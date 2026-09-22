@@ -72,7 +72,7 @@ class _LevelSelectScreenState extends State<LevelSelectScreen> {
                   ),
                   Expanded(
                     child: Text(
-                      'NIVEAUX',
+                      'LEVELS',
                       textAlign: TextAlign.center,
                       style: textTheme.titleMedium,
                     ),

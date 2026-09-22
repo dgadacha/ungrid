@@ -75,7 +75,7 @@ class _GameHeaderState extends State<GameHeader> {
               ),
               Expanded(
                 child: Text(
-                  'NIVEAU ${widget.levelId}',
+                  'LEVEL ${widget.levelId}',
                   textAlign: TextAlign.center,
                   style: textTheme.titleMedium,
                 ),
@@ -133,7 +133,7 @@ class _MovesLeft extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('COUPS RESTANTS',
+        Text('MOVES LEFT',
             style: Theme.of(context).textTheme.labelLarge),
         const SizedBox(height: 2),
         Transform.scale(
@@ -167,7 +167,7 @@ class _TimePanel extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text('TEMPS', style: textTheme.labelLarge),
+        Text('TIME', style: textTheme.labelLarge),
         const SizedBox(height: 2),
         Text(
           formatPlayTime(elapsed),
@@ -181,7 +181,7 @@ class _TimePanel extends StatelessWidget {
         ),
         if (best != null)
           Text(
-            'RECORD ${formatPlayTime(best!)}',
+            'BEST ${formatPlayTime(best!)}',
             style: textTheme.labelLarge?.copyWith(fontSize: 10),
           ),
       ],

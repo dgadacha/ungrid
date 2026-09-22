@@ -17,6 +17,7 @@ class DifficultyConfig {
     required this.maxExitableRatio,
     required this.minScore,
     required this.maxScore,
+    required this.knotCount,
     this.maxWalls = 0,
   });
 
@@ -41,6 +42,13 @@ class DifficultyConfig {
   final double minScore;
   final double maxScore;
 
+  /// Rondes de blocs à poser avant la construction.
+  ///
+  /// Chacune force un bloc à être joué deux fois : c'est ce qui fait monter le
+  /// rapport coups / blocs, et avec lui la vraie difficulté. Ajouter des blocs
+  /// ou retirer des coups ne produit pas cet effet.
+  final int knotCount;
+
   /// Nombre de murs à poser. Ils arrivent tard dans la progression : la règle
   /// de base doit être acquise avant qu'on y ajoute des obstacles.
   final int maxWalls;
@@ -61,9 +69,11 @@ class DifficultyConfig {
     };
     final cells = gridSize * gridSize;
 
-    // La grille doit respirer : au-delà de la moitié des cases occupées, plus
-    // rien ne glisse et le board se fige.
-    final density = _lerp(0.20, 0.42, scalar);
+    // La grille doit respirer, et rester lisible. Surtout : au-delà d'une
+    // douzaine de blocs, les rondes qui font la difficulté se diluent — leur
+    // coup supplémentaire pèse de moins en moins dans le rapport coups par
+    // bloc. Un board plus grand n'est donc pas un board plus difficile.
+    final density = _lerp(0.20, 0.34, scalar);
     final target = (density * cells).round();
     final spread = math.max(1, (cells * 0.05).round());
 
@@ -75,12 +85,15 @@ class DifficultyConfig {
       gridSize: gridSize,
       minBlocks: minBlocks,
       maxBlocks: math.max(minBlocks, maxBlocks),
-      repositionRatio: _lerp(0.15, 1.05, scalar),
+      repositionRatio: _lerp(0.20, 1.60, scalar),
       maxExitableRatio: _lerp(0.70, 0.28, scalar),
       // Bornes calées sur ce que le générateur produit réellement : le score
       // plafonne avec la taille de grille, il ne monte pas indéfiniment.
       minScore: _lerp(0, 26, scalar),
       maxScore: _lerp(22, 62, scalar),
+      // Autant de rondes que le board peut en porter : c'est d'elles que
+      // vient le rapport coups / blocs.
+      knotCount: scalar < 0.12 ? 1 : (scalar < 0.35 ? 2 : (target ~/ 4)),
       maxWalls: maxWalls,
     );
   }
@@ -91,8 +104,123 @@ class DifficultyConfig {
   String toString() => 'DifficultyConfig(${scalar.toStringAsFixed(2)} '
       '${gridSize}x$gridSize, $minBlocks-$maxBlocks blocs, '
       'repositionnement ${repositionRatio.toStringAsFixed(2)}, '
-      'sorties immédiates <=${(maxExitableRatio * 100).round()}%'
+      'sorties immédiates <=${(maxExitableRatio * 100).round()}%, '
+      '$knotCount ronde${knotCount > 1 ? 's' : ''}'
       '${maxWalls > 0 ? ', $maxWalls mur${maxWalls > 1 ? 's' : ''}' : ''})';
+}
+
+/// Ce qu'on exige d'un niveau selon l'endroit où il tombe dans la campagne.
+///
+/// Le nombre de blocs ne fait pas la difficulté : un grand board dont chaque
+/// bloc sort d'un tap reste facile. Ce qui compte est le rapport coups par
+/// bloc, la part de blocs qu'il faut repositionner, et le nombre de décisions
+/// réelles offertes en chemin.
+class DifficultyBand {
+  const DifficultyBand({
+    required this.name,
+    required this.upToLevel,
+    required this.minComplexity,
+    required this.maxComplexity,
+    required this.minMultiMoveRatio,
+    required this.minDecisionScore,
+    required this.maxExitRatio,
+  });
+
+  final String name;
+  final int upToLevel;
+
+  /// Rapport coups / blocs visé.
+  ///
+  /// La borne haute plafonne à 1,25 : c'est le maximum qu'atteint le
+  /// générateur, une ronde coûtant quatre blocs pour un coup supplémentaire.
+  final double minComplexity;
+  final double maxComplexity;
+
+  /// Part minimale de blocs qu'il faut jouer plusieurs fois.
+  final double minMultiMoveRatio;
+
+  /// Note de décision minimale, de 0 à 100.
+  final double minDecisionScore;
+
+  /// Part maximale de blocs qui peuvent sortir dès le premier coup.
+  final double maxExitRatio;
+}
+
+/// La campagne, par tranches.
+///
+/// Les cinq premiers niveaux apprennent, les dix suivants laissent faire, et
+/// c'est vers le trentième que le joueur doit commencer à pouvoir se tromper.
+const List<DifficultyBand> difficultyBands = [
+  DifficultyBand(
+    name: 'Tutorial',
+    upToLevel: 5,
+    minComplexity: 1.0,
+    maxComplexity: 1.10,
+    minMultiMoveRatio: 0,
+    minDecisionScore: 0,
+    maxExitRatio: 1.0,
+  ),
+  DifficultyBand(
+    name: 'Very easy',
+    upToLevel: 15,
+    minComplexity: 1.0,
+    maxComplexity: 1.15,
+    minMultiMoveRatio: 0,
+    minDecisionScore: 30,
+    maxExitRatio: 0.60,
+  ),
+  DifficultyBand(
+    name: 'Easy',
+    upToLevel: 30,
+    minComplexity: 1.08,
+    maxComplexity: 1.22,
+    minMultiMoveRatio: 0.10,
+    minDecisionScore: 50,
+    maxExitRatio: 0.40,
+  ),
+  DifficultyBand(
+    name: 'Easy / Medium',
+    upToLevel: 50,
+    minComplexity: 1.12,
+    maxComplexity: 1.26,
+    minMultiMoveRatio: 0.15,
+    minDecisionScore: 62,
+    maxExitRatio: 0.30,
+  ),
+  DifficultyBand(
+    name: 'Medium',
+    upToLevel: 100,
+    minComplexity: 1.15,
+    maxComplexity: 1.30,
+    minMultiMoveRatio: 0.20,
+    minDecisionScore: 72,
+    maxExitRatio: 0.25,
+  ),
+  DifficultyBand(
+    name: 'Medium / Hard',
+    upToLevel: 250,
+    minComplexity: 1.18,
+    maxComplexity: 1.35,
+    minMultiMoveRatio: 0.25,
+    minDecisionScore: 80,
+    maxExitRatio: 0.20,
+  ),
+  DifficultyBand(
+    name: 'Hard',
+    upToLevel: 1 << 30,
+    minComplexity: 1.20,
+    maxComplexity: 1.40,
+    minMultiMoveRatio: 0.28,
+    minDecisionScore: 86,
+    maxExitRatio: 0.18,
+  ),
+];
+
+DifficultyBand bandFor(int levelId) {
+  for (final band in difficultyBands) {
+    if (levelId <= band.upToLevel) return band;
+  }
+  return difficultyBands.last;
 }
 
 /// Courbe de progression : quelle difficulté pour quel numéro de niveau.

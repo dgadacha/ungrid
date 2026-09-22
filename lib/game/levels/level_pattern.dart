@@ -73,6 +73,8 @@ class LevelPattern {
       walls: walls,
       // Chaque bloc sort exactement une fois : le minimum de coups réussis
       // est donc le nombre de blocs.
+      // Valeur provisoire : le solveur la corrige, un bloc pouvant demander
+      // plusieurs coups.
       optimalMoves: blocks.length,
       difficulty: difficulty,
     );

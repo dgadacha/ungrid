@@ -13,8 +13,7 @@ class Level {
     this.walls = const [],
     this.difficulty = Difficulty.easy,
     this.seed,
-    int? moveAllowance,
-  }) : moveAllowance = moveAllowance ?? moveAllowanceFor(difficulty);
+  });
 
   final int id;
   final int rows;
@@ -27,14 +26,17 @@ class Level {
   final List<GridPosition> walls;
 
   /// Nombre minimal de coups pour vider la grille, calculé par le solveur.
-  /// Chaque bloc sortant exactement une fois, c'est le nombre de blocs.
+  ///
+  /// Un bloc peut devoir être joué plusieurs fois : ce n'est donc pas le
+  /// nombre de blocs.
   final int optimalMoves;
 
-  /// Coups d'erreur tolérés au-delà de [optimalMoves].
-  final int moveAllowance;
-
-  /// Coups dont dispose le joueur. Au-delà, la partie est perdue.
-  int get moveLimit => optimalMoves + moveAllowance;
+  /// Coups dont dispose le joueur : exactement la solution optimale.
+  ///
+  /// Le but n'est pas de vider la grille, c'est de trouver la bonne séquence.
+  /// Une erreur ne se paie pas en marge, elle se reprend — d'où l'importance
+  /// de l'annulation.
+  int get moveLimit => optimalMoves;
 
   final Difficulty difficulty;
 
@@ -57,7 +59,6 @@ class Level {
     int? optimalMoves,
     Difficulty? difficulty,
     int? seed,
-    int? moveAllowance,
   }) =>
       Level(
         id: id ?? this.id,
@@ -68,14 +69,12 @@ class Level {
         optimalMoves: optimalMoves ?? this.optimalMoves,
         difficulty: difficulty ?? this.difficulty,
         seed: seed ?? this.seed,
-        moveAllowance: moveAllowance,
       );
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'rows': rows,
         'columns': columns,
-        'moveAllowance': moveAllowance,
         'blocks': blocks.map((b) => b.toJson()).toList(),
         'walls': walls.map((w) => {'x': w.x, 'y': w.y}).toList(),
       };
@@ -98,7 +97,6 @@ class Level {
         for (final wall in rawWalls)
           GridPosition(wall['x'] as int, wall['y'] as int),
       ],
-      moveAllowance: json['moveAllowance'] as int?,
     );
   }
 

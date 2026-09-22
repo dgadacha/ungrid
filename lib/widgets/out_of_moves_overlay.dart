@@ -67,24 +67,24 @@ class _OutOfMovesOverlayState extends State<OutOfMovesOverlay>
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('PLUS DE COUPS', style: textTheme.displayMedium),
+          Text('OUT OF MOVES', style: textTheme.displayMedium),
           const SizedBox(height: 12),
           Text(
             widget.remainingBlocks > 1
-                ? 'il restait ${widget.remainingBlocks} blocs'
-                : 'il restait un bloc',
+                ? '${widget.remainingBlocks} blocks left'
+                : 'one block left',
             style: textTheme.bodyMedium,
           ),
           const SizedBox(height: 46),
           UngridButton(
-            label: 'RECOMMENCER',
+            label: 'RETRY',
             icon: Icons.refresh_rounded,
             onPressed: widget.onRetry,
           ),
           if (widget.onExtraMoves != null) ...[
             const SizedBox(height: 14),
             UngridButton(
-              label: '+${widget.extraMovesAmount} COUPS',
+              label: '+${widget.extraMovesAmount} MOVES',
               icon: Icons.play_circle_outline_rounded,
               filled: false,
               onPressed: widget.onExtraMoves!,

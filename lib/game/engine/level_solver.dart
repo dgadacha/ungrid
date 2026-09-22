@@ -141,7 +141,96 @@ class LevelSolver {
     );
   }
 
-  /// Vérification rapide, sans métriques : suffit pour rejeter un candidat.
+  /// Rejoue une solution et éprouve, à chaque étape, les coups écartés.
+  ///
+  /// C'est ce qui distingue un long couloir d'un vrai puzzle : combien de
+  /// coups s'offraient, combien menaient à une partie plus longue, combien la
+  /// condamnaient. Chaque alternative est résolue à son tour, d'où le coût —
+  /// à réserver aux candidats déjà retenus.
+  SolutionWalk walkSolution(Level level, List<String> moves) {
+    final board = _Board.of(level);
+    var state = board.initialState();
+
+    final choices = <int>[];
+    var wrongMoves = 0;
+    var deadEnds = 0;
+    final wallsUsed = <int>{};
+
+    // Ce qu'il reste à jouer en suivant la solution, à chaque étape.
+    var remaining = moves.length;
+
+    for (final move in moves) {
+      final index = level.blocks.indexWhere((b) => b.id == move);
+      if (index < 0) break;
+
+      final occupied = board.occupancyOf(state);
+      var available = 0;
+
+      for (var i = 0; i < state.length; i++) {
+        if (state[i] < 0) continue;
+        final next = board.slideWith(state, i, occupied);
+        if (next == null) continue;
+        available++;
+        if (i == index) continue;
+
+        // Ce que coûte l'autre chemin : la partie est-elle perdue, rallongée,
+        // ou aussi bonne ?
+        final cost = _distanceFrom(board, next);
+        if (cost < 0) {
+          deadEnds++;
+        } else if (cost > remaining - 1) {
+          wrongMoves++;
+        }
+      }
+
+      choices.add(available);
+      final wall = board.wallStopping(state, index, occupied);
+      if (wall >= 0) wallsUsed.add(wall);
+
+      final next = board.slideWith(state, index, occupied);
+      if (next == null) break;
+      state = next;
+      remaining--;
+    }
+
+    return SolutionWalk(
+      choices: choices,
+      wrongMoves: wrongMoves,
+      deadEnds: deadEnds,
+      wallsUsed: wallsUsed.length,
+    );
+  }
+
+  /// Coups nécessaires pour vider la grille depuis cet état, `-1` si c'est
+  /// impossible ou hors budget.
+  int _distanceFrom(_Board board, List<int> start) {
+    final startKey = _key(start);
+    final open = _BucketQueue();
+    final cost = <String, int>{startKey: 0};
+    open.add(board.remainingCount(start), start);
+
+    while (!open.isEmpty && cost.length <= maxExploredStates) {
+      final state = open.removeFirst();
+      final key = _key(state);
+      final g = cost[key]!;
+      if (board.isCleared(state)) return g;
+
+      final occupied = board.occupancyOf(state);
+      for (var i = 0; i < state.length; i++) {
+        if (state[i] < 0) continue;
+        final next = board.slideWith(state, i, occupied);
+        if (next == null) continue;
+        final nextKey = _key(next);
+        final known = cost[nextKey];
+        if (known != null && known <= g + 1) continue;
+        cost[nextKey] = g + 1;
+        open.add(g + 1 + board.remainingCount(next), next);
+      }
+    }
+    return -1;
+  }
+
+  /// Vérification rapide, sans métriques : suffit pour rejeter un candidat.  /// Vérification rapide, sans métriques : suffit pour rejeter un candidat.
   bool isSolvable(Level level) => solve(level).solvable;
 
   /// Bloc à jouer maintenant, depuis une configuration donnée.
@@ -316,6 +405,30 @@ class _Board {
     return next;
   }
 
+  /// Mur qui arrête le bloc [index], ou `-1` si c'est un bloc ou le vide.
+  ///
+  /// Sert à mesurer l'influence réelle des murs : un mur qui n'arrête jamais
+  /// personne n'est qu'un décor.
+  int wallStopping(List<int> state, int index, List<bool> occupied) {
+    final cell = state[index];
+    if (cell < 0) return -1;
+    var x = cell % columns;
+    var y = cell ~/ columns;
+    final stepX = dx[index];
+    final stepY = dy[index];
+
+    while (true) {
+      final nx = x + stepX;
+      final ny = y + stepY;
+      if (nx < 0 || ny < 0 || nx >= columns || ny >= rows) return -1;
+      final target = ny * columns + nx;
+      if (walls[target]) return target;
+      if (occupied[target]) return -1;
+      x = nx;
+      y = ny;
+    }
+  }
+
   /// Nombre de blocs qui bougeraient dans cet état.
   int movableCount(List<int> state) {
     final occupied = occupancyOf(state);
@@ -355,4 +468,26 @@ class _BucketQueue {
     _length--;
     return _buckets[_cursor].removeFirst();
   }
+}
+
+/// Ce qu'on apprend en rejouant une solution.
+class SolutionWalk {
+  const SolutionWalk({
+    required this.choices,
+    required this.wrongMoves,
+    required this.deadEnds,
+    required this.wallsUsed,
+  });
+
+  /// Nombre de coups jouables à chaque étape de la solution.
+  final List<int> choices;
+
+  /// Coups écartés qui auraient allongé la partie.
+  final int wrongMoves;
+
+  /// Coups écartés qui l'auraient condamnée.
+  final int deadEnds;
+
+  /// Murs qui arrêtent réellement un bloc au cours de la solution.
+  final int wallsUsed;
 }

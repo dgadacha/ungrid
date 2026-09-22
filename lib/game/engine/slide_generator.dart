@@ -33,6 +33,26 @@ abstract class PuzzleGenerator {
 class SlideGenerator implements PuzzleGenerator {
   const SlideGenerator();
 
+  /// Construit le seul noeud de dépendance, sans rien autour.
+  ///
+  /// Sert à vérifier le motif isolément : il doit demander un coup de plus
+  /// qu'il n'a de blocs.
+  static Level? debugKnotOnly({
+    required int seed,
+    required DifficultyConfig config,
+  }) {
+    final board = _Rewind(config.gridSize, config.gridSize);
+    if (!board.seedKnot(SeededRandom(seed))) return null;
+    return Level(
+      id: 0,
+      rows: config.gridSize,
+      columns: config.gridSize,
+      blocks: board.toBlocks(),
+      walls: board.wallPositions(),
+      optimalMoves: board.moveCount,
+    );
+  }
+
   /// Nombre de candidats de tête conservés pour le tirage.
   static const int _shortlistSize = 5;
 
@@ -108,6 +128,7 @@ class SlideGenerator implements PuzzleGenerator {
     final random = SeededRandom(seed);
     final board = _Rewind(size, size);
     board.placeWalls(config.maxWalls, random);
+    if (strict) board.seedKnots(config.knotCount, random);
 
     var guard = targetMoves * 6;
     while (board.moveCount < targetMoves && guard-- > 0) {
@@ -160,6 +181,9 @@ class _Rewind {
   final List<Direction> _directions = [];
 
   int _moves = 0;
+
+  /// Blocs posés par les rondes : ce sont eux qu'il est payant de reculer.
+  int knottedBlocks = 0;
 
   int get blockCount => _x.length;
 
@@ -311,6 +335,173 @@ class _Rewind {
     _moves++;
     return true;
   }
+
+  /// Pose un noeud de quatre blocs qui oblige à jouer deux fois le même.
+  ///
+  /// Le rembobinage seul produit surtout des niveaux où chaque bloc sort d'un
+  /// tap : le solveur retire l'obstacle avant de jouer le bloc, et le
+  /// déplacement intermédiaire devient inutile. Pour qu'il soit obligatoire,
+  /// il faut un enchaînement fermé, et le plus simple est une ronde :
+  ///
+  ///     A → . . B
+  ///     .       ↓
+  ///     ↑       .
+  ///     D . . ← C
+  ///
+  /// Chacun bute sur le suivant, personne ne peut sortir. Le seul coup ouvert
+  /// est de pousser l'un d'eux, ce qui libère son voisin, et de proche en
+  /// proche la ronde se défait — le bloc poussé ne sortant qu'à la fin, joué
+  /// deux fois.
+  ///
+  /// Retourne `false` si la grille ne s'y prête pas ; la génération continue
+  /// alors normalement.
+  /// Pose autant de rondes que possible, jusqu'à [count].
+  ///
+  /// Chacune ajoute un coup à la solution sans ajouter de sortie : c'est le
+  /// levier principal pour faire monter le rapport coups / blocs.
+  int seedKnots(int count, SeededRandom random) {
+    var placed = 0;
+    for (var i = 0; i < count; i++) {
+      if (!seedKnot(random)) break;
+      placed++;
+    }
+    knottedBlocks = blockCount;
+    return placed;
+  }
+
+  bool seedKnot(SeededRandom random) {
+    // Un côté d'au moins deux cases : il faut de la place pour glisser.
+    final rectangles = <(int, int, int, int)>[
+      for (var y1 = 0; y1 < rows - 2; y1++)
+        for (var y2 = y1 + 2; y2 < rows; y2++)
+          for (var x1 = 0; x1 < columns - 2; x1++)
+            for (var x2 = x1 + 2; x2 < columns; x2++) (x1, y1, x2, y2),
+    ];
+    if (rectangles.isEmpty) return false;
+    random.shuffle(rectangles);
+
+    for (final (x1, y1, x2, y2) in rectangles) {
+      for (final clockwise in [true, false]) {
+        // Les quatre coins et le sens de leur flèche.
+        final corners = clockwise
+            ? [
+                (x1, y1, Direction.right),
+                (x2, y1, Direction.down),
+                (x2, y2, Direction.left),
+                (x1, y2, Direction.up),
+              ]
+            : [
+                (x1, y1, Direction.down),
+                (x1, y2, Direction.right),
+                (x2, y2, Direction.up),
+                (x2, y1, Direction.left),
+              ];
+
+        if (!_knotFits(corners)) continue;
+        if (!_knotSparesOthers(corners)) continue;
+
+        var added = 0;
+        for (final (x, y, direction) in corners) {
+          // Un coin déjà tenu par le bon bloc est réutilisé : deux rondes qui
+          // partagent des blocs coûtent moins cher en place, et font monter
+          // d'autant le rapport coups / blocs.
+          if (!_isFree(x, y)) continue;
+          _place(x, y, direction);
+          added++;
+        }
+        if (added == 0) continue;
+
+        // Une sortie à défaire par bloc posé, plus le coup qui dénoue la ronde.
+        _moves += added + 1;
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /// La nouvelle ronde laisse-t-elle les blocs déjà posés s'en aller ?
+  ///
+  /// Une ronde qui se referme sur la route d'une autre condamnerait les deux :
+  /// on vérifie donc qu'aucun de ses coins ne tombe sur un trajet de sortie
+  /// déjà nécessaire.
+  bool _knotSparesOthers(List<(int, int, Direction)> corners) {
+    for (var i = 0; i < blockCount; i++) {
+      final direction = _directions[i];
+      var cx = _x[i] + direction.dx;
+      var cy = _y[i] + direction.dy;
+      while (_inside(cx, cy)) {
+        for (final (x, y, _) in corners) {
+          // Une case déjà occupée par ce bloc-là n'est pas une gêne nouvelle.
+          if (cx == x && cy == y && _isFree(x, y)) return false;
+        }
+        cx += direction.dx;
+        cy += direction.dy;
+      }
+    }
+    return true;
+  }
+
+  /// La ronde tient-elle sur cette grille ?
+  ///
+  /// Il faut les quatre coins libres, les côtés dégagés — sans quoi les blocs
+  /// ne butent pas les uns sur les autres — et une sortie praticable pour
+  /// chacun une fois la ronde défaite.
+  bool _knotFits(List<(int, int, Direction)> corners) {
+    for (final (x, y, direction) in corners) {
+      if (_isFree(x, y)) continue;
+      // Un bloc déjà là ne convient que s'il regarde dans le bon sens : la
+      // ronde ne se referme qu'à cette condition.
+      final index = _cells[y * columns + x];
+      if (index < 0 || _directions[index] != direction) return false;
+    }
+
+    for (var i = 0; i < corners.length; i++) {
+      final (x, y, direction) = corners[i];
+      final (nextX, nextY, _) = corners[(i + 1) % corners.length];
+
+      // Le côté qui mène au voisin doit être vide : un mur au milieu
+      // arrêterait le bloc trop tôt et le condamnerait.
+      var cx = x + direction.dx;
+      var cy = y + direction.dy;
+      var reached = false;
+      while (_inside(cx, cy)) {
+        if (cx == nextX && cy == nextY) {
+          reached = true;
+          break;
+        }
+        if (!_isFree(cx, cy)) return false;
+        cx += direction.dx;
+        cy += direction.dy;
+      }
+      if (!reached) return false;
+
+      // Au-delà du voisin, la route vers le bord doit rester praticable ;
+      // un bloc partagé par une autre ronde y est admis, il partira avant.
+      
+
+      cx = nextX + direction.dx;
+      cy = nextY + direction.dy;
+      while (_inside(cx, cy)) {
+        if (_walls[cy * columns + cx]) return false;
+        cx += direction.dx;
+        cy += direction.dy;
+      }
+    }
+    return true;
+  }
+
+  bool _inside(int x, int y) =>
+      x >= 0 && y >= 0 && x < columns && y < rows;
+
+  void _place(int x, int y, Direction direction) {
+    _cells[y * columns + x] = blockCount;
+    _x.add(x);
+    _y.add(y);
+    _directions.add(direction);
+  }
+
+
+
 
   /// Blocs qui quitteraient la grille dès le premier coup.
   int exitableCount() {
@@ -511,10 +702,15 @@ class _Rewind {
 
   /// Un recul est utile s'il éloigne le bloc de sa sortie et, mieux encore,
   /// s'il vient se mettre en travers d'un autre.
+  ///
+  /// Reculer un bloc déjà noué compte double : il devra être joué une fois de
+  /// plus, et c'est exactement ce qui fait monter le rapport coups / blocs
+  /// au-delà de ce qu'une ronde seule permet.
   double _pullBackScore(int index, int x, int y, int distance) {
     var score = 1.0 + distance * 1.4;
     score += _exitableInterrupted(x, y, ignore: index) * 14.0;
     score += _blocksInterrupted(x, y, ignore: index) * 3.0;
+    if (index < knottedBlocks) score += 8.0;
     score += _spaceBonus(x, y);
     score -= _crowding(x, y) * 1.2;
     score -= _repetitionPenalty(x, y, _directions[index]);

@@ -14,22 +14,16 @@ class LevelCompleteOverlay extends StatefulWidget {
   const LevelCompleteOverlay({
     super.key,
     required this.movesUsed,
-    required this.moveLimit,
     required this.elapsed,
     required this.records,
-    required this.isPerfect,
     required this.onNext,
     required this.onReplay,
     required this.allowTapAnywhere,
   });
 
   final int movesUsed;
-  final int moveLimit;
   final Duration elapsed;
   final RecordsBeaten records;
-
-  /// Terminé au nombre de coups minimum, sans la moindre erreur.
-  final bool isPerfect;
 
   final VoidCallback onNext;
   final VoidCallback onReplay;
@@ -54,8 +48,8 @@ class _LevelCompleteOverlayState extends State<LevelCompleteOverlay>
 
   String? get _recordLabel {
     if (widget.records.both) return 'DOUBLE RECORD';
-    if (widget.records.time) return 'NOUVEAU MEILLEUR TEMPS';
-    if (widget.records.moves) return 'NOUVEAU MEILLEUR SCORE';
+    if (widget.records.time) return 'NEW BEST TIME';
+    if (widget.records.moves) return 'NEW BEST MOVES';
     return null;
   }
 
@@ -87,11 +81,7 @@ class _LevelCompleteOverlayState extends State<LevelCompleteOverlay>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('TERMINÉ', style: textTheme.displayLarge),
-            if (widget.isPerfect) ...[
-              const SizedBox(height: 10),
-              const _Badge(label: 'SANS FAUTE', color: UngridColors.success),
-            ],
+            Text('CLEAR', style: textTheme.displayLarge),
             if (record != null) ...[
               const SizedBox(height: 10),
               _Badge(label: record, color: UngridColors.accent),
@@ -101,22 +91,19 @@ class _LevelCompleteOverlayState extends State<LevelCompleteOverlay>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _Stat(
-                  label: 'TEMPS',
+                  label: 'TIME',
                   value: formatPlayTime(widget.elapsed),
                 ),
                 const SizedBox(width: 44),
-                _Stat(
-                  label: 'COUPS',
-                  value: '${widget.movesUsed} / ${widget.moveLimit}',
-                ),
+                _Stat(label: 'MOVES', value: '${widget.movesUsed}'),
               ],
             ),
             const SizedBox(height: 46),
-            UngridButton(label: 'SUIVANT', onPressed: widget.onNext),
+            UngridButton(label: 'NEXT', onPressed: widget.onNext),
             const SizedBox(height: 12),
             TextButton(
               onPressed: widget.onReplay,
-              child: Text('REJOUER', style: textTheme.labelLarge),
+              child: Text('REPLAY', style: textTheme.labelLarge),
             ),
           ],
         ),

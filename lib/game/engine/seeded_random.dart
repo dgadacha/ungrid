@@ -53,8 +53,13 @@ class SeededRandom {
 
 /// Seed d'un niveau : déterministe, et suffisamment dispersée pour que deux
 /// niveaux voisins ne partagent aucune structure.
+///
+/// Le numéro du niveau et celui de l'essai sont écartés par deux multiplicateurs
+/// très différents : avec des facteurs proches, deux couples distincts finissent
+/// par retomber sur la même valeur, et deux niveaux voisins livrent alors le
+/// même board.
 int seedForLevel(int levelId, [int attempt = 0]) {
-  var x = (levelId * 7919 + attempt * 2654435761) & 0xFFFFFFFF;
+  var x = (levelId * 2654435761 + attempt * 40503) & 0xFFFFFFFF;
   x = ((x >> 16) ^ x) * 0x45d9f3b & 0xFFFFFFFF;
   x = ((x >> 16) ^ x) * 0x45d9f3b & 0xFFFFFFFF;
   x = (x >> 16) ^ x;

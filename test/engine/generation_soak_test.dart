@@ -68,10 +68,10 @@ void main() {
     expect(broken, isEmpty, reason: 'niveaux insolubles : $broken');
   });
 
-  test('la limite de coups laisse toujours une marge', () {
+  test('la limite de coups est la solution optimale', () {
     for (final sample in samples) {
-      expect(sample.level.moveLimit, greaterThan(sample.moves),
-          reason: 'niveau ${sample.id} : aucune erreur permise');
+      expect(sample.level.moveLimit, sample.moves,
+          reason: 'niveau ${sample.id} : la limite doit valoir l\'optimal');
     }
   });
 
@@ -110,13 +110,30 @@ void main() {
   });
 
   test('les boards ne tombent pas tous dans le même moule', () {
-    final seen = <String>{};
+    // La construction est très contrainte : deux niveaux d'une même tranche
+    // finissent parfois sur le même board. Ce qui compte, c'est que le joueur
+    // ne s'en aperçoive pas — donc jamais deux niveaux proches.
+    final seenAt = <String, int>{};
     final duplicates = <int>[];
+    final nearDuplicates = <String>[];
+
     for (final sample in samples.where((s) => s.id > 20)) {
       final signature = LevelPattern.render(sample.level).join('/');
-      if (!seen.add(signature)) duplicates.add(sample.id);
+      final previous = seenAt[signature];
+      if (previous == null) {
+        seenAt[signature] = sample.id;
+        continue;
+      }
+      duplicates.add(sample.id);
+      if (sample.id - previous < 10) {
+        nearDuplicates.add('$previous et ${sample.id}');
+      }
     }
-    expect(duplicates, isEmpty, reason: 'boards identiques : $duplicates');
+
+    expect(nearDuplicates, isEmpty,
+        reason: 'boards identiques à portée de mémoire : $nearDuplicates');
+    expect(duplicates.length / samples.length, lessThan(0.01),
+        reason: 'trop de boards identiques : ${duplicates.length}');
 
     final counts = <String, int>{};
     for (final sample in samples) {

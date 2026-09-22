@@ -75,15 +75,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            Text('NIVEAU $level', style: textTheme.labelLarge),
+            Text('LEVEL $level', style: textTheme.labelLarge),
             const Spacer(flex: 2),
-            UngridButton(label: 'JOUER', onPressed: _play, horizontalPadding: 64),
+            UngridButton(label: 'PLAY', onPressed: _play, horizontalPadding: 64),
             const Spacer(flex: 4),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _FooterAction(
-                  label: 'NIVEAUX',
+                  label: 'LEVELS',
                   onPressed: () => _open(LevelSelectScreen(
                     repository: widget.repository,
                     progress: widget.progress,
@@ -104,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 18),
             if (completed > 0)
               Text(
-                '$completed NIVEAU${completed > 1 ? 'X' : ''} TERMINÉ${completed > 1 ? 'S' : ''}',
+                '$completed LEVEL${completed > 1 ? 'S' : ''} CLEARED',
                 style: textTheme.labelLarge,
               ),
             const SizedBox(height: 26),

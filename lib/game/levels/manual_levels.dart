@@ -1,3 +1,4 @@
+import '../engine/level_solver.dart';
 import '../models/difficulty.dart';
 import '../models/level.dart';
 import 'level_pattern.dart';
@@ -17,13 +18,28 @@ class ManualLevels {
 
   static bool contains(int levelId) => levelId >= 1 && levelId <= count;
 
-  static Level byId(int levelId) {
+  static const LevelSolver _solver = LevelSolver();
+
+  /// Niveaux déjà résolus : le solveur ne tourne qu'une fois par niveau.
+  static final Map<int, Level> _cache = {};
+
+  static Level byId(int levelId) => _cache[levelId] ??= _build(levelId);
+
+  static Level _build(int levelId) {
     final pattern = _patterns[levelId - 1];
-    return LevelPattern.parse(
+    final level = LevelPattern.parse(
       pattern.$1,
       id: levelId,
       difficulty: pattern.$2,
     );
+
+    // Le joueur ne dispose que de la solution optimale : il faut donc la
+    // connaître. Depuis le glissement, ce n'est plus le nombre de blocs — un
+    // bloc peut devoir être repositionné avant de sortir.
+    final result = _solver.solve(level);
+    return result.solvable
+        ? level.copyWith(optimalMoves: result.minimumMoves)
+        : level;
   }
 
   static List<Level> all() =>
@@ -34,10 +50,10 @@ class ManualLevels {
   /// Une idée par niveau, dite une fois. Le joueur apprend en jouant : ces
   /// lignes accompagnent le geste, elles ne le remplacent pas.
   static String? hintFor(int levelId) => switch (levelId) {
-        1 => 'Touche un bloc : il part dans le sens de sa flèche.',
-        2 => 'Un bloc glisse jusqu\'à ce que quelque chose l\'arrête.',
-        3 => 'Collé à un obstacle, il ne bouge pas — et le coup est perdu.',
-        4 => 'Ici, rien ne peut sortir. Pousse d\'abord un bloc.',
+        1 => 'Tap a block: it leaves the way its arrow points.',
+        2 => 'A block slides until something stops it.',
+        3 => 'Stuck against an obstacle, it stays put — and the move is spent.',
+        4 => 'Nothing can leave yet. Push a block out of the way first.',
         _ => null,
       };
 

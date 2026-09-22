@@ -3,6 +3,7 @@ import 'board_quality_evaluator.dart';
 import 'difficulty_config.dart';
 import 'difficulty_evaluator.dart';
 import 'level_solver.dart';
+import 'puzzle_analysis.dart';
 import 'seeded_random.dart';
 import 'slide_generator.dart';
 import 'solve_result.dart';
@@ -14,6 +15,7 @@ class GeneratedLevel {
     required this.solveResult,
     required this.difficulty,
     required this.quality,
+    required this.analysis,
     required this.attempts,
     required this.accepted,
     required this.distance,
@@ -23,6 +25,10 @@ class GeneratedLevel {
   final SolveResult solveResult;
   final DifficultyEvaluation difficulty;
   final BoardQuality quality;
+
+  /// Ce que le niveau demande au joueur : repositionnements, décisions,
+  /// erreurs possibles.
+  final PuzzleAnalysis analysis;
 
   /// Nombre de candidats produits avant celui-ci.
   final int attempts;
@@ -37,7 +43,8 @@ class GeneratedLevel {
   @override
   String toString() => 'GeneratedLevel(${level.id}, '
       '${level.blocks.length} blocs, ${solveResult.minimumMoves} coups, '
-      'score ${difficulty.score.round()}, visuel ${quality.score.round()}, '
+      '${analysis.moveComplexity.toStringAsFixed(2)} coups/bloc, '
+      'décision ${analysis.decisionScore.round()}, '
       '${accepted ? "accepté" : "replié"} en $attempts essai(s))';
 }
 
@@ -52,7 +59,8 @@ class LevelGenerator {
     this.solver = const LevelSolver(),
     this.difficultyEvaluator = const DifficultyEvaluator(),
     this.qualityEvaluator = const BoardQualityEvaluator(),
-    this.maxAttempts = 14,
+    this.analyzer = const PuzzleAnalyzer(),
+    this.maxAttempts = 18,
     this.minimumQuality = 50,
   });
 
@@ -60,14 +68,22 @@ class LevelGenerator {
   final LevelSolver solver;
   final DifficultyEvaluator difficultyEvaluator;
   final BoardQualityEvaluator qualityEvaluator;
+  final PuzzleAnalyzer analyzer;
 
   /// Au-delà, on renvoie le meilleur candidat rencontré plutôt que d'échouer.
   final int maxAttempts;
 
   final double minimumQuality;
 
+  /// Fabrique le niveau [levelId].
+  ///
+  /// On ne prend pas le premier candidat jouable : c'est ainsi qu'on se
+  /// retrouve avec une campagne de niveaux corrects et sans intérêt. Chaque
+  /// candidat est éprouvé contre ce que sa tranche exige — coups par bloc,
+  /// blocs à repositionner, décisions offertes — et le meilleur l'emporte.
   GeneratedLevel generate({required int levelId, DifficultyConfig? config}) {
     final settings = config ?? DifficultyCurve.configFor(levelId);
+    final band = bandFor(levelId);
     GeneratedLevel? best;
 
     for (var attempt = 0; attempt < maxAttempts; attempt++) {
@@ -80,27 +96,39 @@ class LevelGenerator {
       if (candidate == null || !candidate.isStructurallyValid) continue;
 
       // Deux examens bon marché avant l'exploration, qui est de loin le plus
-      // coûteux : inutile de résoudre un board qu'on rejettera de toute façon
-      // sur sa forme.
+      // coûteux : inutile de résoudre un board qu'on rejettera sur sa forme.
       final exitable = exitableCount(candidate);
       final exitableRatio = exitable / candidate.blocks.length;
       final quality = qualityEvaluator.evaluate(candidate);
-      final cheapDistance = (exitableRatio > settings.maxExitableRatio
-              ? (exitableRatio - settings.maxExitableRatio) * 12
+      final cheapDistance = (exitableRatio > band.maxExitRatio
+              ? (exitableRatio - band.maxExitRatio) * 12
               : 0.0) +
           _qualityDistance(quality);
       if (best != null && cheapDistance >= best.distance) continue;
 
       // Le rembobinage garantit une solution ; le solveur dit laquelle est la
-      // plus courte, et ce que le niveau cache d'impasses.
+      // plus courte.
       final solveResult = solver.solve(candidate);
       if (!solveResult.solvable) continue;
 
+      // Le rapport coups / blocs se lit directement sur la solution. S'il est
+      // déjà hors cible, inutile de payer l'analyse fine, qui rejoue la
+      // partie et éprouve chaque alternative.
+      final complexity = solveResult.minimumMoves / candidate.blocks.length;
+      final complexityGap = complexity < band.minComplexity
+          ? (band.minComplexity - complexity) * 8
+          : (complexity > band.maxComplexity
+              ? (complexity - band.maxComplexity) * 4
+              : 0.0);
+      if (best != null && cheapDistance + complexityGap >= best.distance) {
+        continue;
+      }
+
+      final analysis = analyzer.analyse(candidate, solveResult);
       final difficulty =
           difficultyEvaluator.evaluate(candidate, solveResult, exitable);
 
-      final distance = difficultyEvaluator.distanceTo(settings, difficulty) +
-          _qualityDistance(quality);
+      final distance = cheapDistance + _bandDistance(band, analysis);
       final accepted = distance == 0;
 
       final evaluated = GeneratedLevel(
@@ -111,6 +139,7 @@ class LevelGenerator {
         solveResult: solveResult,
         difficulty: difficulty,
         quality: quality,
+        analysis: analysis,
         attempts: attempt + 1,
         accepted: accepted,
         distance: distance,
@@ -133,6 +162,29 @@ class LevelGenerator {
     );
   }
 
+  /// Écart entre ce que le niveau demande et ce que sa tranche exige.
+  ///
+  /// Zéro signifie « tout est satisfait ». Les manques sont additionnés, de
+  /// sorte qu'un candidat presque bon reste préférable à un candidat plat.
+  static double _bandDistance(DifficultyBand band, PuzzleAnalysis analysis) {
+    var distance = 0.0;
+
+    if (analysis.moveComplexity < band.minComplexity) {
+      distance += (band.minComplexity - analysis.moveComplexity) * 8;
+    }
+    if (analysis.moveComplexity > band.maxComplexity) {
+      distance += (analysis.moveComplexity - band.maxComplexity) * 4;
+    }
+    if (analysis.multiMoveRatio < band.minMultiMoveRatio) {
+      distance += (band.minMultiMoveRatio - analysis.multiMoveRatio) * 4;
+    }
+    if (analysis.decisionScore < band.minDecisionScore) {
+      distance += (band.minDecisionScore - analysis.decisionScore) / 25;
+    }
+    return distance;
+  }
+
+  /// Blocs qui quitteraient la grille dès le premier coup.
   /// Blocs qui quitteraient la grille dès le premier coup.
   static int exitableCount(Level level) {
     final occupied = <int>{

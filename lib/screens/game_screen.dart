@@ -151,7 +151,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
     if (!granted && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Aucun indice disponible pour le moment.'),
+          content: Text('No hint available right now.'),
           duration: Duration(seconds: 2),
         ),
       );
@@ -204,10 +204,8 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
             Positioned.fill(
               child: LevelCompleteOverlay(
                 movesUsed: controller.movesUsed,
-                moveLimit: controller.moveLimit,
                 elapsed: controller.elapsed,
                 records: _records,
-                isPerfect: controller.isPerfect,
                 allowTapAnywhere: _levelId > 3,
                 onNext: _next,
                 onReplay: _restart,
@@ -230,8 +228,9 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
 
 /// La phrase d'apprentissage des premiers niveaux.
 ///
-/// Elle occupe toujours la même hauteur, qu'il y ait un texte ou non : la
-/// grille ne doit pas sauter d'un niveau à l'autre.
+/// Elle réserve toujours la même hauteur, qu'il y ait un texte ou non, pour
+/// que la grille ne saute pas d'un niveau à l'autre — et cette hauteur tient
+/// deux lignes, sinon la phrase vient mordre sur les boutons.
 class _TutorialHint extends StatelessWidget {
   const _TutorialHint({required this.levelId});
 
@@ -241,14 +240,16 @@ class _TutorialHint extends StatelessWidget {
   Widget build(BuildContext context) {
     final hint = ManualLevels.hintFor(levelId);
     return SizedBox(
-      height: 34,
+      height: 54,
       child: hint == null
           ? null
           : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
+              padding: const EdgeInsets.fromLTRB(28, 4, 28, 10),
               child: Text(
                 hint,
                 textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
@@ -283,19 +284,19 @@ class _Controls extends StatelessWidget {
         children: [
           RoundIconButton(
             icon: Icons.undo_rounded,
-            label: 'ANNULER',
+            label: 'UNDO',
             onPressed: controller.canUndo ? onUndo : null,
           ),
           const SizedBox(width: 30),
           RoundIconButton(
             icon: Icons.refresh_rounded,
-            label: 'REJOUER',
+            label: 'RESTART',
             onPressed: controller.movesUsed > 0 ? onRestart : null,
           ),
           const SizedBox(width: 30),
           RoundIconButton(
             icon: Icons.lightbulb_outline_rounded,
-            label: 'INDICE',
+            label: 'HINT',
             onPressed: controller.isPlaying && controller.rewards.isAvailable
                 ? onHint
                 : null,

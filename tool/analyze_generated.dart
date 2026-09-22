@@ -1,5 +1,6 @@
 // Statistiques sur les niveaux générés.
 // Usage : dart run tool/analyze_generated.dart [nombre]
+import 'package:ungrid/game/engine/difficulty_config.dart';
 import 'package:ungrid/game/engine/level_generator.dart';
 import 'package:ungrid/game/levels/level_pattern.dart';
 
@@ -7,8 +8,8 @@ void main(List<String> args) {
   final total = args.isEmpty ? 200 : int.parse(args.first);
   const generator = LevelGenerator();
   const fields = 9;
+  final bands = <String, List<double>>{};
 
-  final buckets = <String, List<double>>{};
   var replies = 0;
   var unsolvable = 0;
   var withReposition = 0;
@@ -28,16 +29,16 @@ void main(List<String> args) {
     }
     if (generated.difficulty.exitableRatio == 0) sealed++;
 
-    final start = ((id - 21) ~/ 50) * 50 + 21;
-    buckets.putIfAbsent('$start-${start + 49}', () => []).addAll([
+    final band = bandFor(id);
+    bands.putIfAbsent(band.name, () => []).addAll([
       generated.level.blocks.length.toDouble(),
-      generated.level.density,
-      generated.solveResult.minimumMoves.toDouble(),
-      generated.difficulty.repositionRatio,
+      generated.analysis.moveComplexity,
+      generated.analysis.multiMoveRatio,
+      generated.analysis.averageChoices,
+      generated.analysis.wrongMoveOpportunities.toDouble(),
+      generated.analysis.deadEndOpportunities.toDouble(),
+      generated.analysis.decisionScore,
       generated.difficulty.exitableRatio,
-      generated.difficulty.score,
-      generated.quality.score,
-      generated.solveResult.deadEndCount.toDouble(),
       generated.attempts.toDouble(),
     ]);
 
@@ -50,9 +51,9 @@ void main(List<String> args) {
   }
   watch.stop();
 
-  print('\nplage        blocs  densité  coups  repos  sorties  diff  visuel'
-      '  impasses  essais');
-  for (final entry in buckets.entries) {
+  print('\ntranche                blocs  coups/bloc  rejoués  choix  erreurs'
+      '  pièges  décision  sorties  essais');
+  for (final entry in bands.entries) {
     final values = entry.value;
     final rows = values.length ~/ fields;
     double avg(int offset) {
@@ -63,15 +64,15 @@ void main(List<String> args) {
       return sum / rows;
     }
 
-    print('${entry.key.padRight(11)}'
+    print('${entry.key.padRight(21)}'
         '  ${avg(0).toStringAsFixed(1).padLeft(5)}'
-        '  ${(avg(1) * 100).toStringAsFixed(0).padLeft(6)}%'
-        '  ${avg(2).toStringAsFixed(1).padLeft(5)}'
-        '  ${avg(3).toStringAsFixed(2).padLeft(5)}'
-        '  ${(avg(4) * 100).toStringAsFixed(0).padLeft(6)}%'
-        '  ${avg(5).toStringAsFixed(0).padLeft(4)}'
-        '  ${avg(6).toStringAsFixed(0).padLeft(6)}'
-        '  ${avg(7).toStringAsFixed(1).padLeft(8)}'
+        '  ${avg(1).toStringAsFixed(2).padLeft(10)}'
+        '  ${'${(avg(2) * 100).round()} %'.padLeft(7)}'
+        '  ${avg(3).toStringAsFixed(1).padLeft(5)}'
+        '  ${avg(4).toStringAsFixed(1).padLeft(7)}'
+        '  ${avg(5).toStringAsFixed(1).padLeft(6)}'
+        '  ${avg(6).toStringAsFixed(0).padLeft(8)}'
+        '  ${'${(avg(7) * 100).round()} %'.padLeft(7)}'
         '  ${avg(8).toStringAsFixed(1).padLeft(6)}');
   }
 

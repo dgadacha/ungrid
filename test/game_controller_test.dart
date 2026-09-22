@@ -35,22 +35,16 @@ class _NoRewards implements RewardService {
 
 void main() {
   group('limite de coups', () {
-    test('la limite vaut la solution optimale plus la marge', () {
+    test('la limite est exactement la solution optimale', () {
+      // Le but n'est pas de vider la grille, c'est de trouver la bonne
+      // séquence : aucune marge n'est accordée.
       final level = parse([
         '....',
         '>..^',
         '....',
         '....',
-      ], difficulty: Difficulty.hard);
-
-      expect(level.optimalMoves, 2);
-      expect(level.moveAllowance, moveAllowanceFor(Difficulty.hard));
-      expect(level.moveLimit, 2 + moveAllowanceFor(Difficulty.hard));
-    });
-
-    test('la marge se resserre avec la difficulté', () {
-      expect(moveAllowanceFor(Difficulty.easy),
-          greaterThan(moveAllowanceFor(Difficulty.expert)));
+      ]);
+      expect(level.moveLimit, level.optimalMoves);
     });
 
     test('une sortie consomme un coup', () {
@@ -118,7 +112,7 @@ void main() {
       expect(controller.remainingBlocks, 0);
     });
 
-    test('sans erreur, la partie est parfaite', () {
+    test('la séquence juste vide la grille au dernier coup', () {
       final controller = controllerFor([
         '....',
         '.>..',
@@ -127,26 +121,40 @@ void main() {
       ]);
       controller.tapCell(2, 2);
       controller.tapCell(1, 1);
-      expect(controller.isPerfect, isTrue);
+      expect(controller.isCleared, isTrue);
+      expect(controller.movesLeft, 0,
+          reason: 'la réserve vaut exactement la solution optimale');
     });
 
-    test('un coup de trop suffit à perdre le sans-faute', () {
+    test('un coup de trop fait perdre la partie', () {
+      // Deux coups suffisaient ; en pousser un d'abord en coûte trois, et la
+      // réserve n'en contient que deux.
       final controller = controllerFor([
         '....',
         '>..^',
         '....',
         '....',
       ]);
-      // Pousser le bloc avant de dégager la sortie coûte un coup inutile :
-      // il faudra le rejouer ensuite.
-      controller.tapCell(0, 1); // glisse en (2,1)
-      controller.tapCell(3, 1); // le '^' sort
-      controller.tapCell(2, 1); // le '>' sort enfin
+      expect(controller.moveLimit, 2);
 
+      controller.tapCell(0, 1); // glisse en (2,1) : coup gâché
+      controller.tapCell(3, 1); // le '^' sort
+      expect(controller.movesLeft, 0);
+      expect(controller.isOutOfMoves, isTrue);
+      expect(controller.isCleared, isFalse);
+    });
+
+    test('la bonne séquence passe tout juste', () {
+      final controller = controllerFor([
+        '....',
+        '>..^',
+        '....',
+        '....',
+      ]);
+      controller.tapCell(3, 1); // le '^' sort
+      controller.tapCell(0, 1); // le '>' file droit dehors
       expect(controller.isCleared, isTrue);
-      expect(controller.movesUsed, 3);
-      expect(controller.isPerfect, isFalse,
-          reason: 'la solution optimale tenait en deux coups');
+      expect(controller.movesLeft, 0);
     });
 
     test('épuiser ses coups perd la partie', () {

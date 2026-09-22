@@ -108,9 +108,6 @@ class GameController extends ChangeNotifier {
   bool get isOutOfMoves => outcome == GameOutcome.outOfMoves;
   bool get isPlaying => outcome == GameOutcome.playing;
 
-  /// Vrai quand le joueur a terminé sans la moindre erreur.
-  bool get isPerfect => isCleared && movesUsed == level.optimalMoves;
-
   Duration get elapsed => _playTime.elapsed;
 
   bool get timerStarted => _playTime.elapsedMicroseconds > 0;

@@ -6,6 +6,7 @@ import '../game/engine/difficulty_evaluator.dart';
 import '../game/engine/game_engine.dart';
 import '../game/engine/level_generator.dart';
 import '../game/engine/level_solver.dart';
+import '../game/engine/puzzle_analysis.dart';
 import '../game/engine/solve_result.dart';
 import '../game/engine/seeded_random.dart';
 import '../game/levels/level_repository.dart';
@@ -46,6 +47,7 @@ class DebugGenerationScreen extends StatefulWidget {
 class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
   static const LevelGenerator _generator = LevelGenerator();
   static const LevelSolver _solver = LevelSolver();
+  static const PuzzleAnalyzer _analyzer = PuzzleAnalyzer();
 
   final BlockPainter _blockPainter = BlockPainter();
 
@@ -82,6 +84,8 @@ class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
       level: level,
       solveResult: solveResult,
       difficulty: difficulty,
+      puzzle: generated?.analysis ?? _analyzer.analyse(level, solveResult),
+      band: bandFor(levelId),
       generated: generated,
       config: DifficultyCurve.configFor(levelId),
     );
@@ -158,8 +162,8 @@ class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
                 ),
                 Expanded(
                   child: Text(
-                    'NIVEAU $_levelId'
-                    '${analysis.generated == null ? " · écrit" : " · généré"}',
+                    'LEVEL $_levelId'
+                    '${analysis.generated == null ? " · handmade" : " · generated"}',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
@@ -199,13 +203,13 @@ class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
                 _Chip(label: '+10', onTap: () => _load(_levelId + 10)),
                 _Chip(
                   label: _step >= solution.length
-                      ? 'REJOUER'
-                      : 'COUP ${_step + 1}/${solution.length}',
+                      ? 'REPLAY'
+                      : 'MOVE ${_step + 1}/${solution.length}',
                   onTap: _stepSolution,
                   accent: true,
                 ),
                 if (widget.progress != null)
-                  _Chip(label: 'JOUER', onTap: _play),
+                  _Chip(label: 'PLAY', onTap: _play),
               ],
             ),
           ),
@@ -227,6 +231,8 @@ class _Analysis {
     required this.level,
     required this.solveResult,
     required this.difficulty,
+    required this.puzzle,
+    required this.band,
     required this.generated,
     required this.config,
   });
@@ -234,6 +240,8 @@ class _Analysis {
   final Level level;
   final SolveResult solveResult;
   final DifficultyEvaluation difficulty;
+  final PuzzleAnalysis puzzle;
+  final DifficultyBand band;
   final GeneratedLevel? generated;
   final DifficultyConfig config;
 }
@@ -289,6 +297,7 @@ class _Stats extends StatelessWidget {
     final level = analysis.level;
     final solve = analysis.solveResult;
     final difficulty = analysis.difficulty;
+    final puzzle = analysis.puzzle;
     final config = analysis.config;
     final unmet =
         const DifficultyEvaluator().unmetCriteria(config, difficulty);
@@ -296,42 +305,53 @@ class _Stats extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.fromLTRB(22, 16, 22, 24),
       children: [
-        _row('Grille', '${level.columns} x ${level.rows}'),
-        _row('Blocs', '${level.blocks.length}'),
-        _row('Murs', '${level.walls.length}'),
-        _row('Densité', '${(level.occupancy * 100).round()} %'),
+        _row('Band', analysis.band.name),
+        _row('Grid', '${level.columns} x ${level.rows}'),
+        _row('Blocks', '${level.blocks.length}'),
+        _row('Walls', '${level.walls.length}'),
+        _row('Density', '${(level.occupancy * 100).round()} %'),
         const Divider(height: 26),
-        _row('Solvable', solve.solvable ? 'oui' : 'NON'),
-        _row('Coups minimum', '${solve.minimumMoves}'),
-        _row('Repositionnements',
-            '${solve.minimumMoves - level.blocks.length}'),
-        _row('Limite de coups',
-            '${level.moveLimit}  (+${level.moveAllowance})'),
-        _row('Sorties immédiates',
+
+        // Ce que le niveau demande vraiment : le nombre de coups seul ne dit
+        // rien, deux niveaux de même longueur peuvent n'avoir rien à voir.
+        _row('Optimal moves', '${solve.minimumMoves}'),
+        _row('Moves / block',
+            '${puzzle.moveComplexity.toStringAsFixed(2)}'
+            '   target ${analysis.band.minComplexity.toStringAsFixed(2)}'
+            '-${analysis.band.maxComplexity.toStringAsFixed(2)}'),
+        _row('Replayed blocks',
+            '${puzzle.multiMoveBlocks} (${(puzzle.multiMoveRatio * 100).round()} %)'
+            '   target ${(analysis.band.minMultiMoveRatio * 100).round()} %'),
+        _row('Choices per step', puzzle.averageChoices.toStringAsFixed(1)),
+        _row('Steps with a choice',
+            '${(puzzle.decisionRatio * 100).round()} %'),
+        _row('Moves that cost', '${puzzle.wrongMoveOpportunities}'),
+        _row('Moves that lose', '${puzzle.deadEndOpportunities}'),
+        _row('Decision score',
+            '${puzzle.decisionScore.round()}'
+            '   target ${analysis.band.minDecisionScore.round()}'),
+        const Divider(height: 26),
+
+        _row('Move limit', '${level.moveLimit}'),
+        _row('Instant exits',
             '${LevelGenerator.exitableCount(level)}'
-            ' (${(difficulty.exitableRatio * 100).round()} %)'),
-        _row('Impasses croisées', '${solve.deadEndCount}'),
-        _row('Coups forcés', '${solve.forcedMoveCount}'),
-        _row('Points de choix', '${solve.decisionPointCount}'),
-        _row('Choix moyen', solve.averageBranchingFactor.toStringAsFixed(2)),
-        _row('États explorés',
+            ' (${(difficulty.exitableRatio * 100).round()} %)'
+            '   max ${(analysis.band.maxExitRatio * 100).round()} %'),
+        _row('States explored',
             '${solve.exploredStates}${solve.exhaustive ? "" : "+"}'),
-        const Divider(height: 26),
-        _row('Score difficulté',
+        _row('Difficulty score',
             '${difficulty.score.round()} · ${difficulty.tier.label}'),
-        _row('Fenêtre visée',
-            '${config.minScore.round()} - ${config.maxScore.round()}'),
-        _row('Score visuel',
+        _row('Visual score',
             '${analysis.generated?.quality.score.round() ?? "-"}'),
-        _row('Essais', '${analysis.generated?.attempts ?? "-"}'),
+        _row('Attempts', '${analysis.generated?.attempts ?? "-"}'),
         _row('Seed',
             '${seedForLevel(levelId, (analysis.generated?.attempts ?? 1) - 1)}'),
-        _row('Génération', '${(generationMicros / 1000).toStringAsFixed(1)} ms'),
+        _row('Generation', '${(generationMicros / 1000).toStringAsFixed(1)} ms'),
         if (unmet.isNotEmpty)
           Padding(
             padding: const EdgeInsets.only(top: 12),
             child: Text(
-              'Critères non tenus : ${unmet.join(", ")}',
+              'Unmet: ${unmet.join(", ")}',
               style: const TextStyle(
                 color: UngridColors.danger,
                 fontSize: 12,

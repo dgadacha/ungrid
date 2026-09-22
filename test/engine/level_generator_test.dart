@@ -4,7 +4,6 @@ import 'package:ungrid/game/engine/level_generator.dart';
 import 'package:ungrid/game/engine/level_solver.dart';
 import 'package:ungrid/game/levels/level_pattern.dart';
 import 'package:ungrid/game/levels/manual_levels.dart';
-import 'package:ungrid/game/models/difficulty.dart';
 
 void main() {
   const generator = LevelGenerator();
@@ -137,17 +136,80 @@ void main() {
   });
 
   group('limite de coups', () {
-    test('chaque niveau laisse une marge d\'erreur', () {
-      for (var id = 21; id <= 150; id += 9) {
-        final level = generator.generate(levelId: id).level;
-        expect(level.moveLimit, greaterThan(level.optimalMoves));
-        expect(level.moveAllowance, moveAllowanceFor(level.difficulty));
+    test('la limite est la solution optimale, partout', () {
+      for (var id = 1; id <= 150; id += 7) {
+        final level = ManualLevels.contains(id)
+            ? ManualLevels.byId(id)
+            : generator.generate(levelId: id).level;
+        expect(level.moveLimit, level.optimalMoves,
+            reason: 'niveau $id : le joueur doit jouer juste');
       }
     });
 
-    test('la marge se resserre à mesure que le jeu durcit', () {
-      expect(moveAllowanceFor(Difficulty.expert),
-          lessThan(moveAllowanceFor(Difficulty.easy)));
+    test('les niveaux écrits connaissent leur vrai optimal', () {
+      // Depuis le glissement, ce n'est plus le nombre de blocs : sans le
+      // solveur, les niveaux qui demandent un repositionnement seraient
+      // impossibles à finir.
+      for (final level in ManualLevels.all()) {
+        expect(level.optimalMoves, solver.solve(level).minimumMoves,
+            reason: 'niveau ${level.id}');
+      }
+    });
+  });
+
+  group('exigences de la campagne', () {
+    test('les tranches se suivent sans trou', () {
+      var previous = 0;
+      for (final band in difficultyBands) {
+        expect(band.upToLevel, greaterThan(previous));
+        previous = band.upToLevel;
+      }
+      expect(bandFor(1).name, difficultyBands.first.name);
+      expect(bandFor(100000).name, difficultyBands.last.name);
+    });
+
+    test('les exigences montent avec les tranches', () {
+      for (var i = 1; i < difficultyBands.length; i++) {
+        final before = difficultyBands[i - 1];
+        final after = difficultyBands[i];
+        expect(after.minComplexity, greaterThanOrEqualTo(before.minComplexity));
+        expect(after.minDecisionScore,
+            greaterThanOrEqualTo(before.minDecisionScore));
+        expect(after.maxExitRatio, lessThanOrEqualTo(before.maxExitRatio));
+      }
+    });
+
+    test('un bloc doit être rejoué dès le milieu de la campagne', () {
+      // C'est là que le glissement cesse d'être décoratif : sans
+      // repositionnement, chaque bloc sort d'un tap et le niveau se résume à
+      // trouver l'ordre.
+      var withReposition = 0;
+      var checked = 0;
+      for (var id = 31; id <= 90; id += 3) {
+        final generated = generator.generate(levelId: id);
+        checked++;
+        if (generated.analysis.multiMoveBlocks > 0) withReposition++;
+      }
+      expect(withReposition / checked, greaterThan(0.8),
+          reason: 'la plupart des niveaux doivent demander un repositionnement');
+    });
+
+    test('les niveaux offrent de vrais choix, et donc de vraies erreurs', () {
+      for (var id = 31; id <= 120; id += 11) {
+        final analysis = generator.generate(levelId: id).analysis;
+        expect(analysis.averageChoices, greaterThan(2.0),
+            reason: 'niveau $id : un couloir, pas un puzzle');
+        expect(analysis.wrongMoveOpportunities, greaterThan(0),
+            reason: 'niveau $id : impossible de se tromper');
+      }
+    });
+
+    test('les premiers niveaux restent doux', () {
+      for (var id = 6; id <= 15; id++) {
+        final analysis = generator.generate(levelId: id).analysis;
+        expect(analysis.moveComplexity, lessThanOrEqualTo(1.3),
+            reason: 'niveau $id trop exigeant pour un début');
+      }
     });
   });
 

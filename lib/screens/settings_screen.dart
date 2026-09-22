@@ -38,20 +38,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: UngridColors.surface,
-        title: const Text('Effacer la progression ?',
+        title: const Text('Reset progress?',
             style: TextStyle(color: UngridColors.onBackground)),
         content: const Text(
-          'Les niveaux terminés et les records seront perdus.',
+          'Cleared levels and best times will be lost.',
           style: TextStyle(color: UngridColors.onBackgroundSoft),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Annuler'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('Effacer'),
+            child: const Text('Reset'),
           ),
         ],
       ),
@@ -83,7 +83,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   Expanded(
                     child: Text(
-                      'RÉGLAGES',
+                      'SETTINGS',
                       textAlign: TextAlign.center,
                       style: textTheme.titleMedium,
                     ),
@@ -96,7 +96,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               value: _haptics,
               onChanged: _toggleHaptics,
               contentPadding: const EdgeInsets.symmetric(horizontal: 28),
-              title: Text('VIBRATIONS', style: textTheme.labelLarge),
+              title: Text('HAPTICS', style: textTheme.labelLarge),
               activeThumbColor: UngridColors.onBackground,
               activeTrackColor: UngridColors.success,
             ),
@@ -104,13 +104,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ListTile(
               contentPadding: const EdgeInsets.symmetric(horizontal: 28),
               onTap: _confirmReset,
-              title: Text('EFFACER LA PROGRESSION',
+              title: Text('RESET PROGRESS',
                   style: textTheme.labelLarge?.copyWith(
                     color: UngridColors.danger,
                   )),
               subtitle: Text(
-                'Niveau ${widget.progress.highestUnlockedLevel}'
-                ' · ${widget.progress.completedCount()} terminés',
+                'Level ${widget.progress.highestUnlockedLevel}'
+                ' · ${widget.progress.completedCount()} cleared',
                 style: textTheme.bodyMedium,
               ),
             ),
@@ -126,8 +126,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
               ),
-              title: Text('GÉNÉRATION', style: textTheme.labelLarge),
-              subtitle: Text('Analyse et réglage des niveaux',
+              title: Text('GENERATION', style: textTheme.labelLarge),
+              subtitle: Text('Level analysis and tuning',
                   style: textTheme.bodyMedium),
               trailing: const Icon(Icons.chevron_right_rounded,
                   color: UngridColors.onBackgroundFaint),
