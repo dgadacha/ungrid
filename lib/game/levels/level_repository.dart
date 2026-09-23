@@ -1,22 +1,29 @@
 import 'package:flutter/foundation.dart';
 
+import '../campaign/campaign_catalog.dart';
+import '../campaign/campaign_level.dart';
 import '../engine/level_generator.dart';
 import '../models/level.dart';
-import 'manual_levels.dart';
 
-/// Fournit les niveaux au jeu, d'où qu'ils viennent.
+/// Fournit les niveaux au jeu.
 ///
-/// Les vingt premiers sont écrits à la main ; les suivants sont fabriqués à la
-/// demande. La génération étant déterministe, rien n'est stocké : le numéro du
-/// niveau suffit à le reconstruire à l'identique.
+/// La campagne officielle est la source : le catalogue donne une seed, le
+/// niveau se reconstruit à l'identique chez tout le monde. Level 284 désigne
+/// le même puzzle pour tous, aujourd'hui comme après une mise à jour — sans
+/// quoi ni les solutions partagées ni les comparaisons entre joueurs n'ont de
+/// sens.
 ///
-/// Elle tourne dans un isolate pour ne jamais retenir une frame, et les
-/// niveaux à venir sont préparés pendant que le joueur réfléchit au sien.
+/// Le générateur reste là comme filet : si le catalogue manque ou s'arrête
+/// avant, le jeu continue avec des niveaux fabriqués à la volée.
 class LevelRepository {
   LevelRepository({
+    this.catalog,
     this.generator = const LevelGenerator(),
     this.useIsolate = true,
   });
+
+  /// Campagne publiée. `null` tant qu'elle n'est pas chargée.
+  CampaignCatalog? catalog;
 
   final LevelGenerator generator;
 
@@ -29,17 +36,17 @@ class LevelRepository {
   /// Niveaux conservés autour de celui en cours.
   static const int _prefetchCount = 5;
 
-  bool isManual(int levelId) => ManualLevels.contains(levelId);
+  /// Coups accordés au joueur pour ce niveau.
+  int moveLimitFor(int levelId, Level level) =>
+      catalog?.definitionFor(levelId)?.moveLimit ??
+      level.optimalMoves + moveAllowanceForLevel(levelId);
 
   Future<Level> levelFor(int levelId) async {
     final cached = _cache[levelId];
     if (cached != null) return cached;
 
-    if (ManualLevels.contains(levelId)) {
-      final level = ManualLevels.byId(levelId);
-      _cache[levelId] = level;
-      return level;
-    }
+    final official = catalog?.levelFor(levelId);
+    if (official != null) return _cache[levelId] = official;
 
     final pending = _pending[levelId];
     if (pending != null) return pending;
@@ -52,11 +59,10 @@ class LevelRepository {
     return level;
   }
 
-  /// Version bloquante, réservée aux tests et à l'écran de debug.
+  /// Version bloquante, réservée aux tests et à l'écran d'analyse.
   Level levelForSync(int levelId) => _cache[levelId] ??=
-      ManualLevels.contains(levelId)
-          ? ManualLevels.byId(levelId)
-          : generator.generate(levelId: levelId).level;
+      catalog?.levelFor(levelId) ??
+          generator.generate(levelId: levelId).level;
 
   Future<Level> _generate(int levelId) {
     if (!useIsolate) {

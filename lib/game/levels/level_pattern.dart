@@ -7,8 +7,15 @@ import '../models/level.dart';
 /// Lecture d'un niveau écrit en ASCII.
 ///
 /// Un point ou une espace pour une case vide, `^ v < >` pour un bloc et sa
-/// direction, `#` pour un mur. Chaque chaîne est une ligne de la grille, de
-/// haut en bas.
+/// direction, `o` pour une tuile d'arrêt. Chaque chaîne est une ligne de la
+/// grille, de haut en bas.
+///
+/// Un bloc posé sur une tuile s'écrit avec sa direction en capitale —
+/// `^ V < >` deviennent `A V L R` serait illisible, on garde donc la flèche
+/// et la tuile se lit dans `Level.stopTiles`. Au rendu, la flèche prime.
+///
+/// Sert aux tests et aux outils : un board se lit et s'écrit alors d'un coup
+/// d'oeil.
 class LevelPattern {
   const LevelPattern._();
 
@@ -26,8 +33,6 @@ class LevelPattern {
         Direction.right => '>',
       };
 
-  static const String wallSymbol = '#';
-
   static Level parse(
     List<String> rows, {
     required int id,
@@ -38,7 +43,7 @@ class LevelPattern {
     }
     final columns = rows.first.length;
     final blocks = <Block>[];
-    final walls = <GridPosition>[];
+    final stopTiles = <GridPosition>[];
 
     for (var y = 0; y < rows.length; y++) {
       final row = rows[y];
@@ -49,8 +54,8 @@ class LevelPattern {
       for (var x = 0; x < columns; x++) {
         final symbol = row[x];
         if (symbol == '.' || symbol == ' ') continue;
-        if (symbol == wallSymbol) {
-          walls.add(GridPosition(x, y));
+        if (symbol == 'o') {
+          stopTiles.add(GridPosition(x, y));
           continue;
         }
         final direction = _symbols[symbol];
@@ -70,7 +75,7 @@ class LevelPattern {
       rows: rows.length,
       columns: columns,
       blocks: blocks,
-      walls: walls,
+      stopTiles: stopTiles,
       // Chaque bloc sort exactement une fois : le minimum de coups réussis
       // est donc le nombre de blocs.
       // Valeur provisoire : le solveur la corrige, un bloc pouvant demander
@@ -87,8 +92,8 @@ class LevelPattern {
       (_) => List.filled(level.columns, '.'),
       growable: false,
     );
-    for (final wall in level.walls) {
-      grid[wall.y][wall.x] = wallSymbol;
+    for (final tile in level.stopTiles) {
+      grid[tile.y][tile.x] = 'o';
     }
     for (final block in level.blocks) {
       grid[block.y][block.x] = symbolOf(block.direction);

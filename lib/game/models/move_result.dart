@@ -8,6 +8,9 @@ enum MoveOutcome {
   /// Le bloc a glissé jusqu'à la dernière case libre avant l'obstacle.
   slid,
 
+  /// Le bloc est entré sur une tuile d'arrêt et s'y est posé.
+  stopped,
+
   /// L'obstacle touchait le bloc : il n'a pas bougé d'un pouce.
   blocked,
 
@@ -22,7 +25,6 @@ class MoveResult {
     this.blockId,
     this.from,
     this.to,
-    this.blockedByWall = false,
     this.remainingBlocks = 0,
   });
 
@@ -31,7 +33,6 @@ class MoveResult {
         blockId = null,
         from = null,
         to = null,
-        blockedByWall = false,
         remainingBlocks = 0;
 
   final MoveOutcome outcome;
@@ -43,18 +44,16 @@ class MoveResult {
   /// Case d'arrivée, `null` si le bloc a quitté la grille.
   final GridPosition? to;
 
-  /// `true` si c'est un mur qui a arrêté le bloc.
-  final bool blockedByWall;
-
   final int remainingBlocks;
 
   bool get exited => outcome == MoveOutcome.exited;
   bool get slid => outcome == MoveOutcome.slid;
   bool get blocked => outcome == MoveOutcome.blocked;
+  bool get stopped => outcome == MoveOutcome.stopped;
 
   /// Le coup a-t-il modifié le plateau ? Un refus n'y change rien, et n'a donc
   /// rien à annuler.
-  bool get changedBoard => exited || slid;
+  bool get changedBoard => exited || slid || stopped;
 
   bool get isLevelComplete => exited && remainingBlocks == 0;
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../game/campaign/campaign_catalog.dart';
 import '../game/levels/level_repository.dart';
 import '../screens/home_screen.dart';
 import '../services/haptic_service.dart';
@@ -10,9 +11,12 @@ import 'theme.dart';
 /// constructeur : à cette taille, une injection plus savante n'apporterait
 /// rien.
 class UngridApp extends StatefulWidget {
-  const UngridApp({super.key, required this.progress});
+  const UngridApp({super.key, required this.progress, this.catalog});
 
   final ProgressService progress;
+
+  /// La campagne publiée, `null` si le fichier manque.
+  final CampaignCatalog? catalog;
 
   @override
   State<UngridApp> createState() => _UngridAppState();
@@ -21,7 +25,8 @@ class UngridApp extends StatefulWidget {
 class _UngridAppState extends State<UngridApp> {
   late final HapticService _haptics =
       HapticService(enabled: widget.progress.hapticsEnabled);
-  final LevelRepository _repository = LevelRepository();
+  late final LevelRepository _repository =
+      LevelRepository(catalog: widget.catalog);
 
   @override
   Widget build(BuildContext context) {

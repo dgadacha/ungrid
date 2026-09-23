@@ -1,7 +1,10 @@
 import 'dart:collection';
+import 'dart:typed_data';
 
 import '../models/level.dart';
+import '../models/move_result.dart';
 import 'game_engine.dart';
+import 'move_resolver.dart';
 import 'solve_result.dart';
 
 /// Analyse complète d'un niveau : solvabilité, nombre de coups minimal, forme
@@ -12,7 +15,8 @@ import 'solve_result.dart';
 /// Depuis que les blocs glissent, leur position fait partie de l'état : un
 /// même bloc peut être joué plusieurs fois avant de sortir. Un état est donc
 /// la liste des cases occupées par les blocs encore présents, `-1` marquant
-/// ceux qui sont sortis. Les directions et les murs, eux, ne bougent jamais.
+/// ceux qui sont sortis. Les directions et les tuiles d'arrêt, elles, ne
+/// bougent jamais : elles sont portées par le board, pas par l'état.
 ///
 /// Deux propriétés bornent l'exploration. Un bloc ne se déplace que dans sa
 /// direction, donc sa coordonnée ne revient jamais en arrière : l'espace
@@ -78,10 +82,10 @@ class LevelSolver {
       }
 
       var moves = 0;
-      final occupied = board.occupancyOf(state);
+      final cells = board.cellsOf(state);
       for (var i = 0; i < n; i++) {
         if (state[i] < 0) continue;
-        final next = board.slideWith(state, i, occupied);
+        final next = board.slideWith(state, i, cells);
         if (next == null) continue; // refus : l'état ne change pas
         moves++;
 
@@ -145,16 +149,22 @@ class LevelSolver {
   ///
   /// C'est ce qui distingue un long couloir d'un vrai puzzle : combien de
   /// coups s'offraient, combien menaient à une partie plus longue, combien la
-  /// condamnaient. Chaque alternative est résolue à son tour, d'où le coût —
-  /// à réserver aux candidats déjà retenus.
+  /// condamnaient, et combien la laissaient encore gagnable au plus court.
+  /// Chaque alternative est résolue à son tour, d'où le coût — à réserver aux
+  /// candidats déjà retenus.
   SolutionWalk walkSolution(Level level, List<String> moves) {
     final board = _Board.of(level);
     var state = board.initialState();
 
     final choices = <int>[];
+    final optimalChoices = <int>[];
     var wrongMoves = 0;
     var deadEnds = 0;
-    final wallsUsed = <int>{};
+    var stopInteractions = 0;
+    var meaningfulStops = 0;
+    var dependencyMoves = 0;
+    var unresolved = 0;
+    final usedStopTiles = <int>{};
 
     // Ce qu'il reste à jouer en suivant la solution, à chaque étape.
     var remaining = moves.length;
@@ -163,62 +173,102 @@ class LevelSolver {
       final index = level.blocks.indexWhere((b) => b.id == move);
       if (index < 0) break;
 
-      final occupied = board.occupancyOf(state);
+      final cells = board.cellsOf(state);
       var available = 0;
+      var optimal = 0;
 
       for (var i = 0; i < state.length; i++) {
         if (state[i] < 0) continue;
-        final next = board.slideWith(state, i, occupied);
-        if (next == null) continue;
+        final next = board.slideWith(state, i, cells);
+        if (next == null) continue; // un refus ne décide de rien
         available++;
-        if (i == index) continue;
 
         // Ce que coûte l'autre chemin : la partie est-elle perdue, rallongée,
-        // ou aussi bonne ?
+        // ou aussi bonne ? Une réponse hors budget n'est aucune des trois, et
+        // ne se compte nulle part — la prendre pour une impasse créditerait
+        // les grands boards de pièges qui n'existent pas.
         final cost = _distanceFrom(board, next);
-        if (cost < 0) {
-          deadEnds++;
+        if (cost == _unknown) {
+          unresolved++;
+        } else if (cost == _unreachable) {
+          if (i != index) deadEnds++;
         } else if (cost > remaining - 1) {
-          wrongMoves++;
+          if (i != index) wrongMoves++;
+        } else {
+          optimal++;
         }
       }
 
       choices.add(available);
-      final wall = board.wallStopping(state, index, occupied);
-      if (wall >= 0) wallsUsed.add(wall);
+      optimalChoices.add(optimal);
 
-      final next = board.slideWith(state, index, occupied);
+      // Ce que le coup joué change pour les autres : c'est là que se noue la
+      // dépendance, et c'est ce qui sépare un arrêt utile d'un tap forcé.
+      final before = board.prospects(state, cells, skip: index);
+      final next = board.slideWith(state, index, cells);
       if (next == null) break;
+      final landed = next[index];
+      final after = board.prospects(next, board.cellsOf(next), skip: index);
+      final changed = !_sameProspects(before, after);
+      if (changed) dependencyMoves++;
+
+      if (landed >= 0 && board.isStopTile(landed)) {
+        stopInteractions++;
+        usedStopTiles.add(landed);
+        if (changed) meaningfulStops++;
+      }
+
       state = next;
       remaining--;
     }
 
     return SolutionWalk(
       choices: choices,
+      optimalChoices: optimalChoices,
       wrongMoves: wrongMoves,
       deadEnds: deadEnds,
-      wallsUsed: wallsUsed.length,
+      stopInteractions: stopInteractions,
+      meaningfulStopInteractions: meaningfulStops,
+      dependencyMoves: dependencyMoves,
+      usedStopTiles: usedStopTiles.length,
+      unresolvedAlternatives: unresolved,
     );
   }
 
-  /// Coups nécessaires pour vider la grille depuis cet état, `-1` si c'est
-  /// impossible ou hors budget.
+  static bool _sameProspects(List<int> a, List<int> b) {
+    if (a.length != b.length) return false;
+    for (var i = 0; i < a.length; i++) {
+      if (a[i] != b[i]) return false;
+    }
+    return true;
+  }
+
+  /// Coups nécessaires pour vider la grille depuis cet état.
+  ///
+  /// Renvoie [_unreachable] quand la position est réellement perdue, et
+  /// [_unknown] quand l'exploration a manqué de budget. Les confondre
+  /// reviendrait à compter comme piège tout état simplement trop gros à
+  /// analyser, et à créditer les grands boards de pièges imaginaires.
+  static const int _unreachable = -1;
+  static const int _unknown = -2;
+
   int _distanceFrom(_Board board, List<int> start) {
     final startKey = _key(start);
     final open = _BucketQueue();
     final cost = <String, int>{startKey: 0};
     open.add(board.remainingCount(start), start);
 
-    while (!open.isEmpty && cost.length <= maxExploredStates) {
+    while (!open.isEmpty) {
+      if (cost.length > maxExploredStates) return _unknown;
       final state = open.removeFirst();
       final key = _key(state);
       final g = cost[key]!;
       if (board.isCleared(state)) return g;
 
-      final occupied = board.occupancyOf(state);
+      final cells = board.cellsOf(state);
       for (var i = 0; i < state.length; i++) {
         if (state[i] < 0) continue;
-        final next = board.slideWith(state, i, occupied);
+        final next = board.slideWith(state, i, cells);
         if (next == null) continue;
         final nextKey = _key(next);
         final known = cost[nextKey];
@@ -227,10 +277,10 @@ class LevelSolver {
         open.add(g + 1 + board.remainingCount(next), next);
       }
     }
-    return -1;
+    return _unreachable;
   }
 
-  /// Vérification rapide, sans métriques : suffit pour rejeter un candidat.  /// Vérification rapide, sans métriques : suffit pour rejeter un candidat.
+  /// Vérification rapide, sans métriques : suffit pour rejeter un candidat.
   bool isSolvable(Level level) => solve(level).solvable;
 
   /// Bloc à jouer maintenant, depuis une configuration donnée.
@@ -271,10 +321,10 @@ class LevelSolver {
         break;
       }
 
-      final occupied = board.occupancyOf(state);
+      final cells = board.cellsOf(state);
       for (var i = 0; i < start.length; i++) {
         if (state[i] < 0) continue;
-        final next = board.slideWith(state, i, occupied);
+        final next = board.slideWith(state, i, cells);
         if (next == null) continue;
         final nextKey = _key(next);
         final known = cost[nextKey];
@@ -301,7 +351,7 @@ class LevelSolver {
       String.fromCharCodes([for (final cell in state) cell + 1]);
 }
 
-/// Vue figée d'un niveau : directions, murs, géométrie.
+/// Vue figée d'un niveau : directions, tuiles d'arrêt, géométrie.
 ///
 /// Séparée du moteur de jeu pour que l'exploration travaille sur des listes
 /// d'entiers plutôt que sur des objets, et reste assez rapide pour valider un
@@ -312,24 +362,20 @@ class _Board {
     required this.rows,
     required this.dx,
     required this.dy,
-    required this.walls,
     required this.startCells,
+    required this.stopMask,
   });
 
   factory _Board.of(Level level) {
-    final walls = List<bool>.filled(level.rows * level.columns, false);
-    for (final wall in level.walls) {
-      walls[wall.y * level.columns + wall.x] = true;
-    }
     return _Board(
       columns: level.columns,
       rows: level.rows,
       dx: [for (final b in level.blocks) b.direction.dx],
       dy: [for (final b in level.blocks) b.direction.dy],
-      walls: walls,
       startCells: [
         for (final b in level.blocks) b.y * level.columns + b.x,
       ],
+      stopMask: level.stopMask(),
     );
   }
 
@@ -337,8 +383,10 @@ class _Board {
   final int rows;
   final List<int> dx;
   final List<int> dy;
-  final List<bool> walls;
   final List<int> startCells;
+
+  /// Grille des tuiles d'arrêt : elle ne change jamais, on la recopie.
+  final Uint8List stopMask;
 
   List<int> initialState() => List<int>.from(startCells);
 
@@ -360,82 +408,64 @@ class _Board {
 
   /// État obtenu en jouant le bloc [index], ou `null` si le coup est refusé.
   List<int>? slide(List<int> state, int index) =>
-      slideWith(state, index, occupancyOf(state));
+      slideWith(state, index, cellsOf(state));
 
-  /// Cases occupées par les blocs d'un état.
+  /// La grille telle que le résolveur la lit : tuiles d'arrêt du board, plus
+  /// les blocs de cet état.
   ///
   /// Construite une fois par état développé : la recalculer à chaque coup
   /// testé dominait le coût de l'exploration.
-  List<bool> occupancyOf(List<int> state) {
-    final occupied = List<bool>.filled(columns * rows, false);
+  Uint8List cellsOf(List<int> state) {
+    final cells = Uint8List.fromList(stopMask);
     for (final cell in state) {
-      if (cell >= 0) occupied[cell] = true;
+      if (cell >= 0) cells[cell] |= cellOccupied;
     }
-    return occupied;
+    return cells;
   }
 
-  List<int>? slideWith(List<int> state, int index, List<bool> occupied) {
+  List<int>? slideWith(List<int> state, int index, Uint8List cells) {
     final cell = state[index];
     if (cell < 0) return null;
 
-    var x = cell % columns;
-    var y = cell ~/ columns;
-    final stepX = dx[index];
-    final stepY = dy[index];
-    var moved = 0;
+    final move = MoveResolver.resolve(
+      cell: cell,
+      stepX: dx[index],
+      stepY: dy[index],
+      columns: columns,
+      rows: rows,
+      cells: cells,
+    );
+    if (move.outcome == MoveOutcome.blocked) return null;
 
-    while (true) {
-      final nx = x + stepX;
-      final ny = y + stepY;
-      if (nx < 0 || ny < 0 || nx >= columns || ny >= rows) {
-        final next = List<int>.from(state);
-        next[index] = -1;
-        return next;
-      }
-      final target = ny * columns + nx;
-      if (occupied[target] || walls[target]) break;
-      x = nx;
-      y = ny;
-      moved++;
-    }
-
-    if (moved == 0) return null;
     final next = List<int>.from(state);
-    next[index] = y * columns + x;
+    next[index] = move.cell;
     return next;
   }
 
-  /// Mur qui arrête le bloc [index], ou `-1` si c'est un bloc ou le vide.
-  ///
-  /// Sert à mesurer l'influence réelle des murs : un mur qui n'arrête jamais
-  /// personne n'est qu'un décor.
-  int wallStopping(List<int> state, int index, List<bool> occupied) {
-    final cell = state[index];
-    if (cell < 0) return -1;
-    var x = cell % columns;
-    var y = cell ~/ columns;
-    final stepX = dx[index];
-    final stepY = dy[index];
+  bool isStopTile(int cell) => stopMask[cell] & cellStopTile != 0;
 
-    while (true) {
-      final nx = x + stepX;
-      final ny = y + stepY;
-      if (nx < 0 || ny < 0 || nx >= columns || ny >= rows) return -1;
-      final target = ny * columns + nx;
-      if (walls[target]) return target;
-      if (occupied[target]) return -1;
-      x = nx;
-      y = ny;
+  /// Ce que chaque bloc ferait si on le touchait maintenant.
+  ///
+  /// Sert à mesurer l'effet d'un coup sur les autres : deux relevés qui
+  /// diffèrent signifient que le coup a ouvert ou fermé une route, donc qu'il
+  /// compte pour quelqu'un d'autre que celui qu'on a bougé.
+  List<int> prospects(List<int> state, Uint8List cells, {required int skip}) {
+    final out = <int>[];
+    for (var i = 0; i < state.length; i++) {
+      if (i == skip || state[i] < 0) continue;
+      final next = slideWith(state, i, cells);
+      out.add(next == null ? -2 : next[i]);
     }
+    return out;
   }
 
   /// Nombre de blocs qui bougeraient dans cet état.
   int movableCount(List<int> state) {
-    final occupied = occupancyOf(state);
+    final cells = cellsOf(state);
     var count = 0;
     for (var i = 0; i < state.length; i++) {
       if (state[i] < 0) continue;
-      if (slideWith(state, i, occupied) != null) count++;
+      if (slideWith(state, i, cells) != null) count++;
     }
     return count;
   }
@@ -474,13 +504,24 @@ class _BucketQueue {
 class SolutionWalk {
   const SolutionWalk({
     required this.choices,
+    required this.optimalChoices,
     required this.wrongMoves,
     required this.deadEnds,
-    required this.wallsUsed,
+    required this.stopInteractions,
+    required this.meaningfulStopInteractions,
+    required this.dependencyMoves,
+    required this.usedStopTiles,
+    this.unresolvedAlternatives = 0,
   });
 
   /// Nombre de coups jouables à chaque étape de la solution.
   final List<int> choices;
+
+  /// Parmi eux, ceux qui laissent la partie gagnable au plus court.
+  ///
+  /// C'est la vraie mesure de l'étroitesse : un board peut offrir cinq coups
+  /// dont un seul passe.
+  final List<int> optimalChoices;
 
   /// Coups écartés qui auraient allongé la partie.
   final int wrongMoves;
@@ -488,6 +529,24 @@ class SolutionWalk {
   /// Coups écartés qui l'auraient condamnée.
   final int deadEnds;
 
-  /// Murs qui arrêtent réellement un bloc au cours de la solution.
-  final int wallsUsed;
+  /// Coups de la solution qui posent un bloc sur une tuile d'arrêt.
+  final int stopInteractions;
+
+  /// Parmi eux, ceux dont la nouvelle position change ce que les autres blocs
+  /// peuvent faire. Les autres ne sont que des taps obligatoires.
+  final int meaningfulStopInteractions;
+
+  /// Coups de la solution qui modifient les possibilités d'un autre bloc.
+  final int dependencyMoves;
+
+  /// Tuiles effectivement utilisées par la solution.
+  final int usedStopTiles;
+
+  /// Alternatives dont le coût n'a pas pu être établi dans le budget.
+  ///
+  /// Ni bonnes, ni mauvaises, ni fatales : inconnues. Le nombre se publie pour
+  /// qu'on sache à quel point une analyse s'appuie sur des trous — un candidat
+  /// qui en accumule mérite d'être relu avec un budget plus large plutôt que
+  /// classé sur des chiffres incomplets.
+  final int unresolvedAlternatives;
 }

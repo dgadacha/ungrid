@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'block.dart';
 import 'difficulty.dart';
 import 'grid_position.dart';
@@ -10,7 +12,7 @@ class Level {
     required this.columns,
     required this.blocks,
     required this.optimalMoves,
-    this.walls = const [],
+    this.stopTiles = const [],
     this.difficulty = Difficulty.easy,
     this.seed,
   });
@@ -20,10 +22,12 @@ class Level {
   final int columns;
   final List<Block> blocks;
 
-  /// Obstacles permanents. Ils ne bougent pas, ne sortent pas, ne se touchent
-  /// pas : ils barrent la route, et c'est tout. Ils ne comptent donc pas dans
-  /// la condition de victoire, qui ne regarde que les blocs.
-  final List<GridPosition> walls;
+  /// Cases qui retiennent un bloc entrant dessus.
+  ///
+  /// Elles ne bougent jamais, ne se touchent pas, ne comptent pas dans la
+  /// victoire : ce sont des points d'arrêt, pas des obstacles. Un bloc peut
+  /// démarrer sur l'une d'elles sans être retenu.
+  final List<GridPosition> stopTiles;
 
   /// Nombre minimal de coups pour vider la grille, calculé par le solveur.
   ///
@@ -47,15 +51,16 @@ class Level {
 
   int get cellCount => rows * columns;
 
+  /// Part de la grille occupée. C'est elle qui décide de l'encombrement
+  /// visuel, et de ce qui peut encore glisser.
   double get density => blocks.length / cellCount;
 
-  /// Part de la grille occupée, murs compris : c'est elle qui décide de
-  /// l'encombrement visuel.
-  double get occupancy => (blocks.length + walls.length) / cellCount;
+  double get occupancy => density;
 
   Level copyWith({
     int? id,
     List<Block>? blocks,
+    List<GridPosition>? stopTiles,
     int? optimalMoves,
     Difficulty? difficulty,
     int? seed,
@@ -65,24 +70,41 @@ class Level {
         rows: rows,
         columns: columns,
         blocks: blocks ?? this.blocks,
-        walls: walls,
+        stopTiles: stopTiles ?? this.stopTiles,
         optimalMoves: optimalMoves ?? this.optimalMoves,
         difficulty: difficulty ?? this.difficulty,
         seed: seed ?? this.seed,
       );
+
+  /// Grille des tuiles d'arrêt, prête pour le résolveur.
+  Uint8List stopMask() {
+    final mask = Uint8List(cellCount);
+    for (final tile in stopTiles) {
+      mask[tile.y * columns + tile.x] = 2;
+    }
+    return mask;
+  }
+
+  bool hasStopTileAt(int x, int y) {
+    for (final tile in stopTiles) {
+      if (tile.x == x && tile.y == y) return true;
+    }
+    return false;
+  }
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'rows': rows,
         'columns': columns,
         'blocks': blocks.map((b) => b.toJson()).toList(),
-        'walls': walls.map((w) => {'x': w.x, 'y': w.y}).toList(),
+        if (stopTiles.isNotEmpty)
+          'stopTiles': [
+            for (final tile in stopTiles) {'x': tile.x, 'y': tile.y},
+          ],
       };
 
   static Level fromJson(Map<String, dynamic> json, {int optimalMoves = 0}) {
     final rawBlocks = (json['blocks'] as List).cast<Map<String, dynamic>>();
-    final rawWalls =
-        (json['walls'] as List? ?? const []).cast<Map<String, dynamic>>();
     return Level(
       id: json['id'] as int,
       rows: json['rows'] as int,
@@ -91,12 +113,12 @@ class Level {
         for (var i = 0; i < rawBlocks.length; i++)
           Block.fromJson(rawBlocks[i], id: 'b$i'),
       ],
+      stopTiles: [
+        for (final tile in (json['stopTiles'] as List? ?? const []).cast<Map>())
+          GridPosition(tile['x'] as int, tile['y'] as int),
+      ],
       optimalMoves:
           json['optimalMoves'] as int? ?? (optimalMoves == 0 ? rawBlocks.length : optimalMoves),
-      walls: [
-        for (final wall in rawWalls)
-          GridPosition(wall['x'] as int, wall['y'] as int),
-      ],
     );
   }
 
@@ -105,14 +127,15 @@ class Level {
   bool get isStructurallyValid {
     final seen = <int>{};
     final ids = <String>{};
-    for (final wall in walls) {
-      if (!wall.isInside(columns, rows)) return false;
-      if (!seen.add(wall.y * columns + wall.x)) return false;
-    }
     for (final block in blocks) {
       if (!block.position.isInside(columns, rows)) return false;
       if (!seen.add(block.y * columns + block.x)) return false;
       if (!ids.add(block.id)) return false;
+    }
+    final tiles = <int>{};
+    for (final tile in stopTiles) {
+      if (!tile.isInside(columns, rows)) return false;
+      if (!tiles.add(tile.y * columns + tile.x)) return false;
     }
     return blocks.isNotEmpty;
   }

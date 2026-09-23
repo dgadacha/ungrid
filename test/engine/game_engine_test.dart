@@ -39,19 +39,6 @@ void main() {
       expect(engine.remainingCount, 2, reason: 'il reste dans la grille');
     });
 
-    test('un bloc s\'arrête juste avant un mur', () {
-      final engine = engineFor([
-        '....',
-        '>..#',
-        '....',
-        '....',
-      ]);
-      final result = engine.tap('b0');
-      expect(result.outcome, MoveOutcome.slid);
-      expect(result.to, const GridPosition(2, 1));
-      expect(result.blockedByWall, isTrue);
-    });
-
     test('un obstacle collé au bloc le laisse sur place', () {
       final engine = engineFor([
         '....',
@@ -62,18 +49,6 @@ void main() {
       final result = engine.tap('b0');
       expect(result.outcome, MoveOutcome.blocked);
       expect(engine.blockAt(0, 1)?.id, 'b0');
-    });
-
-    test('un mur collé au bloc le laisse sur place', () {
-      final engine = engineFor([
-        '....',
-        '>#..',
-        '....',
-        '....',
-      ]);
-      final result = engine.tap('b0');
-      expect(result.outcome, MoveOutcome.blocked);
-      expect(result.blockedByWall, isTrue);
     });
 
     test('la direction ne change jamais', () {
@@ -108,7 +83,7 @@ void main() {
         '.v..',
         '....',
         '>...',
-        '.#..',
+        '.^..',
       ]);
       expect(engine.canExit('b1'), isTrue);
       engine.tap('b0');
@@ -132,30 +107,31 @@ void main() {
     }
   });
 
-  group('murs', () {
-    test('un mur n\'est pas un bloc', () {
+  group('tuiles d\'arrêt', () {
+    test('une tuile n\'est pas un bloc', () {
       final engine = engineFor([
-        '.#..',
+        '.o..',
         '..>.',
         '....',
         '....',
       ]);
       expect(engine.blockAt(1, 0), isNull);
-      expect(engine.isWall(1, 0), isTrue);
-      expect(engine.remainingCount, 1);
+      expect(engine.hasStopTileAt(1, 0), isTrue);
+      expect(engine.remainingCount, 1,
+          reason: 'elle ne compte pas dans la victoire');
     });
 
-    test('la grille se vide sans que les murs partent', () {
+    test('la grille se vide sans que les tuiles partent', () {
       final engine = engineFor([
-        '.#..',
+        '.o..',
         '..>.',
         '....',
-        '..#.',
+        '..o.',
       ]);
       engine.tap('b0');
       expect(engine.isCompleted, isTrue);
-      expect(engine.isWall(1, 0), isTrue);
-      expect(engine.isWall(2, 3), isTrue);
+      expect(engine.hasStopTileAt(1, 0), isTrue);
+      expect(engine.hasStopTileAt(2, 3), isTrue);
     });
   });
 
@@ -205,12 +181,12 @@ void main() {
     test('elle se remonte coup par coup', () {
       final engine = engineFor([
         '....',
-        '>..#',
+        '>.o.',
         '....',
         '..^.',
       ]);
-      engine.tap('b0'); // glisse jusqu'en (2,1)
-      engine.tap('b1'); // monte et s'arrête sous... rien : il sort
+      engine.tap('b0'); // se pose sur la tuile en (2,1)
+      engine.tap('b1'); // monte et bute sur b0 : il s'arrête en (2,2)
       expect(engine.history, hasLength(2));
 
       engine.undo();

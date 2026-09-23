@@ -18,7 +18,7 @@ void main(List<String> args) {
 
   var count = 0;
   var complexity = 0.0, multi = 0.0, choices = 0.0, decisions = 0.0;
-  var wrong = 0.0, dead = 0.0, walls = 0.0, score = 0.0;
+  var wrong = 0.0, dead = 0.0, stops = 0.0, score = 0.0;
   var bestScore = 0.0;
   String? best;
   final watch = Stopwatch()..start();
@@ -43,7 +43,7 @@ void main(List<String> args) {
       decisions += analysis.decisionRatio;
       wrong += analysis.wrongMoveOpportunities;
       dead += analysis.deadEndOpportunities;
-      walls += analysis.wallInfluence;
+      stops += analysis.stopTileInteractions.toDouble();
       score += analysis.decisionScore;
 
       if (analysis.decisionScore > bestScore) {
@@ -70,7 +70,7 @@ void main(List<String> args) {
   line('étapes avec un choix (part)', decisions / count);
   line('coups qui rallongent', wrong / count, 1);
   line('coups qui condamnent', dead / count, 1);
-  line('murs utiles', walls / count, 1);
+  line('arrêts sur tuile', stops / count, 1);
   line('note de décision', score / count, 1);
   print('\nmeilleur : $best');
 }

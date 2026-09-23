@@ -2,31 +2,16 @@
 // Usage : dart run tool/inspect_level.dart 43
 import 'package:ungrid/game/engine/difficulty_config.dart';
 import 'package:ungrid/game/engine/level_generator.dart';
-import 'package:ungrid/game/engine/level_solver.dart';
 import 'package:ungrid/game/engine/puzzle_analysis.dart';
 import 'package:ungrid/game/levels/level_pattern.dart';
-import 'package:ungrid/game/levels/manual_levels.dart';
 
 void main(List<String> args) {
   final ids = args.isEmpty ? [43] : args.map(int.parse);
   const generator = LevelGenerator();
-  const solver = LevelSolver();
-  const analyzer = PuzzleAnalyzer();
 
   for (final id in ids) {
     final band = bandFor(id);
     print('=== niveau $id — tranche « ${band.name} »');
-
-    if (ManualLevels.contains(id)) {
-      final level = ManualLevels.byId(id);
-      final result = solver.solve(level);
-      final analysis = analyzer.analyse(level, result);
-      _show(level.blocks.length, result.minimumMoves, level.moveLimit, analysis);
-      for (final row in LevelPattern.render(level)) {
-        print('    $row');
-      }
-      continue;
-    }
 
     final watch = Stopwatch()..start();
     final generated = generator.generate(levelId: id);

@@ -81,41 +81,6 @@ void main() {
     expect(result.exampleSolution, hasLength(result.minimumMoves));
   });
 
-  group('murs', () {
-    test('un bloc s\'arrête au mur au lieu de sortir', () {
-      // Le bloc glisse jusqu'au mur, puis ne peut plus rien faire.
-      final result = solver.solve(parse([
-        '....',
-        '>..#',
-        '....',
-        '....',
-      ]));
-      expect(result.solvable, isFalse);
-    });
-
-    test('un mur hors trajectoire ne gêne rien', () {
-      final result = solver.solve(parse([
-        '.#..',
-        '>...',
-        '....',
-        '....',
-      ]));
-      expect(result.solvable, isTrue);
-      expect(result.minimumMoves, 1);
-    });
-
-    test('les murs restent en place', () {
-      final level = parse([
-        '.#..',
-        '..>.',
-        '....',
-        '..#.',
-      ]);
-      expect(level.walls, hasLength(2));
-      expect(solver.solve(level).solvable, isTrue);
-    });
-  });
-
   group('indice', () {
     test('il désigne un coup qui mène à la victoire', () {
       final level = parse([

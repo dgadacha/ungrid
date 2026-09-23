@@ -38,7 +38,9 @@ class GameController extends ChangeNotifier {
     required this.haptics,
     this.solver = const LevelSolver(),
     this.rewards = const LocalRewardService(),
+    int? moveLimit,
   })  : _level = level,
+        _moveLimit = moveLimit,
         engine = GameEngine(level) {
     _clock.start();
   }
@@ -97,7 +99,10 @@ class GameController extends ChangeNotifier {
 
   int get nowMs => _clock.elapsedMilliseconds;
 
-  int get moveLimit => level.moveLimit + bonusMoves;
+  /// Coups accordés, fixés par la campagne. À défaut, ceux du niveau.
+  int? _moveLimit;
+
+  int get moveLimit => (_moveLimit ?? level.moveLimit) + bonusMoves;
 
   int get movesLeft {
     final left = moveLimit - movesUsed;
@@ -175,6 +180,7 @@ class GameController extends ChangeNotifier {
           startMs: nowMs,
         ));
       case MoveOutcome.slid:
+      case MoveOutcome.stopped:
         final moved = engine.blockById(block.id)!;
         _push(BlockMotion.slide(
           block: moved,
@@ -182,6 +188,7 @@ class GameController extends ChangeNotifier {
           fromY: block.y,
           startMs: nowMs,
         ));
+        if (result.stopped) haptics.stoppedOnTile();
       case MoveOutcome.blocked:
         blockedFeedback = BlockedFeedback(block: block, startMs: nowMs);
         haptics.blocked();
@@ -331,8 +338,9 @@ class GameController extends ChangeNotifier {
 
   /// Passe à un autre niveau sans recréer le contrôleur : l'enchaînement d'un
   /// niveau au suivant doit être instantané.
-  void loadLevel(Level next) {
+  void loadLevel(Level next, {int? moveLimit}) {
     _level = next;
+    _moveLimit = moveLimit;
     engine = GameEngine(next);
     restart();
   }

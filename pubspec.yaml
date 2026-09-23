@@ -62,6 +62,8 @@ flutter:
   # Le jeu dessine tout lui-même ; seul le logo est une image.
   assets:
     - assets/images/logo.png
+    # La campagne officielle v2 se déclarera ici une fois construite. Sans
+    # elle, le jeu fabrique ses niveaux à la volée — voir main.dart.
 
   fonts:
     - family: NunitoSans

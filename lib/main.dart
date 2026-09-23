@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'app/app.dart';
+import 'game/campaign/campaign_catalog.dart';
 import 'services/progress_service.dart';
 
 Future<void> main() async {
@@ -19,5 +20,16 @@ Future<void> main() async {
   ));
 
   final progress = await ProgressService.load();
-  runApp(UngridApp(progress: progress));
+
+  // La campagne publiée : c'est elle qui décide quel puzzle porte quel numéro.
+  // Si le fichier manque, le jeu tourne avec des niveaux fabriqués à la volée
+  // plutôt que de refuser de démarrer.
+  CampaignCatalog? catalog;
+  try {
+    catalog = await CampaignCatalog.load();
+  } catch (error) {
+    debugPrint('Campagne introuvable, génération à la volée : $error');
+  }
+
+  runApp(UngridApp(progress: progress, catalog: catalog));
 }

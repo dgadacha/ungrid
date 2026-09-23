@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../app/constants.dart';
 import '../game/controllers/game_controller.dart';
 import '../game/levels/level_repository.dart';
-import '../game/levels/manual_levels.dart';
+import '../game/levels/tutorial_hints.dart';
 import '../services/haptic_service.dart';
 import '../services/progress_service.dart';
 import '../services/reward_service.dart';
@@ -89,9 +89,13 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
           level: level,
           haptics: widget.haptics,
           rewards: widget.rewards,
+          moveLimit: widget.repository.moveLimitFor(levelId, level),
         )..addListener(_onControllerChanged);
       } else {
-        _controller!.loadLevel(level);
+        _controller!.loadLevel(
+          level,
+          moveLimit: widget.repository.moveLimitFor(levelId, level),
+        );
       }
     });
 
@@ -238,7 +242,7 @@ class _TutorialHint extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hint = ManualLevels.hintFor(levelId);
+    final hint = TutorialHints.forLevel(levelId);
     return SizedBox(
       height: 54,
       child: hint == null

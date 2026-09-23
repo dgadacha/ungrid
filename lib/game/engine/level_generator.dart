@@ -1,8 +1,10 @@
 import '../models/level.dart';
+import '../models/move_result.dart';
 import 'board_quality_evaluator.dart';
 import 'difficulty_config.dart';
 import 'difficulty_evaluator.dart';
 import 'level_solver.dart';
+import 'move_resolver.dart';
 import 'puzzle_analysis.dart';
 import 'seeded_random.dart';
 import 'slide_generator.dart';
@@ -157,7 +159,6 @@ class LevelGenerator {
       levelId: levelId,
       config: DifficultyConfig.fromScalar(
         (settings.scalar - 0.15).clamp(0.0, 1.0),
-        maxWalls: settings.maxWalls,
       ),
     );
   }
@@ -185,30 +186,28 @@ class LevelGenerator {
   }
 
   /// Blocs qui quitteraient la grille dès le premier coup.
-  /// Blocs qui quitteraient la grille dès le premier coup.
+  ///
+  /// Passe par le résolveur partagé : une tuile sur le trajet suffit à retenir
+  /// le bloc, et l'ignorer ici ferait compter comme sortie immédiate un coup
+  /// qui n'en est pas une — la mesure qui plafonne les sorties gratuites
+  /// deviendrait fausse.
   static int exitableCount(Level level) {
-    final occupied = <int>{
-      for (final block in level.blocks) block.y * level.columns + block.x,
-    };
-    final walls = <int>{
-      for (final wall in level.walls) wall.y * level.columns + wall.x,
-    };
+    final cells = level.stopMask();
+    for (final block in level.blocks) {
+      cells[block.y * level.columns + block.x] |= cellOccupied;
+    }
 
     var count = 0;
     for (final block in level.blocks) {
-      var x = block.x + block.direction.dx;
-      var y = block.y + block.direction.dy;
-      var clear = true;
-      while (x >= 0 && y >= 0 && x < level.columns && y < level.rows) {
-        final cell = y * level.columns + x;
-        if (occupied.contains(cell) || walls.contains(cell)) {
-          clear = false;
-          break;
-        }
-        x += block.direction.dx;
-        y += block.direction.dy;
-      }
-      if (clear) count++;
+      final move = MoveResolver.resolve(
+        cell: block.y * level.columns + block.x,
+        stepX: block.direction.dx,
+        stepY: block.direction.dy,
+        columns: level.columns,
+        rows: level.rows,
+        cells: cells,
+      );
+      if (move.outcome == MoveOutcome.exited) count++;
     }
     return count;
   }

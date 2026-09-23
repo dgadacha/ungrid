@@ -16,6 +16,7 @@ class DebugBoardPainter extends CustomPainter {
     required this.positions,
     required this.removed,
     this.nextInSolution,
+    this.usedStopTiles = const {},
   });
 
   final Level level;
@@ -30,6 +31,18 @@ class DebugBoardPainter extends CustomPainter {
 
   /// Bloc que la solution propose de jouer maintenant.
   final int? nextInSolution;
+
+  /// Cases de tuiles que la solution optimale emprunte vraiment.
+  ///
+  /// Les autres sont de la décoration : elles allongent le board sans rien
+  /// demander, et c'est exactement ce qu'on veut voir d'un coup d'oeil.
+  final Set<int> usedStopTiles;
+
+  final Paint _unusedTilePaint = Paint()
+    ..isAntiAlias = true
+    ..style = PaintingStyle.stroke
+    ..strokeWidth = 2
+    ..color = UngridColors.danger;
 
   final Paint _highlightPaint = Paint()
     ..isAntiAlias = true
@@ -48,8 +61,15 @@ class DebugBoardPainter extends CustomPainter {
       }
     }
 
-    for (final wall in level.walls) {
-      blocks.paintWall(canvas, layout.cellRect(wall.x, wall.y));
+    for (final tile in level.stopTiles) {
+      final cell = tile.y * level.columns + tile.x;
+      final rect = layout.cellRect(tile.x, tile.y);
+      blocks.paintStopTile(canvas, rect);
+      // Une tuile que personne n'emprunte se signale : elle n'a rien à faire
+      // dans un niveau officiel.
+      if (!usedStopTiles.contains(cell)) {
+        canvas.drawCircle(rect.center, rect.width * 0.28, _unusedTilePaint);
+      }
     }
 
     for (var i = 0; i < level.blocks.length; i++) {

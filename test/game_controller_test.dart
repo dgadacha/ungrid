@@ -7,16 +7,26 @@ import 'package:ungrid/game/models/move_result.dart';
 import 'package:ungrid/services/haptic_service.dart';
 import 'package:ungrid/services/reward_service.dart';
 
-Level parse(List<String> rows, {Difficulty difficulty = Difficulty.easy}) =>
-    LevelPattern.parse(rows, id: 1, difficulty: difficulty);
+Level parse(
+  List<String> rows, {
+  Difficulty difficulty = Difficulty.easy,
+  int? moves,
+}) {
+  final level = LevelPattern.parse(rows, id: 1, difficulty: difficulty);
+  // Le parseur suppose un coup par bloc. Dès qu'une tuile impose un
+  // repositionnement, il faut lui donner le vrai compte, sinon la partie est
+  // perdue avant d'avoir commencé.
+  return moves == null ? level : level.copyWith(optimalMoves: moves);
+}
 
 GameController controllerFor(
   List<String> rows, {
   Difficulty difficulty = Difficulty.easy,
+  int? moves,
   RewardService rewards = const LocalRewardService(),
 }) =>
     GameController(
-      level: parse(rows, difficulty: difficulty),
+      level: parse(rows, difficulty: difficulty, moves: moves),
       // Les vibrations passeraient par le canal de la plateforme, absent ici.
       haptics: HapticService(enabled: false),
       rewards: rewards,
@@ -346,75 +356,56 @@ void main() {
     });
   });
 
-  group('murs', () {
-    test('un mur collé au bloc le laisse sur place', () {
+  group('tuiles d\'arrêt', () {
+    test('un arrêt sur tuile consomme un coup comme un autre', () {
       final controller = controllerFor([
         '....',
-        '>#..',
+        '>.o.',
         '....',
         '....',
-      ]);
+      ], moves: 2);
       final result = controller.tapCell(0, 1);
-      expect(result.blocked, isTrue);
-      expect(result.blockedByWall, isTrue);
-      expect(controller.movesUsed, 1, reason: 'le coup est bel et bien joué');
+      expect(result.stopped, isTrue);
+      expect(result.changedBoard, isTrue);
+      expect(controller.movesUsed, 1);
     });
 
-    test('un bloc glisse jusqu\'au mur', () {
+    test('toucher une tuile vide ne fait rien du tout', () {
       final controller = controllerFor([
         '....',
-        '>..#',
-        '....',
-        '....',
-      ]);
-      final result = controller.tapCell(0, 1);
-      expect(result.slid, isTrue);
-      expect(result.blockedByWall, isTrue);
-    });
-
-    test('toucher un mur ne fait rien du tout', () {
-      final controller = controllerFor([
-        '....',
-        '.#..',
+        '.o..',
         '..>.',
         '....',
       ]);
       expect(controller.tapCell(1, 1).outcome, MoveOutcome.ignored);
       expect(controller.movesUsed, 0);
       expect(controller.timerStarted, isFalse,
-          reason: 'un mur n\'est pas un élément de jeu');
+          reason: 'une tuile ne se joue pas');
     });
 
-    test('un mur ne gêne pas les blocs qui l\'évitent', () {
+    test('les tuiles ne comptent pas dans la victoire', () {
       final controller = controllerFor([
-        '....',
-        '>#..',
+        '.o..',
         '.>..',
-        '....',
-      ]);
-      expect(controller.tapCell(1, 2).exited, isTrue);
-    });
-
-    test('toucher un mur ne consomme rien', () {
-      final controller = controllerFor([
-        '....',
-        '.#..',
-        '..>.',
-        '....',
-      ]);
-      expect(controller.tapCell(1, 1).outcome, MoveOutcome.ignored);
-      expect(controller.movesUsed, 0);
-    });
-
-    test('les murs ne comptent pas dans la victoire', () {
-      final controller = controllerFor([
-        '.#..',
-        '.>..',
-        '..#.',
+        '..o.',
         '....',
       ]);
       controller.tapCell(1, 1);
       expect(controller.isCleared, isTrue);
+    });
+
+    test('un arrêt s\'annule et rend le coup', () {
+      final controller = controllerFor([
+        '....',
+        '>.o.',
+        '....',
+        '....',
+      ], moves: 2);
+      controller.tapCell(0, 1);
+      final used = controller.movesUsed;
+      controller.undo();
+      expect(controller.movesUsed, used - 1);
+      expect(controller.engine.blockAt(0, 1), isNotNull);
     });
   });
 

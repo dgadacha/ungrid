@@ -32,6 +32,13 @@ class BlockPainter {
   final Paint _cellFill = Paint()
     ..isAntiAlias = true
     ..color = UngridColors.surface;
+  final Paint _stopRing = Paint()
+    ..isAntiAlias = true
+    ..style = PaintingStyle.stroke
+    ..color = UngridColors.onBackgroundFaint;
+  final Paint _stopDot = Paint()
+    ..isAntiAlias = true
+    ..color = UngridColors.onBackgroundFaint;
 
   /// Contour de la flèche, en coordonnées normalisées autour de son centre,
   /// pointant vers la droite. Les quatre directions ne sont que des rotations
@@ -59,19 +66,33 @@ class BlockPainter {
     );
   }
 
-  /// Mur : la même case, plus claire, sans flèche.
+  /// Tuile d'arrêt : un anneau et un point, au centre de la case.
   ///
-  /// Même forme pour rester dans la grille ; teinte sourde et absence de
-  /// flèche pour dire, du premier coup d'oeil, qu'il n'y a rien à jouer ici.
-  void paintWall(Canvas canvas, Rect cell) {
-    final rect = cell.deflate(cell.width * GameMetrics.blockInsetRatio);
-    _fill.color = UngridColors.wall;
+  /// Ni aplat ni arrondi : rien qui puisse passer pour un bloc ou pour un
+  /// bouton. Le signe est petit, dans le gris du fond, et ne prend la parole
+  /// que si on le cherche — ce qui suffit, puisqu'il ne se touche pas.
+  void paintStopTile(Canvas canvas, Rect cell) {
+    final center = cell.center;
+    final radius = cell.width * 0.17;
+    _stopRing.strokeWidth = (cell.width * 0.045).clamp(1.2, 3.0);
+    canvas.drawCircle(center, radius, _stopRing);
+    canvas.drawCircle(center, cell.width * 0.05, _stopDot);
+  }
+
+  /// Le même repère, quand un bloc est posé dessus.
+  ///
+  /// Le bloc recouvre le centre : on souligne alors la case, dans la marge
+  /// que le bloc laisse libre. L'information reste lisible sans rien ajouter
+  /// par-dessus le bloc.
+  void paintOccupiedStopTile(Canvas canvas, Rect cell) {
+    final rect = cell.deflate(cell.width * GameMetrics.blockInsetRatio * 0.35);
+    _stopRing.strokeWidth = (cell.width * 0.03).clamp(1.0, 2.0);
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         rect,
         Radius.circular(rect.width * GameMetrics.blockRadiusRatio),
       ),
-      _fill,
+      _stopRing,
     );
   }
 

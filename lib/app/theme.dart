@@ -16,8 +16,6 @@ class UngridColors {
   /// Panneaux, cases vides, boutons secondaires.
   static const Color surface = Color(0xFF34495E); // Wet Asphalt
 
-  /// Mur : la même case, un ton au-dessus. Présent, inerte.
-  static const Color wall = Color(0xFF7F8C8D); // Asbestos
 
   static const Color onBackground = Color(0xFFECF0F1); // Clouds
   static const Color onBackgroundSoft = Color(0xFFBDC3C7); // Silver

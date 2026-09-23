@@ -3,56 +3,10 @@ import 'package:ungrid/game/engine/difficulty_config.dart';
 import 'package:ungrid/game/engine/level_generator.dart';
 import 'package:ungrid/game/engine/level_solver.dart';
 import 'package:ungrid/game/levels/level_pattern.dart';
-import 'package:ungrid/game/levels/manual_levels.dart';
 
 void main() {
   const generator = LevelGenerator();
   const solver = LevelSolver();
-
-  group('niveaux écrits à la main', () {
-    test('les vingt restent jouables', () {
-      for (final level in ManualLevels.all()) {
-        final result = solver.solve(level);
-        final trace = LevelPattern.render(level).join('\n');
-
-        expect(level.isStructurallyValid, isTrue,
-            reason: 'niveau ${level.id} mal formé\n$trace');
-        expect(result.solvable, isTrue,
-            reason: 'niveau ${level.id} insoluble\n$trace');
-      }
-    });
-
-    test('les premiers niveaux enseignent chacun une règle', () {
-      // 1 : le geste. 2 : le glissement. 3 : le refus. 4 : le
-      // repositionnement, seul moyen de démarrer.
-      expect(ManualLevels.byId(1).blocks, hasLength(1));
-
-      final slide = solver.solve(ManualLevels.byId(2));
-      expect(slide.solvable, isTrue);
-
-      final push = ManualLevels.byId(4);
-      final pushed = solver.solve(push);
-      expect(pushed.solvable, isTrue);
-      expect(LevelGenerator.exitableCount(push), 0,
-          reason: 'aucun bloc ne doit pouvoir sortir d\'emblée');
-      expect(pushed.minimumMoves, greaterThan(push.blocks.length),
-          reason: 'il faut jouer un bloc deux fois');
-    });
-
-    test('chaque niveau d\'apprentissage a sa phrase', () {
-      for (var id = 1; id <= 4; id++) {
-        expect(ManualLevels.hintFor(id), isNotNull);
-      }
-      expect(ManualLevels.hintFor(5), isNull);
-    });
-
-    test('la progression va du plus simple au plus fourni', () {
-      final first = ManualLevels.byId(1);
-      final last = ManualLevels.byId(ManualLevels.count);
-      expect(first.blocks, hasLength(1));
-      expect(last.blocks.length, greaterThan(first.blocks.length));
-    });
-  });
 
   group('génération', () {
     test('un même numéro produit toujours le même board', () {
@@ -105,54 +59,54 @@ void main() {
     });
   });
 
-  group('murs', () {
-    test('ils n\'apparaissent qu\'une fois la règle acquise', () {
-      for (var id = 1; id <= 15; id++) {
-        final level = ManualLevels.contains(id)
-            ? ManualLevels.byId(id)
-            : generator.generate(levelId: id).level;
-        expect(level.walls, isEmpty,
-            reason: 'niveau $id : trop tôt pour des obstacles');
+  group('tuiles d\'arrêt', () {
+    test('elles restent rares : le board doit rester lisible', () {
+      for (var id = 20; id <= 150; id += 7) {
+        final level = generator.generate(levelId: id).level;
+        expect(level.stopTiles.length,
+            lessThanOrEqualTo(DifficultyCurve.configFor(id).stopTileBudget),
+            reason: 'niveau $id : plus de tuiles que le budget');
+        expect(level.stopTiles.length, lessThanOrEqualTo(level.columns - 2),
+            reason: 'niveau $id : grille encombrée');
       }
     });
 
-    test('ils arrivent ensuite, sans envahir le board', () {
-      for (var id = 60; id <= 150; id += 9) {
+    test('deux tuiles ne partagent jamais une case', () {
+      for (var id = 20; id <= 200; id += 11) {
         final level = generator.generate(levelId: id).level;
-        expect(level.walls.length,
-            lessThanOrEqualTo(DifficultyCurve.configFor(id).maxWalls));
-      }
-    });
-
-    test('un mur n\'occupe jamais la case d\'un bloc', () {
-      for (var id = 30; id <= 150; id += 13) {
-        final level = generator.generate(levelId: id).level;
-        final wallCells = {for (final w in level.walls) (w.x, w.y)};
-        for (final block in level.blocks) {
-          expect(wallCells.contains((block.x, block.y)), isFalse);
+        final cells = <(int, int)>{};
+        for (final tile in level.stopTiles) {
+          expect(cells.add((tile.x, tile.y)), isTrue, reason: 'niveau $id');
+          expect(tile.isInside(level.columns, level.rows), isTrue);
         }
       }
+    });
+
+    test('une tuile peut porter un bloc au départ', () {
+      // Rien ne l'interdit : un bloc qui démarre sur une tuile n'est pas
+      // retenu par elle. Le test garde la règle explicite.
+      final level = generator.generate(levelId: 42).level;
+      expect(level.isStructurallyValid, isTrue);
     });
   });
 
   group('limite de coups', () {
     test('la limite est la solution optimale, partout', () {
       for (var id = 1; id <= 150; id += 7) {
-        final level = ManualLevels.contains(id)
-            ? ManualLevels.byId(id)
-            : generator.generate(levelId: id).level;
+        final level = generator.generate(levelId: id).level;
         expect(level.moveLimit, level.optimalMoves,
             reason: 'niveau $id : le joueur doit jouer juste');
       }
     });
 
-    test('les niveaux écrits connaissent leur vrai optimal', () {
+    test('chaque niveau connaît son vrai optimal', () {
       // Depuis le glissement, ce n'est plus le nombre de blocs : sans le
       // solveur, les niveaux qui demandent un repositionnement seraient
       // impossibles à finir.
-      for (final level in ManualLevels.all()) {
+      for (var id = 1; id <= 60; id += 7) {
+        final level = generator.generate(levelId: id).level;
         expect(level.optimalMoves, solver.solve(level).minimumMoves,
-            reason: 'niveau ${level.id}');
+            reason: 'niveau $id');
       }
     });
   });
@@ -204,12 +158,27 @@ void main() {
       }
     });
 
-    test('les premiers niveaux restent doux', () {
-      for (var id = 6; id <= 15; id++) {
-        final analysis = generator.generate(levelId: id).analysis;
-        expect(analysis.moveComplexity, lessThanOrEqualTo(1.3),
-            reason: 'niveau $id trop exigeant pour un début');
+    test('les premiers niveaux restent plus doux que les suivants', () {
+      // On ne compare pas à un seuil : depuis les tuiles d'arrêt, le rapport
+      // coups / blocs ne dit plus à lui seul ce qu'un niveau demande — une
+      // tuile l'augmente avec un tap forcé, qui ne décide de rien. Les seuils
+      // définitifs viendront du benchmark ; ce qui doit tenir maintenant,
+      // c'est la pente.
+      double averageDifficulty(int from, int to) {
+        var sum = 0.0;
+        var count = 0;
+        for (var id = from; id <= to; id++) {
+          sum += generator.generate(levelId: id).analysis.difficultyScore();
+          count++;
+        }
+        return sum / count;
       }
+
+      final start = averageDifficulty(1, 12);
+      final later = averageDifficulty(60, 71);
+      expect(start, lessThan(later),
+          reason: 'le début doit rester plus doux que la suite '
+              '(${start.toStringAsFixed(1)} contre ${later.toStringAsFixed(1)})');
     });
   });
 

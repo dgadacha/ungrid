@@ -1,0 +1,3449 @@
+{
+  "run": {
+    "generatorVersion": 2,
+    "seeds": 60000,
+    "candidates": 103199,
+    "groupA": 58597,
+    "groupB": 30194,
+    "elapsedSeconds": 0.0,
+    "highQualityRule": "difficultyScore >= 45 && trivialityPenalty <= 0.30 && visualScore >= 50"
+  },
+  "comparison": {
+    "optimalMoves": {
+      "noStopTile": {
+        "mean": 12.841135211700257,
+        "p50": 12.0,
+        "p90": 19.0,
+        "p95": 21.0,
+        "p99": 24.0,
+        "p999": 28.0,
+        "max": 32.0,
+        "min": 4.0
+      },
+      "stopTile": {
+        "mean": 13.496688083725244,
+        "p50": 14.0,
+        "p90": 18.0,
+        "p95": 19.0,
+        "p99": 20.0,
+        "p999": 22.0,
+        "max": 26.0,
+        "min": 6.0
+      }
+    },
+    "moveComplexity": {
+      "noStopTile": {
+        "mean": 1.0575851834391394,
+        "p50": 1.055556,
+        "p90": 1.142857,
+        "p95": 1.166667,
+        "p99": 1.222222,
+        "p999": 1.25,
+        "max": 1.285714,
+        "min": 1.0
+      },
+      "stopTile": {
+        "mean": 1.42010089786044,
+        "p50": 1.375,
+        "p90": 1.714286,
+        "p95": 1.8,
+        "p99": 2.0,
+        "p999": 2.285714,
+        "max": 2.444444,
+        "min": 1.086957
+      }
+    },
+    "multiMoveRatio": {
+      "noStopTile": {
+        "mean": 0.057564954007871094,
+        "p50": 0.055556,
+        "p90": 0.142857,
+        "p95": 0.166667,
+        "p99": 0.222222,
+        "p999": 0.25,
+        "max": 0.285714,
+        "min": 0.0
+      },
+      "stopTile": {
+        "mean": 0.3794414577730459,
+        "p50": 0.333333,
+        "p90": 0.625,
+        "p95": 0.7,
+        "p99": 0.833333,
+        "p999": 1.0,
+        "max": 1.0,
+        "min": 0.086957
+      }
+    },
+    "maxMovesForSingleBlock": {
+      "noStopTile": {
+        "mean": 1.5224328890557537,
+        "p50": 2.0,
+        "p90": 2.0,
+        "p95": 2.0,
+        "p99": 2.0,
+        "p999": 2.0,
+        "max": 3.0,
+        "min": 1.0
+      },
+      "stopTile": {
+        "mean": 2.2671391667218654,
+        "p50": 2.0,
+        "p90": 3.0,
+        "p95": 3.0,
+        "p99": 3.0,
+        "p999": 4.0,
+        "max": 5.0,
+        "min": 2.0
+      }
+    },
+    "decisionScore": {
+      "noStopTile": {
+        "mean": 70.112199810414,
+        "p50": 73.666667,
+        "p90": 76.944444,
+        "p95": 77.868937,
+        "p99": 87.200855,
+        "p999": 90.483683,
+        "max": 94.789916,
+        "min": 0.0
+      },
+      "stopTile": {
+        "mean": 72.06238945572852,
+        "p50": 77.091503,
+        "p90": 82.647059,
+        "p95": 83.571429,
+        "p99": 88.055556,
+        "p999": 96.666667,
+        "max": 99.090909,
+        "min": 25.0
+      }
+    },
+    "optimalPathNarrowness": {
+      "noStopTile": {
+        "mean": 0.5264688443093978,
+        "p50": 0.421053,
+        "p90": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "p999": 1.0,
+        "max": 1.0,
+        "min": 0.0
+      },
+      "stopTile": {
+        "mean": 0.16153362913162606,
+        "p50": 0.111111,
+        "p90": 0.416667,
+        "p95": 0.5,
+        "p99": 0.75,
+        "p999": 1.0,
+        "max": 1.0,
+        "min": 0.0
+      }
+    },
+    "temptingWrongMoveRatio": {
+      "noStopTile": {
+        "mean": 0.7111227504650481,
+        "p50": 0.771812,
+        "p90": 1.0,
+        "p95": 1.0,
+        "p99": 1.0,
+        "p999": 1.0,
+        "max": 1.0,
+        "min": 0.0
+      },
+      "stopTile": {
+        "mean": 0.4741485405047334,
+        "p50": 0.469388,
+        "p90": 0.777778,
+        "p95": 0.825,
+        "p99": 0.918033,
+        "p999": 1.0,
+        "max": 1.0,
+        "min": 0.0
+      }
+    },
+    "dependencyComplexity": {
+      "noStopTile": {
+        "mean": 0.8357654498353194,
+        "p50": 0.857143,
+        "p90": 0.923077,
+        "p95": 0.928571,
+        "p99": 0.941176,
+        "p999": 0.95,
+        "max": 0.961538,
+        "min": 0.4
+      },
+      "stopTile": {
+        "mean": 0.6374732919785367,
+        "p50": 0.642857,
+        "p90": 0.777778,
+        "p95": 0.8125,
+        "p99": 0.866667,
+        "p999": 0.928571,
+        "max": 0.947368,
+        "min": 0.166667
+      }
+    },
+    "trivialityPenalty": {
+      "noStopTile": {
+        "mean": 0.1393709899312415,
+        "p50": 0.117647,
+        "p90": 0.25,
+        "p95": 0.333333,
+        "p99": 0.5,
+        "p999": 0.857143,
+        "max": 1.0,
+        "min": 0.03125
+      },
+      "stopTile": {
+        "mean": 0.27216905795850327,
+        "p50": 0.266667,
+        "p90": 0.444444,
+        "p95": 0.5,
+        "p99": 0.6,
+        "p999": 0.714286,
+        "max": 0.875,
+        "min": 0.038462
+      }
+    },
+    "exploredStates": {
+      "noStopTile": {
+        "mean": 2456.921531819035,
+        "p50": 318.0,
+        "p90": 6093.0,
+        "p95": 13709.0,
+        "p99": 36291.0,
+        "p999": 55836.0,
+        "max": 59953.0,
+        "min": 7.0
+      },
+      "stopTile": {
+        "mean": 8498.441942107704,
+        "p50": 2340.0,
+        "p90": 28117.0,
+        "p95": 40627.0,
+        "p99": 55006.0,
+        "p999": 59641.0,
+        "max": 59992.0,
+        "min": 15.0
+      }
+    },
+    "difficultyScore": {
+      "noStopTile": {
+        "mean": 49.425186235918794,
+        "p50": 48.372166,
+        "p90": 61.2637,
+        "p95": 62.215611,
+        "p99": 64.040016,
+        "p999": 66.021073,
+        "max": 69.791176,
+        "min": 0.0
+      },
+      "stopTile": {
+        "mean": 48.997780539478335,
+        "p50": 49.916665,
+        "p90": 61.78738,
+        "p95": 64.902795,
+        "p99": 69.847647,
+        "p999": 74.912755,
+        "max": 81.7763,
+        "min": 14.513065
+      }
+    },
+    "visualScore": {
+      "noStopTile": {
+        "mean": 73.74201320303689,
+        "p50": 75.383333,
+        "p90": 85.661905,
+        "p95": 88.0,
+        "p99": 92.028827,
+        "p999": 95.168027,
+        "max": 99.216327,
+        "min": 13.918594
+      },
+      "stopTile": {
+        "mean": 73.33471952290742,
+        "p50": 75.421429,
+        "p90": 85.9,
+        "p95": 88.75,
+        "p99": 92.983333,
+        "p999": 96.875,
+        "max": 100.0,
+        "min": 0.183333
+      }
+    }
+  },
+  "moveComplexityCeiling": {
+    "noStopTile": {
+      "max": 1.285714,
+      "p95": 1.166667,
+      "p99": 1.222222,
+      "p999": 1.25,
+      "maxHighQuality": 1.25,
+      "highQualityCount": 36280
+    },
+    "stopTile": {
+      "max": 2.444444,
+      "p95": 1.8,
+      "p99": 2.0,
+      "p999": 2.285714,
+      "maxHighQuality": 2.222222,
+      "highQualityCount": 15670
+    }
+  },
+  "distribution": {
+    "all": [
+      {
+        "bucket": "1.00-1.09",
+        "count": 51229,
+        "percentage": 49.640984893264466,
+        "avgDifficultyScore": 51.960758408304166,
+        "avgDecisionScore": 71.68648746942158,
+        "avgNarrowness": 0.5961467311874439,
+        "avgDependencyComplexity": 0.8363673310626457,
+        "avgStopInteractions": 0.0003513634855257764,
+        "avgTrivialityPenalty": 0.11373771030080009
+      },
+      {
+        "bucket": "1.10-1.19",
+        "count": 22608,
+        "percentage": 21.90718902314945,
+        "avgDifficultyScore": 44.774022822849524,
+        "avgDecisionScore": 67.1035695331279,
+        "avgNarrowness": 0.37441779626679894,
+        "avgDependencyComplexity": 0.8230806173920564,
+        "avgStopInteractions": 0.28149327671620666,
+        "avgTrivialityPenalty": 0.19780747018754305
+      },
+      {
+        "bucket": "1.20-1.29",
+        "count": 9492,
+        "percentage": 9.19776354422039,
+        "avgDifficultyScore": 46.053308572482166,
+        "avgDecisionScore": 69.37956437494795,
+        "avgNarrowness": 0.23615040128529777,
+        "avgDependencyComplexity": 0.7253373493468375,
+        "avgStopInteractions": 1.6609776654024442,
+        "avgTrivialityPenalty": 0.24448954667088882
+      },
+      {
+        "bucket": "1.30-1.39",
+        "count": 5138,
+        "percentage": 4.9787304140544,
+        "avgDifficultyScore": 49.46498925107048,
+        "avgDecisionScore": 73.10043600836883,
+        "avgNarrowness": 0.17946317711171894,
+        "avgDependencyComplexity": 0.6647599758660913,
+        "avgStopInteractions": 3.0533281432463992,
+        "avgTrivialityPenalty": 0.2585518756325483
+      },
+      {
+        "bucket": "1.40-1.49",
+        "count": 4175,
+        "percentage": 4.045581837033304,
+        "avgDifficultyScore": 49.77433455616756,
+        "avgDecisionScore": 72.30154557149704,
+        "avgNarrowness": 0.14447492191616834,
+        "avgDependencyComplexity": 0.6236454455089813,
+        "avgStopInteractions": 3.7547305389221557,
+        "avgTrivialityPenalty": 0.28625021724551075
+      },
+      {
+        "bucket": "1.50-1.59",
+        "count": 4401,
+        "percentage": 4.26457620713379,
+        "avgDifficultyScore": 48.70616162235845,
+        "avgDecisionScore": 70.39039871847278,
+        "avgNarrowness": 0.1213900597591455,
+        "avgDependencyComplexity": 0.5856859831856331,
+        "avgStopInteractions": 4.520790729379686,
+        "avgTrivialityPenalty": 0.30686491456487913
+      },
+      {
+        "bucket": "1.60-1.74",
+        "count": 3515,
+        "percentage": 3.4060407562088777,
+        "avgDifficultyScore": 48.666232878805125,
+        "avgDecisionScore": 70.04218707368415,
+        "avgNarrowness": 0.10270529843527705,
+        "avgDependencyComplexity": 0.55721469018492,
+        "avgStopInteractions": 5.593741109530583,
+        "avgTrivialityPenalty": 0.33087092688478065
+      },
+      {
+        "bucket": "1.75-1.99",
+        "count": 2042,
+        "percentage": 1.9787013440052712,
+        "avgDifficultyScore": 46.87100476444656,
+        "avgDecisionScore": 66.67964538344758,
+        "avgNarrowness": 0.07703522184133176,
+        "avgDependencyComplexity": 0.5151380460333014,
+        "avgStopInteractions": 6.475514201762977,
+        "avgTrivialityPenalty": 0.3679360146914757
+      },
+      {
+        "bucket": "2.00-2.49",
+        "count": 599,
+        "percentage": 0.5804319809300478,
+        "avgDifficultyScore": 44.53951721368953,
+        "avgDecisionScore": 61.962747931552585,
+        "avgNarrowness": 0.08007976293823052,
+        "avgDependencyComplexity": 0.47444939899833066,
+        "avgStopInteractions": 7.479131886477463,
+        "avgTrivialityPenalty": 0.4450265275459104
+      },
+      {
+        "bucket": "2.50-2.99",
+        "count": 0,
+        "percentage": 0.0,
+        "avgDifficultyScore": 0.0,
+        "avgDecisionScore": 0.0,
+        "avgNarrowness": 0.0,
+        "avgDependencyComplexity": 0.0,
+        "avgStopInteractions": 0.0,
+        "avgTrivialityPenalty": 0.0
+      },
+      {
+        "bucket": "3.00+",
+        "count": 0,
+        "percentage": 0.0,
+        "avgDifficultyScore": 0.0,
+        "avgDecisionScore": 0.0,
+        "avgNarrowness": 0.0,
+        "avgDependencyComplexity": 0.0,
+        "avgStopInteractions": 0.0,
+        "avgTrivialityPenalty": 0.0
+      }
+    ],
+    "noStopTile": [
+      {
+        "bucket": "1.00-1.09",
+        "count": 41608,
+        "percentage": 71.00704814239637,
+        "avgDifficultyScore": 51.882090923571695,
+        "avgDecisionScore": 71.9107079292692,
+        "avgNarrowness": 0.5873537121226853,
+        "avgDependencyComplexity": 0.8361061724909873,
+        "avgStopInteractions": 0.0,
+        "avgTrivialityPenalty": 0.11263544888002529
+      },
+      {
+        "bucket": "1.10-1.19",
+        "count": 15292,
+        "percentage": 26.096899158659998,
+        "avgDifficultyScore": 43.737439137391895,
+        "avgDecisionScore": 66.25792938314115,
+        "avgNarrowness": 0.3845794118493331,
+        "avgDependencyComplexity": 0.8364620878236806,
+        "avgStopInteractions": 0.0,
+        "avgTrivialityPenalty": 0.19972142688987965
+      },
+      {
+        "bucket": "1.20-1.29",
+        "count": 1697,
+        "percentage": 2.896052698943632,
+        "avgDifficultyScore": 40.43882111314084,
+        "avgDecisionScore": 60.74695382616362,
+        "avgNarrowness": 0.3122529463759544,
+        "avgDependencyComplexity": 0.821133878609308,
+        "avgStopInteractions": 0.0,
+        "avgTrivialityPenalty": 0.2510583853859766
+      },
+      {
+        "bucket": "1.30-1.39",
+        "count": 0,
+        "percentage": 0.0,
+        "avgDifficultyScore": 0.0,
+        "avgDecisionScore": 0.0,
+        "avgNarrowness": 0.0,
+        "avgDependencyComplexity": 0.0,
+        "avgStopInteractions": 0.0,
+        "avgTrivialityPenalty": 0.0
+      },
+      {
+        "bucket": "1.40-1.49",
+        "count": 0,
+        "percentage": 0.0,
+        "avgDifficultyScore": 0.0,
+        "avgDecisionScore": 0.0,
+        "avgNarrowness": 0.0,
+        "avgDependencyComplexity": 0.0,
+        "avgStopInteractions": 0.0,
+        "avgTrivialityPenalty": 0.0
+      },
+      {
+        "bucket": "1.50-1.59",
+        "count": 0,
+        "percentage": 0.0,
+        "avgDifficultyScore": 0.0,
+        "avgDecisionScore": 0.0,
+        "avgNarrowness": 0.0,
+        "avgDependencyComplexity": 0.0,
+        "avgStopInteractions": 0.0,
+        "avgTrivialityPenalty": 0.0
+      },
+      {
+        "bucket": "1.60-1.74",
+        "count": 0,
+        "percentage": 0.0,
+        "avgDifficultyScore": 0.0,
+        "avgDecisionScore": 0.0,
+        "avgNarrowness": 0.0,
+        "avgDependencyComplexity": 0.0,
+        "avgStopInteractions": 0.0,
+        "avgTrivialityPenalty": 0.0
+      },
+      {
+        "bucket": "1.75-1.99",
+        "count": 0,
+        "percentage": 0.0,
+        "avgDifficultyScore": 0.0,
+        "avgDecisionScore": 0.0,
+        "avgNarrowness": 0.0,
+        "avgDependencyComplexity": 0.0,
+        "avgStopInteractions": 0.0,
+        "avgTrivialityPenalty": 0.0
+      },
+      {
+        "bucket": "2.00-2.49",
+        "count": 0,
+        "percentage": 0.0,
+        "avgDifficultyScore": 0.0,
+        "avgDecisionScore": 0.0,
+        "avgNarrowness": 0.0,
+        "avgDependencyComplexity": 0.0,
+        "avgStopInteractions": 0.0,
+        "avgTrivialityPenalty": 0.0
+      },
+      {
+        "bucket": "2.50-2.99",
+        "count": 0,
+        "percentage": 0.0,
+        "avgDifficultyScore": 0.0,
+        "avgDecisionScore": 0.0,
+        "avgNarrowness": 0.0,
+        "avgDependencyComplexity": 0.0,
+        "avgStopInteractions": 0.0,
+        "avgTrivialityPenalty": 0.0
+      },
+      {
+        "bucket": "3.00+",
+        "count": 0,
+        "percentage": 0.0,
+        "avgDifficultyScore": 0.0,
+        "avgDecisionScore": 0.0,
+        "avgNarrowness": 0.0,
+        "avgDependencyComplexity": 0.0,
+        "avgStopInteractions": 0.0,
+        "avgTrivialityPenalty": 0.0
+      }
+    ],
+    "stopTile": [
+      {
+        "bucket": "1.00-1.09",
+        "count": 9,
+        "percentage": 0.029807246472809166,
+        "avgDifficultyScore": 58.30074333333333,
+        "avgDecisionScore": 78.7109461111111,
+        "avgNarrowness": 0.5612647777777777,
+        "avgDependencyComplexity": 0.8036473333333335,
+        "avgStopInteractions": 2.0,
+        "avgTrivialityPenalty": 0.05541877777777779
+      },
+      {
+        "bucket": "1.10-1.19",
+        "count": 3135,
+        "percentage": 10.38285752136186,
+        "avgDifficultyScore": 52.31067146794253,
+        "avgDecisionScore": 78.01526625263101,
+        "avgNarrowness": 0.24748070877193162,
+        "avgDependencyComplexity": 0.7513357457735196,
+        "avgStopInteractions": 2.0299840510366827,
+        "avgTrivialityPenalty": 0.14808079904306318
+      },
+      {
+        "bucket": "1.20-1.29",
+        "count": 7180,
+        "percentage": 23.779558852752203,
+        "avgDifficultyScore": 48.07158411058506,
+        "avgDecisionScore": 72.96024816559981,
+        "avgNarrowness": 0.20482700724234357,
+        "avgDependencyComplexity": 0.695490385793873,
+        "avgStopInteractions": 2.1958217270194984,
+        "avgTrivialityPenalty": 0.23651618927577192
+      },
+      {
+        "bucket": "1.30-1.39",
+        "count": 5138,
+        "percentage": 17.01662581969928,
+        "avgDifficultyScore": 49.46498925107048,
+        "avgDecisionScore": 73.10043600836883,
+        "avgNarrowness": 0.17946317711171894,
+        "avgDependencyComplexity": 0.6647599758660913,
+        "avgStopInteractions": 3.0533281432463992,
+        "avgTrivialityPenalty": 0.2585518756325483
+      },
+      {
+        "bucket": "1.40-1.49",
+        "count": 4175,
+        "percentage": 13.827250447108696,
+        "avgDifficultyScore": 49.77433455616756,
+        "avgDecisionScore": 72.30154557149704,
+        "avgNarrowness": 0.14447492191616834,
+        "avgDependencyComplexity": 0.6236454455089813,
+        "avgStopInteractions": 3.7547305389221557,
+        "avgTrivialityPenalty": 0.28625021724551075
+      },
+      {
+        "bucket": "1.50-1.59",
+        "count": 4401,
+        "percentage": 14.575743525203682,
+        "avgDifficultyScore": 48.70616162235845,
+        "avgDecisionScore": 70.39039871847278,
+        "avgNarrowness": 0.1213900597591455,
+        "avgDependencyComplexity": 0.5856859831856331,
+        "avgStopInteractions": 4.520790729379686,
+        "avgTrivialityPenalty": 0.30686491456487913
+      },
+      {
+        "bucket": "1.60-1.74",
+        "count": 3515,
+        "percentage": 11.641385705769359,
+        "avgDifficultyScore": 48.666232878805125,
+        "avgDecisionScore": 70.04218707368415,
+        "avgNarrowness": 0.10270529843527705,
+        "avgDependencyComplexity": 0.55721469018492,
+        "avgStopInteractions": 5.593741109530583,
+        "avgTrivialityPenalty": 0.33087092688478065
+      },
+      {
+        "bucket": "1.75-1.99",
+        "count": 2042,
+        "percentage": 6.762933033052924,
+        "avgDifficultyScore": 46.87100476444656,
+        "avgDecisionScore": 66.67964538344758,
+        "avgNarrowness": 0.07703522184133176,
+        "avgDependencyComplexity": 0.5151380460333014,
+        "avgStopInteractions": 6.475514201762977,
+        "avgTrivialityPenalty": 0.3679360146914757
+      },
+      {
+        "bucket": "2.00-2.49",
+        "count": 599,
+        "percentage": 1.9838378485791879,
+        "avgDifficultyScore": 44.53951721368953,
+        "avgDecisionScore": 61.962747931552585,
+        "avgNarrowness": 0.08007976293823052,
+        "avgDependencyComplexity": 0.47444939899833066,
+        "avgStopInteractions": 7.479131886477463,
+        "avgTrivialityPenalty": 0.4450265275459104
+      },
+      {
+        "bucket": "2.50-2.99",
+        "count": 0,
+        "percentage": 0.0,
+        "avgDifficultyScore": 0.0,
+        "avgDecisionScore": 0.0,
+        "avgNarrowness": 0.0,
+        "avgDependencyComplexity": 0.0,
+        "avgStopInteractions": 0.0,
+        "avgTrivialityPenalty": 0.0
+      },
+      {
+        "bucket": "3.00+",
+        "count": 0,
+        "percentage": 0.0,
+        "avgDifficultyScore": 0.0,
+        "avgDecisionScore": 0.0,
+        "avgNarrowness": 0.0,
+        "avgDependencyComplexity": 0.0,
+        "avgStopInteractions": 0.0,
+        "avgTrivialityPenalty": 0.0
+      }
+    ]
+  },
+  "correlations": {
+    "all": {
+      "moveComplexity": {
+        "moveComplexity": 1.0,
+        "stopTileCount": 0.9103511341507219,
+        "stopTileInteractions": 0.9196954100095516,
+        "meaningfulStopInteractions": 0.8527039459106164,
+        "multiMoveRatio": 0.9791157454046184,
+        "dependencyComplexity": -0.7171855111174068,
+        "optimalPathNarrowness": -0.521630964978512,
+        "decisionScore": -0.04029022842833053,
+        "difficultyScore": -0.15052701255829254,
+        "trivialityPenalty": 0.5945465178618231
+      },
+      "stopTileCount": {
+        "moveComplexity": 0.9103511341507219,
+        "stopTileCount": 1.0,
+        "stopTileInteractions": 0.9873695452103665,
+        "meaningfulStopInteractions": 0.9290694231724602,
+        "multiMoveRatio": 0.8871185795468128,
+        "dependencyComplexity": -0.7354438535726942,
+        "optimalPathNarrowness": -0.45783556808742676,
+        "decisionScore": 0.11737773987416358,
+        "difficultyScore": 0.018350214757266708,
+        "trivialityPenalty": 0.4661767196118625
+      },
+      "stopTileInteractions": {
+        "moveComplexity": 0.9196954100095516,
+        "stopTileCount": 0.9873695452103665,
+        "stopTileInteractions": 1.0,
+        "meaningfulStopInteractions": 0.9516749621198188,
+        "multiMoveRatio": 0.8912460963285043,
+        "dependencyComplexity": -0.7166680017399852,
+        "optimalPathNarrowness": -0.4461994317610369,
+        "decisionScore": 0.12718594816651985,
+        "difficultyScore": 0.04392390235762884,
+        "trivialityPenalty": 0.4555808958097291
+      },
+      "meaningfulStopInteractions": {
+        "moveComplexity": 0.8527039459106164,
+        "stopTileCount": 0.9290694231724602,
+        "stopTileInteractions": 0.9516749621198188,
+        "meaningfulStopInteractions": 1.0,
+        "multiMoveRatio": 0.8385850254658305,
+        "dependencyComplexity": -0.6165880031267111,
+        "optimalPathNarrowness": -0.39858168948233025,
+        "decisionScore": 0.18477614038925366,
+        "difficultyScore": 0.16384666504970646,
+        "trivialityPenalty": 0.3100560191774855
+      },
+      "multiMoveRatio": {
+        "moveComplexity": 0.9791157454046184,
+        "stopTileCount": 0.8871185795468128,
+        "stopTileInteractions": 0.8912460963285043,
+        "meaningfulStopInteractions": 0.8385850254658305,
+        "multiMoveRatio": 1.0,
+        "dependencyComplexity": -0.7097070681220097,
+        "optimalPathNarrowness": -0.5419618621979688,
+        "decisionScore": -0.05000138593778738,
+        "difficultyScore": -0.168236915690376,
+        "trivialityPenalty": 0.5885024438319467
+      },
+      "dependencyComplexity": {
+        "moveComplexity": -0.7171855111174068,
+        "stopTileCount": -0.7354438535726942,
+        "stopTileInteractions": -0.7166680017399852,
+        "meaningfulStopInteractions": -0.6165880031267111,
+        "multiMoveRatio": -0.7097070681220097,
+        "dependencyComplexity": 1.0,
+        "optimalPathNarrowness": 0.590881303982677,
+        "decisionScore": 0.08847655873087332,
+        "difficultyScore": 0.36857542647584807,
+        "trivialityPenalty": -0.4940547137701402
+      },
+      "optimalPathNarrowness": {
+        "moveComplexity": -0.521630964978512,
+        "stopTileCount": -0.45783556808742676,
+        "stopTileInteractions": -0.4461994317610369,
+        "meaningfulStopInteractions": -0.39858168948233025,
+        "multiMoveRatio": -0.5419618621979688,
+        "dependencyComplexity": 0.590881303982677,
+        "optimalPathNarrowness": 1.0,
+        "decisionScore": -0.14892575529727906,
+        "difficultyScore": 0.6224437965114226,
+        "trivialityPenalty": -0.28256009475488675
+      },
+      "decisionScore": {
+        "moveComplexity": -0.04029022842833053,
+        "stopTileCount": 0.11737773987416358,
+        "stopTileInteractions": 0.12718594816651985,
+        "meaningfulStopInteractions": 0.18477614038925366,
+        "multiMoveRatio": -0.05000138593778738,
+        "dependencyComplexity": 0.08847655873087332,
+        "optimalPathNarrowness": -0.14892575529727906,
+        "decisionScore": 1.0,
+        "difficultyScore": 0.5454237923058991,
+        "trivialityPenalty": -0.6108492918830133
+      },
+      "difficultyScore": {
+        "moveComplexity": -0.15052701255829254,
+        "stopTileCount": 0.018350214757266708,
+        "stopTileInteractions": 0.04392390235762884,
+        "meaningfulStopInteractions": 0.16384666504970646,
+        "multiMoveRatio": -0.168236915690376,
+        "dependencyComplexity": 0.36857542647584807,
+        "optimalPathNarrowness": 0.6224437965114226,
+        "decisionScore": 0.5454237923058991,
+        "difficultyScore": 1.0,
+        "trivialityPenalty": -0.5504424938487061
+      },
+      "trivialityPenalty": {
+        "moveComplexity": 0.5945465178618231,
+        "stopTileCount": 0.4661767196118625,
+        "stopTileInteractions": 0.4555808958097291,
+        "meaningfulStopInteractions": 0.3100560191774855,
+        "multiMoveRatio": 0.5885024438319467,
+        "dependencyComplexity": -0.4940547137701402,
+        "optimalPathNarrowness": -0.28256009475488675,
+        "decisionScore": -0.6108492918830133,
+        "difficultyScore": -0.5504424938487061,
+        "trivialityPenalty": 1.0
+      }
+    },
+    "stopTile": {
+      "moveComplexity": {
+        "moveComplexity": 1.0,
+        "stopTileCount": 0.8072425977337897,
+        "stopTileInteractions": 0.8419792629930654,
+        "meaningfulStopInteractions": 0.6191163513483033,
+        "multiMoveRatio": 0.9303214540916025,
+        "dependencyComplexity": -0.6252513301436385,
+        "optimalPathNarrowness": -0.27104653140577417,
+        "decisionScore": -0.2237043469779268,
+        "difficultyScore": -0.0875650255330267,
+        "trivialityPenalty": 0.4395407871190735
+      },
+      "stopTileCount": {
+        "moveComplexity": 0.8072425977337897,
+        "stopTileCount": 1.0,
+        "stopTileInteractions": 0.9483313965126396,
+        "meaningfulStopInteractions": 0.7367317160584098,
+        "multiMoveRatio": 0.7263514386982991,
+        "dependencyComplexity": -0.5088086455227291,
+        "optimalPathNarrowness": -0.23597573340255357,
+        "decisionScore": 0.11489208287171676,
+        "difficultyScore": 0.11187717351261611,
+        "trivialityPenalty": 0.19403806497398252
+      },
+      "stopTileInteractions": {
+        "moveComplexity": 0.8419792629930654,
+        "stopTileCount": 0.9483313965126396,
+        "stopTileInteractions": 1.0,
+        "meaningfulStopInteractions": 0.8258358797352288,
+        "multiMoveRatio": 0.750014014817973,
+        "dependencyComplexity": -0.44311776189290575,
+        "optimalPathNarrowness": -0.18309294096658324,
+        "decisionScore": 0.14766062000051466,
+        "difficultyScore": 0.19093515768031163,
+        "trivialityPenalty": 0.16822323554936863
+      },
+      "meaningfulStopInteractions": {
+        "moveComplexity": 0.6191163513483033,
+        "stopTileCount": 0.7367317160584098,
+        "stopTileInteractions": 0.8258358797352288,
+        "meaningfulStopInteractions": 1.0,
+        "multiMoveRatio": 0.5750972991285167,
+        "dependencyComplexity": -0.09079323110181976,
+        "optimalPathNarrowness": 0.06303531177369566,
+        "decisionScore": 0.32627481833894073,
+        "difficultyScore": 0.5392164370649142,
+        "trivialityPenalty": -0.2686596434240966
+      },
+      "multiMoveRatio": {
+        "moveComplexity": 0.9303214540916025,
+        "stopTileCount": 0.7263514386982991,
+        "stopTileInteractions": 0.750014014817973,
+        "meaningfulStopInteractions": 0.5750972991285167,
+        "multiMoveRatio": 1.0,
+        "dependencyComplexity": -0.6085834598096808,
+        "optimalPathNarrowness": -0.2921337353304655,
+        "decisionScore": -0.25679108359295516,
+        "difficultyScore": -0.10008747272419984,
+        "trivialityPenalty": 0.3920825252621005
+      },
+      "dependencyComplexity": {
+        "moveComplexity": -0.6252513301436385,
+        "stopTileCount": -0.5088086455227291,
+        "stopTileInteractions": -0.44311776189290575,
+        "meaningfulStopInteractions": -0.09079323110181976,
+        "multiMoveRatio": -0.6085834598096808,
+        "dependencyComplexity": 1.0,
+        "optimalPathNarrowness": 0.4987033913742704,
+        "decisionScore": 0.4260452951672206,
+        "difficultyScore": 0.5389428589308873,
+        "trivialityPenalty": -0.6301099872204996
+      },
+      "optimalPathNarrowness": {
+        "moveComplexity": -0.27104653140577417,
+        "stopTileCount": -0.23597573340255357,
+        "stopTileInteractions": -0.18309294096658324,
+        "meaningfulStopInteractions": 0.06303531177369566,
+        "multiMoveRatio": -0.2921337353304655,
+        "dependencyComplexity": 0.4987033913742704,
+        "optimalPathNarrowness": 1.0,
+        "decisionScore": 0.2511393592761441,
+        "difficultyScore": 0.6456227689034545,
+        "trivialityPenalty": -0.444771939494236
+      },
+      "decisionScore": {
+        "moveComplexity": -0.2237043469779268,
+        "stopTileCount": 0.11489208287171676,
+        "stopTileInteractions": 0.14766062000051466,
+        "meaningfulStopInteractions": 0.32627481833894073,
+        "multiMoveRatio": -0.25679108359295516,
+        "dependencyComplexity": 0.4260452951672206,
+        "optimalPathNarrowness": 0.2511393592761441,
+        "decisionScore": 1.0,
+        "difficultyScore": 0.7883224623339058,
+        "trivialityPenalty": -0.6594229514540689
+      },
+      "difficultyScore": {
+        "moveComplexity": -0.0875650255330267,
+        "stopTileCount": 0.11187717351261611,
+        "stopTileInteractions": 0.19093515768031163,
+        "meaningfulStopInteractions": 0.5392164370649142,
+        "multiMoveRatio": -0.10008747272419984,
+        "dependencyComplexity": 0.5389428589308873,
+        "optimalPathNarrowness": 0.6456227689034545,
+        "decisionScore": 0.7883224623339058,
+        "difficultyScore": 1.0,
+        "trivialityPenalty": -0.7674038718397566
+      },
+      "trivialityPenalty": {
+        "moveComplexity": 0.4395407871190735,
+        "stopTileCount": 0.19403806497398252,
+        "stopTileInteractions": 0.16822323554936863,
+        "meaningfulStopInteractions": -0.2686596434240966,
+        "multiMoveRatio": 0.3920825252621005,
+        "dependencyComplexity": -0.6301099872204996,
+        "optimalPathNarrowness": -0.444771939494236,
+        "decisionScore": -0.6594229514540689,
+        "difficultyScore": -0.7674038718397566,
+        "trivialityPenalty": 1.0
+      }
+    }
+  },
+  "stopTileUsage": {
+    "levelsWithUnusedTile": 0,
+    "unusedTileRate": 0.0,
+    "avgStopTiles": 1.6885142743591441,
+    "avgInteractions": 3.6687090150360997,
+    "avgMeaningful": 2.4126316486719217,
+    "meaningfulShare": 0.6683494388951315,
+    "byTileCount": {
+      "0": null,
+      "1": {
+        "count": 14745,
+        "avgMoveComplexity": 1.2682708271956702,
+        "avgDifficultyScore": 47.80348454120095,
+        "avgTrivialityPenalty": 0.24995764286200048
+      },
+      "2": {
+        "count": 10581,
+        "avgMoveComplexity": 1.4939312748322253,
+        "avgDifficultyScore": 49.80077885710266,
+        "avgTrivialityPenalty": 0.2806918506757464
+      },
+      "3": {
+        "count": 4399,
+        "avgMoveComplexity": 1.6979471088884281,
+        "avgDifficultyScore": 50.825868290975215,
+        "avgTrivialityPenalty": 0.3161276942486975
+      },
+      "4": {
+        "count": 466,
+        "avgMoveComplexity": 1.920029354077245,
+        "avgDifficultyScore": 51.30579302145928,
+        "avgTrivialityPenalty": 0.36537251502145957
+      },
+      "5": {
+        "count": 3,
+        "avgMoveComplexity": 2.194444333333333,
+        "avgDifficultyScore": 47.69026733333334,
+        "avgTrivialityPenalty": 0.445767
+      },
+      "6": null
+    }
+  },
+  "solverPerformance": {
+    "all": {
+      "4x4": {
+        "count": 14694,
+        "solveMicros": {
+          "mean": 471.50517217912073,
+          "p50": 61.0,
+          "p90": 577.0,
+          "p95": 1137.0,
+          "p99": 9088.0,
+          "p999": 28325.0,
+          "max": 409805.0,
+          "min": 4.0
+        },
+        "exploredStates": {
+          "mean": 135.61698652511228,
+          "p50": 52.0,
+          "p90": 326.0,
+          "p95": 530.0,
+          "p99": 1158.0,
+          "p999": 2671.0,
+          "max": 3465.0,
+          "min": 7.0
+        }
+      },
+      "5x5": {
+        "count": 38967,
+        "solveMicros": {
+          "mean": 15628.597043652322,
+          "p50": 375.0,
+          "p90": 21499.0,
+          "p95": 48108.0,
+          "p99": 190752.0,
+          "p999": 764037.0,
+          "max": 78758413.0,
+          "min": 6.0
+        },
+        "exploredStates": {
+          "mean": 1971.7095234429132,
+          "p50": 284.0,
+          "p90": 4481.0,
+          "p95": 9853.0,
+          "p99": 31110.0,
+          "p999": 53240.0,
+          "max": 59843.0,
+          "min": 8.0
+        }
+      },
+      "6x6": {
+        "count": 35085,
+        "solveMicros": {
+          "mean": 94074.90742482542,
+          "p50": 1903.0,
+          "p90": 86160.0,
+          "p95": 155807.0,
+          "p99": 336942.0,
+          "p999": 1584045.0,
+          "max": 1362520660.0,
+          "min": 12.0
+        },
+        "exploredStates": {
+          "mean": 5928.251902522446,
+          "p50": 1145.0,
+          "p90": 19023.0,
+          "p95": 32679.0,
+          "p99": 52236.0,
+          "p999": 59309.0,
+          "max": 59992.0,
+          "min": 16.0
+        }
+      },
+      "7x7": {
+        "count": 14453,
+        "solveMicros": {
+          "mean": 80544.9292188473,
+          "p50": 7632.0,
+          "p90": 120090.0,
+          "p95": 183999.0,
+          "p99": 468280.0,
+          "p999": 1995876.0,
+          "max": 81611992.0,
+          "min": 22.0
+        },
+        "exploredStates": {
+          "mean": 9687.53912682488,
+          "p50": 3135.0,
+          "p90": 29710.0,
+          "p95": 41128.0,
+          "p99": 54993.0,
+          "p999": 59683.0,
+          "max": 59979.0,
+          "min": 30.0
+        }
+      }
+    },
+    "noStopTile": {
+      "4x4": {
+        "count": 7347,
+        "solveMicros": {
+          "mean": 201.10507690213691,
+          "p50": 40.0,
+          "p90": 228.0,
+          "p95": 395.0,
+          "p99": 1810.0,
+          "p999": 22568.0,
+          "max": 70116.0,
+          "min": 6.0
+        },
+        "exploredStates": {
+          "mean": 69.71376071866068,
+          "p50": 31.0,
+          "p90": 147.0,
+          "p95": 221.0,
+          "p99": 650.0,
+          "p999": 921.0,
+          "max": 1400.0,
+          "min": 7.0
+        }
+      },
+      "5x5": {
+        "count": 19635,
+        "solveMicros": {
+          "mean": 1104.6926916221034,
+          "p50": 143.0,
+          "p90": 1487.0,
+          "p95": 3590.0,
+          "p99": 20621.0,
+          "p999": 73149.0,
+          "max": 472234.0,
+          "min": 8.0
+        },
+        "exploredStates": {
+          "mean": 348.68158899923606,
+          "p50": 126.0,
+          "p90": 787.0,
+          "p95": 1438.0,
+          "p99": 3428.0,
+          "p999": 7561.0,
+          "max": 26694.0,
+          "min": 8.0
+        }
+      },
+      "6x6": {
+        "count": 20836,
+        "solveMicros": {
+          "mean": 11846.624832021502,
+          "p50": 946.0,
+          "p90": 24105.0,
+          "p95": 43131.0,
+          "p99": 147003.0,
+          "p999": 518682.0,
+          "max": 25408254.0,
+          "min": 12.0
+        },
+        "exploredStates": {
+          "mean": 2455.2494240737187,
+          "p50": 700.0,
+          "p90": 6463.0,
+          "p95": 11078.0,
+          "p99": 29673.0,
+          "p999": 52399.0,
+          "max": 59847.0,
+          "min": 16.0
+        }
+      },
+      "7x7": {
+        "count": 10779,
+        "solveMicros": {
+          "mean": 58940.46599870118,
+          "p50": 4963.0,
+          "p90": 92173.0,
+          "p95": 144166.0,
+          "p99": 371461.0,
+          "p999": 1341777.0,
+          "max": 80724566.0,
+          "min": 22.0
+        },
+        "exploredStates": {
+          "mean": 7927.646720474998,
+          "p50": 2387.0,
+          "p90": 23998.0,
+          "p95": 34184.0,
+          "p99": 52262.0,
+          "p999": 59033.0,
+          "max": 59953.0,
+          "min": 30.0
+        }
+      }
+    },
+    "stopTile": {
+      "4x4": {
+        "count": 4245,
+        "solveMicros": {
+          "mean": 1165.71542991755,
+          "p50": 256.0,
+          "p90": 1512.0,
+          "p95": 2932.0,
+          "p99": 20077.0,
+          "p999": 77253.0,
+          "max": 409805.0,
+          "min": 10.0
+        },
+        "exploredStates": {
+          "mean": 302.9575971731449,
+          "p50": 191.0,
+          "p90": 680.0,
+          "p95": 999.0,
+          "p99": 1880.0,
+          "p999": 3181.0,
+          "max": 3465.0,
+          "min": 15.0
+        }
+      },
+      "5x5": {
+        "count": 14164,
+        "solveMicros": {
+          "mean": 41078.66831403558,
+          "p50": 3407.0,
+          "p90": 66535.0,
+          "p95": 124997.0,
+          "p99": 321551.0,
+          "p999": 1423790.0,
+          "max": 78758413.0,
+          "min": 14.0
+        },
+        "exploredStates": {
+          "mean": 4817.783323919797,
+          "p50": 1511.0,
+          "p90": 13350.0,
+          "p95": 22551.0,
+          "p99": 43349.0,
+          "p999": 57327.0,
+          "max": 59843.0,
+          "min": 19.0
+        }
+      },
+      "6x6": {
+        "count": 9957,
+        "solveMicros": {
+          "mean": 299898.38304710254,
+          "p50": 35885.0,
+          "p90": 203516.0,
+          "p95": 269373.0,
+          "p99": 824258.0,
+          "p999": 24988953.0,
+          "max": 1362520660.0,
+          "min": 63.0
+        },
+        "exploredStates": {
+          "mean": 14756.093100331425,
+          "p50": 8390.0,
+          "p90": 40514.0,
+          "p95": 48818.0,
+          "p99": 57508.0,
+          "p999": 59808.0,
+          "max": 59992.0,
+          "min": 64.0
+        }
+      },
+      "7x7": {
+        "count": 1828,
+        "solveMicros": {
+          "mean": 241302.0590809628,
+          "p50": 66855.0,
+          "p90": 234601.0,
+          "p95": 303307.0,
+          "p99": 1018147.0,
+          "p999": 75844950.0,
+          "max": 81611992.0,
+          "min": 355.0
+        },
+        "exploredStates": {
+          "mean": 21964.113238512036,
+          "p50": 17505.0,
+          "p90": 48335.0,
+          "p95": 53941.0,
+          "p99": 58844.0,
+          "p999": 59873.0,
+          "max": 59979.0,
+          "min": 219.0
+        }
+      }
+    }
+  },
+  "outliers": {
+    "longButEasyCount": 586,
+    "shortButHardCount": 12044,
+    "longButEasy": [
+      {
+        "seed": 6227,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "5x5",
+        "board": [
+          "v<.o<",
+          "...o.",
+          ">..o.",
+          "...^.",
+          "...^."
+        ],
+        "blocks": [
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "L"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "L"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "D"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "R"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "U"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "U"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 3,
+            "y": 0
+          },
+          {
+            "x": 3,
+            "y": 1
+          },
+          {
+            "x": 3,
+            "y": 2
+          }
+        ],
+        "optimalSolution": [
+          "b3",
+          "b2",
+          "b1",
+          "b3",
+          "b0",
+          "b0",
+          "b5",
+          "b5",
+          "b5",
+          "b5",
+          "b4",
+          "b4",
+          "b4",
+          "b4"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 6227.0,
+          "gridSize": 5.0,
+          "blockCount": 6.0,
+          "stopTileCount": 3.0,
+          "optimalMoves": 14.0,
+          "moveComplexity": 2.333333,
+          "multiMoveRatio": 0.666667,
+          "maxMovesForSingleBlock": 4.0,
+          "averageChoices": 1.928571,
+          "decisionScore": 36.309524,
+          "optimalPathNarrowness": 0.111111,
+          "temptingWrongMoveRatio": 0.153846,
+          "dependencyComplexity": 0.357143,
+          "stopTileInteractions": 8.0,
+          "meaningfulStopInteractions": 3.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 0.375,
+          "stopTileDensity": 0.12,
+          "trivialityPenalty": 0.714286,
+          "stateSpaceComplexity": 0.568409,
+          "exploredStates": 770.0,
+          "unresolvedAlternatives": 0.0,
+          "deadEndStates": 0.0,
+          "branchingFactor": 1.928571,
+          "wrongMoveOpportunities": 2.0,
+          "deadEndOpportunities": 0.0,
+          "difficultyScore": 28.220242,
+          "visualScore": 66.733333,
+          "solveMicros": 19176.0
+        }
+      },
+      {
+        "seed": 23566,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "6x6",
+        "board": [
+          "....v.",
+          "..>.o.",
+          "....o<",
+          ">.o...",
+          "......",
+          "..^.o<"
+        ],
+        "blocks": [
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "L"
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "direction": "U"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "R"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "D"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "R"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "L"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 4,
+            "y": 1
+          },
+          {
+            "x": 4,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 3
+          },
+          {
+            "x": 4,
+            "y": 5
+          }
+        ],
+        "optimalSolution": [
+          "b2",
+          "b2",
+          "b1",
+          "b1",
+          "b0",
+          "b0",
+          "b4",
+          "b4",
+          "b5",
+          "b5",
+          "b3",
+          "b3",
+          "b3",
+          "b3"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 23566.0,
+          "gridSize": 6.0,
+          "blockCount": 6.0,
+          "stopTileCount": 4.0,
+          "optimalMoves": 14.0,
+          "moveComplexity": 2.333333,
+          "multiMoveRatio": 1.0,
+          "maxMovesForSingleBlock": 4.0,
+          "averageChoices": 3.071429,
+          "decisionScore": 47.083333,
+          "optimalPathNarrowness": 0.0,
+          "temptingWrongMoveRatio": 0.034483,
+          "dependencyComplexity": 0.285714,
+          "stopTileInteractions": 8.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 0.25,
+          "stopTileDensity": 0.111111,
+          "trivialityPenalty": 0.714286,
+          "stateSpaceComplexity": 0.695285,
+          "exploredStates": 3399.0,
+          "unresolvedAlternatives": 0.0,
+          "deadEndStates": 0.0,
+          "branchingFactor": 3.071429,
+          "wrongMoveOpportunities": 1.0,
+          "deadEndOpportunities": 0.0,
+          "difficultyScore": 25.35578,
+          "visualScore": 56.1,
+          "solveMicros": 6885.0
+        }
+      },
+      {
+        "seed": 8499,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "4x4",
+        "board": [
+          ">.o.",
+          "..o.",
+          ">.^.",
+          "..^."
+        ],
+        "blocks": [
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "R"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "U"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "U"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "R"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 2,
+            "y": 1
+          }
+        ],
+        "optimalSolution": [
+          "b2",
+          "b0",
+          "b2",
+          "b2",
+          "b3",
+          "b3",
+          "b1",
+          "b1",
+          "b1"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 8499.0,
+          "gridSize": 4.0,
+          "blockCount": 4.0,
+          "stopTileCount": 2.0,
+          "optimalMoves": 9.0,
+          "moveComplexity": 2.25,
+          "multiMoveRatio": 0.75,
+          "maxMovesForSingleBlock": 3.0,
+          "averageChoices": 2.222222,
+          "decisionScore": 43.888889,
+          "optimalPathNarrowness": 0.0,
+          "temptingWrongMoveRatio": 0.363636,
+          "dependencyComplexity": 0.333333,
+          "stopTileInteractions": 5.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 0.4,
+          "stopTileDensity": 0.125,
+          "trivialityPenalty": 0.666667,
+          "stateSpaceComplexity": 0.399549,
+          "exploredStates": 106.0,
+          "unresolvedAlternatives": 0.0,
+          "deadEndStates": 0.0,
+          "branchingFactor": 2.222222,
+          "wrongMoveOpportunities": 4.0,
+          "deadEndOpportunities": 0.0,
+          "difficultyScore": 28.937365,
+          "visualScore": 47.35,
+          "solveMicros": 66.0
+        }
+      },
+      {
+        "seed": 6233,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "4x4",
+        "board": [
+          "..o<",
+          "..o.",
+          ">.^.",
+          "..^."
+        ],
+        "blocks": [
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "R"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "U"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "U"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "L"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 2,
+            "y": 1
+          }
+        ],
+        "optimalSolution": [
+          "b2",
+          "b0",
+          "b2",
+          "b2",
+          "b3",
+          "b3",
+          "b1",
+          "b1",
+          "b1"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 6233.0,
+          "gridSize": 4.0,
+          "blockCount": 4.0,
+          "stopTileCount": 2.0,
+          "optimalMoves": 9.0,
+          "moveComplexity": 2.25,
+          "multiMoveRatio": 0.75,
+          "maxMovesForSingleBlock": 3.0,
+          "averageChoices": 2.111111,
+          "decisionScore": 40.694444,
+          "optimalPathNarrowness": 0.0,
+          "temptingWrongMoveRatio": 0.3,
+          "dependencyComplexity": 0.333333,
+          "stopTileInteractions": 5.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 0.4,
+          "stopTileDensity": 0.125,
+          "trivialityPenalty": 0.666667,
+          "stateSpaceComplexity": 0.378856,
+          "exploredStates": 83.0,
+          "unresolvedAlternatives": 0.0,
+          "deadEndStates": 0.0,
+          "branchingFactor": 2.111111,
+          "wrongMoveOpportunities": 3.0,
+          "deadEndOpportunities": 0.0,
+          "difficultyScore": 27.072289,
+          "visualScore": 58.35,
+          "solveMicros": 59.0
+        }
+      },
+      {
+        "seed": 17904,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "4x4",
+        "board": [
+          "..o<",
+          "..o.",
+          ">.^.",
+          "..^."
+        ],
+        "blocks": [
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "R"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "U"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "U"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "L"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 2,
+            "y": 1
+          }
+        ],
+        "optimalSolution": [
+          "b2",
+          "b0",
+          "b2",
+          "b2",
+          "b3",
+          "b3",
+          "b1",
+          "b1",
+          "b1"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 17904.0,
+          "gridSize": 4.0,
+          "blockCount": 4.0,
+          "stopTileCount": 2.0,
+          "optimalMoves": 9.0,
+          "moveComplexity": 2.25,
+          "multiMoveRatio": 0.75,
+          "maxMovesForSingleBlock": 3.0,
+          "averageChoices": 2.111111,
+          "decisionScore": 40.694444,
+          "optimalPathNarrowness": 0.0,
+          "temptingWrongMoveRatio": 0.3,
+          "dependencyComplexity": 0.333333,
+          "stopTileInteractions": 5.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 0.4,
+          "stopTileDensity": 0.125,
+          "trivialityPenalty": 0.666667,
+          "stateSpaceComplexity": 0.378856,
+          "exploredStates": 83.0,
+          "unresolvedAlternatives": 0.0,
+          "deadEndStates": 0.0,
+          "branchingFactor": 2.111111,
+          "wrongMoveOpportunities": 3.0,
+          "deadEndOpportunities": 0.0,
+          "difficultyScore": 27.072289,
+          "visualScore": 58.35,
+          "solveMicros": 64.0
+        }
+      },
+      {
+        "seed": 47355,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "4x4",
+        "board": [
+          "..o<",
+          "..o.",
+          ">.^.",
+          "..^."
+        ],
+        "blocks": [
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "R"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "U"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "U"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "L"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 2,
+            "y": 1
+          }
+        ],
+        "optimalSolution": [
+          "b2",
+          "b0",
+          "b2",
+          "b2",
+          "b3",
+          "b3",
+          "b1",
+          "b1",
+          "b1"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 47355.0,
+          "gridSize": 4.0,
+          "blockCount": 4.0,
+          "stopTileCount": 2.0,
+          "optimalMoves": 9.0,
+          "moveComplexity": 2.25,
+          "multiMoveRatio": 0.75,
+          "maxMovesForSingleBlock": 3.0,
+          "averageChoices": 2.111111,
+          "decisionScore": 40.694444,
+          "optimalPathNarrowness": 0.0,
+          "temptingWrongMoveRatio": 0.3,
+          "dependencyComplexity": 0.333333,
+          "stopTileInteractions": 5.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 0.4,
+          "stopTileDensity": 0.125,
+          "trivialityPenalty": 0.666667,
+          "stateSpaceComplexity": 0.378856,
+          "exploredStates": 83.0,
+          "unresolvedAlternatives": 0.0,
+          "deadEndStates": 0.0,
+          "branchingFactor": 2.111111,
+          "wrongMoveOpportunities": 3.0,
+          "deadEndOpportunities": 0.0,
+          "difficultyScore": 27.072289,
+          "visualScore": 58.35,
+          "solveMicros": 60.0
+        }
+      },
+      {
+        "seed": 9096,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "4x4",
+        "board": [
+          ">.o.",
+          "..o.",
+          ".>^.",
+          "..^."
+        ],
+        "blocks": [
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "R"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "U"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "U"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "R"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 2,
+            "y": 1
+          }
+        ],
+        "optimalSolution": [
+          "b2",
+          "b0",
+          "b2",
+          "b2",
+          "b3",
+          "b3",
+          "b1",
+          "b1",
+          "b1"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 9096.0,
+          "gridSize": 4.0,
+          "blockCount": 4.0,
+          "stopTileCount": 2.0,
+          "optimalMoves": 9.0,
+          "moveComplexity": 2.25,
+          "multiMoveRatio": 0.75,
+          "maxMovesForSingleBlock": 3.0,
+          "averageChoices": 2.111111,
+          "decisionScore": 40.694444,
+          "optimalPathNarrowness": 0.0,
+          "temptingWrongMoveRatio": 0.3,
+          "dependencyComplexity": 0.333333,
+          "stopTileInteractions": 5.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 0.4,
+          "stopTileDensity": 0.125,
+          "trivialityPenalty": 0.666667,
+          "stateSpaceComplexity": 0.365676,
+          "exploredStates": 71.0,
+          "unresolvedAlternatives": 0.0,
+          "deadEndStates": 0.0,
+          "branchingFactor": 2.111111,
+          "wrongMoveOpportunities": 3.0,
+          "deadEndOpportunities": 0.0,
+          "difficultyScore": 26.974654,
+          "visualScore": 53.35,
+          "solveMicros": 44.0
+        }
+      },
+      {
+        "seed": 25270,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "4x4",
+        "board": [
+          "v...",
+          "oo<<",
+          "....",
+          "..^."
+        ],
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "U"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "L"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "L"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "D"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 0,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
+        ],
+        "optimalSolution": [
+          "b2",
+          "b0",
+          "b2",
+          "b2",
+          "b3",
+          "b3",
+          "b1",
+          "b1",
+          "b1"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 25270.0,
+          "gridSize": 4.0,
+          "blockCount": 4.0,
+          "stopTileCount": 2.0,
+          "optimalMoves": 9.0,
+          "moveComplexity": 2.25,
+          "multiMoveRatio": 0.75,
+          "maxMovesForSingleBlock": 3.0,
+          "averageChoices": 2.111111,
+          "decisionScore": 40.694444,
+          "optimalPathNarrowness": 0.0,
+          "temptingWrongMoveRatio": 0.3,
+          "dependencyComplexity": 0.333333,
+          "stopTileInteractions": 5.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 0.4,
+          "stopTileDensity": 0.125,
+          "trivialityPenalty": 0.666667,
+          "stateSpaceComplexity": 0.378856,
+          "exploredStates": 83.0,
+          "unresolvedAlternatives": 0.0,
+          "deadEndStates": 0.0,
+          "branchingFactor": 2.111111,
+          "wrongMoveOpportunities": 3.0,
+          "deadEndOpportunities": 0.0,
+          "difficultyScore": 27.072289,
+          "visualScore": 58.35,
+          "solveMicros": 145.0
+        }
+      },
+      {
+        "seed": 5253,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "5x5",
+        "board": [
+          ".v...",
+          ">o...",
+          ">o...",
+          "o.<..",
+          "^...."
+        ],
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "L"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "U"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "R"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "D"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "R"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 0,
+            "y": 3
+          }
+        ],
+        "optimalSolution": [
+          "b0",
+          "b0",
+          "b2",
+          "b2",
+          "b4",
+          "b4",
+          "b1",
+          "b1",
+          "b3",
+          "b3",
+          "b3"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 5253.0,
+          "gridSize": 5.0,
+          "blockCount": 5.0,
+          "stopTileCount": 3.0,
+          "optimalMoves": 11.0,
+          "moveComplexity": 2.2,
+          "multiMoveRatio": 1.0,
+          "maxMovesForSingleBlock": 3.0,
+          "averageChoices": 2.636364,
+          "decisionScore": 40.909091,
+          "optimalPathNarrowness": 0.0,
+          "temptingWrongMoveRatio": 0.0,
+          "dependencyComplexity": 0.363636,
+          "stopTileInteractions": 6.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 0.333333,
+          "stopTileDensity": 0.12,
+          "trivialityPenalty": 0.636364,
+          "stateSpaceComplexity": 0.487985,
+          "exploredStates": 300.0,
+          "unresolvedAlternatives": 0.0,
+          "deadEndStates": 1.0,
+          "branchingFactor": 2.636364,
+          "wrongMoveOpportunities": 0.0,
+          "deadEndOpportunities": 0.0,
+          "difficultyScore": 24.547367,
+          "visualScore": 55.1,
+          "solveMicros": 489.0
+        }
+      },
+      {
+        "seed": 32940,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "5x5",
+        "board": [
+          "..v..",
+          ">.o..",
+          "....^",
+          "o.o.<",
+          "^...."
+        ],
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "D"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "L"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "U"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "R"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "U"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 0,
+            "y": 3
+          },
+          {
+            "x": 2,
+            "y": 3
+          }
+        ],
+        "optimalSolution": [
+          "b4",
+          "b3",
+          "b3",
+          "b2",
+          "b2",
+          "b0",
+          "b0",
+          "b0",
+          "b1",
+          "b1",
+          "b1"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 32940.0,
+          "gridSize": 5.0,
+          "blockCount": 5.0,
+          "stopTileCount": 3.0,
+          "optimalMoves": 11.0,
+          "moveComplexity": 2.2,
+          "multiMoveRatio": 0.8,
+          "maxMovesForSingleBlock": 3.0,
+          "averageChoices": 2.454545,
+          "decisionScore": 41.174242,
+          "optimalPathNarrowness": 0.125,
+          "temptingWrongMoveRatio": 0.0625,
+          "dependencyComplexity": 0.363636,
+          "stopTileInteractions": 6.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 0.333333,
+          "stopTileDensity": 0.12,
+          "trivialityPenalty": 0.636364,
+          "stateSpaceComplexity": 0.544511,
+          "exploredStates": 582.0,
+          "unresolvedAlternatives": 0.0,
+          "deadEndStates": 0.0,
+          "branchingFactor": 2.454545,
+          "wrongMoveOpportunities": 1.0,
+          "deadEndOpportunities": 0.0,
+          "difficultyScore": 28.039165,
+          "visualScore": 63.85,
+          "solveMicros": 766.0
+        }
+      }
+    ],
+    "shortButHard": [
+      {
+        "seed": 54234,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "5x5",
+        "board": [
+          ".v.<.",
+          "^>..v",
+          "^.<..",
+          ".>^o.",
+          "...^<"
+        ],
+        "blocks": [
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "L"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "D"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "R"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "U"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "R"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "D"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "L"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "U"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "L"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "U"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "U"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 3,
+            "y": 3
+          }
+        ],
+        "optimalSolution": [
+          "b10",
+          "b9",
+          "b8",
+          "b7",
+          "b2",
+          "b2",
+          "b3",
+          "b6",
+          "b5",
+          "b4",
+          "b1",
+          "b0",
+          "b3"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 54234.0,
+          "gridSize": 5.0,
+          "blockCount": 11.0,
+          "stopTileCount": 1.0,
+          "optimalMoves": 13.0,
+          "moveComplexity": 1.181818,
+          "multiMoveRatio": 0.181818,
+          "maxMovesForSingleBlock": 2.0,
+          "averageChoices": 4.076923,
+          "decisionScore": 82.022145,
+          "optimalPathNarrowness": 1.0,
+          "temptingWrongMoveRatio": 1.0,
+          "dependencyComplexity": 0.923077,
+          "stopTileInteractions": 2.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 1.0,
+          "stopTileDensity": 0.04,
+          "trivialityPenalty": 0.076923,
+          "stateSpaceComplexity": 0.56362,
+          "exploredStates": 728.0,
+          "unresolvedAlternatives": 0.0,
+          "deadEndStates": 2.0,
+          "branchingFactor": 4.076923,
+          "wrongMoveOpportunities": 39.0,
+          "deadEndOpportunities": 1.0,
+          "difficultyScore": 74.935279,
+          "visualScore": 75.940909,
+          "solveMicros": 1698.0
+        }
+      },
+      {
+        "seed": 42643,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "6x6",
+        "board": [
+          "..v.<.",
+          "..>v..",
+          ">.o.^v",
+          "......",
+          "^..v.<",
+          "..>.^."
+        ],
+        "blocks": [
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "R"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "D"
+          },
+          {
+            "x": 5,
+            "y": 4,
+            "direction": "L"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "U"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "D"
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "direction": "R"
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "direction": "U"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "U"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "L"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "R"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "D"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "D"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 2,
+            "y": 2
+          }
+        ],
+        "optimalSolution": [
+          "b11",
+          "b10",
+          "b9",
+          "b4",
+          "b8",
+          "b7",
+          "b6",
+          "b5",
+          "b4",
+          "b0",
+          "b3",
+          "b2",
+          "b1",
+          "b0"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 42643.0,
+          "gridSize": 6.0,
+          "blockCount": 12.0,
+          "stopTileCount": 1.0,
+          "optimalMoves": 14.0,
+          "moveComplexity": 1.166667,
+          "multiMoveRatio": 0.166667,
+          "maxMovesForSingleBlock": 2.0,
+          "averageChoices": 6.142857,
+          "decisionScore": 79.126984,
+          "optimalPathNarrowness": 1.0,
+          "temptingWrongMoveRatio": 1.0,
+          "dependencyComplexity": 0.928571,
+          "stopTileInteractions": 2.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 1.0,
+          "stopTileDensity": 0.027778,
+          "trivialityPenalty": 0.071429,
+          "stateSpaceComplexity": 0.681949,
+          "exploredStates": 2908.0,
+          "unresolvedAlternatives": 0.0,
+          "deadEndStates": 0.0,
+          "branchingFactor": 6.142857,
+          "wrongMoveOpportunities": 72.0,
+          "deadEndOpportunities": 0.0,
+          "difficultyScore": 74.843951,
+          "visualScore": 80.983333,
+          "solveMicros": 1939.0
+        }
+      },
+      {
+        "seed": 40860,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "5x5",
+        "board": [
+          "v..<<",
+          ".>o.^",
+          ">.^.v",
+          ".....",
+          ".^..<"
+        ],
+        "blocks": [
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "R"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "D"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "L"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "U"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "U"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "R"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "U"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "L"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "L"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "D"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 2,
+            "y": 1
+          }
+        ],
+        "optimalSolution": [
+          "b4",
+          "b4",
+          "b5",
+          "b3",
+          "b2",
+          "b1",
+          "b0",
+          "b9",
+          "b8",
+          "b7",
+          "b6",
+          "b5"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 40860.0,
+          "gridSize": 5.0,
+          "blockCount": 10.0,
+          "stopTileCount": 1.0,
+          "optimalMoves": 12.0,
+          "moveComplexity": 1.2,
+          "multiMoveRatio": 0.2,
+          "maxMovesForSingleBlock": 2.0,
+          "averageChoices": 4.5,
+          "decisionScore": 80.0,
+          "optimalPathNarrowness": 1.0,
+          "temptingWrongMoveRatio": 1.0,
+          "dependencyComplexity": 0.916667,
+          "stopTileInteractions": 2.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 1.0,
+          "stopTileDensity": 0.04,
+          "trivialityPenalty": 0.083333,
+          "stateSpaceComplexity": 0.565016,
+          "exploredStates": 740.0,
+          "unresolvedAlternatives": 0.0,
+          "deadEndStates": 0.0,
+          "branchingFactor": 4.5,
+          "wrongMoveOpportunities": 42.0,
+          "deadEndOpportunities": 0.0,
+          "difficultyScore": 74.790241,
+          "visualScore": 74.9,
+          "solveMicros": 996.0
+        }
+      },
+      {
+        "seed": 30862,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "6x6",
+        "board": [
+          ">..v..",
+          ".>..v.",
+          "o.v<..",
+          "^...<.",
+          "..v...",
+          ".^.<.."
+        ],
+        "blocks": [
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "R"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "D"
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "direction": "L"
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "direction": "U"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "L"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "U"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "R"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "D"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "L"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "D"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "D"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 0,
+            "y": 2
+          }
+        ],
+        "optimalSolution": [
+          "b10",
+          "b9",
+          "b4",
+          "b4",
+          "b5",
+          "b8",
+          "b7",
+          "b0",
+          "b3",
+          "b2",
+          "b1",
+          "b6",
+          "b5"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 30862.0,
+          "gridSize": 6.0,
+          "blockCount": 11.0,
+          "stopTileCount": 1.0,
+          "optimalMoves": 13.0,
+          "moveComplexity": 1.181818,
+          "multiMoveRatio": 0.181818,
+          "maxMovesForSingleBlock": 2.0,
+          "averageChoices": 6.153846,
+          "decisionScore": 79.522145,
+          "optimalPathNarrowness": 1.0,
+          "temptingWrongMoveRatio": 0.970149,
+          "dependencyComplexity": 0.923077,
+          "stopTileInteractions": 2.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 1.0,
+          "stopTileDensity": 0.027778,
+          "trivialityPenalty": 0.076923,
+          "stateSpaceComplexity": 0.668925,
+          "exploredStates": 2497.0,
+          "unresolvedAlternatives": 2.0,
+          "deadEndStates": 0.0,
+          "branchingFactor": 6.153846,
+          "wrongMoveOpportunities": 65.0,
+          "deadEndOpportunities": 0.0,
+          "difficultyScore": 74.671233,
+          "visualScore": 86.016667,
+          "solveMicros": 4354.0
+        }
+      },
+      {
+        "seed": 54392,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "6x6",
+        "board": [
+          ".>.>.v",
+          "......",
+          ">^v.v.",
+          ".<<...",
+          "^.o..<",
+          ".^..<."
+        ],
+        "blocks": [
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "R"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "D"
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "direction": "L"
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "direction": "U"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "D"
+          },
+          {
+            "x": 5,
+            "y": 4,
+            "direction": "L"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "U"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "U"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "R"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "R"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "D"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "L"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "L"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 2,
+            "y": 4
+          }
+        ],
+        "optimalSolution": [
+          "b12",
+          "b11",
+          "b4",
+          "b4",
+          "b5",
+          "b10",
+          "b9",
+          "b8",
+          "b7",
+          "b3",
+          "b2",
+          "b1",
+          "b0",
+          "b6",
+          "b5"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 54392.0,
+          "gridSize": 6.0,
+          "blockCount": 13.0,
+          "stopTileCount": 1.0,
+          "optimalMoves": 15.0,
+          "moveComplexity": 1.153846,
+          "multiMoveRatio": 0.153846,
+          "maxMovesForSingleBlock": 2.0,
+          "averageChoices": 6.666667,
+          "decisionScore": 78.794872,
+          "optimalPathNarrowness": 1.0,
+          "temptingWrongMoveRatio": 0.964706,
+          "dependencyComplexity": 0.933333,
+          "stopTileInteractions": 2.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 1.0,
+          "stopTileDensity": 0.027778,
+          "trivialityPenalty": 0.066667,
+          "stateSpaceComplexity": 0.699001,
+          "exploredStates": 3550.0,
+          "unresolvedAlternatives": 3.0,
+          "deadEndStates": 0.0,
+          "branchingFactor": 6.666667,
+          "wrongMoveOpportunities": 82.0,
+          "deadEndOpportunities": 0.0,
+          "difficultyScore": 74.142181,
+          "visualScore": 83.874359,
+          "solveMicros": 41403.0
+        }
+      },
+      {
+        "seed": 42548,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "6x6",
+        "board": [
+          ".>..v.",
+          "v.^o<.",
+          "..^<..",
+          "......",
+          ".^.^.<",
+          ">>.>.^"
+        ],
+        "blocks": [
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "R"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "D"
+          },
+          {
+            "x": 5,
+            "y": 4,
+            "direction": "L"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "U"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "U"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "L"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "D"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "R"
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "direction": "R"
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "direction": "R"
+          },
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "U"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "L"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "U"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "U"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 3,
+            "y": 1
+          }
+        ],
+        "optimalSolution": [
+          "b13",
+          "b12",
+          "b11",
+          "b4",
+          "b4",
+          "b5",
+          "b1",
+          "b0",
+          "b3",
+          "b2",
+          "b10",
+          "b9",
+          "b8",
+          "b7",
+          "b6",
+          "b5"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 42548.0,
+          "gridSize": 6.0,
+          "blockCount": 14.0,
+          "stopTileCount": 1.0,
+          "optimalMoves": 16.0,
+          "moveComplexity": 1.142857,
+          "multiMoveRatio": 0.142857,
+          "maxMovesForSingleBlock": 2.0,
+          "averageChoices": 5.8125,
+          "decisionScore": 81.011905,
+          "optimalPathNarrowness": 1.0,
+          "temptingWrongMoveRatio": 0.948052,
+          "dependencyComplexity": 0.9375,
+          "stopTileInteractions": 2.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 1.0,
+          "stopTileDensity": 0.027778,
+          "trivialityPenalty": 0.0625,
+          "stateSpaceComplexity": 0.669539,
+          "exploredStates": 2515.0,
+          "unresolvedAlternatives": 4.0,
+          "deadEndStates": 1.0,
+          "branchingFactor": 5.8125,
+          "wrongMoveOpportunities": 72.0,
+          "deadEndOpportunities": 1.0,
+          "difficultyScore": 74.020857,
+          "visualScore": 79.661905,
+          "solveMicros": 15692.0
+        }
+      },
+      {
+        "seed": 33814,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "5x5",
+        "board": [
+          ">..vv",
+          ".>..v",
+          ">.v..",
+          ".^<..",
+          "^..o<"
+        ],
+        "blocks": [
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "R"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "D"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "L"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "U"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "R"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "D"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "D"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "D"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "L"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "U"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "R"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 3,
+            "y": 4
+          }
+        ],
+        "optimalSolution": [
+          "b1",
+          "b1",
+          "b2",
+          "b6",
+          "b5",
+          "b0",
+          "b10",
+          "b9",
+          "b8",
+          "b7",
+          "b4",
+          "b3",
+          "b2"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 33814.0,
+          "gridSize": 5.0,
+          "blockCount": 11.0,
+          "stopTileCount": 1.0,
+          "optimalMoves": 13.0,
+          "moveComplexity": 1.181818,
+          "multiMoveRatio": 0.181818,
+          "maxMovesForSingleBlock": 2.0,
+          "averageChoices": 5.0,
+          "decisionScore": 94.522145,
+          "optimalPathNarrowness": 0.833333,
+          "temptingWrongMoveRatio": 0.961538,
+          "dependencyComplexity": 0.846154,
+          "stopTileInteractions": 2.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 1.0,
+          "stopTileDensity": 0.04,
+          "trivialityPenalty": 0.076923,
+          "stateSpaceComplexity": 0.591073,
+          "exploredStates": 1004.0,
+          "unresolvedAlternatives": 0.0,
+          "deadEndStates": 0.0,
+          "branchingFactor": 5.0,
+          "wrongMoveOpportunities": 42.0,
+          "deadEndOpportunities": 8.0,
+          "difficultyScore": 73.803164,
+          "visualScore": 77.077273,
+          "solveMicros": 1276.0
+        }
+      },
+      {
+        "seed": 38645,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "5x5",
+        "board": [
+          ">o.v.",
+          ".>..v",
+          ".<..<",
+          ".^.<.",
+          "^..<."
+        ],
+        "blocks": [
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "L"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "U"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "R"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "D"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "L"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "U"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "R"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "D"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "L"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "L"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 1,
+            "y": 0
+          }
+        ],
+        "optimalSolution": [
+          "b9",
+          "b8",
+          "b7",
+          "b6",
+          "b1",
+          "b0",
+          "b1",
+          "b2",
+          "b5",
+          "b4",
+          "b3",
+          "b2"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 38645.0,
+          "gridSize": 5.0,
+          "blockCount": 10.0,
+          "stopTileCount": 1.0,
+          "optimalMoves": 12.0,
+          "moveComplexity": 1.2,
+          "multiMoveRatio": 0.2,
+          "maxMovesForSingleBlock": 2.0,
+          "averageChoices": 5.0,
+          "decisionScore": 80.0,
+          "optimalPathNarrowness": 0.909091,
+          "temptingWrongMoveRatio": 0.979167,
+          "dependencyComplexity": 0.916667,
+          "stopTileInteractions": 2.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 1.0,
+          "stopTileDensity": 0.04,
+          "trivialityPenalty": 0.083333,
+          "stateSpaceComplexity": 0.613146,
+          "exploredStates": 1300.0,
+          "unresolvedAlternatives": 0.0,
+          "deadEndStates": 0.0,
+          "branchingFactor": 5.0,
+          "wrongMoveOpportunities": 47.0,
+          "deadEndOpportunities": 0.0,
+          "difficultyScore": 73.322964,
+          "visualScore": 75.9,
+          "solveMicros": 1981.0
+        }
+      },
+      {
+        "seed": 54999,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "5x5",
+        "board": [
+          ">..v.",
+          ">...v",
+          ".>.>.",
+          ".^.<.",
+          "^..o<"
+        ],
+        "blocks": [
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "R"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "D"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "L"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "U"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "R"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "D"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "L"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "U"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "R"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "R"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 3,
+            "y": 4
+          }
+        ],
+        "optimalSolution": [
+          "b9",
+          "b8",
+          "b7",
+          "b6",
+          "b1",
+          "b0",
+          "b1",
+          "b2",
+          "b5",
+          "b4",
+          "b3",
+          "b2"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 54999.0,
+          "gridSize": 5.0,
+          "blockCount": 10.0,
+          "stopTileCount": 1.0,
+          "optimalMoves": 12.0,
+          "moveComplexity": 1.2,
+          "multiMoveRatio": 0.2,
+          "maxMovesForSingleBlock": 2.0,
+          "averageChoices": 5.083333,
+          "decisionScore": 80.0,
+          "optimalPathNarrowness": 0.909091,
+          "temptingWrongMoveRatio": 0.979592,
+          "dependencyComplexity": 0.833333,
+          "stopTileInteractions": 2.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 1.0,
+          "stopTileDensity": 0.04,
+          "trivialityPenalty": 0.083333,
+          "stateSpaceComplexity": 0.640476,
+          "exploredStates": 1790.0,
+          "unresolvedAlternatives": 0.0,
+          "deadEndStates": 0.0,
+          "branchingFactor": 5.083333,
+          "wrongMoveOpportunities": 48.0,
+          "deadEndOpportunities": 0.0,
+          "difficultyScore": 72.451466,
+          "visualScore": 75.9,
+          "solveMicros": 8256.0
+        }
+      },
+      {
+        "seed": 40668,
+        "generatorVersion": 2,
+        "group": "B",
+        "grid": "5x5",
+        "board": [
+          "v.<..",
+          ">o.v^",
+          ">>>.^",
+          "..^<.",
+          ".^.<."
+        ],
+        "blocks": [
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "R"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "D"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "L"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "U"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "L"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "U"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "L"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "D"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "R"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "R"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "R"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "U"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "U"
+          }
+        ],
+        "stopTiles": [
+          {
+            "x": 1,
+            "y": 1
+          }
+        ],
+        "optimalSolution": [
+          "b12",
+          "b11",
+          "b10",
+          "b9",
+          "b8",
+          "b3",
+          "b2",
+          "b3",
+          "b0",
+          "b7",
+          "b6",
+          "b5",
+          "b4",
+          "b1",
+          "b0"
+        ],
+        "metrics": {
+          "group": 1.0,
+          "seed": 40668.0,
+          "gridSize": 5.0,
+          "blockCount": 13.0,
+          "stopTileCount": 1.0,
+          "optimalMoves": 15.0,
+          "moveComplexity": 1.153846,
+          "multiMoveRatio": 0.153846,
+          "maxMovesForSingleBlock": 2.0,
+          "averageChoices": 4.733333,
+          "decisionScore": 91.294872,
+          "optimalPathNarrowness": 0.857143,
+          "temptingWrongMoveRatio": 0.964286,
+          "dependencyComplexity": 0.8,
+          "stopTileInteractions": 2.0,
+          "meaningfulStopInteractions": 2.0,
+          "unusedStopTileCount": 0.0,
+          "stopDependencyScore": 1.0,
+          "stopTileDensity": 0.04,
+          "trivialityPenalty": 0.066667,
+          "stateSpaceComplexity": 0.606449,
+          "exploredStates": 1202.0,
+          "unresolvedAlternatives": 0.0,
+          "deadEndStates": 1.0,
+          "branchingFactor": 4.733333,
+          "wrongMoveOpportunities": 49.0,
+          "deadEndOpportunities": 5.0,
+          "difficultyScore": 72.350302,
+          "visualScore": 68.403846,
+          "solveMicros": 994.0
+        }
+      }
+    ]
+  }
+}

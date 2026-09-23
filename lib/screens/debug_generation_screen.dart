@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../app/theme.dart';
 import '../game/engine/difficulty_config.dart';
@@ -8,9 +11,11 @@ import '../game/engine/level_generator.dart';
 import '../game/engine/level_solver.dart';
 import '../game/engine/puzzle_analysis.dart';
 import '../game/engine/solve_result.dart';
+import '../game/engine/generator_version.dart';
 import '../game/engine/seeded_random.dart';
+import '../game/engine/slide_generator.dart';
+import '../game/models/move_result.dart';
 import '../game/levels/level_repository.dart';
-import '../game/levels/manual_levels.dart';
 import '../game/models/level.dart';
 import '../game/painters/block_painter.dart';
 import '../game/painters/debug_board_painter.dart';
@@ -47,29 +52,37 @@ class DebugGenerationScreen extends StatefulWidget {
 class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
   static const LevelGenerator _generator = LevelGenerator();
   static const LevelSolver _solver = LevelSolver();
-  static const PuzzleAnalyzer _analyzer = PuzzleAnalyzer();
 
   final BlockPainter _blockPainter = BlockPainter();
 
   int _levelId = 21;
+
+  /// Seed imposée, quand on explore la génération hors de la campagne.
+  int? _seed;
+
   late _Analysis _analysis = _analyse(_levelId);
+  Timer? _autoPlay;
 
   /// Moteur de rejeu, pour dérouler la solution pas à pas.
   late GameEngine _playback = GameEngine(_analysis.level);
   int _step = 0;
   int _generationMicros = 0;
 
+  @override
+  void dispose() {
+    _autoPlay?.cancel();
+    super.dispose();
+  }
+
   _Analysis _analyse(int levelId) {
     final watch = Stopwatch()..start();
-    late Level level;
-    GeneratedLevel? generated;
-
-    if (ManualLevels.contains(levelId)) {
-      level = ManualLevels.byId(levelId);
-    } else {
-      generated = _generator.generate(levelId: levelId);
-      level = generated.level;
-    }
+    final seed = _seed;
+    // Par seed, on regarde ce que le générateur sait faire ; par numéro, ce
+    // que la campagne servirait vraiment.
+    final generated = seed == null ? _generator.generate(levelId: levelId) : null;
+    final level = generated?.level ??
+        const SlideGenerator().fromSeed(seed!, levelId: levelId) ??
+        _generator.generate(levelId: levelId).level;
     watch.stop();
     _generationMicros = watch.elapsedMicroseconds;
 
@@ -80,24 +93,108 @@ class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
       LevelGenerator.exitableCount(level),
     );
 
+    // Rejeu de la solution : il dit quelles tuiles servent, et combien de
+    // fois chaque bloc est touché. C'est ce qui explique un rapport coups /
+    // blocs élevé en un coup d'oeil.
+    final replay = GameEngine(level);
+    final used = <int>{};
+    final taps = <String, int>{};
+    for (final id in solveResult.exampleSolution) {
+      final move = replay.tap(id);
+      taps[id] = (taps[id] ?? 0) + 1;
+      if (move.outcome == MoveOutcome.stopped && move.to != null) {
+        used.add(move.to!.y * level.columns + move.to!.x);
+      }
+    }
+
     return _Analysis(
       level: level,
       solveResult: solveResult,
       difficulty: difficulty,
-      puzzle: generated?.analysis ?? _analyzer.analyse(level, solveResult),
+      puzzle: generated?.analysis ??
+          const PuzzleAnalyzer().analyse(level, solveResult),
       band: bandFor(levelId),
       generated: generated,
       config: DifficultyCurve.configFor(levelId),
+      usedStopTiles: used,
+      taps: taps,
+      seed: seed ??
+          seedForLevel(levelId, (generated?.attempts ?? 1) - 1),
     );
   }
 
-  void _load(int levelId) {
+  /// Passe à la seed suivante, sans changer de numéro de niveau.
+  void _nextSeed() {
+    setState(() {
+      _seed = (_seed ?? _analysis.seed) + 1;
+      _reload();
+    });
+  }
+
+  void _reload() {
+    _autoPlay?.cancel();
+    _autoPlay = null;
+    _analysis = _analyse(_levelId);
+    _playback = GameEngine(_analysis.level);
+    _step = 0;
+  }
+
+  /// Déroule la solution toute seule, un coup toutes les 420 ms.
+  void _toggleAutoPlay() {
+    if (_autoPlay != null) {
+      setState(() {
+        _autoPlay?.cancel();
+        _autoPlay = null;
+      });
+      return;
+    }
+    setState(() {
+      _playback.reset();
+      _step = 0;
+      _autoPlay = Timer.periodic(const Duration(milliseconds: 420), (timer) {
+        if (_step >= _analysis.solveResult.exampleSolution.length) {
+          timer.cancel();
+          setState(() => _autoPlay = null);
+          return;
+        }
+        _stepSolution();
+      });
+    });
+  }
+
+  Future<void> _copyReport() async {
+    await Clipboard.setData(ClipboardData(text: _report()));
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Report copied')),
+    );
+  }
+
+  String _report() {
+    final a = _analysis;
+    final metrics = a.puzzle.toJson();
+    return [
+      'UNGRID level $_levelId',
+      'generatorVersion $currentGeneratorVersion  seed ${a.seed}',
+      'grid ${a.level.columns}x${a.level.rows}  '
+          'blocks ${a.level.blocks.length}  '
+          'stopTiles ${a.level.stopTiles.length}',
+      'solution ${a.solveResult.exampleSolution.join(" ")}',
+      '',
+      for (final entry in metrics.entries)
+        '${entry.key}: ${entry.value is double ? (entry.value as double).toStringAsFixed(3) : entry.value}',
+      'visualScore: ${a.generated?.quality.score.round() ?? "-"}',
+      '',
+      ...a.level.stopTiles.map((t) => 'stopTile ${t.x},${t.y}'),
+    ].join('\n');
+  }
+
+  void _load(int levelId, {bool keepSeed = false}) {
     if (levelId < 1) return;
     setState(() {
       _levelId = levelId;
-      _analysis = _analyse(levelId);
-      _playback = GameEngine(_analysis.level);
-      _step = 0;
+      if (!keepSeed) _seed = null;
+      _reload();
     });
   }
 
@@ -162,8 +259,8 @@ class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
                 ),
                 Expanded(
                   child: Text(
-                    'LEVEL $_levelId'
-                    '${analysis.generated == null ? " · handmade" : " · generated"}',
+                    'LEVEL $_levelId · SEED ${analysis.seed}'
+                    '${_seed == null ? "" : " · manual"}',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
@@ -187,6 +284,7 @@ class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
                 positions: positions,
                 removed: removed,
                 nextInSolution: next != null && next >= 0 ? next : null,
+                usedStopTiles: analysis.usedStopTiles,
               ),
             ),
           ),
@@ -208,6 +306,15 @@ class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
                   onTap: _stepSolution,
                   accent: true,
                 ),
+                _Chip(
+                  label: _autoPlay == null ? 'AUTO PLAY' : 'STOP',
+                  onTap: _toggleAutoPlay,
+                  accent: _autoPlay != null,
+                ),
+                _Chip(label: 'REGENERATE', onTap: () => _load(_levelId)),
+                _Chip(label: 'SEED +1', onTap: _nextSeed),
+                _Chip(label: 'SOLVE', onTap: () => _load(_levelId, keepSeed: true)),
+                _Chip(label: 'COPY REPORT', onTap: _copyReport),
                 if (widget.progress != null)
                   _Chip(label: 'PLAY', onTap: _play),
               ],
@@ -235,6 +342,9 @@ class _Analysis {
     required this.band,
     required this.generated,
     required this.config,
+    required this.usedStopTiles,
+    required this.taps,
+    required this.seed,
   });
 
   final Level level;
@@ -244,6 +354,14 @@ class _Analysis {
   final DifficultyBand band;
   final GeneratedLevel? generated;
   final DifficultyConfig config;
+
+  /// Tuiles que la solution emprunte réellement.
+  final Set<int> usedStopTiles;
+
+  /// Nombre de taps par bloc dans la solution optimale.
+  final Map<String, int> taps;
+
+  final int seed;
 }
 
 class _Chip extends StatelessWidget {
@@ -306,9 +424,13 @@ class _Stats extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(22, 16, 22, 24),
       children: [
         _row('Band', analysis.band.name),
+        _row('Generator version', '$currentGeneratorVersion'),
+        _row('Seed', '${analysis.seed}'),
         _row('Grid', '${level.columns} x ${level.rows}'),
         _row('Blocks', '${level.blocks.length}'),
-        _row('Walls', '${level.walls.length}'),
+        _row('Stop tiles',
+            '${puzzle.stopTileCount}'
+            '${puzzle.unusedStopTileCount > 0 ? "  (${puzzle.unusedStopTileCount} unused)" : ""}'),
         _row('Density', '${(level.occupancy * 100).round()} %'),
         const Divider(height: 26),
 
@@ -322,14 +444,32 @@ class _Stats extends StatelessWidget {
         _row('Replayed blocks',
             '${puzzle.multiMoveBlocks} (${(puzzle.multiMoveRatio * 100).round()} %)'
             '   target ${(analysis.band.minMultiMoveRatio * 100).round()} %'),
+        _row('Max moves / block', '${puzzle.maxMovesForSingleBlock}'),
         _row('Choices per step', puzzle.averageChoices.toStringAsFixed(1)),
+        _row('Meaningful choices', '${puzzle.meaningfulAlternativeCount}'),
         _row('Steps with a choice',
             '${(puzzle.decisionRatio * 100).round()} %'),
         _row('Moves that cost', '${puzzle.wrongMoveOpportunities}'),
         _row('Moves that lose', '${puzzle.deadEndOpportunities}'),
+        _row('Tempting wrong moves',
+            '${puzzle.temptingWrongMoves}'
+            '  (${puzzle.temptingWrongMoveRatio.toStringAsFixed(2)})'),
+        _row('Path narrowness',
+            puzzle.optimalPathNarrowness.toStringAsFixed(2)),
+        _row('Dependency complexity',
+            puzzle.dependencyComplexity.toStringAsFixed(2)),
         _row('Decision score',
             '${puzzle.decisionScore.round()}'
             '   target ${analysis.band.minDecisionScore.round()}'),
+        const Divider(height: 26),
+
+        // Ce que les tuiles apportent, et ce qu'elles ne font qu'allonger.
+        _row('Stop interactions', '${puzzle.stopTileInteractions}'),
+        _row('Meaningful stops',
+            '${puzzle.meaningfulStopInteractions}'
+            '  (${(puzzle.stopDependencyScore * 100).round()} %)'),
+        _row('Triviality penalty',
+            puzzle.trivialityPenalty.toStringAsFixed(2)),
         const Divider(height: 26),
 
         _row('Move limit', '${level.moveLimit}'),
@@ -339,14 +479,44 @@ class _Stats extends StatelessWidget {
             '   max ${(analysis.band.maxExitRatio * 100).round()} %'),
         _row('States explored',
             '${solve.exploredStates}${solve.exhaustive ? "" : "+"}'),
-        _row('Difficulty score',
+        _row('Difficulty score', '${puzzle.difficultyScore().round()}'),
+        _row('Tier score',
             '${difficulty.score.round()} · ${difficulty.tier.label}'),
         _row('Visual score',
             '${analysis.generated?.quality.score.round() ?? "-"}'),
         _row('Attempts', '${analysis.generated?.attempts ?? "-"}'),
-        _row('Seed',
-            '${seedForLevel(levelId, (analysis.generated?.attempts ?? 1) - 1)}'),
         _row('Generation', '${(generationMicros / 1000).toStringAsFixed(1)} ms'),
+        const Divider(height: 26),
+
+        // Les taps par bloc : c'est là qu'un rapport coups / blocs élevé
+        // s'explique, bloc par bloc.
+        Text(
+          'TAPS PER BLOCK',
+          style: const TextStyle(
+            color: UngridColors.onBackgroundFaint,
+            fontSize: 11,
+            fontWeight: FontWeight.w800,
+            letterSpacing: 1.2,
+          ),
+        ),
+        const SizedBox(height: 6),
+        Wrap(
+          spacing: 8,
+          runSpacing: 6,
+          children: [
+            for (final block in level.blocks)
+              Text(
+                '${block.id} x${analysis.taps[block.id] ?? 0}',
+                style: TextStyle(
+                  color: (analysis.taps[block.id] ?? 0) > 1
+                      ? UngridColors.accent
+                      : UngridColors.onBackgroundSoft,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+          ],
+        ),
         if (unmet.isNotEmpty)
           Padding(
             padding: const EdgeInsets.only(top: 12),

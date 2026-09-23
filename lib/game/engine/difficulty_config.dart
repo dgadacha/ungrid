@@ -18,7 +18,7 @@ class DifficultyConfig {
     required this.minScore,
     required this.maxScore,
     required this.knotCount,
-    this.maxWalls = 0,
+    this.stopTileBudget = 0,
   });
 
   /// Difficulté visée, entre 0 et 1.
@@ -44,21 +44,31 @@ class DifficultyConfig {
 
   /// Rondes de blocs à poser avant la construction.
   ///
-  /// Chacune force un bloc à être joué deux fois : c'est ce qui fait monter le
-  /// rapport coups / blocs, et avec lui la vraie difficulté. Ajouter des blocs
-  /// ou retirer des coups ne produit pas cet effet.
+  /// Une ronde force un bloc à être joué deux fois, mais elle coûte quatre
+  /// blocs pour ce seul coup — et surtout, elle fige quatre cases avant même
+  /// que le rembobinage commence. Un board qui n'est fait que de rondes se
+  /// ressemble d'un niveau à l'autre : c'est le motif qu'on voit, plus le
+  /// puzzle.
+  ///
+  /// Depuis les tuiles d'arrêt, elles ne sont plus le seul moyen de faire
+  /// monter le rapport coups / blocs. On en pose donc peu, et on laisse la
+  /// place au rembobinage.
   final int knotCount;
 
-  /// Nombre de murs à poser. Ils arrivent tard dans la progression : la règle
-  /// de base doit être acquise avant qu'on y ajoute des obstacles.
-  final int maxWalls;
+  /// Tuiles d'arrêt que la construction s'autorise à poser.
+  ///
+  /// Chacune achète un coup de plus sans un bloc de plus : là où une ronde
+  /// demandait quatre blocs pour un coup, une tuile suffit. C'est le levier
+  /// qui découple la longueur de la solution de la taille du board.
+  final int stopTileBudget;
+
 
   Difficulty get tier => Difficulty.fromScalar(scalar);
 
   int get targetBlocks => (minBlocks + maxBlocks) ~/ 2;
 
   /// Construit la configuration correspondant à une difficulté continue.
-  factory DifficultyConfig.fromScalar(double t, {int maxWalls = 0}) {
+  factory DifficultyConfig.fromScalar(double t, {int? stopTileBudget}) {
     final scalar = t.clamp(0.0, 1.0);
 
     final gridSize = switch (scalar) {
@@ -91,10 +101,12 @@ class DifficultyConfig {
       // plafonne avec la taille de grille, il ne monte pas indéfiniment.
       minScore: _lerp(0, 26, scalar),
       maxScore: _lerp(22, 62, scalar),
-      // Autant de rondes que le board peut en porter : c'est d'elles que
-      // vient le rapport coups / blocs.
-      knotCount: scalar < 0.12 ? 1 : (scalar < 0.35 ? 2 : (target ~/ 4)),
-      maxWalls: maxWalls,
+      // Aucune ronde sur un petit board : elle en occuperait toute la
+      // surface, le rembobinage n'aurait plus rien à faire, et tous les
+      // premiers niveaux se ressembleraient — ils étaient littéralement
+      // identiques. Une seule ensuite, deux sur les grands.
+      knotCount: target >= 14 ? 2 : (target >= 9 ? 1 : 0),
+      stopTileBudget: stopTileBudget ?? _lerp(0.6, 3.4, scalar).round(),
     );
   }
 
@@ -105,8 +117,8 @@ class DifficultyConfig {
       '${gridSize}x$gridSize, $minBlocks-$maxBlocks blocs, '
       'repositionnement ${repositionRatio.toStringAsFixed(2)}, '
       'sorties immédiates <=${(maxExitableRatio * 100).round()}%, '
-      '$knotCount ronde${knotCount > 1 ? 's' : ''}'
-      '${maxWalls > 0 ? ', $maxWalls mur${maxWalls > 1 ? 's' : ''}' : ''})';
+      '$knotCount ronde${knotCount > 1 ? 's' : ''}, '
+      '$stopTileBudget tuile${stopTileBudget > 1 ? 's' : ''})';
 }
 
 /// Ce qu'on exige d'un niveau selon l'endroit où il tombe dans la campagne.
@@ -131,8 +143,15 @@ class DifficultyBand {
 
   /// Rapport coups / blocs visé.
   ///
-  /// La borne haute plafonne à 1,25 : c'est le maximum qu'atteint le
-  /// générateur, une ronde coûtant quatre blocs pour un coup supplémentaire.
+  /// La borne haute ne vaut plus 1,25. Ce plafond n'était pas un réglage mais
+  /// une conséquence des règles : sans tuile d'arrêt, un bloc n'est joué deux
+  /// fois que pris dans un blocage circulaire, et le plus petit en compte
+  /// quatre pour un seul coup gagné. La tuile lève cette contrainte — un coup
+  /// de plus n'y coûte plus quatre blocs.
+  ///
+  /// Les bornes ci-dessous sont donc **provisoires** et volontairement
+  /// larges : les vraies viendront de la distribution mesurée, pas d'une
+  /// intuition posée avant de compter.
   final double minComplexity;
   final double maxComplexity;
 
@@ -155,7 +174,7 @@ const List<DifficultyBand> difficultyBands = [
     name: 'Tutorial',
     upToLevel: 5,
     minComplexity: 1.0,
-    maxComplexity: 1.10,
+    maxComplexity: 99,
     minMultiMoveRatio: 0,
     minDecisionScore: 0,
     maxExitRatio: 1.0,
@@ -164,7 +183,7 @@ const List<DifficultyBand> difficultyBands = [
     name: 'Very easy',
     upToLevel: 15,
     minComplexity: 1.0,
-    maxComplexity: 1.15,
+    maxComplexity: 99,
     minMultiMoveRatio: 0,
     minDecisionScore: 30,
     maxExitRatio: 0.60,
@@ -173,7 +192,7 @@ const List<DifficultyBand> difficultyBands = [
     name: 'Easy',
     upToLevel: 30,
     minComplexity: 1.08,
-    maxComplexity: 1.22,
+    maxComplexity: 99,
     minMultiMoveRatio: 0.10,
     minDecisionScore: 50,
     maxExitRatio: 0.40,
@@ -182,7 +201,7 @@ const List<DifficultyBand> difficultyBands = [
     name: 'Easy / Medium',
     upToLevel: 50,
     minComplexity: 1.12,
-    maxComplexity: 1.26,
+    maxComplexity: 99,
     minMultiMoveRatio: 0.15,
     minDecisionScore: 62,
     maxExitRatio: 0.30,
@@ -191,7 +210,7 @@ const List<DifficultyBand> difficultyBands = [
     name: 'Medium',
     upToLevel: 100,
     minComplexity: 1.15,
-    maxComplexity: 1.30,
+    maxComplexity: 99,
     minMultiMoveRatio: 0.20,
     minDecisionScore: 72,
     maxExitRatio: 0.25,
@@ -200,7 +219,7 @@ const List<DifficultyBand> difficultyBands = [
     name: 'Medium / Hard',
     upToLevel: 250,
     minComplexity: 1.18,
-    maxComplexity: 1.35,
+    maxComplexity: 99,
     minMultiMoveRatio: 0.25,
     minDecisionScore: 80,
     maxExitRatio: 0.20,
@@ -209,7 +228,7 @@ const List<DifficultyBand> difficultyBands = [
     name: 'Hard',
     upToLevel: 1 << 30,
     minComplexity: 1.20,
-    maxComplexity: 1.40,
+    maxComplexity: 99,
     minMultiMoveRatio: 0.28,
     minDecisionScore: 86,
     maxExitRatio: 0.18,
@@ -252,34 +271,9 @@ class DifficultyCurve {
     return (base + wave).clamp(0.0, 1.0);
   }
 
-  /// Nombre de murs par palier de progression.
-  ///
-  /// Les murs n'apparaissent qu'une fois la règle de base assimilée, et
-  /// restent rares : ils ferment le board, et un board fermé se lit mal.
-  static const List<({int upToLevel, int walls})> _wallPlan = [
-    (upToLevel: 15, walls: 0),
-    (upToLevel: 30, walls: 1),
-    (upToLevel: 50, walls: 2),
-  ];
 
-  /// Au-delà du plan, on ajoute un mur sur les grandes grilles.
-  static const int _wallsBeyondPlan = 3;
-
-  static int wallsFor(int levelId, int gridSize) {
-    for (final step in _wallPlan) {
-      if (levelId <= step.upToLevel) return step.walls;
-    }
-    return gridSize >= 7 ? _wallsBeyondPlan + 1 : _wallsBeyondPlan;
-  }
-
-  static DifficultyConfig configFor(int levelId) {
-    final scalar = scalarFor(levelId);
-    final base = DifficultyConfig.fromScalar(scalar);
-    return DifficultyConfig.fromScalar(
-      scalar,
-      maxWalls: wallsFor(levelId, base.gridSize),
-    );
-  }
+  static DifficultyConfig configFor(int levelId) =>
+      DifficultyConfig.fromScalar(scalarFor(levelId));
 
   static Difficulty tierFor(int levelId) =>
       Difficulty.fromScalar(scalarFor(levelId));

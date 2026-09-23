@@ -70,8 +70,15 @@ class GamePainter extends CustomPainter {
       }
     }
 
-    for (final wall in level.walls) {
-      blocks.paintWall(canvas, layout.cellRect(wall.x, wall.y));
+    // Les tuiles se dessinent sous les blocs : une case occupée garde son
+    // repère, porté par le liseré plutôt que par le point central.
+    for (final tile in level.stopTiles) {
+      final cell = layout.cellRect(tile.x, tile.y);
+      if (controller.engine.blockAt(tile.x, tile.y) == null) {
+        blocks.paintStopTile(canvas, cell);
+      } else {
+        blocks.paintOccupiedStopTile(canvas, cell);
+      }
     }
 
     final blocked = controller.blockedFeedback;

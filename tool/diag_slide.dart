@@ -10,7 +10,6 @@ import 'package:ungrid/game/models/level.dart';
 int exitable(Level level) {
   final busy = <int>{
     for (final b in level.blocks) b.y * level.columns + b.x,
-    for (final w in level.walls) w.y * level.columns + w.x,
   };
   var count = 0;
   for (final block in level.blocks) {

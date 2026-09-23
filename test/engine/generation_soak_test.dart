@@ -3,20 +3,22 @@ library;
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ungrid/game/engine/level_generator.dart';
-import 'package:ungrid/game/engine/level_solver.dart';
 import 'package:ungrid/game/levels/level_pattern.dart';
-import 'package:ungrid/game/levels/manual_levels.dart';
 import 'package:ungrid/game/models/level.dart';
 
-/// Épreuve de fond : mille niveaux d'affilée.
+/// Épreuve de fond : toute la campagne d'affilée.
 ///
 /// C'est le test qui décide si le générateur est utilisable. Il vérifie qu'on
-/// peut jouer mille niveaux sans en croiser un seul de cassé, que la
-/// difficulté monte vraiment, et que rien ne prend assez de temps pour se voir.
+/// peut jouer toute la campagne sans croiser un seul niveau cassé, que la
+/// difficulté monte vraiment, et que rien ne prend assez de temps pour se
+/// voir.
+///
+/// Le périmètre est celui de la campagne : cent niveaux. Le dépôt sait en
+/// générer au-delà, mais ce n'est pas ce qu'on publie, et éprouver mille
+/// niveaux coûtait dix fois plus cher pour la même garantie.
 void main() {
   const generator = LevelGenerator();
-  const solver = LevelSolver();
-  const total = 1000;
+  const total = 100;
 
   late List<_Sample> samples;
 
@@ -25,17 +27,7 @@ void main() {
     for (var id = 1; id <= total; id++) {
       final watch = Stopwatch()..start();
 
-      if (ManualLevels.contains(id)) {
-        final level = ManualLevels.byId(id);
-        watch.stop();
-        samples.add(_Sample(
-          id: id,
-          level: level,
-          micros: watch.elapsedMicroseconds,
-          solvable: solver.solve(level).solvable,
-          moves: level.optimalMoves,
-        ));
-      } else {
+      {
         final generated = generator.generate(levelId: id);
         watch.stop();
         samples.add(_Sample(
@@ -51,7 +43,7 @@ void main() {
     }
   });
 
-  test('les mille niveaux sont structurellement valides', () {
+  test('toute la campagne est structurellement valide', () {
     for (final sample in samples) {
       final trace = LevelPattern.render(sample.level).join('\n');
       expect(sample.level.blocks, isNotEmpty,
@@ -63,7 +55,7 @@ void main() {
     }
   });
 
-  test('les mille niveaux se terminent', () {
+  test('tous les niveaux se terminent', () {
     final broken = samples.where((s) => !s.solvable).map((s) => s.id).toList();
     expect(broken, isEmpty, reason: 'niveaux insolubles : $broken');
   });
@@ -76,13 +68,9 @@ void main() {
   });
 
   test('un même numéro donne toujours le même board', () {
-    for (final id in [7, 21, 128, 349, 512, 777, 1000]) {
-      final a = ManualLevels.contains(id)
-          ? ManualLevels.byId(id)
-          : generator.generate(levelId: id).level;
-      final b = ManualLevels.contains(id)
-          ? ManualLevels.byId(id)
-          : generator.generate(levelId: id).level;
+    for (final id in [7, 21, 48, 63, 77, 92, 100]) {
+      final a = generator.generate(levelId: id).level;
+      final b = generator.generate(levelId: id).level;
       expect(LevelPattern.render(a), LevelPattern.render(b),
           reason: 'niveau $id non reproductible');
     }
@@ -99,11 +87,11 @@ void main() {
     }
 
     final blocksEarly =
-        average(21, 120, (s) => s.level.blocks.length.toDouble());
+        average(11, 40, (s) => s.level.blocks.length.toDouble());
     final blocksLate =
-        average(400, 500, (s) => s.level.blocks.length.toDouble());
-    final scoreEarly = average(21, 120, (s) => s.score);
-    final scoreLate = average(400, 500, (s) => s.score);
+        average(71, 100, (s) => s.level.blocks.length.toDouble());
+    final scoreEarly = average(11, 40, (s) => s.score);
+    final scoreLate = average(71, 100, (s) => s.score);
 
     expect(blocksLate, greaterThan(blocksEarly));
     expect(scoreLate, greaterThan(scoreEarly));

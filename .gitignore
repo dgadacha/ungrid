@@ -43,3 +43,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Détail ligne à ligne du benchmark des tuiles : dix-huit méga-octets que
+# l'outil régénère (tool/benchmark_stop_tiles.dart). Le rapport, les agrégats
+# et les candidats exportés, eux, sont versionnés.
+benchmark_stop_tiles.json

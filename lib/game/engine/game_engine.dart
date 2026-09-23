@@ -1,8 +1,10 @@
+import 'dart:typed_data';
+
 import '../models/block.dart';
-import '../models/direction.dart';
 import '../models/grid_position.dart';
 import '../models/level.dart';
 import '../models/move_result.dart';
+import 'move_resolver.dart';
 
 /// Un coup joué, de quoi le rejouer à l'envers.
 class MoveRecord {
@@ -22,28 +24,32 @@ class MoveRecord {
   final MoveOutcome outcome;
 
   bool get exited => outcome == MoveOutcome.exited;
+
+  /// Un arrêt sur tuile est un déplacement comme un autre : il s'annule.
+  bool get stopped => outcome == MoveOutcome.stopped;
 }
 
 /// Moteur de jeu d'un niveau. Aucune dépendance à Flutter : il peut tourner
 /// dans un test, un isolate ou le solveur.
 ///
 /// La règle tient en une phrase : un bloc touché glisse dans la direction de
-/// sa flèche aussi loin qu'il peut. Il sort si rien ne l'arrête, s'arrête
-/// juste avant l'obstacle sinon, et ne bouge pas du tout quand l'obstacle le
-/// touche déjà.
+/// sa flèche aussi loin qu'il peut. Il sort si rien ne l'arrête, se pose sur
+/// la tuile d'arrêt qu'il rencontre, s'arrête juste avant un bloc, et ne bouge
+/// pas du tout quand un bloc le touche déjà.
 ///
 /// Les blocs sont donc des obstacles mobiles : déplacer l'un ouvre ou ferme la
 /// route des autres, et l'ordre dans lequel on les joue fait tout le puzzle.
+/// Les tuiles, elles, ne bougent pas : ce sont les points fixes sur lesquels
+/// la position se reconstruit.
 ///
 /// Le moteur ne connaît ni le temps, ni les coups joués, ni le score : il ne
-/// gère que l'état du board.
+/// gère que l'état du board. Il ne décide pas non plus de la règle du
+/// glissement, qu'il partage avec le solveur ([MoveResolver]).
 class GameEngine {
   GameEngine(this.level)
       : _occupancy = List<Block?>.filled(level.rows * level.columns, null),
-        _walls = List<bool>.filled(level.rows * level.columns, false) {
-    for (final wall in level.walls) {
-      _walls[wall.y * level.columns + wall.x] = true;
-    }
+        _cells = Uint8List(level.rows * level.columns),
+        _stops = level.stopMask() {
     reset();
   }
 
@@ -55,8 +61,11 @@ class GameEngine {
   /// Grille d'occupation, indexée `y * columns + x`.
   final List<Block?> _occupancy;
 
-  /// Cases murées. Fixé une fois pour toutes : un mur ne bouge jamais.
-  final List<bool> _walls;
+  /// La même grille vue par le résolveur : occupation et tuiles d'arrêt.
+  final Uint8List _cells;
+
+  /// Les tuiles seules, pour repartir d'une grille propre.
+  final Uint8List _stops;
 
   final Map<String, Block> _remaining = {};
 
@@ -66,11 +75,12 @@ class GameEngine {
   /// Remet le niveau dans son état initial.
   void reset() {
     _occupancy.fillRange(0, _occupancy.length, null);
+    _cells.setAll(0, _stops);
     _remaining.clear();
     _history.clear();
     for (final block in level.blocks) {
       _remaining[block.id] = block;
-      _occupancy[block.y * columns + block.x] = block;
+      _occupy(block);
     }
   }
 
@@ -92,54 +102,33 @@ class GameEngine {
     return _occupancy[y * columns + x];
   }
 
-  bool isWall(int x, int y) {
+  bool hasStopTileAt(int x, int y) {
     if (x < 0 || y < 0 || x >= columns || y >= rows) return false;
-    return _walls[y * columns + x];
+    return _stops[y * columns + x] & cellStopTile != 0;
   }
 
-  bool _isFree(int x, int y) =>
-      _occupancy[y * columns + x] == null && !_walls[y * columns + x];
-
-  /// Nombre de cases libres devant [block], et ce qui l'arrête.
-  ///
-  /// `distance` vaut le nombre de cases que le bloc peut parcourir ; `exits`
-  /// indique qu'il atteindra le bord sans rien rencontrer.
-  ({int distance, bool exits, bool wall}) slideRoom(Block block) {
-    final Direction direction = block.direction;
-    var x = block.x;
-    var y = block.y;
-    var distance = 0;
-
-    while (true) {
-      x += direction.dx;
-      y += direction.dy;
-      if (x < 0 || y < 0 || x >= columns || y >= rows) {
-        return (distance: distance, exits: true, wall: false);
-      }
-      if (!_isFree(x, y)) {
-        return (
-          distance: distance,
-          exits: false,
-          wall: _walls[y * columns + x],
-        );
-      }
-      distance++;
-    }
-  }
+  /// Ce que donnerait un tap sur ce bloc, sans rien changer au plateau.
+  SlideOutcome slideRoom(Block block) => MoveResolver.resolve(
+        cell: block.y * columns + block.x,
+        stepX: block.direction.dx,
+        stepY: block.direction.dy,
+        columns: columns,
+        rows: rows,
+        cells: _cells,
+      );
 
   /// `true` si le bloc peut quitter la grille d'un seul coup.
   bool canExit(String blockId) {
     final block = _remaining[blockId];
     if (block == null) return false;
-    return slideRoom(block).exits;
+    return slideRoom(block).outcome == MoveOutcome.exited;
   }
 
-  /// `true` si le bloc a au moins une case devant lui.
+  /// `true` si toucher le bloc changerait quelque chose.
   bool canMove(String blockId) {
     final block = _remaining[blockId];
     if (block == null) return false;
-    final room = slideRoom(block);
-    return room.exits || room.distance > 0;
+    return slideRoom(block).outcome != MoveOutcome.blocked;
   }
 
   /// Tous les blocs qui bougeraient si on les touchait.
@@ -151,7 +140,7 @@ class GameEngine {
   /// Tous les blocs qui sortiraient d'un seul coup.
   List<Block> exitableBlocks() => [
         for (final block in _remaining.values)
-          if (slideRoom(block).exits) block,
+          if (slideRoom(block).outcome == MoveOutcome.exited) block,
       ];
 
   /// Applique un coup sur [blockId].
@@ -161,90 +150,98 @@ class GameEngine {
 
     final room = slideRoom(block);
 
-    if (room.exits) {
-      _lift(block);
-      _history.add(MoveRecord(
-        blockId: block.id,
-        from: block.position,
-        to: null,
-        outcome: MoveOutcome.exited,
-      ));
-      return MoveResult(
-        outcome: MoveOutcome.exited,
-        blockId: block.id,
-        from: block.position,
-        remainingBlocks: _remaining.length,
-      );
+    switch (room.outcome) {
+      case MoveOutcome.exited:
+        _lift(block);
+        _history.add(MoveRecord(
+          blockId: block.id,
+          from: block.position,
+          to: null,
+          outcome: MoveOutcome.exited,
+        ));
+        return MoveResult(
+          outcome: MoveOutcome.exited,
+          blockId: block.id,
+          from: block.position,
+          remainingBlocks: _remaining.length,
+        );
+
+      case MoveOutcome.blocked:
+        // L'obstacle touche déjà le bloc : rien à faire, et rien à annuler.
+        return MoveResult(
+          outcome: MoveOutcome.blocked,
+          blockId: block.id,
+          from: block.position,
+          to: block.position,
+          remainingBlocks: _remaining.length,
+        );
+
+      case MoveOutcome.slid:
+      case MoveOutcome.stopped:
+        final destination = GridPosition(
+          room.cell % columns,
+          room.cell ~/ columns,
+        );
+        _move(block, destination);
+        _history.add(MoveRecord(
+          blockId: block.id,
+          from: block.position,
+          to: destination,
+          outcome: room.outcome,
+        ));
+        return MoveResult(
+          outcome: room.outcome,
+          blockId: block.id,
+          from: block.position,
+          to: destination,
+          remainingBlocks: _remaining.length,
+        );
+
+      case MoveOutcome.ignored:
+        return const MoveResult.ignored();
     }
+  }
 
-    if (room.distance == 0) {
-      // L'obstacle touche déjà le bloc : rien à faire, et rien à annuler.
-      return MoveResult(
-        outcome: MoveOutcome.blocked,
-        blockId: block.id,
-        from: block.position,
-        to: block.position,
-        blockedByWall: room.wall,
-        remainingBlocks: _remaining.length,
-      );
-    }
+  void _occupy(Block block) {
+    final cell = block.y * columns + block.x;
+    _occupancy[cell] = block;
+    _cells[cell] |= cellOccupied;
+  }
 
-    final destination = GridPosition(
-      block.x + block.direction.dx * room.distance,
-      block.y + block.direction.dy * room.distance,
-    );
-    _move(block, destination);
-    _history.add(MoveRecord(
-      blockId: block.id,
-      from: block.position,
-      to: destination,
-      outcome: MoveOutcome.slid,
-    ));
-
-    return MoveResult(
-      outcome: MoveOutcome.slid,
-      blockId: block.id,
-      from: block.position,
-      to: destination,
-      blockedByWall: room.wall,
-      remainingBlocks: _remaining.length,
-    );
+  void _vacate(int cell) {
+    _occupancy[cell] = null;
+    _cells[cell] &= ~cellOccupied;
   }
 
   void _lift(Block block) {
     _remaining.remove(block.id);
-    _occupancy[block.y * columns + block.x] = null;
+    _vacate(block.y * columns + block.x);
   }
 
   void _move(Block block, GridPosition destination) {
-    _occupancy[block.y * columns + block.x] = null;
+    _vacate(block.y * columns + block.x);
     final moved = block.copyWith(position: destination);
     _remaining[block.id] = moved;
-    _occupancy[destination.y * columns + destination.x] = moved;
+    _occupy(moved);
   }
 
   /// Annule le dernier coup qui a modifié le plateau.
   ///
-  /// Un bloc sorti revient de l'extérieur, un bloc glissé retourne à sa case
+  /// Un bloc sorti revient de l'extérieur, un bloc déplacé retourne à sa case
   /// de départ. Le coup annulé est rendu au joueur.
   MoveRecord? undo() {
     if (_history.isEmpty) return null;
     final record = _history.removeLast();
     final template = level.blocks.firstWhere((b) => b.id == record.blockId);
 
-    if (record.exited) {
-      final restored = template.copyWith(position: record.from);
-      _remaining[record.blockId] = restored;
-      _occupancy[record.from.y * columns + record.from.x] = restored;
-    } else {
+    if (!record.exited) {
       final current = _remaining[record.blockId];
-      if (current != null) {
-        _occupancy[current.y * columns + current.x] = null;
-      }
-      final restored = template.copyWith(position: record.from);
-      _remaining[record.blockId] = restored;
-      _occupancy[record.from.y * columns + record.from.x] = restored;
+      if (current != null) _vacate(current.y * columns + current.x);
     }
+
+    final restored = template.copyWith(position: record.from);
+    _remaining[record.blockId] = restored;
+    _occupy(restored);
     return record;
   }
 
