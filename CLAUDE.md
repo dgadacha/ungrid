@@ -183,6 +183,17 @@ reproduit pas. D'où deux règles :
 - Une association niveau / seed publiée est définitive. Un niveau défectueux se
   désactive (`LevelStatus.disabled`), il ne se remplace pas.
 
+**La progression est liée à la version du générateur.** Un niveau n'est qu'un
+numéro ; le puzzle qu'il désigne vient du générateur. Quand celui-ci change, le
+niveau 7 n'est plus le même board, et le record de coups qu'on y avait posé
+porterait sur un puzzle que personne ne peut plus rejouer. `ProgressService`
+inscrit donc `currentGeneratorVersion` à côté de la progression et efface
+celle-ci quand les deux ne correspondent plus — une sauvegarde sans version
+inscrite datant forcément d'avant, elle s'efface aussi. Les réglages qui ne
+dépendent pas des boards, comme l'haptique, survivent. Le joueur est prévenu
+une fois à l'accueil : retrouver son compte à zéro sans explication serait pire
+que de garder des records faux.
+
 La campagne compte **cent niveaux**. Elle se fabrique avec
 `tool/build_campaign.dart` : cent mille candidats sont générés, résolus,
 analysés, dédupliqués, puis répartis par tranche — les plus exigeantes servies

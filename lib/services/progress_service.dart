@@ -1,5 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../game/engine/generator_version.dart';
+
 /// Ce qu'on retient d'un niveau terminé.
 ///
 /// Les deux records sont indépendants : le meilleur temps et le plus petit
@@ -30,14 +32,50 @@ class ProgressService {
 
   static const String _kHighestUnlocked = 'highest_unlocked_level';
   static const String _kHaptics = 'haptics_enabled';
+  static const String _kGeneratorVersion = 'progress_generator_version';
   static String _kCompleted(int id) => 'level_${id}_completed';
   static String _kMoves(int id) => 'level_${id}_best_moves';
   static String _kTime(int id) => 'level_${id}_best_time';
 
   final SharedPreferences _prefs;
 
-  static Future<ProgressService> load() async =>
-      ProgressService._(await SharedPreferences.getInstance());
+  /// La progression a été effacée parce que les niveaux ont changé.
+  bool _resetForNewLevels = false;
+
+  /// À dire au joueur une fois, au lancement : ses records ne portaient plus
+  /// sur les mêmes puzzles.
+  bool get wasResetForNewLevels => _resetForNewLevels;
+
+  static Future<ProgressService> load() async {
+    final service = ProgressService._(await SharedPreferences.getInstance());
+    await service._reconcileGeneratorVersion();
+    return service;
+  }
+
+  /// Efface la progression quand les boards ne sont plus les mêmes.
+  ///
+  /// Un niveau n'est qu'un numéro : le puzzle qu'il désigne vient du
+  /// générateur. Quand celui-ci change, le niveau 7 n'est plus le même
+  /// board, et le record de coups qu'on y avait posé ne veut plus rien dire —
+  /// il porterait sur un puzzle que personne ne peut plus rejouer.
+  ///
+  /// Une progression sans version inscrite date d'avant cette mécanique :
+  /// elle vient forcément d'un générateur antérieur, donc elle s'efface aussi.
+  Future<void> _reconcileGeneratorVersion() async {
+    final stored = _prefs.getInt(_kGeneratorVersion);
+    if (stored == currentGeneratorVersion) return;
+
+    final hasProgress = _prefs.getInt(_kHighestUnlocked) != null ||
+        _prefs.getBool(_kCompleted(1)) == true;
+    if (stored != null || hasProgress) {
+      await resetProgress();
+      _resetForNewLevels = hasProgress;
+    }
+    await _prefs.setInt(_kGeneratorVersion, currentGeneratorVersion);
+  }
+
+  /// Le joueur a vu le message : on ne le lui répète pas.
+  void acknowledgeReset() => _resetForNewLevels = false;
 
   int get highestUnlockedLevel => _prefs.getInt(_kHighestUnlocked) ?? 1;
 

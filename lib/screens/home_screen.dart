@@ -34,6 +34,28 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     // Le premier niveau à jouer est prêt avant même que le joueur appuie.
     widget.repository.prefetchAround(widget.progress.highestUnlockedLevel);
+    _announceResetIfNeeded();
+  }
+
+  /// Prévient une fois que la progression a été effacée.
+  ///
+  /// Le joueur retrouverait sinon son compte à zéro sans savoir pourquoi. Il
+  /// n'a rien perdu par erreur : ses records portaient sur des puzzles qui
+  /// n'existent plus.
+  void _announceResetIfNeeded() {
+    if (!widget.progress.wasResetForNewLevels) return;
+    widget.progress.acknowledgeReset();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          duration: Duration(seconds: 6),
+          content: Text('New levels: the puzzles changed, so progress and '
+              'records were reset.'),
+        ),
+      );
+    });
   }
 
   Future<void> _open(Widget screen) async {
