@@ -7,10 +7,14 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ungrid/game/campaign/campaign_catalog.dart';
 import 'package:ungrid/game/campaign/campaign_level.dart';
+import 'package:ungrid/game/campaign/campaign_profile.dart';
+import 'package:ungrid/game/engine/game_engine.dart';
 import 'package:ungrid/game/engine/generator_version.dart';
 import 'package:ungrid/game/engine/level_fingerprint.dart';
 import 'package:ungrid/game/engine/level_solver.dart';
+import 'package:ungrid/game/engine/puzzle_analysis.dart';
 import 'package:ungrid/game/engine/slide_generator.dart';
+import 'package:ungrid/game/levels/level_repository.dart';
 
 /// La campagne publiée est un engagement : le niveau 284 doit désigner le même
 /// puzzle pour tout le monde, aujourd'hui comme après une mise à jour. Ces
@@ -147,5 +151,67 @@ void main() {
       final last = campaign.levels.last.levelId;
       expect(average(last - 99, last), greaterThan(average(30, 129)));
     }, skip: exists ? false : 'campagne non construite');
+
+    test(
+      'tous les niveaux respectent le profil validé et leur solution se joue',
+      () {
+        final raw =
+            jsonDecode(
+                  File(
+                    'assets/levels/campaign_v2_solutions.json',
+                  ).readAsStringSync(),
+                )
+                as Map;
+        final solutions = raw['levels'] as List;
+        for (final definition in campaign.levels) {
+          final level = catalog.levelFor(definition.levelId)!;
+          final solved = const LevelSolver(
+            maxExploredStates: 60000,
+          ).solve(level);
+          final analysis = const PuzzleAnalyzer(
+            solver: LevelSolver(maxExploredStates: 6000),
+          ).analyse(level, solved);
+          expect(
+            CampaignProfile.forLevel(level.id).accepts(level, analysis),
+            isTrue,
+            reason: 'niveau ${level.id}',
+          );
+          final engine = GameEngine(level);
+          final sequence = (solutions[level.id - 1] as Map)['solution'] as List;
+          expect(sequence.length, level.moveLimit);
+          for (final id in sequence.cast<String>()) {
+            expect(engine.canMove(id), isTrue);
+            engine.tap(id);
+          }
+          expect(engine.isCompleted, isTrue);
+        }
+      },
+      skip: exists ? false : 'campagne non construite',
+    );
+
+    test(
+      'aucun niveau hors catalogue ne remplace un défi par une grille facile',
+      () async {
+        final repository = LevelRepository(
+          catalog: catalog,
+          lastLevel: campaign.levelCount,
+          useIsolate: false,
+        );
+
+        // Dans la campagne, chaque niveau vient du catalogue publié.
+        for (final definition in campaign.levels) {
+          expect(repository.levelForSync(definition.levelId).id,
+              definition.levelId);
+        }
+
+        // Au-delà, le dépôt refuse. Fabriquer un board à la volée serait pire
+        // que de s'arrêter : il n'aurait passé aucun des contrôles qui ont
+        // retenu les cent autres, et le joueur croirait continuer la campagne.
+        final beyond = campaign.levelCount + 1;
+        expect(() => repository.levelForSync(beyond), throwsRangeError);
+        await expectLater(repository.levelFor(beyond), throwsRangeError);
+      },
+      skip: exists ? false : 'campagne non construite',
+    );
   });
 }
