@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../app/constants.dart';
+import '../app/theme.dart';
 import '../game/controllers/game_controller.dart';
 import '../game/levels/level_repository.dart';
 import '../game/levels/tutorial_hints.dart';
@@ -25,6 +26,7 @@ class GameScreen extends StatefulWidget {
     required this.progress,
     required this.haptics,
     this.rewards = const LocalRewardService(),
+    this.playtest = false,
   });
 
   final int levelId;
@@ -32,6 +34,14 @@ class GameScreen extends StatefulWidget {
   final ProgressService progress;
   final HapticService haptics;
   final RewardService rewards;
+
+  /// Partie d'essai : rien n'est enregistré.
+  ///
+  /// On vient ici pour juger un palier, pas pour progresser. Enregistrer la
+  /// victoire débloquerait la suite et écraserait les records d'un joueur qui
+  /// ne jouait pas vraiment — après trois niveaux essayés au hasard, sa
+  /// progression ne voudrait plus rien dire.
+  final bool playtest;
 
   @override
   State<GameScreen> createState() => _GameScreenState();
@@ -83,7 +93,8 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
       _levelId = levelId;
       _showOutcome = false;
       _records = const RecordsBeaten.none();
-      _best = widget.progress.progressFor(levelId);
+      // En essai, aucun record à battre : la partie ne compte pas.
+      _best = widget.playtest ? null : widget.progress.progressFor(levelId);
       if (_controller == null) {
         _controller = GameController(
           level: level,
@@ -122,11 +133,13 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
     if (controller == null || !mounted || controller.isPlaying) return;
 
     if (controller.isCleared) {
-      final records = await widget.progress.recordCompletion(
-        levelId: _levelId,
-        movesUsed: controller.movesUsed,
-        time: controller.elapsed,
-      );
+      final records = widget.playtest
+          ? const RecordsBeaten.none()
+          : await widget.progress.recordCompletion(
+              levelId: _levelId,
+              movesUsed: controller.movesUsed,
+              time: controller.elapsed,
+            );
       if (!mounted) return;
       setState(() {
         _records = records;
@@ -194,7 +207,10 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
                 onBack: () => Navigator.of(context).maybePop(),
               ),
               Expanded(child: GameBoard(controller: controller)),
-              _TutorialHint(levelId: _levelId),
+              if (widget.playtest)
+                const _PlaytestBanner()
+              else
+                _TutorialHint(levelId: _levelId),
               _Controls(
                 controller: controller,
                 onUndo: () => setState(controller.undo),
@@ -235,6 +251,29 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
 /// Elle réserve toujours la même hauteur, qu'il y ait un texte ou non, pour
 /// que la grille ne saute pas d'un niveau à l'autre — et cette hauteur tient
 /// deux lignes, sinon la phrase vient mordre sur les boutons.
+/// Rappelle que la partie ne compte pas.
+///
+/// Sans lui, on finit par oublier qu'on est en essai et par s'étonner que la
+/// progression n'ait pas bougé.
+class _PlaytestBanner extends StatelessWidget {
+  const _PlaytestBanner();
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 54,
+      child: Center(
+        child: Text(
+          'PLAYTEST · NOTHING IS SAVED',
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                color: UngridColors.onBackgroundFaint,
+              ),
+        ),
+      ),
+    );
+  }
+}
+
 class _TutorialHint extends StatelessWidget {
   const _TutorialHint({required this.levelId});
 

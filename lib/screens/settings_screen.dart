@@ -6,6 +6,7 @@ import '../services/haptic_service.dart';
 import '../services/progress_service.dart';
 import '../widgets/ungrid_scaffold.dart';
 import 'debug_generation_screen.dart';
+import 'playtest_screen.dart';
 
 /// Réglages. Le strict nécessaire, sans sous-menu.
 class SettingsScreen extends StatefulWidget {
@@ -115,6 +116,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             const Spacer(),
+            ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 28),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => PlaytestScreen(
+                    repository: widget.repository,
+                    progress: widget.progress,
+                    haptics: widget.haptics,
+                  ),
+                ),
+              ),
+              title: Text('PLAYTEST', style: textTheme.labelLarge),
+              subtitle: Text('Jump to any level, nothing is saved',
+                  style: textTheme.bodyMedium),
+              trailing: const Icon(Icons.chevron_right_rounded,
+                  color: UngridColors.onBackgroundFaint),
+            ),
             ListTile(
               contentPadding: const EdgeInsets.symmetric(horizontal: 28),
               onTap: () => Navigator.of(context).push(
