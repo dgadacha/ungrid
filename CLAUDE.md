@@ -196,19 +196,49 @@ une fois à l'accueil : retrouver son compte à zéro sans explication serait pi
 que de garder des records faux.
 
 La campagne compte **cent niveaux**. Elle se fabrique avec
-`tool/build_campaign.dart` : cent mille candidats sont générés, résolus,
+`tool/build_campaign.dart` : soixante mille seeds sont examinées, les candidats sont résolus,
 analysés, dédupliqués, puis répartis par tranche — les plus exigeantes servies
 en premier, sans quoi elles héritent des restes. Trois fichiers en sortent : le
 catalogue, les solutions (développement et QA) et un rapport de métriques par
 niveau.
 
-**Il n'y a pas de catalogue pour l'instant.** Le v1 avait été produit par le
-générateur v1 ; les règles ayant changé, il ne se reconstruit plus et a été
-retiré plutôt que rafistolé — c'est exactement ce que le versionnement veut
-dire. Le v2 se construira quand les seuils auront été arrêtés sur les mesures
-du benchmark, pas avant. En attendant, le jeu fabrique ses niveaux à la volée.
+**La campagne v2 est intégrée.** Cent niveaux sélectionnés sur 60 000 seeds
+remplacent la progression facile dans le jeu principal. Tous respectent le
+profil `CampaignProfile`, inspiré du niveau 10 validé lors du playtest : score
+minimal 60, dépendances et choix non équivalents, peu de coups triviaux. La fin
+monte au-delà du niveau 20 du lot d’essai. `tool/build_campaign.dart` écrit dans
+`build/campaign/` pour ne jamais écraser les seeds intégrées sans revue.
+
+La campagne est finie : le niveau 100 revient à l’accueil, qui permet de
+rejouer. `LevelRepository.lastLevel` borne le chargement, le préchargement et
+la sélection. Un niveau absent d’un catalogue fini provoque une erreur plutôt
+qu’un repli facile. La sauvegarde est séparée par identité de campagne et de
+générateur ; les anciennes clés restent conservées, l’haptique est commune.
+
+### Progression et arrêts fragiles
+
+Les cent grilles publiées restent identiques. `ProgressService` conserve la
+maîtrise par niveau (sans indice ni coups supplémentaires, annulations permises),
+les médailles des chapitres et la palette choisie. Voir `docs/engagement.md`.
+L'annulation du dernier déplacement est maintenant disponible après une défaite.
+
+`Level.fragileStopTiles` contient les arrêts à usage unique du lot séparé
+`assets/levels/fragile_v1.json`. Ils disparaissent au départ du bloc ; les refus
+ne les consomment pas. Le moteur enregistre cette consommation dans `MoveRecord`,
+et le solveur ajoute les indicateurs de disponibilité après les positions dans
+l'état de recherche. Ces indicateurs ne doivent jamais être comptés comme des
+blocs. L'ancienne génération et ses empreintes sont conservées.
 
 ### Points connus
+
+**Lot d’essai de 20 niveaux.** `assets/levels/playtest_v1.json` est un catalogue
+séparé, accessible dans Réglages → Playtest → 20-LEVEL CHALLENGE. Il conserve
+le générateur v2 et la campagne habituelle. `tool/build_playtest.dart` choisit
+des candidats selon les décisions, les dépendances et la trivialité, avec des
+cibles définies dans `PlaytestPlan`. Les seuils sont stricts et les analyses
+incomplètes exclues. Les propositions sortent dans `build/playtest/`, sans
+écraser le lot intégré. Voir `docs/playtest-20.md` pour les mesures et le
+protocole humain. Ce lot reste une référence distincte de la campagne officielle v2.
 
 - **Le plafond de 1,25 n'en était pas tout à fait un, et la tuile l'a fait
   sauter pour de bon.** Sans tuile, un bloc n'est joué deux fois que pris dans
@@ -238,10 +268,10 @@ du benchmark, pas avant. En attendant, le jeu fabrique ses niveaux à la volée.
   coups qui rallongent la partie, étroitesse du chemin optimal. Avec une réserve
   égale à l'optimal, un seul coup sous-optimal fait perdre — c'est là que se joue
   l'exigence, pas dans la taille du board.
-- **Les seuils de difficulté ne sont pas arrêtés.** Les bornes des tranches sont
-  volontairement larges en attendant la distribution mesurée : décider de ce
-  qu'est un niveau difficile avant de l'avoir compté reviendrait à régler le jeu
-  sur une intuition.
+- **Les seuils de la campagne sont fixés dans `CampaignProfile` après le retour
+  du playtest.** Les anciennes tranches `DifficultyBand` restent utilisées par
+  les outils de génération historique ; elles ne sélectionnent plus les niveaux
+  du jeu principal.
 
 ### Les premiers niveaux
 
@@ -303,3 +333,7 @@ Police Nunito Sans, portrait uniquement.
 - Le moteur ne connaît ni le temps, ni le score : cela appartient au contrôleur.
 - Toute règle de jeu modifiée se répercute dans les tests du même coup.
 - Les niveaux s'écrivent en ASCII (`^ v < >` et `#`), lisibles et modifiables.
+
+### Campagne active v3 — rotations
+
+La campagne active est désormais `assets/levels/campaign_v3.json` : cent grilles générées avec `RotationGenerator` et validées hors ligne par `tool/build_rotation_campaign.dart`. Les définitions contiennent le board et son empreinte ; le chargement ne relance pas le solveur. `CampaignCatalog` continue de charger les anciens catalogues à seeds v2. Le générateur historique reste v2 ; le catalogue et les définitions de la nouvelle campagne portent la version 3. La sauvegarde est `campaign_3_generator_3`. La v2 et ses tests restent des références historiques. Voir `docs/campaign-100.md` pour les critères actuels.

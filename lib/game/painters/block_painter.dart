@@ -96,6 +96,58 @@ class BlockPainter {
     );
   }
 
+  /// Le repère reste visible autour du bloc posé sur la rotation.
+  void paintRotationTile(Canvas canvas, Rect cell, {bool occupied = false}) {
+    final paint = Paint()
+      ..color = const Color(0xFF9CE7EE)
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..strokeWidth = 2;
+    final r = cell.width * (occupied ? .46 : .21);
+    final c = cell.center;
+    canvas.drawArc(
+      Rect.fromCircle(center: c, radius: r),
+      -1.5707963267948966,
+      4.71238898038469,
+      false,
+      paint,
+    );
+    final tip = Offset(c.dx - r, c.dy);
+    canvas.drawPath(
+      Path()
+        ..moveTo(tip.dx - r * .30, tip.dy + r * .35)
+        ..lineTo(tip.dx, tip.dy)
+        ..lineTo(tip.dx + r * .30, tip.dy + r * .35),
+      paint,
+    );
+  }
+
+  /// Un losange fendu distingue la tuile fragile même sans sa couleur.
+  void paintFragileStopTile(Canvas canvas, Rect cell, {bool occupied = false}) {
+    final paint = Paint()
+      ..color = const Color(0xFFF8C471)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2;
+    final r = cell.width * (occupied ? .46 : .19);
+    final c = cell.center;
+    final path = Path()
+      ..moveTo(c.dx, c.dy - r)
+      ..lineTo(c.dx + r, c.dy)
+      ..lineTo(c.dx, c.dy + r)
+      ..lineTo(c.dx - r, c.dy)
+      ..close();
+    canvas.drawPath(path, paint);
+    if (!occupied) {
+      canvas.drawPath(
+        Path()
+          ..moveTo(c.dx + r * .2, c.dy - r)
+          ..lineTo(c.dx - r * .2, c.dy)
+          ..lineTo(c.dx + r * .2, c.dy + r),
+        paint,
+      );
+    }
+  }
+
   /// Dessine un bloc dans la case donnée.
   ///
   /// [scale] sert à l'enfoncement sous le doigt, [opacity] à la disparition en
@@ -109,8 +161,9 @@ class BlockPainter {
     double opacity = 1,
     Offset offset = Offset.zero,
   }) {
-    var rect =
-        cell.deflate(cell.width * GameMetrics.blockInsetRatio).shift(offset);
+    var rect = cell
+        .deflate(cell.width * GameMetrics.blockInsetRatio)
+        .shift(offset);
     if (scale != 1) {
       rect = Rect.fromCenter(
         center: rect.center,
@@ -134,7 +187,12 @@ class BlockPainter {
     _paintArrow(canvas, rect, direction, opacity);
   }
 
-  void _paintArrow(Canvas canvas, Rect rect, Direction direction, double opacity) {
+  void _paintArrow(
+    Canvas canvas,
+    Rect rect,
+    Direction direction,
+    double opacity,
+  ) {
     final size = rect.width * GameMetrics.arrowSizeRatio;
     final center = rect.center;
     final color = opacity >= 1

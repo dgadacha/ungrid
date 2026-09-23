@@ -55,6 +55,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
   RecordsBeaten _records = const RecordsBeaten.none();
   LevelProgress? _best;
   Timer? _outcomeTimer;
+  String? _rewardLabel;
 
   @override
   void initState() {
@@ -93,6 +94,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
       _levelId = levelId;
       _showOutcome = false;
       _records = const RecordsBeaten.none();
+      _rewardLabel = null;
       // En essai, aucun record à battre : la partie ne compte pas.
       _best = widget.playtest ? null : widget.progress.progressFor(levelId);
       if (_controller == null) {
@@ -100,6 +102,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
           level: level,
           haptics: widget.haptics,
           rewards: widget.rewards,
+          paletteIndex: widget.progress.paletteIndex,
           moveLimit: widget.repository.moveLimitFor(levelId, level),
         )..addListener(_onControllerChanged);
       } else {
@@ -133,15 +136,22 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
     if (controller == null || !mounted || controller.isPlaying) return;
 
     if (controller.isCleared) {
+      final completedId = _levelId;
+      final palettesBefore = widget.progress.unlockedPalettes.length;
       final records = widget.playtest
           ? const RecordsBeaten.none()
           : await widget.progress.recordCompletion(
               levelId: _levelId,
               movesUsed: controller.movesUsed,
               time: controller.elapsed,
+              mastered: controller.mastered,
             );
-      if (!mounted) return;
+      if (!mounted || _levelId != completedId || !controller.isCleared) return;
       setState(() {
+        final palettes = widget.progress.unlockedPalettes;
+        _rewardLabel = !widget.playtest && palettes.length > palettesBefore
+            ? '${UngridColors.paletteNames[palettes.last]} UNLOCKED · See Rewards'
+            : null;
         _records = records;
         _showOutcome = true;
       });
@@ -152,13 +162,28 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
 
   void _next() {
     _outcomeTimer?.cancel();
+    if (widget.repository.lastLevel != null &&
+        _levelId >= widget.repository.lastLevel!) {
+      Navigator.of(context).pop();
+      return;
+    }
     _load(_levelId + 1);
+  }
+
+  void _undo() {
+    if (!(_controller?.canUndo ?? false)) return;
+    _outcomeTimer?.cancel();
+    setState(() {
+      _showOutcome = false;
+      _controller!.undo();
+    });
   }
 
   void _restart() {
     _outcomeTimer?.cancel();
     setState(() {
       _showOutcome = false;
+      _rewardLabel = null;
       _controller?.restart();
     });
   }
@@ -207,13 +232,29 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
                 onBack: () => Navigator.of(context).maybePop(),
               ),
               Expanded(child: GameBoard(controller: controller)),
-              if (widget.playtest)
+              if (controller.level.rotationTiles.isNotEmpty)
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                  child: Text(
+                    'Circular tiles stop the block and turn its arrow 90° clockwise.',
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              else if (controller.level.fragileStopTiles.isNotEmpty)
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                  child: Text(
+                    'A cracked stop holds once, then breaks when the block leaves. Undo restores it.',
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              else if (widget.playtest)
                 const _PlaytestBanner()
               else
                 _TutorialHint(levelId: _levelId),
               _Controls(
                 controller: controller,
-                onUndo: () => setState(controller.undo),
+                onUndo: _undo,
                 onRestart: _restart,
                 onHint: _hint,
               ),
@@ -226,9 +267,18 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
                 movesUsed: controller.movesUsed,
                 elapsed: controller.elapsed,
                 records: _records,
+                mastered: controller.mastered,
+                rewardLabel: _rewardLabel,
+                chapter: widget.playtest ? null : (_levelId - 1) ~/ 10 + 1,
+                chapterCleared: widget.playtest
+                    ? 0
+                    : widget.progress.chapterCleared((_levelId - 1) ~/ 10 + 1),
                 allowTapAnywhere: _levelId > 3,
                 onNext: _next,
                 onReplay: _restart,
+                nextLabel: _levelId == widget.repository.lastLevel
+                    ? 'FINISH'
+                    : 'NEXT',
               ),
             ),
           if (_showOutcome && controller.isOutOfMoves)
@@ -236,8 +286,8 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
               child: OutOfMovesOverlay(
                 remainingBlocks: controller.remainingBlocks,
                 onRetry: _restart,
-                onExtraMoves:
-                    widget.rewards.isAvailable ? _extraMoves : null,
+                onUndo: controller.canUndo ? _undo : null,
+                onExtraMoves: widget.rewards.isAvailable ? _extraMoves : null,
               ),
             ),
         ],
@@ -266,8 +316,8 @@ class _PlaytestBanner extends StatelessWidget {
         child: Text(
           'PLAYTEST · NOTHING IS SAVED',
           style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: UngridColors.onBackgroundFaint,
-              ),
+            color: UngridColors.onBackgroundFaint,
+          ),
         ),
       ),
     );

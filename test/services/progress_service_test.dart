@@ -6,12 +6,75 @@ import 'package:ungrid/services/progress_service.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
+  test('la v3 annonce le changement et conserve la progression v2', () async {
+    SharedPreferences.setMockInitialValues({});
+    final old = await ProgressService.load(
+      campaignId: 'campaign_2_generator_2',
+    );
+    await old.recordCompletion(
+      levelId: 7,
+      movesUsed: 14,
+      time: const Duration(seconds: 30),
+      mastered: true,
+    );
+    final fresh = await ProgressService.load(
+      campaignId: 'campaign_3_generator_3',
+    );
+    expect(fresh.startedNewCampaign, isTrue);
+    expect(fresh.highestUnlockedLevel, 1);
+    expect(fresh.isCompleted(7), isFalse);
+    final saved = await ProgressService.load(
+      campaignId: 'campaign_2_generator_2',
+    );
+    expect(saved.highestUnlockedLevel, 8);
+    expect(saved.isMastered(7), isTrue);
+    final reload = await ProgressService.load(
+      campaignId: 'campaign_3_generator_3',
+    );
+    expect(reload.startedNewCampaign, isFalse);
+  });
+
   late ProgressService progress;
 
   setUp(() async {
     SharedPreferences.setMockInitialValues({});
     progress = await ProgressService.load();
   });
+
+  test(
+    'la nouvelle campagne conserve les records historiques séparément',
+    () async {
+      await progress.recordCompletion(
+        levelId: 12,
+        movesUsed: 14,
+        time: const Duration(seconds: 30),
+      );
+      await progress.setHapticsEnabled(false);
+      final challenge = await ProgressService.load(
+        campaignId: 'campaign_2_generator_2',
+      );
+      expect(challenge.highestUnlockedLevel, 1);
+      expect(challenge.progressFor(12), isNull);
+      expect(challenge.startedNewCampaign, isTrue);
+      expect(challenge.hapticsEnabled, isFalse);
+      await challenge.recordCompletion(
+        levelId: 1,
+        movesUsed: 13,
+        time: const Duration(seconds: 40),
+      );
+      final reloaded = await ProgressService.load(
+        campaignId: 'campaign_2_generator_2',
+      );
+      expect(reloaded.highestUnlockedLevel, 2);
+      expect(reloaded.startedNewCampaign, isFalse);
+      final previous = await ProgressService.load();
+      expect(previous.highestUnlockedLevel, 13);
+      expect(previous.progressFor(12)!.bestMovesUsed, 14);
+      await reloaded.resetProgress();
+      expect(previous.progressFor(12)!.bestTime, const Duration(seconds: 30));
+      expect(previous.hapticsEnabled, isFalse);
+    },
+  );
 
   test('seul le premier niveau est ouvert au départ', () {
     expect(progress.highestUnlockedLevel, 1);
@@ -107,21 +170,36 @@ void main() {
 
   test('rejouer un ancien niveau ne referme pas la progression', () async {
     await progress.recordCompletion(
-        levelId: 1, movesUsed: 4, time: const Duration(seconds: 8));
+      levelId: 1,
+      movesUsed: 4,
+      time: const Duration(seconds: 8),
+    );
     await progress.recordCompletion(
-        levelId: 2, movesUsed: 7, time: const Duration(seconds: 9));
+      levelId: 2,
+      movesUsed: 7,
+      time: const Duration(seconds: 9),
+    );
     expect(progress.highestUnlockedLevel, 3);
 
     await progress.recordCompletion(
-        levelId: 1, movesUsed: 4, time: const Duration(seconds: 7));
+      levelId: 1,
+      movesUsed: 4,
+      time: const Duration(seconds: 7),
+    );
     expect(progress.highestUnlockedLevel, 3);
   });
 
   test('les niveaux terminés se comptent', () async {
     await progress.recordCompletion(
-        levelId: 1, movesUsed: 4, time: const Duration(seconds: 1));
+      levelId: 1,
+      movesUsed: 4,
+      time: const Duration(seconds: 1),
+    );
     await progress.recordCompletion(
-        levelId: 2, movesUsed: 7, time: const Duration(seconds: 1));
+      levelId: 2,
+      movesUsed: 7,
+      time: const Duration(seconds: 1),
+    );
     expect(progress.completedCount(), 2);
   });
 
@@ -133,9 +211,15 @@ void main() {
 
   test('effacer la progression remet tout à zéro', () async {
     await progress.recordCompletion(
-        levelId: 1, movesUsed: 4, time: const Duration(seconds: 1));
+      levelId: 1,
+      movesUsed: 4,
+      time: const Duration(seconds: 1),
+    );
     await progress.recordCompletion(
-        levelId: 2, movesUsed: 4, time: const Duration(seconds: 1));
+      levelId: 2,
+      movesUsed: 4,
+      time: const Duration(seconds: 1),
+    );
     await progress.resetProgress();
 
     expect(progress.highestUnlockedLevel, 1);
@@ -148,8 +232,11 @@ void main() {
       SharedPreferences.setMockInitialValues({});
       final fresh = await ProgressService.load();
 
-      expect(fresh.wasResetForNewLevels, isFalse,
-          reason: 'il n\'y avait aucune progression à effacer');
+      expect(
+        fresh.wasResetForNewLevels,
+        isFalse,
+        reason: 'il n\'y avait aucune progression à effacer',
+      );
       expect(fresh.highestUnlockedLevel, 1);
     });
 
@@ -168,10 +255,16 @@ void main() {
       expect(migrated.wasResetForNewLevels, isTrue);
       expect(migrated.highestUnlockedLevel, 1);
       expect(migrated.isCompleted(7), isFalse);
-      expect(migrated.progressFor(7), isNull,
-          reason: 'le record portait sur un puzzle qui n\'existe plus');
-      expect(migrated.hapticsEnabled, isFalse,
-          reason: 'un réglage ne dépend pas des boards : il survit');
+      expect(
+        migrated.progressFor(7),
+        isNull,
+        reason: 'le record portait sur un puzzle qui n\'existe plus',
+      );
+      expect(
+        migrated.hapticsEnabled,
+        isFalse,
+        reason: 'un réglage ne dépend pas des boards : il survit',
+      );
     });
 
     test('une progression à jour est conservée', () async {

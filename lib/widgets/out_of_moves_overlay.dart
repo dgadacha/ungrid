@@ -12,11 +12,13 @@ class OutOfMovesOverlay extends StatefulWidget {
     required this.remainingBlocks,
     required this.onRetry,
     this.onExtraMoves,
+    this.onUndo,
     this.extraMovesAmount = 3,
   });
 
   final int remainingBlocks;
   final VoidCallback onRetry;
+  final VoidCallback? onUndo;
 
   /// Proposé seulement quand une récompense est réellement disponible : pas de
   /// bouton mort en attendant la régie publicitaire.
@@ -75,7 +77,15 @@ class _OutOfMovesOverlayState extends State<OutOfMovesOverlay>
                 : 'one block left',
             style: textTheme.bodyMedium,
           ),
-          const SizedBox(height: 46),
+          const SizedBox(height: 28),
+          if (widget.onUndo != null) ...[
+            UngridButton(
+              label: 'UNDO MOVE',
+              icon: Icons.undo_rounded,
+              onPressed: widget.onUndo!,
+            ),
+            const SizedBox(height: 14),
+          ],
           UngridButton(
             label: 'RETRY',
             icon: Icons.refresh_rounded,

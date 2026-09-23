@@ -11,9 +11,8 @@ import 'game_screen.dart';
 
 /// Choix du niveau.
 ///
-/// Les niveaux ne sont pas stockés mais reconstruits à la demande : la liste
-/// n'a donc pas de fin. On montre ce qui est ouvert, plus quelques cases
-/// verrouillées pour donner à voir la suite.
+/// Chapitres de dix niveaux, progression et distinctions persistantes.
+/// La campagne finie montre ses chapitres suivants verrouillés.
 class LevelSelectScreen extends StatefulWidget {
   const LevelSelectScreen({
     super.key,
@@ -55,55 +54,112 @@ class _LevelSelectScreenState extends State<LevelSelectScreen> {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final unlocked = widget.progress.highestUnlockedLevel;
-    final total = unlocked + _lockedPreview;
+    final total = widget.repository.lastLevel ?? unlocked + _lockedPreview;
 
     return UngridScaffold(
       child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 4, 56, 4),
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () => Navigator.of(context).maybePop(),
-                    icon: const Icon(Icons.arrow_back_rounded,
-                        color: UngridColors.onBackground),
-                    splashRadius: 24,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 4, 56, 4),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () => Navigator.of(context).maybePop(),
+                  icon: const Icon(
+                    Icons.arrow_back_rounded,
+                    color: UngridColors.onBackground,
                   ),
-                  Expanded(
-                    child: Text(
-                      'LEVELS',
-                      textAlign: TextAlign.center,
-                      style: textTheme.titleMedium,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: GridView.builder(
-                padding: const EdgeInsets.fromLTRB(22, 10, 22, 30),
-                gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  crossAxisSpacing: 14,
-                  mainAxisSpacing: 14,
-                  childAspectRatio: 0.88,
+                  splashRadius: 24,
                 ),
-                itemCount: total,
-                itemBuilder: (context, index) {
-                  final levelId = index + 1;
-                  return _LevelTile(
-                    levelId: levelId,
-                    best: widget.progress.progressFor(levelId),
-                    locked: levelId > unlocked,
-                    isCurrent: levelId == unlocked,
-                    onTap: levelId <= unlocked ? () => _play(levelId) : null,
-                  );
-                },
-              ),
+                Expanded(
+                  child: Text(
+                    'LEVELS',
+                    textAlign: TextAlign.center,
+                    style: textTheme.titleMedium,
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 30),
+              itemCount: (total / 10).ceil(),
+              itemBuilder: (context, chapterIndex) {
+                final chapter = chapterIndex + 1;
+                final cleared = widget.progress.chapterCleared(chapter);
+                final mastered = widget.progress.chapterMastered(chapter);
+                final start = chapterIndex * 10 + 1;
+                final count = (total - start + 1).clamp(0, 10);
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 28),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            cleared == 10
+                                ? Icons.workspace_premium_rounded
+                                : Icons.radio_button_unchecked,
+                            color: cleared == 10
+                                ? UngridColors.success
+                                : UngridColors.onBackgroundFaint,
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              'CHAPTER $chapter',
+                              style: textTheme.titleMedium,
+                            ),
+                          ),
+                          Text('$cleared/10', style: textTheme.labelLarge),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      LinearProgressIndicator(
+                        value: cleared / 10,
+                        color: UngridColors.success,
+                        backgroundColor: UngridColors.surface,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        '$mastered mastered · ${cleared == 10 ? 'Medal collected' : '${10 - cleared} to chapter medal'}',
+                        style: textTheme.bodyMedium,
+                      ),
+                      const SizedBox(height: 12),
+                      GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 5,
+                              crossAxisSpacing: 8,
+                              mainAxisSpacing: 8,
+                              childAspectRatio: .76,
+                            ),
+                        itemCount: count,
+                        itemBuilder: (context, index) {
+                          final levelId = start + index;
+                          return _LevelTile(
+                            levelId: levelId,
+                            best: widget.progress.progressFor(levelId),
+                            locked: levelId > unlocked,
+                            isCurrent: levelId == unlocked,
+                            onTap: levelId <= unlocked
+                                ? () => _play(levelId)
+                                : null,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -141,8 +197,8 @@ class _LevelTile extends StatelessWidget {
             color: isCurrent
                 ? UngridColors.accent
                 : done
-                    ? UngridColors.success.withValues(alpha: 0.5)
-                    : Colors.transparent,
+                ? UngridColors.success.withValues(alpha: 0.5)
+                : Colors.transparent,
             width: isCurrent ? 2.5 : 1.5,
           ),
         ),
@@ -150,9 +206,22 @@ class _LevelTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (locked)
-              const Icon(Icons.lock_rounded,
-                  size: 20, color: UngridColors.onBackgroundFaint)
+              const Icon(
+                Icons.lock_rounded,
+                size: 20,
+                color: UngridColors.onBackgroundFaint,
+              )
             else ...[
+              if (done)
+                Icon(
+                  best?.mastered == true
+                      ? Icons.workspace_premium_rounded
+                      : Icons.check_rounded,
+                  size: 16,
+                  color: best?.mastered == true
+                      ? const Color(0xFFF8C471)
+                      : UngridColors.success,
+                ),
               Text(
                 '$levelId',
                 style: TextStyle(

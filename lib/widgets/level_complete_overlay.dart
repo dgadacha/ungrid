@@ -7,9 +7,8 @@ import 'ungrid_button.dart';
 
 /// Écran de victoire.
 ///
-/// Il dit l'essentiel — le temps, les coups — et s'efface. Pas de score, pas
-/// d'étoiles : terminer dans la limite, c'est gagné, point. Le reste n'est là
-/// que pour donner envie de refaire mieux.
+/// Montre la distinction de la tentative, la progression du chapitre et les
+/// récompenses débloquées, sans retarder le bouton suivant.
 class LevelCompleteOverlay extends StatefulWidget {
   const LevelCompleteOverlay({
     super.key,
@@ -19,6 +18,11 @@ class LevelCompleteOverlay extends StatefulWidget {
     required this.onNext,
     required this.onReplay,
     required this.allowTapAnywhere,
+    this.nextLabel = 'NEXT',
+    this.mastered = false,
+    this.rewardLabel,
+    this.chapter,
+    this.chapterCleared = 0,
   });
 
   final int movesUsed;
@@ -28,6 +32,11 @@ class LevelCompleteOverlay extends StatefulWidget {
   final VoidCallback onNext;
   final VoidCallback onReplay;
   final bool allowTapAnywhere;
+  final String nextLabel;
+  final bool mastered;
+  final String? rewardLabel;
+  final int? chapter;
+  final int chapterCleared;
 
   @override
   State<LevelCompleteOverlay> createState() => _LevelCompleteOverlayState();
@@ -81,25 +90,71 @@ class _LevelCompleteOverlayState extends State<LevelCompleteOverlay>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('CLEAR', style: textTheme.displayLarge),
+            Text(
+              widget.mastered ? 'MASTERED' : 'SOLVED',
+              style: textTheme.displayLarge,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              widget.mastered
+                  ? 'No hints. Original move budget.'
+                  : 'Cleared with assistance',
+              style: textTheme.bodyMedium,
+            ),
             if (record != null) ...[
               const SizedBox(height: 10),
               _Badge(label: record, color: UngridColors.accent),
             ],
-            const SizedBox(height: 40),
+            if (widget.chapter != null) ...[
+              const SizedBox(height: 24),
+              Text(
+                'CHAPTER ${widget.chapter} · ${widget.chapterCleared}/10',
+                style: textTheme.labelLarge,
+              ),
+              const SizedBox(height: 10),
+              SizedBox(
+                width: 220,
+                child: TweenAnimationBuilder<double>(
+                  tween: Tween(begin: 0, end: widget.chapterCleared / 10),
+                  duration: const Duration(milliseconds: 650),
+                  builder: (_, value, _) => LinearProgressIndicator(
+                    value: value,
+                    color: UngridColors.success,
+                    backgroundColor: UngridColors.surface,
+                    minHeight: 6,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                widget.chapterCleared == 10
+                    ? 'CHAPTER MEDAL COLLECTED'
+                    : '${10 - widget.chapterCleared} levels to your chapter medal',
+                style: textTheme.bodyMedium,
+              ),
+            ],
+            if (widget.rewardLabel != null) ...[
+              const SizedBox(height: 12),
+              Text(
+                widget.rewardLabel!,
+                textAlign: TextAlign.center,
+                style: textTheme.bodyMedium?.copyWith(
+                  color: const Color(0xFFF8C471),
+                ),
+              ),
+            ],
+            const SizedBox(height: 28),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _Stat(
-                  label: 'TIME',
-                  value: formatPlayTime(widget.elapsed),
-                ),
+                _Stat(label: 'TIME', value: formatPlayTime(widget.elapsed)),
                 const SizedBox(width: 44),
                 _Stat(label: 'MOVES', value: '${widget.movesUsed}'),
               ],
             ),
             const SizedBox(height: 46),
-            UngridButton(label: 'NEXT', onPressed: widget.onNext),
+            UngridButton(label: widget.nextLabel, onPressed: widget.onNext),
             const SizedBox(height: 12),
             TextButton(
               onPressed: widget.onReplay,

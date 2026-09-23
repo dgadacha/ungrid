@@ -16,7 +16,6 @@ class UngridColors {
   /// Panneaux, cases vides, boutons secondaires.
   static const Color surface = Color(0xFF34495E); // Wet Asphalt
 
-
   static const Color onBackground = Color(0xFFECF0F1); // Clouds
   static const Color onBackgroundSoft = Color(0xFFBDC3C7); // Silver
   static const Color onBackgroundFaint = Color(0xFF95A5A6); // Concrete
@@ -48,13 +47,37 @@ class UngridColors {
   ///
   /// Les blocs se déplacent : une couleur attachée à la position les ferait
   /// changer de teinte en glissant, ce qui rendrait la grille illisible.
-  static Color blockFor(String blockId) {
+  static const paletteNames = ['CLASSIC', 'LAGOON', 'SUNSET', 'AURORA'];
+  static const palettes = [
+    blocks,
+    [
+      Color(0xFF76D7C4),
+      Color(0xFF5DADE2),
+      Color(0xFF85C1E9),
+      Color(0xFFA3E4D7),
+    ],
+    [
+      Color(0xFFF8C471),
+      Color(0xFFF1948A),
+      Color(0xFFF5B7B1),
+      Color(0xFFF9E79F),
+    ],
+    [
+      Color(0xFFBB8FCE),
+      Color(0xFFA3E4D7),
+      Color(0xFFD7BDE2),
+      Color(0xFF85C1E9),
+    ],
+  ];
+
+  static Color blockFor(String blockId, {int palette = 0}) {
     var hash = 0;
     for (final unit in blockId.codeUnits) {
       hash = (hash * 31 + unit) & 0x7FFFFFFF;
     }
     hash = (hash ^ (hash >> 13)) & 0x7FFFFFFF;
-    return blocks[hash % blocks.length];
+    final colors = palettes[palette.clamp(0, palettes.length - 1)];
+    return colors[hash % colors.length];
   }
 
   /// Flèche : la couleur du fond, pas du noir pur. Elle creuse le bloc au lieu

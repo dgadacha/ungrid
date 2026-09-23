@@ -1,0 +1,6816 @@
+{
+  "catalogVersion": 3,
+  "generatorVersion": 3,
+  "levelCount": 100,
+  "mechanic": "rotation-v1",
+  "levels": [
+    {
+      "levelId": 1,
+      "seed": 12753,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 60.18206276383951,
+      "optimalMoves": 11,
+      "status": "active",
+      "fingerprint": "9fa1114132321f0e",
+      "board": {
+        "id": 1,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 2,
+      "seed": 5286,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 60.32880287279342,
+      "optimalMoves": 13,
+      "status": "active",
+      "fingerprint": "b5ff33ec94d262a2",
+      "board": {
+        "id": 2,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 3,
+      "seed": 18205,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 60.41167454399072,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "64bc0b2d15fe6912",
+      "board": {
+        "id": 3,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 4,
+      "seed": 26301,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 60.54820792508871,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "4af7c20f5ccf196f",
+      "board": {
+        "id": 4,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 3
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 5,
+      "seed": 8072,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 60.574173459088286,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "bc7d3137021743fb",
+      "board": {
+        "id": 5,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 6,
+      "seed": 32084,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 60.66220397009261,
+      "optimalMoves": 11,
+      "status": "active",
+      "fingerprint": "9af56d71eab93eb3",
+      "board": {
+        "id": 6,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 7,
+      "seed": 27335,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 60.74353785050291,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "8aaf30d4dfd23e9b",
+      "board": {
+        "id": 7,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 0
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 8,
+      "seed": 36391,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 60.89032521008426,
+      "optimalMoves": 9,
+      "status": "active",
+      "fingerprint": "e5cc1fbdae2c144e",
+      "board": {
+        "id": 8,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 9,
+      "seed": 28029,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 61.096834970697074,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "9127e2dd0c2fba45",
+      "board": {
+        "id": 9,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 10,
+      "seed": 2764,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 61.3318177465982,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "c67f66a91c02beb2",
+      "board": {
+        "id": 10,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 11,
+      "seed": 22267,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 61.46208500939342,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "ba5438290bae93ce",
+      "board": {
+        "id": 11,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 12,
+      "seed": 36789,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 61.52501134458424,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "17de73fd352175c5",
+      "board": {
+        "id": 12,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 13,
+      "seed": 32807,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 61.55730158626832,
+      "optimalMoves": 9,
+      "status": "active",
+      "fingerprint": "6334d2fb021a79fb",
+      "board": {
+        "id": 13,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 1
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 14,
+      "seed": 20806,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 61.57870504045546,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "62c5bc6caae4a822",
+      "board": {
+        "id": 14,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 15,
+      "seed": 15714,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 61.60614004870442,
+      "optimalMoves": 11,
+      "status": "active",
+      "fingerprint": "576bc4d29b37f3c9",
+      "board": {
+        "id": 15,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 0
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 16,
+      "seed": 34314,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 61.64821122502577,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "5c971e97538f3742",
+      "board": {
+        "id": 16,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 17,
+      "seed": 30662,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 61.67243260846981,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "1f0e73936810f8c3",
+      "board": {
+        "id": 17,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 4
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 18,
+      "seed": 23485,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 61.76559268372685,
+      "optimalMoves": 9,
+      "status": "active",
+      "fingerprint": "155774b4dc530f8c",
+      "board": {
+        "id": 18,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 4
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 19,
+      "seed": 38440,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 61.79890451501193,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "2f17a87c85797737",
+      "board": {
+        "id": 19,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 0
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 20,
+      "seed": 29837,
+      "generatorVersion": 3,
+      "difficulty": "medium",
+      "difficultyScore": 62.033469285426236,
+      "optimalMoves": 9,
+      "status": "active",
+      "fingerprint": "abbe94d0accfb2a7",
+      "board": {
+        "id": 20,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 3
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 21,
+      "seed": 483,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 62.128848658481715,
+      "optimalMoves": 11,
+      "status": "active",
+      "fingerprint": "13e981fce33dbcd3",
+      "board": {
+        "id": 21,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 4
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 22,
+      "seed": 30249,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 62.27517528547853,
+      "optimalMoves": 14,
+      "status": "active",
+      "fingerprint": "db7353318f1016da",
+      "board": {
+        "id": 22,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 5,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 23,
+      "seed": 33750,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 62.30782749368217,
+      "optimalMoves": 9,
+      "status": "active",
+      "fingerprint": "1ba54693aa674cc8",
+      "board": {
+        "id": 23,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 5,
+            "y": 4
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 24,
+      "seed": 12633,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 62.42666406410733,
+      "optimalMoves": 9,
+      "status": "active",
+      "fingerprint": "0027f1bc9a1ed100",
+      "board": {
+        "id": 24,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 25,
+      "seed": 14811,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 62.42666406410733,
+      "optimalMoves": 9,
+      "status": "active",
+      "fingerprint": "cd90bb9f974602f9",
+      "board": {
+        "id": 25,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 26,
+      "seed": 35041,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 62.54649060561091,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "b25c5f535f11b8eb",
+      "board": {
+        "id": 26,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 4
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 27,
+      "seed": 14438,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 62.61825894567633,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "086fbfeec769c508",
+      "board": {
+        "id": 27,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 3
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 28,
+      "seed": 23716,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 63.04313727748661,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "d099ca82fc4b4d03",
+      "board": {
+        "id": 28,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 29,
+      "seed": 21607,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 63.14700284606147,
+      "optimalMoves": 11,
+      "status": "active",
+      "fingerprint": "96cedffc0153a406",
+      "board": {
+        "id": 29,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 30,
+      "seed": 36877,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 63.35393130048536,
+      "optimalMoves": 9,
+      "status": "active",
+      "fingerprint": "c47c70373f750925",
+      "board": {
+        "id": 30,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 3
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 31,
+      "seed": 9752,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 63.538656073946356,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "6cee82fae13bc85a",
+      "board": {
+        "id": 31,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 32,
+      "seed": 4279,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 63.70973196811796,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "5c3a05f2398973be",
+      "board": {
+        "id": 32,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 1
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 33,
+      "seed": 2770,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 64.01521266845681,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "251a93ad03cbeb8f",
+      "board": {
+        "id": 33,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 34,
+      "seed": 31118,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 64.12667331624031,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "5c8cc94aa670dad0",
+      "board": {
+        "id": 34,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 4
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 35,
+      "seed": 14751,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 64.27775076538421,
+      "optimalMoves": 9,
+      "status": "active",
+      "fingerprint": "3052bbafc3d27c22",
+      "board": {
+        "id": 35,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 36,
+      "seed": 22069,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 64.42935931830876,
+      "optimalMoves": 9,
+      "status": "active",
+      "fingerprint": "ddfc43183f1e5efa",
+      "board": {
+        "id": 36,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 0
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 37,
+      "seed": 35244,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 64.54843934759958,
+      "optimalMoves": 9,
+      "status": "active",
+      "fingerprint": "ed232276eaa7134b",
+      "board": {
+        "id": 37,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 38,
+      "seed": 3978,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 64.62066785849233,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "b57f9594ce1f4544",
+      "board": {
+        "id": 38,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 0
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 39,
+      "seed": 11932,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 64.88361053407394,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "2e3c91fd066747fd",
+      "board": {
+        "id": 39,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 3
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 40,
+      "seed": 8652,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 64.94927576260287,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "2eb7b2b7c2820607",
+      "board": {
+        "id": 40,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 4
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 41,
+      "seed": 9719,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 64.99476251927484,
+      "optimalMoves": 15,
+      "status": "active",
+      "fingerprint": "c9b6cbc068fd9ca0",
+      "board": {
+        "id": 41,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 5
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 42,
+      "seed": 31641,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 65.10450003325924,
+      "optimalMoves": 11,
+      "status": "active",
+      "fingerprint": "566dbfa29c64f1ea",
+      "board": {
+        "id": 42,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 43,
+      "seed": 31183,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 65.50653592430731,
+      "optimalMoves": 11,
+      "status": "active",
+      "fingerprint": "afc93f270104f83f",
+      "board": {
+        "id": 43,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 44,
+      "seed": 27622,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 65.83036665118671,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "a213aa526f129c9e",
+      "board": {
+        "id": 44,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 1
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 45,
+      "seed": 33327,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 66.06567346968647,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "68b873cc48168700",
+      "board": {
+        "id": 45,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 1
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 46,
+      "seed": 10451,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 66.2502388321101,
+      "optimalMoves": 15,
+      "status": "active",
+      "fingerprint": "85004e7eab325019",
+      "board": {
+        "id": 46,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 3,
+            "y": 5
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 47,
+      "seed": 23510,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 66.71993607958218,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "b12520f6b52a4138",
+      "board": {
+        "id": 47,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 48,
+      "seed": 3890,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 67.0665264621212,
+      "optimalMoves": 9,
+      "status": "active",
+      "fingerprint": "e7e4ace9e65392bf",
+      "board": {
+        "id": 48,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 49,
+      "seed": 13252,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 67.48021653146448,
+      "optimalMoves": 14,
+      "status": "active",
+      "fingerprint": "b8517f1618e194e3",
+      "board": {
+        "id": 49,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 50,
+      "seed": 9009,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 67.51329708779352,
+      "optimalMoves": 11,
+      "status": "active",
+      "fingerprint": "5d6b4f1628381222",
+      "board": {
+        "id": 50,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 51,
+      "seed": 5704,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 67.94096007901666,
+      "optimalMoves": 13,
+      "status": "active",
+      "fingerprint": "3d38d7e723c6ffac",
+      "board": {
+        "id": 51,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 52,
+      "seed": 4167,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 68.00478989869534,
+      "optimalMoves": 13,
+      "status": "active",
+      "fingerprint": "9815a57ae5b7668f",
+      "board": {
+        "id": 52,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 3
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 53,
+      "seed": 163,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 68.44172452998349,
+      "optimalMoves": 11,
+      "status": "active",
+      "fingerprint": "3644fc2a4a66c8bd",
+      "board": {
+        "id": 53,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 54,
+      "seed": 28433,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 68.61335023404384,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "4dd4ba2a4a09da8a",
+      "board": {
+        "id": 54,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 55,
+      "seed": 10743,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 68.84959063567666,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "a1ee441fed118291",
+      "board": {
+        "id": 55,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 56,
+      "seed": 25789,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 69.05436022121751,
+      "optimalMoves": 13,
+      "status": "active",
+      "fingerprint": "aac950bc0df18176",
+      "board": {
+        "id": 56,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 4
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 57,
+      "seed": 1342,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 69.37522461470688,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "663a153d1f671764",
+      "board": {
+        "id": 57,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 58,
+      "seed": 7544,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 69.61701803157288,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "2507c0fc27d1ef83",
+      "board": {
+        "id": 58,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 0,
+            "y": 3
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 59,
+      "seed": 3687,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 69.7341440031771,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "1a0855f510bad773",
+      "board": {
+        "id": 59,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 1
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 60,
+      "seed": 38304,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 69.8278424844846,
+      "optimalMoves": 9,
+      "status": "active",
+      "fingerprint": "6eb3b072e018adc4",
+      "board": {
+        "id": 60,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 61,
+      "seed": 20509,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 70.19254560497389,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "ff06d5d1d7977360",
+      "board": {
+        "id": 61,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 4
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 62,
+      "seed": 13717,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 70.25053810144885,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "9a1e18bc2093c187",
+      "board": {
+        "id": 62,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 1
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 63,
+      "seed": 8091,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 70.44014363521259,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "1101096fc1761e53",
+      "board": {
+        "id": 63,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 3
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 64,
+      "seed": 10797,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 70.66669175390012,
+      "optimalMoves": 15,
+      "status": "active",
+      "fingerprint": "b1527698f258efe4",
+      "board": {
+        "id": 64,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 4
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 65,
+      "seed": 27734,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 70.86112032855901,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "b190de2590927893",
+      "board": {
+        "id": 65,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 4
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 66,
+      "seed": 12725,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 70.910266283079,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "c05bf2d92c573e36",
+      "board": {
+        "id": 66,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 0
+          },
+          {
+            "x": 0,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 67,
+      "seed": 1524,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 71.41484789290843,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "1e3c4a2572b18e73",
+      "board": {
+        "id": 67,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 1
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 68,
+      "seed": 34616,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 71.8129799293046,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "99f0428566789295",
+      "board": {
+        "id": 68,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 1
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 69,
+      "seed": 33916,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 72.06269271737807,
+      "optimalMoves": 11,
+      "status": "active",
+      "fingerprint": "e30d7f507ea4174c",
+      "board": {
+        "id": 69,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 3
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 70,
+      "seed": 32423,
+      "generatorVersion": 3,
+      "difficulty": "hard",
+      "difficultyScore": 72.1539063841738,
+      "optimalMoves": 13,
+      "status": "active",
+      "fingerprint": "e7fc92b75349e06d",
+      "board": {
+        "id": 70,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 1
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 71,
+      "seed": 32564,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 72.31533736650259,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "cf9b0ecf08d85a30",
+      "board": {
+        "id": 71,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 0,
+            "y": 3
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 72,
+      "seed": 17603,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 72.43372194165737,
+      "optimalMoves": 14,
+      "status": "active",
+      "fingerprint": "38364ac4174d47bf",
+      "board": {
+        "id": 72,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 0
+          },
+          {
+            "x": 3,
+            "y": 5
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 73,
+      "seed": 32600,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 72.64736940283248,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "07ac8bd448043652",
+      "board": {
+        "id": 73,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 74,
+      "seed": 17382,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 72.74729967179684,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "8d911daffe4dc6d5",
+      "board": {
+        "id": 74,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 5,
+            "y": 4,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 5
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 75,
+      "seed": 2962,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 72.8783450404121,
+      "optimalMoves": 11,
+      "status": "active",
+      "fingerprint": "2b862c0cb9433c80",
+      "board": {
+        "id": 75,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 76,
+      "seed": 23436,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 72.96342184213253,
+      "optimalMoves": 15,
+      "status": "active",
+      "fingerprint": "b6f0a3bd97ec6d7d",
+      "board": {
+        "id": 76,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 4
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 77,
+      "seed": 14018,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 72.97708837859466,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "a82ec65807ea27c9",
+      "board": {
+        "id": 77,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 4
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 78,
+      "seed": 18424,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 73.39672964402241,
+      "optimalMoves": 14,
+      "status": "active",
+      "fingerprint": "27ea0398eaed349c",
+      "board": {
+        "id": 78,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 4
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 79,
+      "seed": 10234,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 73.52260282113909,
+      "optimalMoves": 14,
+      "status": "active",
+      "fingerprint": "624fd220f3a8f225",
+      "board": {
+        "id": 79,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 5,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 5,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 5,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 80,
+      "seed": 17125,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 73.8546448449591,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "60a88b68fe018316",
+      "board": {
+        "id": 80,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 2
+          },
+          {
+            "x": 1,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 81,
+      "seed": 3777,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 73.85622391491287,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "1907d8d54833eb68",
+      "board": {
+        "id": 81,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 3
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 82,
+      "seed": 17662,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 74.01065429507726,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "1e655574aac92353",
+      "board": {
+        "id": 82,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 3
+          },
+          {
+            "x": 3,
+            "y": 3
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 83,
+      "seed": 6562,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 74.05874531368416,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "35694de83f443c7f",
+      "board": {
+        "id": 83,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 3
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 84,
+      "seed": 22633,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 74.19393231025698,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "f7f9e202f1eac3a9",
+      "board": {
+        "id": 84,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 85,
+      "seed": 35006,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 74.30834609663872,
+      "optimalMoves": 14,
+      "status": "active",
+      "fingerprint": "b39d98e84d43a3ac",
+      "board": {
+        "id": 85,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 4
+          },
+          {
+            "x": 5,
+            "y": 4
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 86,
+      "seed": 37263,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 74.57421942206554,
+      "optimalMoves": 15,
+      "status": "active",
+      "fingerprint": "c1075848511b3666",
+      "board": {
+        "id": 86,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 1
+          },
+          {
+            "x": 0,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 87,
+      "seed": 8993,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 74.70393171967093,
+      "optimalMoves": 13,
+      "status": "active",
+      "fingerprint": "5225fe3e190e1d84",
+      "board": {
+        "id": 87,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 3,
+            "y": 4
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 88,
+      "seed": 33495,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 74.9200698895363,
+      "optimalMoves": 14,
+      "status": "active",
+      "fingerprint": "2b415607fc14d75c",
+      "board": {
+        "id": 88,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 89,
+      "seed": 24567,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 75.21201077442373,
+      "optimalMoves": 15,
+      "status": "active",
+      "fingerprint": "43f911df10209ada",
+      "board": {
+        "id": 89,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 0
+          },
+          {
+            "x": 1,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 90,
+      "seed": 29186,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 75.81703238715178,
+      "optimalMoves": 13,
+      "status": "active",
+      "fingerprint": "27868bc2931c3d00",
+      "board": {
+        "id": 90,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 5,
+            "y": 4
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 91,
+      "seed": 23057,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 76.00042388077813,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "7cb0db3d520edbb2",
+      "board": {
+        "id": 91,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 0
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 92,
+      "seed": 1878,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 76.66363941385258,
+      "optimalMoves": 20,
+      "status": "active",
+      "fingerprint": "eb2f6458e6f9d56c",
+      "board": {
+        "id": 92,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 2,
+            "y": 3
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 93,
+      "seed": 3555,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 76.77657004526357,
+      "optimalMoves": 14,
+      "status": "active",
+      "fingerprint": "530751d448cc433c",
+      "board": {
+        "id": 93,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 5
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 94,
+      "seed": 14766,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 77.10287822727571,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "05f4c7c685155955",
+      "board": {
+        "id": 94,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 2,
+            "y": 3
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 95,
+      "seed": 17398,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 77.47689826813692,
+      "optimalMoves": 14,
+      "status": "active",
+      "fingerprint": "a568a1f912fe4f9c",
+      "board": {
+        "id": 95,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 2
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 96,
+      "seed": 19804,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 78.60552404635166,
+      "optimalMoves": 15,
+      "status": "active",
+      "fingerprint": "e034a365fee79084",
+      "board": {
+        "id": 96,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 3
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 97,
+      "seed": 18581,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 79.30443071452076,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "01d2979aae3e7927",
+      "board": {
+        "id": 97,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 2,
+            "y": 5
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 98,
+      "seed": 7724,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 80.90524740050787,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "754c0b3705f772c6",
+      "board": {
+        "id": 98,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 1
+          },
+          {
+            "x": 3,
+            "y": 3
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 99,
+      "seed": 21773,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 81.26355226213433,
+      "optimalMoves": 13,
+      "status": "active",
+      "fingerprint": "532ba508b84f7abe",
+      "board": {
+        "id": 99,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 3
+          },
+          {
+            "x": 2,
+            "y": 3
+          }
+        ]
+      }
+    },
+    {
+      "levelId": 100,
+      "seed": 11217,
+      "generatorVersion": 3,
+      "difficulty": "expert",
+      "difficultyScore": 81.91888483599868,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "e3f70157119609ed",
+      "board": {
+        "id": 100,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 2,
+            "y": 4
+          }
+        ]
+      }
+    }
+  ]
+}

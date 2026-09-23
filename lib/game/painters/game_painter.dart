@@ -72,9 +72,21 @@ class GamePainter extends CustomPainter {
 
     // Les tuiles se dessinent sous les blocs : une case occupée garde son
     // repère, porté par le liseré plutôt que par le point central.
-    for (final tile in level.stopTiles) {
+    for (final tile in controller.engine.activeStopTiles) {
       final cell = layout.cellRect(tile.x, tile.y);
-      if (controller.engine.blockAt(tile.x, tile.y) == null) {
+      if (controller.engine.isRotationAt(tile.x, tile.y)) {
+        blocks.paintRotationTile(
+          canvas,
+          cell,
+          occupied: controller.engine.blockAt(tile.x, tile.y) != null,
+        );
+      } else if (controller.engine.isFragileStopAt(tile.x, tile.y)) {
+        blocks.paintFragileStopTile(
+          canvas,
+          cell,
+          occupied: controller.engine.blockAt(tile.x, tile.y) != null,
+        );
+      } else if (controller.engine.blockAt(tile.x, tile.y) == null) {
         blocks.paintStopTile(canvas, cell);
       } else {
         blocks.paintOccupiedStopTile(canvas, cell);
@@ -97,7 +109,8 @@ class GamePainter extends CustomPainter {
       if (blocked != null && blocked.block.id == block.id) {
         // Un aller-retour bref dans la direction refusée : le bloc essaie,
         // bute, revient. Aucun texte n'est nécessaire pour comprendre.
-        final travel = math.sin(blocked.progress(nowMs) * math.pi) *
+        final travel =
+            math.sin(blocked.progress(nowMs) * math.pi) *
             layout.cellSize *
             0.16;
         offset = Offset(
@@ -118,7 +131,7 @@ class GamePainter extends CustomPainter {
         canvas,
         cell,
         block.direction,
-        UngridColors.blockFor(block.id),
+        UngridColors.blockFor(block.id, palette: controller.paletteIndex),
         offset: offset,
         scale: scale,
       );
@@ -163,7 +176,7 @@ class GamePainter extends CustomPainter {
       canvas,
       cell,
       motion.direction,
-      UngridColors.blockFor(motion.blockId),
+      UngridColors.blockFor(motion.blockId, palette: controller.paletteIndex),
       opacity: opacity.clamp(0.0, 1.0),
       scale: motion.fadeOut ? 1 - t * 0.06 : 1,
     );

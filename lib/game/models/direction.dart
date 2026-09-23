@@ -22,29 +22,36 @@ enum Direction {
   bool get isHorizontal => dy == 0;
   bool get isVertical => dx == 0;
 
+  Direction get clockwise => switch (this) {
+    Direction.up => Direction.right,
+    Direction.right => Direction.down,
+    Direction.down => Direction.left,
+    Direction.left => Direction.up,
+  };
+
   Direction get opposite => switch (this) {
-        Direction.up => Direction.down,
-        Direction.down => Direction.up,
-        Direction.left => Direction.right,
-        Direction.right => Direction.left,
-      };
+    Direction.up => Direction.down,
+    Direction.down => Direction.up,
+    Direction.left => Direction.right,
+    Direction.right => Direction.left,
+  };
 
   /// Angle de rotation (radians) à appliquer à une flèche pointant vers la
   /// droite pour qu'elle pointe dans cette direction.
   double get angle => switch (this) {
-        Direction.right => 0,
-        Direction.down => 1.5707963267948966,
-        Direction.left => 3.141592653589793,
-        Direction.up => 4.71238898038469,
-      };
+    Direction.right => 0,
+    Direction.down => 1.5707963267948966,
+    Direction.left => 3.141592653589793,
+    Direction.up => 4.71238898038469,
+  };
 
   static Direction fromJson(String value) => switch (value.toLowerCase()) {
-        'up' || 'u' => Direction.up,
-        'down' || 'd' => Direction.down,
-        'left' || 'l' => Direction.left,
-        'right' || 'r' => Direction.right,
-        _ => throw ArgumentError('Direction inconnue: $value'),
-      };
+    'up' || 'u' => Direction.up,
+    'down' || 'd' => Direction.down,
+    'left' || 'l' => Direction.left,
+    'right' || 'r' => Direction.right,
+    _ => throw ArgumentError('Direction inconnue: $value'),
+  };
 
   String toJson() => name;
 }

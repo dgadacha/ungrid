@@ -69,8 +69,10 @@ class _GameHeaderState extends State<GameHeader> {
             children: [
               IconButton(
                 onPressed: widget.onBack,
-                icon: const Icon(Icons.arrow_back_rounded,
-                    color: UngridColors.onBackground),
+                icon: const Icon(
+                  Icons.arrow_back_rounded,
+                  color: UngridColors.onBackground,
+                ),
                 splashRadius: 24,
               ),
               Expanded(
@@ -90,13 +92,27 @@ class _GameHeaderState extends State<GameHeader> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AnimatedBuilder(
-                  animation: controller,
-                  builder: (context, _) => _MovesLeft(controller: controller),
+                Expanded(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.topLeft,
+                    child: AnimatedBuilder(
+                      animation: controller,
+                      builder: (context, _) =>
+                          _MovesLeft(controller: controller),
+                    ),
+                  ),
                 ),
-                _TimePanel(
-                  elapsed: controller.elapsed,
-                  best: widget.bestTime,
+                const SizedBox(width: 16),
+                Expanded(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.topRight,
+                    child: _TimePanel(
+                      elapsed: controller.elapsed,
+                      best: widget.bestTime,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -120,8 +136,8 @@ class _MovesLeft extends StatelessWidget {
     final color = pressure >= 0.75
         ? UngridColors.danger
         : pressure > 0
-            ? UngridColors.accent
-            : UngridColors.onBackground;
+        ? UngridColors.accent
+        : UngridColors.onBackground;
 
     // Le sursaut suit le changement de valeur ; la tension ajoute un battement
     // continu quand il ne reste presque plus rien.
@@ -133,8 +149,7 @@ class _MovesLeft extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('MOVES LEFT',
-            style: Theme.of(context).textTheme.labelLarge),
+        Text('MOVES LEFT', style: Theme.of(context).textTheme.labelLarge),
         const SizedBox(height: 2),
         Transform.scale(
           alignment: Alignment.centerLeft,

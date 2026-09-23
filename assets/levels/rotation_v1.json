@@ -1,0 +1,1071 @@
+{
+  "rulesVersion": 1,
+  "levels": [
+    {
+      "id": 1,
+      "rows": 5,
+      "columns": 5,
+      "blocks": [
+        {
+          "x": 3,
+          "y": 3,
+          "direction": "left"
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "direction": "down"
+        },
+        {
+          "x": 0,
+          "y": 4,
+          "direction": "right"
+        },
+        {
+          "x": 1,
+          "y": 4,
+          "direction": "right"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "direction": "up"
+        },
+        {
+          "x": 4,
+          "y": 0,
+          "direction": "left"
+        },
+        {
+          "x": 3,
+          "y": 0,
+          "direction": "left"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "direction": "up"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "direction": "left"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "direction": "right"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "direction": "right"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "direction": "right"
+        }
+      ],
+      "rotationTiles": [
+        {
+          "x": 2,
+          "y": 4
+        }
+      ],
+      "seed": 170,
+      "optimalMoves": 14,
+      "solution": [
+        "b11",
+        "b10",
+        "b7",
+        "b0",
+        "b9",
+        "b3",
+        "b3",
+        "b2",
+        "b1",
+        "b2",
+        "b8",
+        "b6",
+        "b5",
+        "b4"
+      ],
+      "analysis": {
+        "blockCount": 12,
+        "optimalMoves": 14,
+        "moveComplexity": 1.1666666666666667,
+        "multiMoveBlocks": 2,
+        "multiMoveRatio": 0.16666666666666666,
+        "maxMovesForSingleBlock": 2,
+        "averageChoices": 4.071428571428571,
+        "decisionRatio": 0.9285714285714286,
+        "decisionScore": 79.12698412698413,
+        "optimalPathNarrowness": 0.46153846153846156,
+        "temptingWrongMoves": 34,
+        "temptingWrongMoveRatio": 0.7906976744186046,
+        "wrongMoveOpportunities": 34,
+        "deadEndOpportunities": 0,
+        "dependencyComplexity": 0.7857142857142857,
+        "stopTileCount": 1,
+        "stopTileDensity": 0.04,
+        "stopTileInteractions": 2,
+        "meaningfulStopInteractions": 2,
+        "unusedStopTileCount": 0,
+        "stopDependencyScore": 1.0,
+        "stateSpaceComplexity": 0.5973060513077945,
+        "trivialityPenalty": 0.07142857142857142,
+        "exploredStates": 1080,
+        "unresolvedAlternatives": 0,
+        "difficultyScore": 60.28997826363459
+      }
+    },
+    {
+      "id": 2,
+      "rows": 6,
+      "columns": 6,
+      "blocks": [
+        {
+          "x": 0,
+          "y": 1,
+          "direction": "right"
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "direction": "down"
+        },
+        {
+          "x": 3,
+          "y": 5,
+          "direction": "left"
+        },
+        {
+          "x": 0,
+          "y": 5,
+          "direction": "up"
+        },
+        {
+          "x": 3,
+          "y": 2,
+          "direction": "left"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "direction": "down"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "direction": "right"
+        },
+        {
+          "x": 5,
+          "y": 3,
+          "direction": "up"
+        },
+        {
+          "x": 5,
+          "y": 2,
+          "direction": "up"
+        },
+        {
+          "x": 5,
+          "y": 0,
+          "direction": "left"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "direction": "left"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "direction": "left"
+        }
+      ],
+      "rotationTiles": [
+        {
+          "x": 1,
+          "y": 3
+        }
+      ],
+      "seed": 718,
+      "optimalMoves": 15,
+      "solution": [
+        "b11",
+        "b10",
+        "b4",
+        "b3",
+        "b2",
+        "b1",
+        "b0",
+        "b6",
+        "b3",
+        "b6",
+        "b5",
+        "b5",
+        "b9",
+        "b8",
+        "b7"
+      ],
+      "analysis": {
+        "blockCount": 12,
+        "optimalMoves": 15,
+        "moveComplexity": 1.25,
+        "multiMoveBlocks": 3,
+        "multiMoveRatio": 0.25,
+        "maxMovesForSingleBlock": 2,
+        "averageChoices": 4.866666666666666,
+        "decisionRatio": 0.8666666666666667,
+        "decisionScore": 95.66666666666667,
+        "optimalPathNarrowness": 0.3076923076923077,
+        "temptingWrongMoves": 37,
+        "temptingWrongMoveRatio": 0.6379310344827587,
+        "wrongMoveOpportunities": 30,
+        "deadEndOpportunities": 7,
+        "dependencyComplexity": 0.7333333333333333,
+        "stopTileCount": 1,
+        "stopTileDensity": 0.027777777777777776,
+        "stopTileInteractions": 2,
+        "meaningfulStopInteractions": 2,
+        "unusedStopTileCount": 0,
+        "stopDependencyScore": 1.0,
+        "stateSpaceComplexity": 0.73664343435031,
+        "trivialityPenalty": 0.13333333333333333,
+        "exploredStates": 5514,
+        "unresolvedAlternatives": 0,
+        "difficultyScore": 60.98194959721125
+      }
+    },
+    {
+      "id": 3,
+      "rows": 4,
+      "columns": 4,
+      "blocks": [
+        {
+          "x": 0,
+          "y": 2,
+          "direction": "right"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "direction": "up"
+        },
+        {
+          "x": 3,
+          "y": 0,
+          "direction": "left"
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "direction": "down"
+        }
+      ],
+      "rotationTiles": [
+        {
+          "x": 2,
+          "y": 0
+        }
+      ],
+      "seed": 308,
+      "optimalMoves": 6,
+      "solution": [
+        "b2",
+        "b2",
+        "b1",
+        "b0",
+        "b1",
+        "b3"
+      ],
+      "analysis": {
+        "blockCount": 4,
+        "optimalMoves": 6,
+        "moveComplexity": 1.5,
+        "multiMoveBlocks": 2,
+        "multiMoveRatio": 0.5,
+        "maxMovesForSingleBlock": 2,
+        "averageChoices": 2.8333333333333335,
+        "decisionRatio": 0.8333333333333334,
+        "decisionScore": 64.16666666666666,
+        "optimalPathNarrowness": 0.6,
+        "temptingWrongMoves": 9,
+        "temptingWrongMoveRatio": 0.8181818181818182,
+        "wrongMoveOpportunities": 8,
+        "deadEndOpportunities": 1,
+        "dependencyComplexity": 0.6666666666666666,
+        "stopTileCount": 1,
+        "stopTileDensity": 0.0625,
+        "stopTileInteractions": 2,
+        "meaningfulStopInteractions": 2,
+        "unusedStopTileCount": 0,
+        "stopDependencyScore": 1.0,
+        "stateSpaceComplexity": 0.3235664562600603,
+        "trivialityPenalty": 0.16666666666666666,
+        "exploredStates": 43,
+        "unresolvedAlternatives": 0,
+        "difficultyScore": 61.60750685894096
+      }
+    },
+    {
+      "id": 4,
+      "rows": 6,
+      "columns": 6,
+      "blocks": [
+        {
+          "x": 2,
+          "y": 2,
+          "direction": "right"
+        },
+        {
+          "x": 4,
+          "y": 0,
+          "direction": "down"
+        },
+        {
+          "x": 4,
+          "y": 5,
+          "direction": "left"
+        },
+        {
+          "x": 2,
+          "y": 5,
+          "direction": "up"
+        },
+        {
+          "x": 5,
+          "y": 3,
+          "direction": "left"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "direction": "left"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "direction": "down"
+        },
+        {
+          "x": 0,
+          "y": 4,
+          "direction": "right"
+        },
+        {
+          "x": 1,
+          "y": 4,
+          "direction": "right"
+        },
+        {
+          "x": 5,
+          "y": 2,
+          "direction": "up"
+        },
+        {
+          "x": 5,
+          "y": 1,
+          "direction": "up"
+        }
+      ],
+      "rotationTiles": [
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 4
+        }
+      ],
+      "seed": 489,
+      "optimalMoves": 16,
+      "solution": [
+        "b10",
+        "b9",
+        "b0",
+        "b3",
+        "b2",
+        "b3",
+        "b8",
+        "b8",
+        "b7",
+        "b6",
+        "b5",
+        "b7",
+        "b1",
+        "b1",
+        "b4",
+        "b4"
+      ],
+      "analysis": {
+        "blockCount": 11,
+        "optimalMoves": 16,
+        "moveComplexity": 1.4545454545454546,
+        "multiMoveBlocks": 5,
+        "multiMoveRatio": 0.45454545454545453,
+        "maxMovesForSingleBlock": 2,
+        "averageChoices": 4.25,
+        "decisionRatio": 0.8125,
+        "decisionScore": 96.25,
+        "optimalPathNarrowness": 0.07692307692307693,
+        "temptingWrongMoves": 34,
+        "temptingWrongMoveRatio": 0.6538461538461539,
+        "wrongMoveOpportunities": 17,
+        "deadEndOpportunities": 17,
+        "dependencyComplexity": 0.625,
+        "stopTileCount": 2,
+        "stopTileDensity": 0.05555555555555555,
+        "stopTileInteractions": 5,
+        "meaningfulStopInteractions": 4,
+        "unusedStopTileCount": 0,
+        "stopDependencyScore": 0.8,
+        "stateSpaceComplexity": 0.7351577165008644,
+        "trivialityPenalty": 0.25,
+        "exploredStates": 5419,
+        "unresolvedAlternatives": 0,
+        "difficultyScore": 62.22109186530038
+      }
+    },
+    {
+      "id": 5,
+      "rows": 5,
+      "columns": 5,
+      "blocks": [
+        {
+          "x": 2,
+          "y": 2,
+          "direction": "down"
+        },
+        {
+          "x": 1,
+          "y": 4,
+          "direction": "right"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "direction": "right"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "direction": "up"
+        },
+        {
+          "x": 4,
+          "y": 3,
+          "direction": "left"
+        },
+        {
+          "x": 3,
+          "y": 3,
+          "direction": "left"
+        },
+        {
+          "x": 4,
+          "y": 0,
+          "direction": "left"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "direction": "left"
+        }
+      ],
+      "rotationTiles": [
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 3
+        }
+      ],
+      "seed": 847,
+      "optimalMoves": 13,
+      "solution": [
+        "b0",
+        "b0",
+        "b7",
+        "b7",
+        "b5",
+        "b5",
+        "b4",
+        "b4",
+        "b6",
+        "b3",
+        "b2",
+        "b1",
+        "b6"
+      ],
+      "analysis": {
+        "blockCount": 8,
+        "optimalMoves": 13,
+        "moveComplexity": 1.625,
+        "multiMoveBlocks": 5,
+        "multiMoveRatio": 0.625,
+        "maxMovesForSingleBlock": 2,
+        "averageChoices": 3.230769230769231,
+        "decisionRatio": 0.9230769230769231,
+        "decisionScore": 78.26923076923077,
+        "optimalPathNarrowness": 0.08333333333333333,
+        "temptingWrongMoves": 18,
+        "temptingWrongMoveRatio": 0.6206896551724138,
+        "wrongMoveOpportunities": 17,
+        "deadEndOpportunities": 1,
+        "dependencyComplexity": 0.7692307692307693,
+        "stopTileCount": 2,
+        "stopTileDensity": 0.08,
+        "stopTileInteractions": 5,
+        "meaningfulStopInteractions": 5,
+        "unusedStopTileCount": 0,
+        "stopDependencyScore": 1.0,
+        "stateSpaceComplexity": 0.5500473894025365,
+        "trivialityPenalty": 0.07692307692307693,
+        "exploredStates": 621,
+        "unresolvedAlternatives": 0,
+        "difficultyScore": 63.076807462516086
+      }
+    },
+    {
+      "id": 6,
+      "rows": 5,
+      "columns": 5,
+      "blocks": [
+        {
+          "x": 3,
+          "y": 0,
+          "direction": "left"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "direction": "down"
+        },
+        {
+          "x": 0,
+          "y": 4,
+          "direction": "right"
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "direction": "up"
+        },
+        {
+          "x": 4,
+          "y": 2,
+          "direction": "left"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "direction": "left"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "direction": "down"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "direction": "right"
+        },
+        {
+          "x": 4,
+          "y": 3,
+          "direction": "up"
+        }
+      ],
+      "rotationTiles": [
+        {
+          "x": 1,
+          "y": 4
+        }
+      ],
+      "seed": 572,
+      "optimalMoves": 12,
+      "solution": [
+        "b4",
+        "b8",
+        "b7",
+        "b2",
+        "b2",
+        "b6",
+        "b5",
+        "b4",
+        "b1",
+        "b0",
+        "b1",
+        "b3"
+      ],
+      "analysis": {
+        "blockCount": 9,
+        "optimalMoves": 12,
+        "moveComplexity": 1.3333333333333333,
+        "multiMoveBlocks": 3,
+        "multiMoveRatio": 0.3333333333333333,
+        "maxMovesForSingleBlock": 2,
+        "averageChoices": 4.5,
+        "decisionRatio": 0.9166666666666666,
+        "decisionScore": 93.33333333333333,
+        "optimalPathNarrowness": 0.18181818181818182,
+        "temptingWrongMoves": 32,
+        "temptingWrongMoveRatio": 0.7619047619047619,
+        "wrongMoveOpportunities": 28,
+        "deadEndOpportunities": 4,
+        "dependencyComplexity": 0.8333333333333334,
+        "stopTileCount": 1,
+        "stopTileDensity": 0.04,
+        "stopTileInteractions": 2,
+        "meaningfulStopInteractions": 2,
+        "unusedStopTileCount": 0,
+        "stopDependencyScore": 1.0,
+        "stateSpaceComplexity": 0.6087631688983056,
+        "trivialityPenalty": 0.08333333333333333,
+        "exploredStates": 1235,
+        "unresolvedAlternatives": 0,
+        "difficultyScore": 64.15429828492893
+      }
+    },
+    {
+      "id": 7,
+      "rows": 5,
+      "columns": 5,
+      "blocks": [
+        {
+          "x": 4,
+          "y": 3,
+          "direction": "left"
+        },
+        {
+          "x": 3,
+          "y": 3,
+          "direction": "left"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "direction": "up"
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "direction": "right"
+        },
+        {
+          "x": 3,
+          "y": 0,
+          "direction": "down"
+        },
+        {
+          "x": 3,
+          "y": 2,
+          "direction": "left"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "direction": "up"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "direction": "down"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "direction": "down"
+        },
+        {
+          "x": 1,
+          "y": 4,
+          "direction": "left"
+        }
+      ],
+      "rotationTiles": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 3
+        }
+      ],
+      "seed": 506,
+      "optimalMoves": 16,
+      "solution": [
+        "b9",
+        "b8",
+        "b7",
+        "b5",
+        "b5",
+        "b1",
+        "b4",
+        "b3",
+        "b2",
+        "b1",
+        "b1",
+        "b0",
+        "b0",
+        "b0",
+        "b6",
+        "b6"
+      ],
+      "analysis": {
+        "blockCount": 10,
+        "optimalMoves": 16,
+        "moveComplexity": 1.6,
+        "multiMoveBlocks": 4,
+        "multiMoveRatio": 0.4,
+        "maxMovesForSingleBlock": 3,
+        "averageChoices": 3.875,
+        "decisionRatio": 0.8125,
+        "decisionScore": 95.0,
+        "optimalPathNarrowness": 0.23076923076923078,
+        "temptingWrongMoves": 33,
+        "temptingWrongMoveRatio": 0.717391304347826,
+        "wrongMoveOpportunities": 25,
+        "deadEndOpportunities": 8,
+        "dependencyComplexity": 0.5625,
+        "stopTileCount": 2,
+        "stopTileDensity": 0.08,
+        "stopTileInteractions": 6,
+        "meaningfulStopInteractions": 5,
+        "unusedStopTileCount": 0,
+        "stopDependencyScore": 0.8333333333333334,
+        "stateSpaceComplexity": 0.7007641268317989,
+        "trivialityPenalty": 0.25,
+        "exploredStates": 3624,
+        "unresolvedAlternatives": 0,
+        "difficultyScore": 65.43816670191273
+      }
+    },
+    {
+      "id": 8,
+      "rows": 5,
+      "columns": 5,
+      "blocks": [
+        {
+          "x": 3,
+          "y": 3,
+          "direction": "left"
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "direction": "down"
+        },
+        {
+          "x": 0,
+          "y": 4,
+          "direction": "right"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "direction": "up"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "direction": "right"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "direction": "down"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "direction": "right"
+        },
+        {
+          "x": 1,
+          "y": 4,
+          "direction": "right"
+        }
+      ],
+      "rotationTiles": [
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 4
+        }
+      ],
+      "seed": 497,
+      "optimalMoves": 13,
+      "solution": [
+        "b7",
+        "b7",
+        "b2",
+        "b2",
+        "b6",
+        "b1",
+        "b6",
+        "b6",
+        "b5",
+        "b4",
+        "b3",
+        "b0",
+        "b5"
+      ],
+      "analysis": {
+        "blockCount": 8,
+        "optimalMoves": 13,
+        "moveComplexity": 1.625,
+        "multiMoveBlocks": 4,
+        "multiMoveRatio": 0.5,
+        "maxMovesForSingleBlock": 3,
+        "averageChoices": 3.769230769230769,
+        "decisionRatio": 0.9230769230769231,
+        "decisionScore": 96.15384615384616,
+        "optimalPathNarrowness": 0.25,
+        "temptingWrongMoves": 27,
+        "temptingWrongMoveRatio": 0.75,
+        "wrongMoveOpportunities": 17,
+        "deadEndOpportunities": 10,
+        "dependencyComplexity": 0.5384615384615384,
+        "stopTileCount": 2,
+        "stopTileDensity": 0.08,
+        "stopTileInteractions": 5,
+        "meaningfulStopInteractions": 4,
+        "unusedStopTileCount": 0,
+        "stopDependencyScore": 0.8,
+        "stateSpaceComplexity": 0.6063781382212644,
+        "trivialityPenalty": 0.15384615384615385,
+        "exploredStates": 1201,
+        "unresolvedAlternatives": 0,
+        "difficultyScore": 67.80935373041393
+      }
+    },
+    {
+      "id": 9,
+      "rows": 6,
+      "columns": 6,
+      "blocks": [
+        {
+          "x": 5,
+          "y": 3,
+          "direction": "up"
+        },
+        {
+          "x": 5,
+          "y": 0,
+          "direction": "left"
+        },
+        {
+          "x": 4,
+          "y": 0,
+          "direction": "left"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "direction": "left"
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "direction": "down"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "direction": "down"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "direction": "down"
+        },
+        {
+          "x": 0,
+          "y": 5,
+          "direction": "right"
+        },
+        {
+          "x": 3,
+          "y": 5,
+          "direction": "up"
+        }
+      ],
+      "rotationTiles": [
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        }
+      ],
+      "seed": 299,
+      "optimalMoves": 14,
+      "solution": [
+        "b2",
+        "b2",
+        "b1",
+        "b0",
+        "b1",
+        "b8",
+        "b7",
+        "b6",
+        "b8",
+        "b5",
+        "b5",
+        "b4",
+        "b3",
+        "b4"
+      ],
+      "analysis": {
+        "blockCount": 9,
+        "optimalMoves": 14,
+        "moveComplexity": 1.5555555555555556,
+        "multiMoveBlocks": 5,
+        "multiMoveRatio": 0.5555555555555556,
+        "maxMovesForSingleBlock": 2,
+        "averageChoices": 4.428571428571429,
+        "decisionRatio": 0.9285714285714286,
+        "decisionScore": 88.57142857142857,
+        "optimalPathNarrowness": 0.23076923076923078,
+        "temptingWrongMoves": 35,
+        "temptingWrongMoveRatio": 0.7291666666666666,
+        "wrongMoveOpportunities": 33,
+        "deadEndOpportunities": 2,
+        "dependencyComplexity": 0.6428571428571429,
+        "stopTileCount": 2,
+        "stopTileDensity": 0.05555555555555555,
+        "stopTileInteractions": 5,
+        "meaningfulStopInteractions": 5,
+        "unusedStopTileCount": 0,
+        "stopDependencyScore": 1.0,
+        "stateSpaceComplexity": 0.7169801975581126,
+        "trivialityPenalty": 0.07142857142857142,
+        "exploredStates": 4381,
+        "unresolvedAlternatives": 0,
+        "difficultyScore": 68.82613649708404
+      }
+    },
+    {
+      "id": 10,
+      "rows": 5,
+      "columns": 5,
+      "blocks": [
+        {
+          "x": 2,
+          "y": 3,
+          "direction": "left"
+        },
+        {
+          "x": 0,
+          "y": 4,
+          "direction": "up"
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "direction": "right"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "direction": "right"
+        },
+        {
+          "x": 4,
+          "y": 0,
+          "direction": "down"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "direction": "left"
+        },
+        {
+          "x": 1,
+          "y": 4,
+          "direction": "up"
+        },
+        {
+          "x": 3,
+          "y": 2,
+          "direction": "down"
+        },
+        {
+          "x": 3,
+          "y": 3,
+          "direction": "right"
+        }
+      ],
+      "rotationTiles": [
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 3
+        }
+      ],
+      "seed": 863,
+      "optimalMoves": 13,
+      "solution": [
+        "b8",
+        "b7",
+        "b3",
+        "b6",
+        "b0",
+        "b3",
+        "b2",
+        "b0",
+        "b2",
+        "b1",
+        "b1",
+        "b5",
+        "b4"
+      ],
+      "analysis": {
+        "blockCount": 9,
+        "optimalMoves": 13,
+        "moveComplexity": 1.4444444444444444,
+        "multiMoveBlocks": 4,
+        "multiMoveRatio": 0.4444444444444444,
+        "maxMovesForSingleBlock": 2,
+        "averageChoices": 4.538461538461538,
+        "decisionRatio": 0.9230769230769231,
+        "decisionScore": 95.96153846153847,
+        "optimalPathNarrowness": 0.4166666666666667,
+        "temptingWrongMoves": 37,
+        "temptingWrongMoveRatio": 0.8043478260869565,
+        "wrongMoveOpportunities": 32,
+        "deadEndOpportunities": 5,
+        "dependencyComplexity": 0.6923076923076923,
+        "stopTileCount": 2,
+        "stopTileDensity": 0.08,
+        "stopTileInteractions": 4,
+        "meaningfulStopInteractions": 4,
+        "unusedStopTileCount": 0,
+        "stopDependencyScore": 1.0,
+        "stateSpaceComplexity": 0.6846969540687902,
+        "trivialityPenalty": 0.07692307692307693,
+        "exploredStates": 3003,
+        "unresolvedAlternatives": 0,
+        "difficultyScore": 74.27528869454869
+      }
+    }
+  ]
+}

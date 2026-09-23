@@ -13,23 +13,21 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-    statusBarIconBrightness: Brightness.light,
-    statusBarBrightness: Brightness.dark,
-  ));
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.dark,
+    ),
+  );
 
-  final progress = await ProgressService.load();
-
-  // La campagne publiée : c'est elle qui décide quel puzzle porte quel numéro.
-  // Si le fichier manque, le jeu tourne avec des niveaux fabriqués à la volée
-  // plutôt que de refuser de démarrer.
-  CampaignCatalog? catalog;
-  try {
-    catalog = await CampaignCatalog.load();
-  } catch (error) {
-    debugPrint('Campagne introuvable, génération à la volée : $error');
-  }
+  // La campagne embarquée fixe tous les niveaux proposés au joueur.
+  // Une erreur de chargement ne doit pas servir une grille facile à sa place.
+  final catalog = await CampaignCatalog.load();
+  final progress = await ProgressService.load(
+    campaignId:
+        'campaign_${catalog.campaign.catalogVersion}_generator_${catalog.campaign.generatorVersion}',
+  );
 
   runApp(UngridApp(progress: progress, catalog: catalog));
 }

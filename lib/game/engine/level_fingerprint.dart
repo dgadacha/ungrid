@@ -22,13 +22,17 @@ class LevelFingerprint {
       for (final block in level.blocks)
         '${block.x},${block.y},${block.direction.code}',
     ]..sort();
-    final tiles = [
-      for (final tile in level.stopTiles) '${tile.x},${tile.y}',
-    ]..sort();
+    final tiles = [for (final tile in level.stopTiles) '${tile.x},${tile.y}']
+      ..sort();
 
+    final rotation = level.rotationTiles.isEmpty
+        ? ''
+        : '|R:${([for (final p in level.rotationTiles) '${p.x},${p.y}']..sort()).join(';')}';
     return 'G:${level.columns}x${level.rows}'
         '|B:${blocks.join(';')}'
-        '|S:${tiles.join(';')}';
+        '|S:${tiles.join(';')}'
+        '$rotation'
+        '${level.fragileStopTiles.isEmpty ? '' : '|F:${([for (final p in level.fragileStopTiles) '${p.x},${p.y}']..sort()).join(';')}'}';
   }
 
   /// Empreinte courte et stable, en hexadécimal.

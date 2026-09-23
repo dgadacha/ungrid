@@ -11,25 +11,29 @@ import 'campaign_level.dart';
 
 /// La campagne officielle, telle que tous les joueurs la reçoivent.
 ///
-/// Le catalogue ne contient pas les boards : il contient des seeds. Le niveau
-/// se reconstruit à l'ouverture, et l'empreinte vérifie qu'on obtient bien
-/// celui qui a été publié. Un niveau qui changerait en cours de route rendrait
-/// fausses toutes les solutions déjà partagées.
+/// La v3 embarque les grilles validées hors ligne pour charger sans solveur.
+/// Les anciens catalogues restent reconstruits depuis leurs seeds v2.
+/// L'empreinte est vérifiée dans toutes les configurations de compilation.
 class CampaignCatalog {
   CampaignCatalog(this.campaign, {this.generator = const SlideGenerator()});
 
-  static const String assetPath = 'assets/levels/campaign_v2.json';
+  static const String assetPath = 'assets/levels/campaign_v3.json';
 
   final Campaign campaign;
   final PuzzleGenerator generator;
 
   final Map<int, Level> _cache = {};
 
-  static Future<CampaignCatalog> load() async {
-    final raw = await rootBundle.loadString(assetPath);
-    final json = jsonDecode(raw) as Map<String, dynamic>;
-    return CampaignCatalog(Campaign.fromJson(json));
-  }
+  static Future<CampaignCatalog> load({String path = assetPath}) async =>
+      parse(await rootBundle.loadString(path));
+
+  /// Construit le catalogue depuis le JSON déjà lu.
+  ///
+  /// Les tests de widget passent par là : leur horloge est simulée, si bien
+  /// qu'une lecture de fichier attendue directement ne se termine jamais. Ils
+  /// lisent donc le catalogue eux-mêmes, sous `runAsync`, et le donnent ici.
+  static CampaignCatalog parse(String raw) =>
+      CampaignCatalog(Campaign.fromJson(jsonDecode(raw) as Map<String, dynamic>));
 
   int get levelCount => campaign.levelCount;
 
@@ -37,10 +41,7 @@ class CampaignCatalog {
 
   /// Reconstruit le niveau [levelId].
   ///
-  /// Les premiers sont écrits à la main ; les suivants sortent de leur seed.
-  /// En debug, l'empreinte est comparée à celle du catalogue : une régression
-  /// du générateur se voit immédiatement, plutôt qu'à la première réclamation
-  /// d'un joueur.
+  /// Charge la grille publiée, ou reconstruit une ancienne seed v2.
   Level? levelFor(int levelId) {
     final cached = _cache[levelId];
     if (cached != null) return cached;
@@ -50,23 +51,29 @@ class CampaignCatalog {
       return null;
     }
 
-    final level = generator
-        .fromSeed(definition.seed, levelId: levelId)
-        ?.copyWith(optimalMoves: definition.optimalMoves);
+    if (definition.board == null &&
+        definition.generatorVersion != currentGeneratorVersion) {
+      throw StateError(
+        'Version de génération non prise en charge : ${definition.generatorVersion}',
+      );
+    }
+    final level =
+        (definition.board ??
+                generator.fromSeed(definition.seed, levelId: levelId))
+            ?.copyWith(
+              id: levelId,
+              seed: definition.seed,
+              optimalMoves: definition.optimalMoves,
+              difficulty: definition.difficulty,
+            );
     if (level == null) return null;
 
-    assert(() {
-      final actual = LevelFingerprint.of(level);
-      if (actual != definition.fingerprint) {
-        throw StateError(
-          'Niveau $levelId : le board ne correspond plus au catalogue.\n'
-          'attendu ${definition.fingerprint}, obtenu $actual.\n'
-          'Le générateur a changé : publiez une nouvelle version plutôt que '
-          'de modifier la v$currentGeneratorVersion.',
-        );
-      }
-      return true;
-    }());
+    if (!level.isStructurallyValid ||
+        LevelFingerprint.of(level) != definition.fingerprint) {
+      throw StateError(
+        'Niveau $levelId : grille publiée invalide ou empreinte différente.',
+      );
+    }
 
     return _cache[levelId] = level;
   }
@@ -80,7 +87,7 @@ class CampaignCatalog {
 /// ne sont plus ceux de la campagne publiée.
 @visibleForTesting
 Campaign emptyCampaign() => const Campaign(
-      catalogVersion: 0,
-      generatorVersion: currentGeneratorVersion,
-      levels: [],
-    );
+  catalogVersion: 0,
+  generatorVersion: currentGeneratorVersion,
+  levels: [],
+);

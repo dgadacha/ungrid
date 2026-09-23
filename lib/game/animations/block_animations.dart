@@ -29,8 +29,7 @@ class BlockMotion {
     required int fromY,
     required int startMs,
   }) {
-    final distance =
-        (block.x - fromX).abs() + (block.y - fromY).abs();
+    final distance = (block.x - fromX).abs() + (block.y - fromY).abs();
     return BlockMotion(
       blockId: block.id,
       direction: block.direction,
@@ -71,17 +70,21 @@ class BlockMotion {
   }
 
   /// Retour en arrière : l'animation exacte à l'envers.
-  factory BlockMotion.reverse(BlockMotion motion, int startMs) => BlockMotion(
-        blockId: motion.blockId,
-        direction: motion.direction,
-        fromX: motion.toX,
-        fromY: motion.toY,
-        toX: motion.fromX,
-        toY: motion.fromY,
-        startMs: startMs,
-        durationMs: motion.durationMs,
-        fadeIn: motion.fadeOut,
-      );
+  factory BlockMotion.reverse(
+    BlockMotion motion,
+    int startMs, {
+    Direction? restoredDirection,
+  }) => BlockMotion(
+    blockId: motion.blockId,
+    direction: restoredDirection ?? motion.direction,
+    fromX: motion.toX,
+    fromY: motion.toY,
+    toX: motion.fromX,
+    toY: motion.fromY,
+    startMs: startMs,
+    durationMs: motion.durationMs,
+    fadeIn: motion.fadeOut,
+  );
 
   final String blockId;
   final Direction direction;
@@ -159,5 +162,6 @@ class PressFeedback {
     return elapsed / total;
   }
 
-  bool isDone(int nowMs) => nowMs - startMs >= GameTiming.tapPress.inMilliseconds;
+  bool isDone(int nowMs) =>
+      nowMs - startMs >= GameTiming.tapPress.inMilliseconds;
 }

@@ -14,10 +14,12 @@ class LevelProgress {
     required this.completed,
     this.bestMovesUsed,
     this.bestTime,
+    this.mastered = false,
   });
 
   final int levelId;
   final bool completed;
+  final bool mastered;
   final int? bestMovesUsed;
   final Duration? bestTime;
 }
@@ -28,26 +30,46 @@ class LevelProgress {
 /// `SharedPreferences` directement, ce qui permet de changer de support sans
 /// rien réécrire ailleurs.
 class ProgressService {
-  ProgressService._(this._prefs);
+  ProgressService._(this._prefs, this._prefix);
 
-  static const String _kHighestUnlocked = 'highest_unlocked_level';
+  final String _prefix;
+
+  String get _kHighestUnlocked => '${_prefix}highest_unlocked_level';
   static const String _kHaptics = 'haptics_enabled';
-  static const String _kGeneratorVersion = 'progress_generator_version';
-  static String _kCompleted(int id) => 'level_${id}_completed';
-  static String _kMoves(int id) => 'level_${id}_best_moves';
-  static String _kTime(int id) => 'level_${id}_best_time';
+  String get _kGeneratorVersion => '${_prefix}progress_generator_version';
+  String _kCompleted(int id) => '${_prefix}level_${id}_completed';
+  String _kMoves(int id) => '${_prefix}level_${id}_best_moves';
+  String _kTime(int id) => '${_prefix}level_${id}_best_time';
+  String _kMastered(int id) => '${_prefix}level_${id}_mastered';
+  String get _kPalette => '${_prefix}palette';
 
   final SharedPreferences _prefs;
 
   /// La progression a été effacée parce que les niveaux ont changé.
   bool _resetForNewLevels = false;
 
+  bool startedNewCampaign = false;
+
   /// À dire au joueur une fois, au lancement : ses records ne portaient plus
   /// sur les mêmes puzzles.
   bool get wasResetForNewLevels => _resetForNewLevels;
 
-  static Future<ProgressService> load() async {
-    final service = ProgressService._(await SharedPreferences.getInstance());
+  /// Chaque campagne garde ses records ; null désigne les niveaux historiques.
+  static Future<ProgressService> load({String? campaignId}) async {
+    final prefs = await SharedPreferences.getInstance();
+    final service = ProgressService._(
+      prefs,
+      campaignId == null ? '' : '${campaignId}_',
+    );
+    service.startedNewCampaign =
+        campaignId != null &&
+        prefs.getInt(service._kGeneratorVersion) == null &&
+        prefs.getKeys().any(
+          (key) =>
+              key.endsWith('highest_unlocked_level') &&
+              key != service._kHighestUnlocked &&
+              prefs.getInt(key) != null,
+        );
     await service._reconcileGeneratorVersion();
     return service;
   }
@@ -65,7 +87,8 @@ class ProgressService {
     final stored = _prefs.getInt(_kGeneratorVersion);
     if (stored == currentGeneratorVersion) return;
 
-    final hasProgress = _prefs.getInt(_kHighestUnlocked) != null ||
+    final hasProgress =
+        _prefs.getInt(_kHighestUnlocked) != null ||
         _prefs.getBool(_kCompleted(1)) == true;
     if (stored != null || hasProgress) {
       await resetProgress();
@@ -75,7 +98,10 @@ class ProgressService {
   }
 
   /// Le joueur a vu le message : on ne le lui répète pas.
-  void acknowledgeReset() => _resetForNewLevels = false;
+  void acknowledgeReset() {
+    _resetForNewLevels = false;
+    startedNewCampaign = false;
+  }
 
   int get highestUnlockedLevel => _prefs.getInt(_kHighestUnlocked) ?? 1;
 
@@ -86,7 +112,8 @@ class ProgressService {
 
   bool isUnlocked(int levelId) => levelId <= highestUnlockedLevel;
 
-  bool isCompleted(int levelId) => _prefs.getBool(_kCompleted(levelId)) ?? false;
+  bool isCompleted(int levelId) =>
+      _prefs.getBool(_kCompleted(levelId)) ?? false;
 
   LevelProgress? progressFor(int levelId) {
     if (!isCompleted(levelId)) return null;
@@ -94,6 +121,7 @@ class ProgressService {
     return LevelProgress(
       levelId: levelId,
       completed: true,
+      mastered: isMastered(levelId),
       bestMovesUsed: _prefs.getInt(_kMoves(levelId)),
       bestTime: time == null ? null : Duration(milliseconds: time),
     );
@@ -104,6 +132,7 @@ class ProgressService {
     required int levelId,
     required int movesUsed,
     required Duration time,
+    bool mastered = false,
   }) async {
     final previous = progressFor(levelId);
 
@@ -112,6 +141,7 @@ class ProgressService {
     final beatsTime = previous?.bestTime == null || time < previous!.bestTime!;
 
     await _prefs.setBool(_kCompleted(levelId), true);
+    if (mastered) await _prefs.setBool(_kMastered(levelId), true);
     if (beatsMoves) await _prefs.setInt(_kMoves(levelId), movesUsed);
     if (beatsTime) await _prefs.setInt(_kTime(levelId), time.inMilliseconds);
     if (levelId + 1 > highestUnlockedLevel) {
@@ -135,14 +165,48 @@ class ProgressService {
     return total;
   }
 
+  bool isMastered(int id) => _prefs.getBool(_kMastered(id)) ?? false;
+
+  int chapterCleared(int chapter) => List.generate(
+    10,
+    (i) => (chapter - 1) * 10 + i + 1,
+  ).where(isCompleted).length;
+  int chapterMastered(int chapter) => List.generate(
+    10,
+    (i) => (chapter - 1) * 10 + i + 1,
+  ).where(isMastered).length;
+  int get completedChapters => List.generate(
+    10,
+    (i) => i + 1,
+  ).where((c) => chapterCleared(c) == 10).length;
+  List<int> get unlockedPalettes => [
+    0,
+    if (completedChapters >= 1) 1,
+    if (completedChapters >= 3) 2,
+    if (completedChapters >= 5) 3,
+  ];
+  int get paletteIndex {
+    final selected = _prefs.getInt(_kPalette) ?? 0;
+    return unlockedPalettes.contains(selected) ? selected : 0;
+  }
+
+  Future<void> selectPalette(int index) async {
+    if (!unlockedPalettes.contains(index)) {
+      throw StateError('Palette verrouillée.');
+    }
+    await _prefs.setInt(_kPalette, index);
+  }
+
   Future<void> resetProgress() async {
     final highest = highestUnlockedLevel;
     for (var id = 1; id <= highest; id++) {
       await _prefs.remove(_kCompleted(id));
       await _prefs.remove(_kMoves(id));
       await _prefs.remove(_kTime(id));
+      await _prefs.remove(_kMastered(id));
     }
     await _prefs.remove(_kHighestUnlocked);
+    await _prefs.remove(_kPalette);
   }
 }
 
@@ -150,9 +214,7 @@ class ProgressService {
 class RecordsBeaten {
   const RecordsBeaten({required this.time, required this.moves});
 
-  const RecordsBeaten.none()
-      : time = false,
-        moves = false;
+  const RecordsBeaten.none() : time = false, moves = false;
 
   final bool time;
   final bool moves;

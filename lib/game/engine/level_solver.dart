@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'dart:typed_data';
 
 import '../models/level.dart';
+import '../models/direction.dart';
 import '../models/move_result.dart';
 import 'game_engine.dart';
 import 'move_resolver.dart';
@@ -15,14 +16,15 @@ import 'solve_result.dart';
 /// Depuis que les blocs glissent, leur position fait partie de l'état : un
 /// même bloc peut être joué plusieurs fois avant de sortir. Un état est donc
 /// la liste des cases occupées par les blocs encore présents, `-1` marquant
-/// ceux qui sont sortis. Les directions et les tuiles d'arrêt, elles, ne
-/// bougent jamais : elles sont portées par le board, pas par l'état.
+/// ceux qui sont sortis. Les arrêts permanents restent fixes ; les directions
+/// deviennent variables en présence de rotations.
+/// Les indicateurs des arrêts fragiles suivent les positions dans l'état :
+/// deux positions identiques peuvent avoir consommé des tuiles différentes.
 ///
-/// Deux propriétés bornent l'exploration. Un bloc ne se déplace que dans sa
-/// direction, donc sa coordonnée ne revient jamais en arrière : l'espace
-/// d'états est un graphe sans cycle. Et chaque coup rapproche au moins un bloc
-/// du bord. Le parcours en largeur donne donc la solution la plus courte, sans
-/// risque de tourner en rond.
+/// Les orientations suivent les indicateurs fragiles lorsqu'il y a des rotations.
+/// Le graphe peut contenir des cycles : les coûts mémorisés empêchent de
+/// revisiter un état sans amélioration. A* conserve une borne admissible,
+/// le nombre de blocs restants, et un budget explicite d'exploration.
 class LevelSolver {
   const LevelSolver({this.maxExploredStates = 12000});
 
@@ -125,8 +127,9 @@ class LevelSolver {
       state = board.slide(state, block)!;
     }
 
-    final maxBranching =
-        branching.isEmpty ? 0 : branching.reduce((a, b) => a > b ? a : b);
+    final maxBranching = branching.isEmpty
+        ? 0
+        : branching.reduce((a, b) => a > b ? a : b);
     final average = branching.isEmpty
         ? 0.0
         : branching.fold<int>(0, (a, b) => a + b) / branching.length;
@@ -177,7 +180,7 @@ class LevelSolver {
       var available = 0;
       var optimal = 0;
 
-      for (var i = 0; i < state.length; i++) {
+      for (var i = 0; i < board.startCells.length; i++) {
         if (state[i] < 0) continue;
         final next = board.slideWith(state, i, cells);
         if (next == null) continue; // un refus ne décide de rien
@@ -212,7 +215,7 @@ class LevelSolver {
       final changed = !_sameProspects(before, after);
       if (changed) dependencyMoves++;
 
-      if (landed >= 0 && board.isStopTile(landed)) {
+      if (landed >= 0 && (cells[landed] & cellStopTile != 0)) {
         stopInteractions++;
         usedStopTiles.add(landed);
         if (changed) meaningfulStops++;
@@ -266,7 +269,7 @@ class LevelSolver {
       if (board.isCleared(state)) return g;
 
       final cells = board.cellsOf(state);
-      for (var i = 0; i < state.length; i++) {
+      for (var i = 0; i < board.startCells.length; i++) {
         if (state[i] < 0) continue;
         final next = board.slideWith(state, i, cells);
         if (next == null) continue;
@@ -322,7 +325,7 @@ class LevelSolver {
       }
 
       final cells = board.cellsOf(state);
-      for (var i = 0; i < start.length; i++) {
+      for (var i = 0; i < board.startCells.length; i++) {
         if (state[i] < 0) continue;
         final next = board.slideWith(state, i, cells);
         if (next == null) continue;
@@ -364,6 +367,9 @@ class _Board {
     required this.dy,
     required this.startCells,
     required this.stopMask,
+    required this.fragileCells,
+    required this.rotationCells,
+    required this.directions,
   });
 
   factory _Board.of(Level level) {
@@ -372,10 +378,15 @@ class _Board {
       rows: level.rows,
       dx: [for (final b in level.blocks) b.direction.dx],
       dy: [for (final b in level.blocks) b.direction.dy],
-      startCells: [
-        for (final b in level.blocks) b.y * level.columns + b.x,
-      ],
+      startCells: [for (final b in level.blocks) b.y * level.columns + b.x],
       stopMask: level.stopMask(),
+      directions: [for (final b in level.blocks) b.direction],
+      rotationCells: {
+        for (final p in level.rotationTiles) p.y * level.columns + p.x,
+      },
+      fragileCells: [
+        for (final p in level.fragileStopTiles) p.y * level.columns + p.x,
+      ],
     );
   }
 
@@ -387,20 +398,30 @@ class _Board {
 
   /// Grille des tuiles d'arrêt : elle ne change jamais, on la recopie.
   final Uint8List stopMask;
+  final List<int> fragileCells;
 
-  List<int> initialState() => List<int>.from(startCells);
+  final Set<int> rotationCells;
+  final List<Direction> directions;
+  int get directionOffset => startCells.length + fragileCells.length;
+  List<int> initialState() => [
+    ...startCells,
+    for (final _ in fragileCells) 1,
+    if (rotationCells.isNotEmpty) ...[for (final d in directions) d.index],
+  ];
 
   /// Blocs encore en jeu : c'est l'estimation utilisée par la recherche.
   int remainingCount(List<int> state) {
     var count = 0;
-    for (final cell in state) {
+    for (var i = 0; i < startCells.length; i++) {
+      final cell = state[i];
       if (cell >= 0) count++;
     }
     return count;
   }
 
   bool isCleared(List<int> state) {
-    for (final cell in state) {
+    for (var i = 0; i < startCells.length; i++) {
+      final cell = state[i];
       if (cell >= 0) return false;
     }
     return true;
@@ -417,7 +438,13 @@ class _Board {
   /// testé dominait le coût de l'exploration.
   Uint8List cellsOf(List<int> state) {
     final cells = Uint8List.fromList(stopMask);
-    for (final cell in state) {
+    for (var j = 0; j < fragileCells.length; j++) {
+      if (state[startCells.length + j] == 0) {
+        cells[fragileCells[j]] &= ~cellStopTile;
+      }
+    }
+    for (var i = 0; i < startCells.length; i++) {
+      final cell = state[i];
       if (cell >= 0) cells[cell] |= cellOccupied;
     }
     return cells;
@@ -427,10 +454,13 @@ class _Board {
     final cell = state[index];
     if (cell < 0) return null;
 
+    final direction = rotationCells.isEmpty
+        ? directions[index]
+        : Direction.values[state[directionOffset + index]];
     final move = MoveResolver.resolve(
       cell: cell,
-      stepX: dx[index],
-      stepY: dy[index],
+      stepX: direction.dx,
+      stepY: direction.dy,
       columns: columns,
       rows: rows,
       cells: cells,
@@ -439,10 +469,17 @@ class _Board {
 
     final next = List<int>.from(state);
     next[index] = move.cell;
+    if (rotationCells.isNotEmpty) {
+      next[directionOffset + index] = move.cell < 0
+          ? 0
+          : rotationCells.contains(move.cell)
+          ? direction.clockwise.index
+          : direction.index;
+    }
+    final fragileIndex = fragileCells.indexOf(cell);
+    if (fragileIndex >= 0) next[startCells.length + fragileIndex] = 0;
     return next;
   }
-
-  bool isStopTile(int cell) => stopMask[cell] & cellStopTile != 0;
 
   /// Ce que chaque bloc ferait si on le touchait maintenant.
   ///
@@ -451,10 +488,13 @@ class _Board {
   /// compte pour quelqu'un d'autre que celui qu'on a bougé.
   List<int> prospects(List<int> state, Uint8List cells, {required int skip}) {
     final out = <int>[];
-    for (var i = 0; i < state.length; i++) {
+    for (var i = 0; i < startCells.length; i++) {
       if (i == skip || state[i] < 0) continue;
       final next = slideWith(state, i, cells);
       out.add(next == null ? -2 : next[i]);
+      if (rotationCells.isNotEmpty) {
+        out.add(next == null ? -2 : next[directionOffset + i]);
+      }
     }
     return out;
   }
@@ -463,7 +503,7 @@ class _Board {
   int movableCount(List<int> state) {
     final cells = cellsOf(state);
     var count = 0;
-    for (var i = 0; i < state.length; i++) {
+    for (var i = 0; i < startCells.length; i++) {
       if (state[i] < 0) continue;
       if (slideWith(state, i, cells) != null) count++;
     }

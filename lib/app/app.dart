@@ -23,10 +23,13 @@ class UngridApp extends StatefulWidget {
 }
 
 class _UngridAppState extends State<UngridApp> {
-  late final HapticService _haptics =
-      HapticService(enabled: widget.progress.hapticsEnabled);
-  late final LevelRepository _repository =
-      LevelRepository(catalog: widget.catalog);
+  late final HapticService _haptics = HapticService(
+    enabled: widget.progress.hapticsEnabled,
+  );
+  late final LevelRepository _repository = LevelRepository(
+    catalog: widget.catalog,
+    lastLevel: widget.catalog?.levelCount,
+  );
 
   @override
   Widget build(BuildContext context) {

@@ -38,16 +38,25 @@ class GameController extends ChangeNotifier {
     required this.haptics,
     this.solver = const LevelSolver(),
     this.rewards = const LocalRewardService(),
+    this.paletteIndex = 0,
     int? moveLimit,
-  })  : _level = level,
-        _moveLimit = moveLimit,
-        engine = GameEngine(level) {
+  }) : _level = level,
+       _moveLimit = moveLimit,
+       engine = GameEngine(level) {
     _clock.start();
   }
 
   final HapticService haptics;
   final LevelSolver solver;
   final RewardService rewards;
+  final int paletteIndex;
+  int _attempt = 0;
+  bool usedHint = false;
+  bool get mastered =>
+      isCleared &&
+      !usedHint &&
+      bonusMoves == 0 &&
+      movesUsed <= level.optimalMoves;
 
   Level _level;
   Level get level => _level;
@@ -73,8 +82,9 @@ class GameController extends ChangeNotifier {
   PressFeedback? pressFeedback;
 
   /// Blocs dont le dessin est pris en charge par une animation.
-  Set<String> get animatedBlockIds =>
-      {for (final motion in motions) motion.blockId};
+  Set<String> get animatedBlockIds => {
+    for (final motion in motions) motion.blockId,
+  };
 
   /// Bloc désigné par l'indice, tant qu'il n'a pas été joué.
   String? hintedBlockId;
@@ -173,21 +183,25 @@ class GameController extends ChangeNotifier {
 
     switch (result.outcome) {
       case MoveOutcome.exited:
-        _push(BlockMotion.exit(
-          block: block,
-          columns: level.columns,
-          rows: level.rows,
-          startMs: nowMs,
-        ));
+        _push(
+          BlockMotion.exit(
+            block: block,
+            columns: level.columns,
+            rows: level.rows,
+            startMs: nowMs,
+          ),
+        );
       case MoveOutcome.slid:
       case MoveOutcome.stopped:
         final moved = engine.blockById(block.id)!;
-        _push(BlockMotion.slide(
-          block: moved,
-          fromX: block.x,
-          fromY: block.y,
-          startMs: nowMs,
-        ));
+        _push(
+          BlockMotion.slide(
+            block: moved,
+            fromX: block.x,
+            fromY: block.y,
+            startMs: nowMs,
+          ),
+        );
         if (result.stopped) haptics.stoppedOnTile();
       case MoveOutcome.blocked:
         blockedFeedback = BlockedFeedback(block: block, startMs: nowMs);
@@ -249,7 +263,7 @@ class GameController extends ChangeNotifier {
   /// Seuls les coups qui ont modifié le plateau s'annulent : un refus n'a rien
   /// déplacé, et le rembourser reviendrait à autoriser le joueur à tout tester
   /// sans rien risquer.
-  bool get canUndo => isPlaying && engine.canUndo;
+  bool get canUndo => !isCleared && engine.canUndo;
 
   /// Reprend le dernier déplacement, en le rejouant à l'envers.
   ///
@@ -262,13 +276,25 @@ class GameController extends ChangeNotifier {
     if (record == null) return;
 
     movesUsed = movesUsed > 0 ? movesUsed - 1 : 0;
+    if (isOutOfMoves && movesLeft > 0) {
+      outcome = GameOutcome.playing;
+      _outcomeAtMs = null;
+      resumeTimer();
+    }
+    blockedFeedback = null;
     _movesChangedAtMs = nowMs;
     hintedBlockId = null;
 
     final motion = _lastMotion;
     motions.clear();
     if (motion != null && motion.blockId == record.blockId) {
-      motions.add(BlockMotion.reverse(motion, nowMs));
+      motions.add(
+        BlockMotion.reverse(
+          motion,
+          nowMs,
+          restoredDirection: record.directionBefore,
+        ),
+      );
     }
     _lastMotion = null;
 
@@ -281,12 +307,15 @@ class GameController extends ChangeNotifier {
   Future<bool> requestHint() async {
     if (!isPlaying || !rewards.isAvailable) return false;
 
+    final attempt = _attempt;
     pauseTimer();
     final granted = await rewards.requestReward(RewardType.hint);
+    if (attempt != _attempt || !isPlaying) return false;
     resumeTimer();
     if (!granted) return false;
 
     hintedBlockId = solver.nextBestMove(level, engine.history);
+    if (hintedBlockId != null) usedHint = true;
     notifyListeners();
     return hintedBlockId != null;
   }
@@ -298,9 +327,10 @@ class GameController extends ChangeNotifier {
   Future<bool> requestExtraMoves({int amount = 3}) async {
     if (!isOutOfMoves || !rewards.isAvailable) return false;
 
+    final attempt = _attempt;
     pauseTimer();
     final granted = await rewards.requestReward(RewardType.extraMoves);
-    if (!granted) return false;
+    if (attempt != _attempt || !isOutOfMoves || !granted) return false;
 
     bonusMoves += amount;
     outcome = GameOutcome.playing;
@@ -318,6 +348,8 @@ class GameController extends ChangeNotifier {
 
   /// Recharge le niveau. Immédiat, sans confirmation.
   void restart() {
+    _attempt++;
+    usedHint = false;
     engine.reset();
     motions.clear();
     _lastMotion = null;
@@ -334,6 +366,12 @@ class GameController extends ChangeNotifier {
       ..reset();
     lockInput();
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _attempt++;
+    super.dispose();
   }
 
   /// Passe à un autre niveau sans recréer le contrôleur : l'enchaînement d'un

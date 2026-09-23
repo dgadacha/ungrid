@@ -13,6 +13,8 @@ class Level {
     required this.blocks,
     required this.optimalMoves,
     this.stopTiles = const [],
+    this.fragileStopTiles = const [],
+    this.rotationTiles = const [],
     this.difficulty = Difficulty.easy,
     this.seed,
   });
@@ -28,6 +30,17 @@ class Level {
   /// victoire : ce sont des points d'arrêt, pas des obstacles. Un bloc peut
   /// démarrer sur l'une d'elles sans être retenu.
   final List<GridPosition> stopTiles;
+
+  /// Arrêts consommés quand leur premier occupant repart.
+  final List<GridPosition> fragileStopTiles;
+
+  /// Arrêt et quart de tour horaire à chaque arrivée.
+  final List<GridPosition> rotationTiles;
+  Iterable<GridPosition> get allStopTiles => [
+    ...stopTiles,
+    ...fragileStopTiles,
+    ...rotationTiles,
+  ];
 
   /// Nombre minimal de coups pour vider la grille, calculé par le solveur.
   ///
@@ -61,47 +74,58 @@ class Level {
     int? id,
     List<Block>? blocks,
     List<GridPosition>? stopTiles,
+    List<GridPosition>? fragileStopTiles,
+    List<GridPosition>? rotationTiles,
     int? optimalMoves,
     Difficulty? difficulty,
     int? seed,
-  }) =>
-      Level(
-        id: id ?? this.id,
-        rows: rows,
-        columns: columns,
-        blocks: blocks ?? this.blocks,
-        stopTiles: stopTiles ?? this.stopTiles,
-        optimalMoves: optimalMoves ?? this.optimalMoves,
-        difficulty: difficulty ?? this.difficulty,
-        seed: seed ?? this.seed,
-      );
+  }) => Level(
+    id: id ?? this.id,
+    rows: rows,
+    columns: columns,
+    blocks: blocks ?? this.blocks,
+    stopTiles: stopTiles ?? this.stopTiles,
+    fragileStopTiles: fragileStopTiles ?? this.fragileStopTiles,
+    rotationTiles: rotationTiles ?? this.rotationTiles,
+    optimalMoves: optimalMoves ?? this.optimalMoves,
+    difficulty: difficulty ?? this.difficulty,
+    seed: seed ?? this.seed,
+  );
 
   /// Grille des tuiles d'arrêt, prête pour le résolveur.
   Uint8List stopMask() {
     final mask = Uint8List(cellCount);
-    for (final tile in stopTiles) {
+    for (final tile in allStopTiles) {
       mask[tile.y * columns + tile.x] = 2;
     }
     return mask;
   }
 
   bool hasStopTileAt(int x, int y) {
-    for (final tile in stopTiles) {
+    for (final tile in allStopTiles) {
       if (tile.x == x && tile.y == y) return true;
     }
     return false;
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'rows': rows,
-        'columns': columns,
-        'blocks': blocks.map((b) => b.toJson()).toList(),
-        if (stopTiles.isNotEmpty)
-          'stopTiles': [
-            for (final tile in stopTiles) {'x': tile.x, 'y': tile.y},
-          ],
-      };
+    'id': id,
+    'rows': rows,
+    'columns': columns,
+    'blocks': blocks.map((b) => b.toJson()).toList(),
+    if (stopTiles.isNotEmpty)
+      'stopTiles': [
+        for (final tile in stopTiles) {'x': tile.x, 'y': tile.y},
+      ],
+    if (rotationTiles.isNotEmpty)
+      'rotationTiles': [
+        for (final tile in rotationTiles) {'x': tile.x, 'y': tile.y},
+      ],
+    if (fragileStopTiles.isNotEmpty)
+      'fragileStopTiles': [
+        for (final tile in fragileStopTiles) {'x': tile.x, 'y': tile.y},
+      ],
+  };
 
   static Level fromJson(Map<String, dynamic> json, {int optimalMoves = 0}) {
     final rawBlocks = (json['blocks'] as List).cast<Map<String, dynamic>>();
@@ -117,8 +141,19 @@ class Level {
         for (final tile in (json['stopTiles'] as List? ?? const []).cast<Map>())
           GridPosition(tile['x'] as int, tile['y'] as int),
       ],
+      rotationTiles: [
+        for (final tile
+            in (json['rotationTiles'] as List? ?? const []).cast<Map>())
+          GridPosition(tile['x'] as int, tile['y'] as int),
+      ],
+      fragileStopTiles: [
+        for (final tile
+            in (json['fragileStopTiles'] as List? ?? const []).cast<Map>())
+          GridPosition(tile['x'] as int, tile['y'] as int),
+      ],
       optimalMoves:
-          json['optimalMoves'] as int? ?? (optimalMoves == 0 ? rawBlocks.length : optimalMoves),
+          json['optimalMoves'] as int? ??
+          (optimalMoves == 0 ? rawBlocks.length : optimalMoves),
     );
   }
 
@@ -133,7 +168,7 @@ class Level {
       if (!ids.add(block.id)) return false;
     }
     final tiles = <int>{};
-    for (final tile in stopTiles) {
+    for (final tile in allStopTiles) {
       if (!tile.isInside(columns, rows)) return false;
       if (!tiles.add(tile.y * columns + tile.x)) return false;
     }

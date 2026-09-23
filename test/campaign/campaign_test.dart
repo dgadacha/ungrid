@@ -20,7 +20,7 @@ void main() {
   const solver = LevelSolver();
   const generator = SlideGenerator();
 
-  final file = File(CampaignCatalog.assetPath);
+  final file = File('assets/levels/campaign_v2.json');
   final exists = file.existsSync();
 
   late Campaign campaign;

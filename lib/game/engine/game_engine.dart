@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import '../models/block.dart';
+import '../models/direction.dart';
 import '../models/grid_position.dart';
 import '../models/level.dart';
 import '../models/move_result.dart';
@@ -13,8 +14,12 @@ class MoveRecord {
     required this.from,
     required this.to,
     required this.outcome,
+    this.consumedStop,
+    this.directionBefore,
   });
 
+  final Direction? directionBefore;
+  final GridPosition? consumedStop;
   final String blockId;
   final GridPosition from;
 
@@ -47,9 +52,9 @@ class MoveRecord {
 /// glissement, qu'il partage avec le solveur ([MoveResolver]).
 class GameEngine {
   GameEngine(this.level)
-      : _occupancy = List<Block?>.filled(level.rows * level.columns, null),
-        _cells = Uint8List(level.rows * level.columns),
-        _stops = level.stopMask() {
+    : _occupancy = List<Block?>.filled(level.rows * level.columns, null),
+      _cells = Uint8List(level.rows * level.columns),
+      _stops = level.stopMask() {
     reset();
   }
 
@@ -68,6 +73,13 @@ class GameEngine {
   final Uint8List _stops;
 
   final Map<String, Block> _remaining = {};
+  final Set<GridPosition> _consumedStops = {};
+  Iterable<GridPosition> get activeStopTiles =>
+      level.allStopTiles.where((p) => !_consumedStops.contains(p));
+  bool isRotationAt(int x, int y) =>
+      level.rotationTiles.contains(GridPosition(x, y));
+  bool isFragileStopAt(int x, int y) =>
+      level.fragileStopTiles.contains(GridPosition(x, y));
 
   /// Coups joués, pour l'annulation.
   final List<MoveRecord> _history = [];
@@ -76,6 +88,7 @@ class GameEngine {
   void reset() {
     _occupancy.fillRange(0, _occupancy.length, null);
     _cells.setAll(0, _stops);
+    _consumedStops.clear();
     _remaining.clear();
     _history.clear();
     for (final block in level.blocks) {
@@ -104,18 +117,18 @@ class GameEngine {
 
   bool hasStopTileAt(int x, int y) {
     if (x < 0 || y < 0 || x >= columns || y >= rows) return false;
-    return _stops[y * columns + x] & cellStopTile != 0;
+    return _cells[y * columns + x] & cellStopTile != 0;
   }
 
   /// Ce que donnerait un tap sur ce bloc, sans rien changer au plateau.
   SlideOutcome slideRoom(Block block) => MoveResolver.resolve(
-        cell: block.y * columns + block.x,
-        stepX: block.direction.dx,
-        stepY: block.direction.dy,
-        columns: columns,
-        rows: rows,
-        cells: _cells,
-      );
+    cell: block.y * columns + block.x,
+    stepX: block.direction.dx,
+    stepY: block.direction.dy,
+    columns: columns,
+    rows: rows,
+    cells: _cells,
+  );
 
   /// `true` si le bloc peut quitter la grille d'un seul coup.
   bool canExit(String blockId) {
@@ -133,15 +146,15 @@ class GameEngine {
 
   /// Tous les blocs qui bougeraient si on les touchait.
   List<Block> movableBlocks() => [
-        for (final block in _remaining.values)
-          if (canMove(block.id)) block,
-      ];
+    for (final block in _remaining.values)
+      if (canMove(block.id)) block,
+  ];
 
   /// Tous les blocs qui sortiraient d'un seul coup.
   List<Block> exitableBlocks() => [
-        for (final block in _remaining.values)
-          if (slideRoom(block).outcome == MoveOutcome.exited) block,
-      ];
+    for (final block in _remaining.values)
+      if (slideRoom(block).outcome == MoveOutcome.exited) block,
+  ];
 
   /// Applique un coup sur [blockId].
   MoveResult tap(String blockId) {
@@ -149,16 +162,28 @@ class GameEngine {
     if (block == null) return const MoveResult.ignored();
 
     final room = slideRoom(block);
+    GridPosition? consumed;
+    if (room.outcome != MoveOutcome.blocked &&
+        isFragileStopAt(block.x, block.y) &&
+        !_consumedStops.contains(block.position)) {
+      consumed = block.position;
+      _consumedStops.add(consumed);
+      _cells[block.y * columns + block.x] &= ~cellStopTile;
+    }
 
     switch (room.outcome) {
       case MoveOutcome.exited:
         _lift(block);
-        _history.add(MoveRecord(
-          blockId: block.id,
-          from: block.position,
-          to: null,
-          outcome: MoveOutcome.exited,
-        ));
+        _history.add(
+          MoveRecord(
+            consumedStop: consumed,
+            directionBefore: block.direction,
+            blockId: block.id,
+            from: block.position,
+            to: null,
+            outcome: MoveOutcome.exited,
+          ),
+        );
         return MoveResult(
           outcome: MoveOutcome.exited,
           blockId: block.id,
@@ -183,12 +208,16 @@ class GameEngine {
           room.cell ~/ columns,
         );
         _move(block, destination);
-        _history.add(MoveRecord(
-          blockId: block.id,
-          from: block.position,
-          to: destination,
-          outcome: room.outcome,
-        ));
+        _history.add(
+          MoveRecord(
+            consumedStop: consumed,
+            directionBefore: block.direction,
+            blockId: block.id,
+            from: block.position,
+            to: destination,
+            outcome: room.outcome,
+          ),
+        );
         return MoveResult(
           outcome: room.outcome,
           blockId: block.id,
@@ -220,7 +249,12 @@ class GameEngine {
 
   void _move(Block block, GridPosition destination) {
     _vacate(block.y * columns + block.x);
-    final moved = block.copyWith(position: destination);
+    final moved = block.copyWith(
+      position: destination,
+      direction: isRotationAt(destination.x, destination.y)
+          ? block.direction.clockwise
+          : block.direction,
+    );
     _remaining[block.id] = moved;
     _occupy(moved);
   }
@@ -232,6 +266,10 @@ class GameEngine {
   MoveRecord? undo() {
     if (_history.isEmpty) return null;
     final record = _history.removeLast();
+    if (record.consumedStop case final tile?) {
+      _consumedStops.remove(tile);
+      _cells[tile.y * columns + tile.x] |= cellStopTile;
+    }
     final template = level.blocks.firstWhere((b) => b.id == record.blockId);
 
     if (!record.exited) {
@@ -239,7 +277,10 @@ class GameEngine {
       if (current != null) _vacate(current.y * columns + current.x);
     }
 
-    final restored = template.copyWith(position: record.from);
+    final restored = template.copyWith(
+      position: record.from,
+      direction: record.directionBefore ?? template.direction,
+    );
     _remaining[record.blockId] = restored;
     _occupy(restored);
     return record;

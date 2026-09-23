@@ -1,0 +1,207 @@
+{
+  "catalogVersion": 1,
+  "generatorVersion": 2,
+  "levelCount": 20,
+  "levels": [
+    {
+      "levelId": 1,
+      "seed": 2789,
+      "generatorVersion": 2,
+      "difficulty": "easy",
+      "difficultyScore": 21.22,
+      "optimalMoves": 6,
+      "fingerprint": "da99346fb3edf8c7",
+      "status": "active"
+    },
+    {
+      "levelId": 2,
+      "seed": 742,
+      "generatorVersion": 2,
+      "difficulty": "easy",
+      "difficultyScore": 34.66,
+      "optimalMoves": 6,
+      "fingerprint": "22675e58b36c3de4",
+      "status": "active"
+    },
+    {
+      "levelId": 3,
+      "seed": 1459,
+      "generatorVersion": 2,
+      "difficulty": "easy",
+      "difficultyScore": 40.03,
+      "optimalMoves": 9,
+      "fingerprint": "27acb7b328925687",
+      "status": "active"
+    },
+    {
+      "levelId": 4,
+      "seed": 2031,
+      "generatorVersion": 2,
+      "difficulty": "easy",
+      "difficultyScore": 42.98,
+      "optimalMoves": 10,
+      "fingerprint": "8063b33aee7b1f4b",
+      "status": "active"
+    },
+    {
+      "levelId": 5,
+      "seed": 4797,
+      "generatorVersion": 2,
+      "difficulty": "medium",
+      "difficultyScore": 52.03,
+      "optimalMoves": 11,
+      "fingerprint": "644272b0f5c5927b",
+      "status": "active"
+    },
+    {
+      "levelId": 6,
+      "seed": 5488,
+      "generatorVersion": 2,
+      "difficulty": "easy",
+      "difficultyScore": 40.06,
+      "optimalMoves": 11,
+      "fingerprint": "d94df8d308d53c0b",
+      "status": "active"
+    },
+    {
+      "levelId": 7,
+      "seed": 4404,
+      "generatorVersion": 2,
+      "difficulty": "medium",
+      "difficultyScore": 47.98,
+      "optimalMoves": 11,
+      "fingerprint": "72107569b9440519",
+      "status": "active"
+    },
+    {
+      "levelId": 8,
+      "seed": 4932,
+      "generatorVersion": 2,
+      "difficulty": "medium",
+      "difficultyScore": 53.92,
+      "optimalMoves": 11,
+      "fingerprint": "fc0b0cff9ad7ac7b",
+      "status": "active"
+    },
+    {
+      "levelId": 9,
+      "seed": 765,
+      "generatorVersion": 2,
+      "difficulty": "easy",
+      "difficultyScore": 43.98,
+      "optimalMoves": 11,
+      "fingerprint": "e23746750fe51424",
+      "status": "active"
+    },
+    {
+      "levelId": 10,
+      "seed": 5272,
+      "generatorVersion": 2,
+      "difficulty": "hard",
+      "difficultyScore": 60.83,
+      "optimalMoves": 13,
+      "fingerprint": "8c009e41034ec1d3",
+      "status": "active"
+    },
+    {
+      "levelId": 11,
+      "seed": 3253,
+      "generatorVersion": 2,
+      "difficulty": "medium",
+      "difficultyScore": 45.96,
+      "optimalMoves": 14,
+      "fingerprint": "cac76f791528d580",
+      "status": "active"
+    },
+    {
+      "levelId": 12,
+      "seed": 730,
+      "generatorVersion": 2,
+      "difficulty": "medium",
+      "difficultyScore": 56.0,
+      "optimalMoves": 10,
+      "fingerprint": "c6c89fdcd99e91c9",
+      "status": "active"
+    },
+    {
+      "levelId": 13,
+      "seed": 4082,
+      "generatorVersion": 2,
+      "difficulty": "hard",
+      "difficultyScore": 61.99,
+      "optimalMoves": 9,
+      "fingerprint": "8ee49428ce236a0b",
+      "status": "active"
+    },
+    {
+      "levelId": 14,
+      "seed": 2948,
+      "generatorVersion": 2,
+      "difficulty": "medium",
+      "difficultyScore": 49.03,
+      "optimalMoves": 12,
+      "fingerprint": "8a002a75dc24255a",
+      "status": "active"
+    },
+    {
+      "levelId": 15,
+      "seed": 5032,
+      "generatorVersion": 2,
+      "difficulty": "expert",
+      "difficultyScore": 68.12,
+      "optimalMoves": 14,
+      "fingerprint": "e97a3c6352be0f17",
+      "status": "active"
+    },
+    {
+      "levelId": 16,
+      "seed": 2755,
+      "generatorVersion": 2,
+      "difficulty": "medium",
+      "difficultyScore": 50.99,
+      "optimalMoves": 12,
+      "fingerprint": "7d50811c9bde97fb",
+      "status": "active"
+    },
+    {
+      "levelId": 17,
+      "seed": 534,
+      "generatorVersion": 2,
+      "difficulty": "hard",
+      "difficultyScore": 61.0,
+      "optimalMoves": 10,
+      "fingerprint": "ab04a8d8834a0429",
+      "status": "active"
+    },
+    {
+      "levelId": 18,
+      "seed": 4628,
+      "generatorVersion": 2,
+      "difficulty": "hard",
+      "difficultyScore": 66.71,
+      "optimalMoves": 12,
+      "fingerprint": "134963250d999689",
+      "status": "active"
+    },
+    {
+      "levelId": 19,
+      "seed": 3737,
+      "generatorVersion": 2,
+      "difficulty": "medium",
+      "difficultyScore": 53.97,
+      "optimalMoves": 12,
+      "fingerprint": "3fb0472850e1a9b6",
+      "status": "active"
+    },
+    {
+      "levelId": 20,
+      "seed": 1704,
+      "generatorVersion": 2,
+      "difficulty": "expert",
+      "difficultyScore": 75.16,
+      "optimalMoves": 11,
+      "fingerprint": "929cc8800c9660a5",
+      "status": "active"
+    }
+  ]
+}

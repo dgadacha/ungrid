@@ -12,13 +12,15 @@ import '../models/level.dart';
 /// quoi ni les solutions partagées ni les comparaisons entre joueurs n'ont de
 /// sens.
 ///
-/// Le générateur reste là comme filet : si le catalogue manque ou s'arrête
-/// avant, le jeu continue avec des niveaux fabriqués à la volée.
+/// La campagne finie exige chaque niveau du catalogue. Le générateur reste
+/// disponible pour les outils et les dépôts sans limite explicite.
 class LevelRepository {
   LevelRepository({
     this.catalog,
     this.generator = const LevelGenerator(),
     this.useIsolate = true,
+    this.lastLevel,
+    this.fixedLevels = const [],
   });
 
   /// Campagne publiée. `null` tant qu'elle n'est pas chargée.
@@ -28,6 +30,22 @@ class LevelRepository {
 
   /// Désactivé dans les tests, où il n'y a pas de binding Flutter.
   final bool useIsolate;
+
+  /// Limite d'un lot d'essai fini ; null pour la progression habituelle.
+  final int? lastLevel;
+  final List<Level> fixedLevels;
+  Level? _publishedLevel(int id) {
+    for (final level in fixedLevels) {
+      if (level.id == id) return level;
+    }
+    return catalog?.levelFor(id);
+  }
+
+  void _checkLevel(int levelId) {
+    if (levelId < 1 || (lastLevel != null && levelId > lastLevel!)) {
+      throw RangeError.range(levelId, 1, lastLevel, 'levelId');
+    }
+  }
 
   final Map<int, Level> _cache = {};
   final Map<int, Future<Level>> _pending = {};
@@ -45,27 +63,40 @@ class LevelRepository {
       catalog?.definitionFor(levelId)?.optimalMoves ?? level.optimalMoves;
 
   Future<Level> levelFor(int levelId) async {
+    _checkLevel(levelId);
     final cached = _cache[levelId];
     if (cached != null) return cached;
 
-    final official = catalog?.levelFor(levelId);
+    final official = _publishedLevel(levelId);
     if (official != null) return _cache[levelId] = official;
+    if (lastLevel != null) {
+      throw StateError('Niveau $levelId absent du catalogue.');
+    }
 
     final pending = _pending[levelId];
     if (pending != null) return pending;
 
     final future = _generate(levelId);
     _pending[levelId] = future;
-    final level = await future;
-    _pending.remove(levelId);
-    _cache[levelId] = level;
-    return level;
+    try {
+      final level = await future;
+      _cache[levelId] = level;
+      return level;
+    } finally {
+      _pending.remove(levelId);
+    }
   }
 
   /// Version bloquante, réservée aux tests et à l'écran d'analyse.
-  Level levelForSync(int levelId) => _cache[levelId] ??=
-      catalog?.levelFor(levelId) ??
-          generator.generate(levelId: levelId).level;
+  Level levelForSync(int levelId) {
+    _checkLevel(levelId);
+    final level = _cache[levelId] ?? _publishedLevel(levelId);
+    if (level != null) return _cache[levelId] = level;
+    if (lastLevel != null) {
+      throw StateError('Niveau $levelId absent du catalogue.');
+    }
+    return _cache[levelId] = generator.generate(levelId: levelId).level;
+  }
 
   Future<Level> _generate(int levelId) {
     if (!useIsolate) {
@@ -77,6 +108,7 @@ class LevelRepository {
   /// Prépare les niveaux suivants pendant que le joueur joue celui-ci.
   void prefetchAround(int levelId) {
     for (var id = levelId + 1; id <= levelId + _prefetchCount; id++) {
+      if (lastLevel != null && id > lastLevel!) break;
       if (_cache.containsKey(id) || _pending.containsKey(id)) continue;
       levelFor(id);
     }

@@ -229,7 +229,8 @@ class PuzzleAnalysis {
 
   /// Note globale, de 0 à 100.
   double difficultyScore([ScoringWeights w = ScoringWeights.standard]) {
-    final total = w.decisionComplexity +
+    final total =
+        w.decisionComplexity +
         w.optimalPathNarrowness +
         w.temptingWrongMoveRatio +
         w.dependencyComplexity +
@@ -238,7 +239,8 @@ class PuzzleAnalysis {
         w.stateSpaceComplexity +
         w.moveComplexity;
 
-    final raw = w.decisionComplexity * (decisionScore / 100) +
+    final raw =
+        w.decisionComplexity * (decisionScore / 100) +
         w.optimalPathNarrowness * optimalPathNarrowness +
         w.temptingWrongMoveRatio * temptingWrongMoveRatio +
         w.dependencyComplexity * dependencyComplexity +
@@ -253,36 +255,37 @@ class PuzzleAnalysis {
   }
 
   Map<String, dynamic> toJson() => {
-        'blockCount': blockCount,
-        'optimalMoves': optimalMoves,
-        'moveComplexity': moveComplexity,
-        'multiMoveBlocks': multiMoveBlocks,
-        'multiMoveRatio': multiMoveRatio,
-        'maxMovesForSingleBlock': maxMovesForSingleBlock,
-        'averageChoices': averageChoices,
-        'decisionRatio': decisionRatio,
-        'decisionScore': decisionScore,
-        'optimalPathNarrowness': optimalPathNarrowness,
-        'temptingWrongMoves': temptingWrongMoves,
-        'temptingWrongMoveRatio': temptingWrongMoveRatio,
-        'wrongMoveOpportunities': wrongMoveOpportunities,
-        'deadEndOpportunities': deadEndOpportunities,
-        'dependencyComplexity': dependencyComplexity,
-        'stopTileCount': stopTileCount,
-        'stopTileDensity': stopTileDensity,
-        'stopTileInteractions': stopTileInteractions,
-        'meaningfulStopInteractions': meaningfulStopInteractions,
-        'unusedStopTileCount': unusedStopTileCount,
-        'stopDependencyScore': stopDependencyScore,
-        'stateSpaceComplexity': stateSpaceComplexity,
-        'trivialityPenalty': trivialityPenalty,
-        'exploredStates': exploredStates,
-        'unresolvedAlternatives': unresolvedAlternatives,
-        'difficultyScore': difficultyScore(),
-      };
+    'blockCount': blockCount,
+    'optimalMoves': optimalMoves,
+    'moveComplexity': moveComplexity,
+    'multiMoveBlocks': multiMoveBlocks,
+    'multiMoveRatio': multiMoveRatio,
+    'maxMovesForSingleBlock': maxMovesForSingleBlock,
+    'averageChoices': averageChoices,
+    'decisionRatio': decisionRatio,
+    'decisionScore': decisionScore,
+    'optimalPathNarrowness': optimalPathNarrowness,
+    'temptingWrongMoves': temptingWrongMoves,
+    'temptingWrongMoveRatio': temptingWrongMoveRatio,
+    'wrongMoveOpportunities': wrongMoveOpportunities,
+    'deadEndOpportunities': deadEndOpportunities,
+    'dependencyComplexity': dependencyComplexity,
+    'stopTileCount': stopTileCount,
+    'stopTileDensity': stopTileDensity,
+    'stopTileInteractions': stopTileInteractions,
+    'meaningfulStopInteractions': meaningfulStopInteractions,
+    'unusedStopTileCount': unusedStopTileCount,
+    'stopDependencyScore': stopDependencyScore,
+    'stateSpaceComplexity': stateSpaceComplexity,
+    'trivialityPenalty': trivialityPenalty,
+    'exploredStates': exploredStates,
+    'unresolvedAlternatives': unresolvedAlternatives,
+    'difficultyScore': difficultyScore(),
+  };
 
   @override
-  String toString() => 'PuzzleAnalysis(${moveComplexity.toStringAsFixed(2)} '
+  String toString() =>
+      'PuzzleAnalysis(${moveComplexity.toStringAsFixed(2)} '
       'coups/bloc, $multiMoveBlocks rejoués, $stopTileCount tuiles dont '
       '$meaningfulStopInteractions utiles, '
       'décision ${decisionScore.round()}, '
@@ -318,7 +321,7 @@ class PuzzleAnalyzer {
         wrongMoveOpportunities: 0,
         deadEndOpportunities: 0,
         dependencyMoves: 0,
-        stopTileCount: level.stopTiles.length,
+        stopTileCount: level.allStopTiles.length,
         usedStopTiles: 0,
         stopTileInteractions: 0,
         meaningfulStopInteractions: 0,
@@ -331,8 +334,7 @@ class PuzzleAnalyzer {
       played[id] = (played[id] ?? 0) + 1;
     }
     final multiMove = played.values.where((count) => count > 1).length;
-    final maxForOne =
-        played.values.fold<int>(0, (a, b) => a > b ? a : b);
+    final maxForOne = played.values.fold<int>(0, (a, b) => a > b ? a : b);
 
     final walk = solver.walkSolution(level, solution.exampleSolution);
 
@@ -362,13 +364,15 @@ class PuzzleAnalyzer {
           : walk.choices.fold<int>(0, (a, b) => a + b) / walk.choices.length,
       // Un coup par étape est celui qu'on joue : les autres sont les choix
       // réellement offerts, et c'est parmi eux qu'on peut se tromper.
-      choicesOffered:
-          walk.choices.fold<int>(0, (a, b) => a + (b > 0 ? b - 1 : 0)),
+      choicesOffered: walk.choices.fold<int>(
+        0,
+        (a, b) => a + (b > 0 ? b - 1 : 0),
+      ),
       wrongMoveOpportunities: walk.wrongMoves,
       deadEndOpportunities: walk.deadEnds,
       dependencyMoves: walk.dependencyMoves,
       unresolvedAlternatives: walk.unresolvedAlternatives,
-      stopTileCount: level.stopTiles.length,
+      stopTileCount: level.allStopTiles.length,
       usedStopTiles: walk.usedStopTiles,
       stopTileInteractions: walk.stopInteractions,
       meaningfulStopInteractions: walk.meaningfulStopInteractions,

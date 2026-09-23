@@ -12,9 +12,29 @@ rien.
 flutter run
 ```
 
-Les niveaux ne sont pas stockés : ils sont reconstruits à partir de leur
-numéro. Les vingt premiers sont écrits à la main, les suivants sont fabriqués
-et validés à la volée.
+La campagne principale compte **100 niveaux avec tuiles de rotation**, tous dans le style
+validé à partir du niveau 10 du lot d’essai. Elle démarre directement au niveau
+défi et progresse vers des grilles expertes. Aucun niveau facile n’est généré après la fin du catalogue.
+
+La campagne utilise une sauvegarde séparée : elle démarre au niveau 1, tandis
+que les anciens records restent conservés. Le générateur historique v2 reste disponible pour les anciens catalogues.
+
+Le lot expérimental de 20 niveaux reste accessible dans
+**Settings → Playtest → 20-LEVEL CHALLENGE**, sans sauvegarde.
+Voir [le rapport de campagne](docs/campaign-100.md) et
+[le premier lot d’essai](docs/playtest-20.md).
+
+## Maîtrise et récompenses
+
+Les niveaux sont regroupés en chapitres de dix. Résoudre un chapitre donne une
+médaille ; le maîtriser entièrement la rend dorée. Une victoire sans indice ni
+coups supplémentaires obtient MASTERED, annulations autorisées. Après une
+défaite, UNDO MOVE reprend le dernier déplacement.
+
+REWARDS permet d'équiper les palettes gagnées après 1, 3 et 5 médailles.
+La nouvelle mécanique se teste dans **Settings → Playtest → FRAGILE · 10** :
+un arrêt fendu disparaît quand son premier occupant repart.
+Voir [les règles et les récompenses](docs/engagement.md).
 
 ## Tests
 
@@ -26,3 +46,7 @@ L'épreuve de fond génère mille niveaux et vérifie qu'ils sont tous jouables,
 reproductibles et fabriqués assez vite pour que personne ne s'en aperçoive.
 
 Le détail des règles et de l'architecture est dans [CLAUDE.md](CLAUDE.md).
+
+Tuiles de rotation : Settings → Playtest → **ROTATION · 10**. Le générateur dédié vérifie leur usage et le budget optimal ; voir [les règles et la génération](docs/rotation.md).
+
+La campagne active v3 embarque ses grilles vérifiées et se génère avec `tool/build_rotation_campaign.dart`. PLAY lance directement les 100 niveaux ; le lot Playtest de 10 reste disponible.
