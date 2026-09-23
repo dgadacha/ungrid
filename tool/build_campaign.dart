@@ -315,8 +315,6 @@ Future<void> _export(List<_Assignment> selection) async {
       difficulty: candidate.tier,
       difficultyScore: candidate.difficultyScore,
       optimalMoves: candidate.optimalMoves,
-      moveLimit:
-          candidate.optimalMoves + moveAllowanceForLevel(assignment.levelId),
       fingerprint: candidate.fingerprint,
     ));
 

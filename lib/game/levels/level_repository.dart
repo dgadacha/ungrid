@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 
 import '../campaign/campaign_catalog.dart';
-import '../campaign/campaign_level.dart';
 import '../engine/level_generator.dart';
 import '../models/level.dart';
 
@@ -36,10 +35,14 @@ class LevelRepository {
   /// Niveaux conservés autour de celui en cours.
   static const int _prefetchCount = 5;
 
-  /// Coups accordés au joueur pour ce niveau.
+  /// Coups accordés au joueur : exactement la solution optimale.
+  ///
+  /// Aucune marge, à aucun niveau. Le but n'est pas de vider la grille mais
+  /// de trouver la bonne séquence ; accorder un coup de trop, même pour
+  /// apprendre, enseignerait justement le contraire. Une erreur se reprend
+  /// avec l'annulation, qui rend le coup.
   int moveLimitFor(int levelId, Level level) =>
-      catalog?.definitionFor(levelId)?.moveLimit ??
-      level.optimalMoves + moveAllowanceForLevel(levelId);
+      catalog?.definitionFor(levelId)?.optimalMoves ?? level.optimalMoves;
 
   Future<Level> levelFor(int levelId) async {
     final cached = _cache[levelId];

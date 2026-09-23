@@ -40,10 +40,11 @@ la grille avec son dernier coup est une réussite.
 
 **Défaite** : plus de coups et des blocs encore là.
 
-**La réserve vaut exactement la solution optimale.** Le but n'est pas de vider
-la grille, c'est de trouver la bonne séquence : un coup inutile fait perdre, et
-se reprend avec l'annulation. Seuls les dix premiers niveaux accordent une marge
-(+2 puis +1), le temps d'apprendre les règles — voir `moveAllowanceForLevel`.
+**La réserve vaut exactement la solution optimale, à tous les niveaux.** Le but
+n'est pas de vider la grille, c'est de trouver la bonne séquence : un coup
+inutile fait perdre, et se reprend avec l'annulation, qui le rend. Aucune marge
+nulle part, pas même le temps d'apprendre — accorder un coup de trop au début
+enseignerait justement le contraire de la règle qu'on veut faire comprendre.
 
 **Le chronomètre ne décide de rien.** Il démarre au premier coup, se suspend
 quand l'application passe au second plan, et sert uniquement à battre ses

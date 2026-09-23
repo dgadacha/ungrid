@@ -113,15 +113,11 @@ void main() {
       expect(broken, isEmpty, reason: 'niveaux incohérents : $broken');
     }, skip: exists ? false : 'campagne non construite');
 
-    test('la réserve vaut l\'optimal, sauf le temps d\'apprendre', () {
+    test('la réserve vaut l\'optimal, à tous les niveaux', () {
       for (final definition in campaign.levels) {
-        final allowance = definition.moveLimit - definition.optimalMoves;
-        expect(allowance, moveAllowanceForLevel(definition.levelId),
-            reason: 'niveau ${definition.levelId}');
-        if (definition.levelId > 10) {
-          expect(allowance, 0,
-              reason: 'passé l\'apprentissage, il faut jouer juste');
-        }
+        final level = catalog.levelFor(definition.levelId)!;
+        expect(level.moveLimit, definition.optimalMoves,
+            reason: 'niveau ${definition.levelId} : aucune marge nulle part');
       }
     }, skip: exists ? false : 'campagne non construite');
 

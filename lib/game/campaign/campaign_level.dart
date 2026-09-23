@@ -24,7 +24,6 @@ class CampaignLevel {
     required this.difficulty,
     required this.difficultyScore,
     required this.optimalMoves,
-    required this.moveLimit,
     required this.fingerprint,
     this.status = LevelStatus.active,
   });
@@ -36,10 +35,10 @@ class CampaignLevel {
   final Difficulty difficulty;
   final double difficultyScore;
 
+  /// Coups minimaux pour vider la grille, et réserve du joueur : c'est le
+  /// même nombre. Un second champ qui vaudrait toujours celui-ci finirait par
+  /// en diverger sans que rien ne le signale.
   final int optimalMoves;
-
-  /// Coups accordés. Vaut l'optimal, sauf pendant l'apprentissage.
-  final int moveLimit;
 
   /// Empreinte du board attendu : elle signale toute régression du générateur.
   final String fingerprint;
@@ -53,7 +52,6 @@ class CampaignLevel {
         'difficulty': difficulty.name,
         'difficultyScore': double.parse(difficultyScore.toStringAsFixed(2)),
         'optimalMoves': optimalMoves,
-        'moveLimit': moveLimit,
         'fingerprint': fingerprint,
         'status': status.name,
       };
@@ -68,7 +66,6 @@ class CampaignLevel {
         ),
         difficultyScore: (json['difficultyScore'] as num).toDouble(),
         optimalMoves: json['optimalMoves'] as int,
-        moveLimit: json['moveLimit'] as int,
         fingerprint: json['fingerprint'] as String,
         status: LevelStatus.values.firstWhere(
           (s) => s.name == json['status'],
@@ -119,13 +116,3 @@ class Campaign {
       );
 }
 
-/// Coups accordés au-delà de la solution optimale.
-///
-/// Zéro partout, sauf au tout début : le temps d'apprendre les règles, une
-/// erreur ne doit pas coûter la partie. Passé ce cap, le jeu demande la bonne
-/// séquence — c'est son identité.
-int moveAllowanceForLevel(int levelId) {
-  if (levelId <= 5) return 2;
-  if (levelId <= 10) return 1;
-  return 0;
-}

@@ -160,11 +160,9 @@ class _PlaytestScreenState extends State<PlaytestScreen> {
                         ? 'none'
                         : '${level.stopTiles.length}',
                   ),
-                  _Row('Optimal moves', '${level.optimalMoves}'),
-                  _Row(
-                    'Moves given',
-                    '${widget.repository.moveLimitFor(_levelId, level)}',
-                  ),
+                  // La réserve vaut l'optimal partout : un second chiffre
+                  // identique n'apprendrait rien.
+                  _Row('Moves', '${level.optimalMoves}'),
                   _Row(
                     'Moves / block',
                     (level.optimalMoves / level.blocks.length)
