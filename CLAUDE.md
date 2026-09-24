@@ -219,8 +219,18 @@ générateur ; les anciennes clés restent conservées, l’haptique est commune
 
 Les cent grilles publiées restent identiques. `ProgressService` conserve la
 maîtrise par niveau (sans indice ni coups supplémentaires, annulations permises),
-les médailles des chapitres et la palette choisie. Voir `docs/engagement.md`.
-L'annulation du dernier déplacement est maintenant disponible après une défaite.
+les médailles des chapitres, la langue et le fond choisi. Voir
+`docs/engagement.md`.
+
+**Une annulation et un indice sont offerts par partie**, remis à zéro à chaque
+reprise. Au-delà, le geste passe par une publicité, et une modale le dit avant
+que quoi que ce soit ne soit dépensé : le bouton garde son icône, puisque
+l'action demandée reste la même. La modale annonce la règle — « la première est
+offerte à chaque partie » — plutôt que le prix, qui se subirait à chaque fois.
+Le chronomètre est suspendu tant qu'elle est ouverte : le plateau est couvert,
+et compter ce temps reviendrait à facturer au joueur une question qu'on lui
+pose. L'annulation ne figure plus sur l'écran de défaite, où elle faisait double
+emploi avec les coups supplémentaires et contournait la limite.
 
 `Level.fragileStopTiles` contient les arrêts à usage unique du lot séparé
 `assets/levels/fragile_v1.json`. Ils disparaissent au départ du bloc ; les refus
@@ -316,14 +326,25 @@ le générateur, pas à l'aveugle.
 
 ## Direction artistique
 
-Palette [Flat UI v1](https://flatuicolors.com/palette/defo), fond nuit
-(`#2C3E50`), blocs en aplats vifs, flèche encre épaisse, aucun dégradé ni
-texture. Les couleurs ne désignent **pas** les directions — la flèche s'en
-charge seule, ce qui laisse la couleur libre pour d'autres mécaniques et ne
-pénalise pas un joueur daltonien.
+Palette [Flat UI v1](https://flatuicolors.com/palette/defo), blocs en aplats
+vifs, flèche encre épaisse (`#2C3E50`), aucun dégradé ni texture. Les couleurs
+ne désignent **pas** les directions — la flèche s'en charge seule, ce qui laisse
+la couleur libre pour d'autres mécaniques et ne pénalise pas un joueur
+daltonien.
 
 La couleur d'un bloc est tirée de son identité, pas de sa case : un bloc qui
-glisse ne change pas de teinte.
+glisse ne change pas de teinte. La teinte des cases vides est retirée du tirage,
+sans quoi un bloc disparaîtrait dedans.
+
+**Le fond se choisit dans les réglages**, parmi les huit couples d'origine de
+la palette : la teinte sombre pour le fond, sa voisine claire pour les cases
+vides. Trois choses en dépendent et sont déclarées dans `UngridBackground` :
+
+- l'accent, la réussite et l'alerte, qui s'écartent quand le fond leur prend
+  leur couleur — une bordure de niveau réussi de la teinte de sa propre carte
+  ne désigne plus rien ;
+- le texte, clair sur les fonds sombres et encre sur les fonds clairs : sur
+  Orange, du blanc cassé tombe à 1,9 de contraste.
 
 Police Nunito Sans, portrait uniquement.
 

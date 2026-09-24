@@ -163,11 +163,53 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
     _load(_levelId + 1);
   }
 
+  /// Demande au joueur s'il accepte la publicité, le chronomètre suspendu.
+  ///
+  /// La modale couvre le plateau : compter ce temps-là reviendrait à facturer
+  /// au joueur une question qu'on lui pose. Le bouton garde son icône, c'est
+  /// la modale qui annonce le prix — une icône de vidéo à la place de la
+  /// flèche laissait deviner un autre geste.
+  Future<bool> _confirmReward(String title, String body) async {
+    final strings = Strings.of(context);
+    _controller?.pauseTimer();
+    final accepted = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: UngridColors.surface,
+        title: Text(title, style: TextStyle(color: UngridColors.onBackground)),
+        content: Text(
+          body,
+          style: TextStyle(color: UngridColors.onBackgroundSoft),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(strings.notNow),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text(strings.watchAd),
+          ),
+        ],
+      ),
+    );
+    _controller?.resumeTimer();
+    return accepted ?? false;
+  }
+
   /// Annulation demandée par le joueur : la première est offerte, les
   /// suivantes passent par une publicité.
   Future<void> _undo() async {
     final controller = _controller;
     if (controller == null || !controller.canRequestUndo) return;
+    if (!controller.hasFreeUndo) {
+      final strings = Strings.of(context);
+      final accepted = await _confirmReward(
+        strings.undoAdTitle,
+        strings.undoAdBody,
+      );
+      if (!accepted || !mounted) return;
+    }
     _outcomeTimer?.cancel();
     setState(() => _showOutcome = false);
     await controller.requestUndo();
@@ -183,7 +225,17 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
   }
 
   Future<void> _hint() async {
-    final granted = await _controller?.requestHint() ?? false;
+    final controller = _controller;
+    if (controller == null || !controller.canRequestHint) return;
+    if (!controller.hasFreeHint) {
+      final strings = Strings.of(context);
+      final accepted = await _confirmReward(
+        strings.hintAdTitle,
+        strings.hintAdBody,
+      );
+      if (!accepted || !mounted) return;
+    }
+    final granted = await controller.requestHint();
     if (!granted && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -383,13 +435,11 @@ class _Controls extends StatelessWidget {
       builder: (context, _) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Une fois l'annulation offerte dépensée, l'icône devient celle
-          // d'une vidéo : le joueur voit ce que le geste va lui coûter avant
-          // d'appuyer, pas après.
+          // Les boutons gardent leur icône même quand l'offert est dépensé :
+          // c'est la modale qui annonce la publicité, une fois le geste
+          // engagé et avant qu'il ne coûte quoi que ce soit.
           RoundIconButton(
-            icon: controller.hasFreeUndo
-                ? PhosphorIconsBold.arrowCounterClockwise
-                : PhosphorIconsBold.playCircle,
+            icon: PhosphorIconsBold.arrowCounterClockwise,
             label: Strings.of(context).undo,
             onPressed: controller.canRequestUndo ? onUndo : null,
           ),
@@ -401,9 +451,7 @@ class _Controls extends StatelessWidget {
           ),
           const SizedBox(width: 30),
           RoundIconButton(
-            icon: controller.hasFreeHint
-                ? PhosphorIconsBold.lightbulb
-                : PhosphorIconsBold.playCircle,
+            icon: PhosphorIconsBold.lightbulb,
             label: Strings.of(context).hint,
             onPressed: controller.canRequestHint ? onHint : null,
           ),

@@ -100,6 +100,29 @@ class Strings {
     'No hay ninguna pista ahora mismo.',
   );
 
+  // ── Récompense par publicité ────────────────────────────────────────────
+  // La modale dit la règle plutôt que le prix : « la première est offerte »
+  // se comprend une fois pour toutes, « regarder une pub » se subit à chaque
+  // fois.
+  String get undoAdTitle =>
+      _pick('One more undo?', 'Encore une annulation ?', '¿Deshacer otra vez?');
+  String get undoAdBody => _pick(
+    'The first one is free every game. After that, it takes a short video.',
+    'La première est offerte à chaque partie. Les suivantes passent par une '
+        'courte vidéo.',
+    'La primera es gratis en cada partida. Después hace falta un vídeo corto.',
+  );
+  String get hintAdTitle =>
+      _pick('One more hint?', 'Encore un indice ?', '¿Otra pista?');
+  String get hintAdBody => _pick(
+    'The first one is free every game. After that, it takes a short video.',
+    'Le premier est offert à chaque partie. Les suivants passent par une '
+        'courte vidéo.',
+    'La primera es gratis en cada partida. Después hace falta un vídeo corto.',
+  );
+  String get watchAd => _pick('Watch', 'Regarder', 'Ver');
+  String get notNow => _pick('Not now', 'Plus tard', 'Ahora no');
+
   String get rotationRule => _pick(
     'Circular tiles stop the block and turn its arrow 90° clockwise.',
     'Les cases rondes arrêtent le bloc et tournent sa flèche d\'un quart '
