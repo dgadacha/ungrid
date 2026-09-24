@@ -43,7 +43,6 @@ class ProgressService {
   String _kMoves(int id) => '${_prefix}level_${id}_best_moves';
   String _kTime(int id) => '${_prefix}level_${id}_best_time';
   String _kMastered(int id) => '${_prefix}level_${id}_mastered';
-  String get _kPalette => '${_prefix}palette';
 
   final SharedPreferences _prefs;
 
@@ -188,24 +187,6 @@ class ProgressService {
     10,
     (i) => i + 1,
   ).where((c) => chapterCleared(c) == 10).length;
-  List<int> get unlockedPalettes => [
-    0,
-    if (completedChapters >= 1) 1,
-    if (completedChapters >= 3) 2,
-    if (completedChapters >= 5) 3,
-  ];
-  int get paletteIndex {
-    final selected = _prefs.getInt(_kPalette) ?? 0;
-    return unlockedPalettes.contains(selected) ? selected : 0;
-  }
-
-  Future<void> selectPalette(int index) async {
-    if (!unlockedPalettes.contains(index)) {
-      throw StateError('Palette verrouillée.');
-    }
-    await _prefs.setInt(_kPalette, index);
-  }
-
   Future<void> resetProgress() async {
     final highest = highestUnlockedLevel;
     for (var id = 1; id <= highest; id++) {
@@ -215,7 +196,6 @@ class ProgressService {
       await _prefs.remove(_kMastered(id));
     }
     await _prefs.remove(_kHighestUnlocked);
-    await _prefs.remove(_kPalette);
   }
 }
 

@@ -101,7 +101,6 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
           level: level,
           haptics: widget.haptics,
           rewards: widget.rewards,
-          paletteIndex: widget.progress.paletteIndex,
           moveLimit: widget.repository.moveLimitFor(levelId, level),
         )..addListener(_onControllerChanged);
       } else {

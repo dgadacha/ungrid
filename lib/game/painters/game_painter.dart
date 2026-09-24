@@ -131,7 +131,7 @@ class GamePainter extends CustomPainter {
         canvas,
         cell,
         block.direction,
-        UngridColors.blockFor(block.id, palette: controller.paletteIndex),
+        UngridColors.blockFor(block.id),
         offset: offset,
         scale: scale,
       );
@@ -183,7 +183,7 @@ class GamePainter extends CustomPainter {
       canvas,
       cell,
       motion.direction,
-      UngridColors.blockFor(motion.blockId, palette: controller.paletteIndex),
+      UngridColors.blockFor(motion.blockId),
       opacity: opacity.clamp(0.0, 1.0),
       scale: motion.fadeOut ? 1 - t * 0.06 : 1,
     );

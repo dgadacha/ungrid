@@ -57,11 +57,10 @@ void main() {
     },
   );
   test(
-    'maîtrise persistante, récompenses non cumulables et sélection verrouillée',
+    'maîtrise persistante et récompenses non cumulables',
     () async {
       SharedPreferences.setMockInitialValues({});
       var p = await ProgressService.load(campaignId: 'test');
-      await expectLater(p.selectPalette(1), throwsStateError);
       for (var id = 1; id <= 10; id++) {
         await p.recordCompletion(
           levelId: id,
@@ -70,7 +69,6 @@ void main() {
           mastered: true,
         );
       }
-      await p.selectPalette(1);
       await p.recordCompletion(
         levelId: 1,
         movesUsed: 15,
@@ -80,12 +78,9 @@ void main() {
       expect(p.chapterCleared(1), 10);
       expect(p.chapterMastered(1), 10);
       expect(p.completedChapters, 1);
-      expect(p.paletteIndex, 1);
       expect(p.isMastered(1), isTrue);
-      expect(p.unlockedPalettes, [0, 1]);
       await p.resetProgress();
       expect(p.chapterMastered(1), 0);
-      expect(p.paletteIndex, 0);
       expect(p.completedChapters, 0);
     },
   );

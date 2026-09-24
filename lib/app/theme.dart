@@ -53,37 +53,13 @@ class UngridColors {
   ///
   /// Les blocs se déplacent : une couleur attachée à la position les ferait
   /// changer de teinte en glissant, ce qui rendrait la grille illisible.
-  static const paletteNames = ['CLASSIC', 'LAGOON', 'SUNSET', 'AURORA'];
-  static const palettes = [
-    blocks,
-    [
-      Color(0xFF76D7C4),
-      Color(0xFF5DADE2),
-      Color(0xFF85C1E9),
-      Color(0xFFA3E4D7),
-    ],
-    [
-      Color(0xFFF8C471),
-      Color(0xFFF1948A),
-      Color(0xFFF5B7B1),
-      Color(0xFFF9E79F),
-    ],
-    [
-      Color(0xFFBB8FCE),
-      Color(0xFFA3E4D7),
-      Color(0xFFD7BDE2),
-      Color(0xFF85C1E9),
-    ],
-  ];
-
-  static Color blockFor(String blockId, {int palette = 0}) {
+  static Color blockFor(String blockId) {
     var hash = 0;
     for (final unit in blockId.codeUnits) {
       hash = (hash * 31 + unit) & 0x7FFFFFFF;
     }
     hash = (hash ^ (hash >> 13)) & 0x7FFFFFFF;
-    final colors = palettes[palette.clamp(0, palettes.length - 1)];
-    return colors[hash % colors.length];
+    return blocks[hash % blocks.length];
   }
 
   /// Flèche : la couleur du fond, pas du noir pur. Elle creuse le bloc au lieu

@@ -38,7 +38,6 @@ class GameController extends ChangeNotifier {
     required this.haptics,
     this.solver = const LevelSolver(),
     this.rewards = const LocalRewardService(),
-    this.paletteIndex = 0,
     int? moveLimit,
   }) : _level = level,
        _moveLimit = moveLimit,
@@ -49,7 +48,6 @@ class GameController extends ChangeNotifier {
   final HapticService haptics;
   final LevelSolver solver;
   final RewardService rewards;
-  final int paletteIndex;
   int _attempt = 0;
   bool usedHint = false;
   bool get mastered =>

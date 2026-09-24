@@ -11,7 +11,7 @@ import 'package:ungrid/widgets/game_board.dart';
 
 void main() {
   testWidgets(
-    'reprendre une défaite, maîtriser un niveau, débloquer en coulisses',
+    'reprendre une défaite et maîtriser un niveau',
     (tester) async {
       tester.view.physicalSize = const Size(320, 568);
       tester.view.devicePixelRatio = 1;
@@ -61,12 +61,10 @@ void main() {
       await tester.pump(const Duration(seconds: 1));
       await tester.pump(const Duration(seconds: 1));
       expect(find.text('MASTERED'), findsOneWidget);
-      // Les palettes se débloquent toujours, mais plus rien ne l'annonce :
-      // l'écran qui les montrait a été retiré.
+      // Plus de palettes : ni écran, ni déblocage, ni annonce.
       expect(find.textContaining('UNLOCKED'), findsNothing);
       expect(p.chapterCleared(1), 10);
       expect(p.isMastered(10), isTrue);
-      expect(p.unlockedPalettes, [0, 1]);
       expect(tester.takeException(), isNull);
     },
   );
