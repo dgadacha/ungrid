@@ -176,7 +176,7 @@ class _Stat extends StatelessWidget {
         const SizedBox(height: 4),
         Text(
           value,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w900,
             color: UngridColors.onBackground,

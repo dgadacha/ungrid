@@ -68,7 +68,7 @@ class _LevelSelectScreenState extends State<LevelSelectScreen> {
               children: [
                 IconButton(
                   onPressed: () => Navigator.of(context).maybePop(),
-                  icon: const Icon(
+                  icon: Icon(
                     PhosphorIconsBold.arrowLeft,
                     color: UngridColors.onBackground,
                   ),
@@ -209,7 +209,7 @@ class _LevelTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (locked)
-              const Icon(
+              Icon(
                 PhosphorIconsBold.lockKey,
                 size: 20,
                 color: UngridColors.onBackgroundFaint,
@@ -239,7 +239,7 @@ class _LevelTile extends StatelessWidget {
                 const SizedBox(height: 3),
                 Text(
                   formatPlayTime(best!.bestTime!),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w800,
                     letterSpacing: 0.5,

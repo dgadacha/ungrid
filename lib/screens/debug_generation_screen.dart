@@ -259,7 +259,7 @@ class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
               children: [
                 IconButton(
                   onPressed: () => Navigator.of(context).maybePop(),
-                  icon: const Icon(
+                  icon: Icon(
                     PhosphorIconsBold.arrowLeft,
                     color: UngridColors.onBackground,
                   ),
@@ -275,7 +275,7 @@ class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
                 ),
                 IconButton(
                   onPressed: () => _load(_levelId),
-                  icon: const Icon(
+                  icon: Icon(
                     PhosphorIconsBold.arrowClockwise,
                     color: UngridColors.onBackground,
                   ),
@@ -395,7 +395,7 @@ class _Chip extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: const TextStyle(
+          style: TextStyle(
             color: UngridColors.onBackground,
             fontSize: 11,
             fontWeight: FontWeight.w800,
@@ -527,7 +527,7 @@ class _Stats extends StatelessWidget {
         // s'explique, bloc par bloc.
         Text(
           'TAPS PER BLOCK',
-          style: const TextStyle(
+          style: TextStyle(
             color: UngridColors.onBackgroundFaint,
             fontSize: 11,
             fontWeight: FontWeight.w800,
@@ -557,7 +557,7 @@ class _Stats extends StatelessWidget {
             padding: const EdgeInsets.only(top: 12),
             child: Text(
               'Unmet: ${unmet.join(", ")}',
-              style: const TextStyle(
+              style: TextStyle(
                 color: UngridColors.danger,
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
@@ -567,10 +567,7 @@ class _Stats extends StatelessWidget {
         const SizedBox(height: 10),
         Text(
           config.toString(),
-          style: const TextStyle(
-            color: UngridColors.onBackgroundFaint,
-            fontSize: 11,
-          ),
+          style: TextStyle(color: UngridColors.onBackgroundFaint, fontSize: 11),
         ),
       ],
     );
@@ -583,14 +580,11 @@ class _Stats extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(
-            color: UngridColors.onBackgroundSoft,
-            fontSize: 13,
-          ),
+          style: TextStyle(color: UngridColors.onBackgroundSoft, fontSize: 13),
         ),
         Text(
           value,
-          style: const TextStyle(
+          style: TextStyle(
             color: UngridColors.onBackground,
             fontSize: 13,
             fontWeight: FontWeight.w800,

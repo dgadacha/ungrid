@@ -205,7 +205,7 @@ class _PlaytestScreenState extends State<PlaytestScreen> {
               children: [
                 IconButton(
                   onPressed: () => Navigator.of(context).maybePop(),
-                  icon: const Icon(
+                  icon: Icon(
                     PhosphorIconsBold.arrowLeft,
                     color: UngridColors.onBackground,
                   ),
@@ -397,7 +397,7 @@ class _Chip extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: const TextStyle(
+          style: TextStyle(
             color: UngridColors.onBackground,
             fontSize: 12,
             fontWeight: FontWeight.w800,
@@ -424,14 +424,14 @@ class _Row extends StatelessWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               color: UngridColors.onBackgroundSoft,
               fontSize: 13,
             ),
           ),
           Text(
             value,
-            style: const TextStyle(
+            style: TextStyle(
               color: UngridColors.onBackground,
               fontSize: 13,
               fontWeight: FontWeight.w800,

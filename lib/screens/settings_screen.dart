@@ -52,11 +52,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
         backgroundColor: UngridColors.surface,
         title: Text(
           Strings.of(context).resetQuestion,
-          style: const TextStyle(color: UngridColors.onBackground),
+          style: TextStyle(color: UngridColors.onBackground),
         ),
         content: Text(
           Strings.of(context).resetWarning,
-          style: const TextStyle(color: UngridColors.onBackgroundSoft),
+          style: TextStyle(color: UngridColors.onBackgroundSoft),
         ),
         actions: [
           TextButton(
@@ -92,7 +92,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               children: [
                 IconButton(
                   onPressed: () => Navigator.of(context).maybePop(),
-                  icon: const Icon(
+                  icon: Icon(
                     PhosphorIconsBold.arrowLeft,
                     color: UngridColors.onBackground,
                   ),
@@ -127,17 +127,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(28, 0, 28, 6),
-            child: Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: [
-                for (final choice in UngridBackground.values)
-                  _BackgroundChoice(
-                    choice: choice,
-                    selected: UngridColors.background == choice.background,
-                    onTap: () => widget.onBackgroundChanged?.call(choice),
-                  ),
-              ],
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                // Quatre par rangée : les huit teintes tiennent en deux lignes
+                // pleines, sans pastille orpheline en bout de course.
+                const perRow = 4;
+                const gap = 10.0;
+                final side =
+                    (constraints.maxWidth - gap * (perRow - 1)) / perRow;
+                return Wrap(
+                  spacing: gap,
+                  runSpacing: gap,
+                  children: [
+                    for (final choice in UngridBackground.values)
+                      _BackgroundChoice(
+                        choice: choice,
+                        side: side,
+                        selected: UngridColors.background == choice.background,
+                        onTap: () => widget.onBackgroundChanged?.call(choice),
+                      ),
+                  ],
+                );
+              },
             ),
           ),
           const Divider(height: 34, indent: 28, endIndent: 28),
@@ -201,7 +212,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 'Jump to any level, nothing is saved',
                 style: textTheme.bodyMedium,
               ),
-              trailing: const Icon(
+              trailing: Icon(
                 PhosphorIconsBold.caretRight,
                 color: UngridColors.onBackgroundFaint,
               ),
@@ -222,7 +233,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 'Level analysis and tuning',
                 style: textTheme.bodyMedium,
               ),
-              trailing: const Icon(
+              trailing: Icon(
                 PhosphorIconsBold.caretRight,
                 color: UngridColors.onBackgroundFaint,
               ),
@@ -274,19 +285,17 @@ class _LanguageChoice extends StatelessWidget {
   }
 }
 
-/// Une pastille de fond : la teinte du plateau, et sa nuance de cases vides
-/// en son centre.
-///
-/// Montrer les deux couleurs d'un coup évite d'avoir à essayer pour voir :
-/// c'est exactement ce que la grille donnera.
+/// Une pastille de fond : la teinte du plateau, rien d'autre.
 class _BackgroundChoice extends StatelessWidget {
   const _BackgroundChoice({
     required this.choice,
+    required this.side,
     required this.selected,
     required this.onTap,
   });
 
   final UngridBackground choice;
+  final double side;
   final bool selected;
   final VoidCallback onTap;
 
@@ -295,8 +304,8 @@ class _BackgroundChoice extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 52,
-        height: 52,
+        width: side,
+        height: side,
         decoration: BoxDecoration(
           color: choice.background,
           borderRadius: BorderRadius.circular(14),
@@ -305,16 +314,6 @@ class _BackgroundChoice extends StatelessWidget {
                 ? UngridColors.onBackground
                 : UngridColors.onBackground.withValues(alpha: 0.18),
             width: selected ? 3 : 1,
-          ),
-        ),
-        child: Center(
-          child: Container(
-            width: 20,
-            height: 20,
-            decoration: BoxDecoration(
-              color: choice.surface,
-              borderRadius: BorderRadius.circular(6),
-            ),
           ),
         ),
       ),

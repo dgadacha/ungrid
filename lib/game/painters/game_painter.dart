@@ -24,7 +24,7 @@ class GamePainter extends CustomPainter {
   }) : _bonk = TextPainter(
          text: TextSpan(
            text: bonkLabel,
-           style: const TextStyle(
+           style: TextStyle(
              fontFamily: 'NunitoSans',
              fontSize: 20,
              fontWeight: FontWeight.w900,

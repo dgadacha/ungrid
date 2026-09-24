@@ -71,7 +71,7 @@ class _GameHeaderState extends State<GameHeader> {
             children: [
               IconButton(
                 onPressed: widget.onBack,
-                icon: const Icon(
+                icon: Icon(
                   PhosphorIconsBold.arrowLeft,
                   color: UngridColors.onBackground,
                 ),
@@ -190,7 +190,7 @@ class _TimePanel extends StatelessWidget {
         const SizedBox(height: 2),
         Text(
           formatPlayTime(elapsed),
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 26,
             height: 1.5,
             fontWeight: FontWeight.w800,

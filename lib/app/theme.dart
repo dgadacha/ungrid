@@ -21,24 +21,38 @@ class UngridColors {
   /// pour qu'une case vide se lise comme un emplacement.
   static Color surface = UngridBackground.wisteria.surface;
 
-  /// Applique un fond, sa nuance de surface et l'accent qui va avec.
+  /// Applique un fond et les teintes de signalisation qui vont avec.
   static void apply(UngridBackground choice) {
     background = choice.background;
     surface = choice.surface;
     accent = choice.accent;
+    success = choice.success;
+    danger = choice.danger;
+    onBackground = choice.onBackground;
+    onBackgroundSoft = choice.onBackgroundSoft;
+    onBackgroundFaint = choice.onBackgroundFaint;
   }
 
-  static const Color onBackground = Color(0xFFECF0F1); // Clouds
-  static const Color onBackgroundSoft = Color(0xFFBDC3C7); // Silver
-  static const Color onBackgroundFaint = Color(0xFF95A5A6); // Concrete
+  /// Le texte posé sur le fond, du plus franc au plus discret.
+  ///
+  /// Clair sur les fonds sombres, encre sur les fonds clairs : sur Orange, du
+  /// blanc cassé tomberait à 1,9 de contraste et les libellés disparaîtraient.
+  static Color onBackground = UngridBackground.wisteria.onBackground;
+  static Color onBackgroundSoft = UngridBackground.wisteria.onBackgroundSoft;
+  static Color onBackgroundFaint = UngridBackground.wisteria.onBackgroundFaint;
+
+  // Les trois teintes de signalisation suivent le fond choisi : une couleur
+  // qui tombe sur celle des cases vides ne désigne plus rien. Le tableau des
+  // fonds, plus bas, dit laquelle s'écarte et vers quoi.
 
   /// Sélection, mise en avant, bordure du niveau courant.
-  ///
-  /// Il suit le fond choisi : un accent de la couleur des cases vides ne
-  /// désignerait plus rien, donc il s'écarte quand le plateau prend sa teinte.
   static Color accent = UngridBackground.wisteria.accent;
-  static const Color danger = Color(0xFFE74C3C); // Alizarin
-  static const Color success = Color(0xFF2ECC71); // Emerald
+
+  /// Effacement, coups qui manquent, pièce inutile.
+  static Color danger = UngridBackground.wisteria.danger;
+
+  /// Niveau réussi, maîtrise, progression.
+  static Color success = UngridBackground.wisteria.success;
 
   /// Texte posé sur une surface claire.
   static const Color ink = Color(0xFF2C3E50);
@@ -100,7 +114,7 @@ class UngridTheme {
       scaffoldBackgroundColor: UngridColors.background,
       splashFactory: NoSplash.splashFactory,
       highlightColor: Colors.transparent,
-      textTheme: const TextTheme(
+      textTheme: TextTheme(
         displayLarge: TextStyle(
           fontSize: 46,
           fontWeight: FontWeight.w900,
@@ -142,6 +156,31 @@ class UngridTheme {
   }
 }
 
+// La palette Flat UI « defo », par couples : la teinte claire et sa voisine
+// sombre. Nommer les couleurs rend le tableau des fonds lisible d'un coup.
+const Color _turquoise = Color(0xFF1ABC9C);
+const Color _greenSea = Color(0xFF16A085);
+const Color _emerald = Color(0xFF2ECC71);
+const Color _nephritis = Color(0xFF27AE60);
+const Color _peterRiver = Color(0xFF3498DB);
+const Color _belizeHole = Color(0xFF2980B9);
+const Color _amethyst = Color(0xFF9B59B6);
+const Color _wisteria = Color(0xFF8E44AD);
+const Color _wetAsphalt = Color(0xFF34495E);
+const Color _midnight = Color(0xFF2C3E50);
+const Color _sunFlower = Color(0xFFF1C40F);
+const Color _orange = Color(0xFFF39C12);
+const Color _carrot = Color(0xFFE67E22);
+const Color _pumpkin = Color(0xFFD35400);
+const Color _alizarin = Color(0xFFE74C3C);
+const Color _pomegranate = Color(0xFFC0392B);
+const Color _clouds = Color(0xFFECF0F1);
+const Color _silver = Color(0xFFBDC3C7);
+const Color _concrete = Color(0xFF95A5A6);
+
+/// Midnight assez dilué pour jouer le rôle de Concrete sur un fond clair.
+const Color _midnightFaint = Color(0x732C3E50);
+
 /// Les fonds proposés dans les réglages.
 ///
 /// Chacun est une paire de la palette Flat UI : la teinte sombre pour le
@@ -149,20 +188,43 @@ class UngridTheme {
 /// d'origine de la palette, pas des variantes calculées — c'est ce qui fait
 /// qu'un plateau reste lisible quelle que soit la couleur choisie.
 enum UngridBackground {
-  belizeHole(Color(0xFF2980B9), Color(0xFF3498DB), Color(0xFF9B59B6)),
-  wisteria(Color(0xFF8E44AD), Color(0xFF9B59B6), Color(0xFF3498DB)),
-  midnight(Color(0xFF2C3E50), Color(0xFF34495E), Color(0xFF3498DB));
+  greenSea(_greenSea, _turquoise, accent: _amethyst),
+  nephritis(_nephritis, _emerald, success: _turquoise),
+  belizeHole(_belizeHole, _peterRiver, accent: _amethyst),
+  wisteria(_wisteria, _amethyst),
+  midnight(_midnight, _wetAsphalt),
+  orange(_orange, _sunFlower, ink: true),
+  pumpkin(_pumpkin, _carrot),
+  pomegranate(_pomegranate, _alizarin, danger: _carrot);
 
-  const UngridBackground(this.background, this.surface, this.accent);
+  const UngridBackground(
+    this.background,
+    this.surface, {
+    this.accent = _peterRiver,
+    this.success = _emerald,
+    this.danger = _alizarin,
+    this.ink = false,
+  });
+
+  /// Vrai quand le fond est assez clair pour que le texte passe à l'encre
+  /// sombre. Un fond clair avec du blanc cassé ne se lit pas.
+  final bool ink;
+
+  Color get onBackground => ink ? _midnight : _clouds;
+  Color get onBackgroundSoft => ink ? _wetAsphalt : _silver;
+  Color get onBackgroundFaint => ink ? _midnightFaint : _concrete;
 
   /// La nuance du plateau est toujours la teinte juste au-dessus du fond :
   /// une case vide se lit comme un emplacement, pas comme une découpe.
   final Color background;
   final Color surface;
 
-  /// L'accent ne reprend jamais la couleur des cases vides, sinon une
-  /// sélection deviendrait invisible sur ce fond.
+  /// Les trois teintes de signalisation. Chacune garde sa valeur habituelle,
+  /// sauf sur le fond qui lui prend sa couleur : sur Nephritis les cases vides
+  /// sont déjà Emerald, donc la réussite passe à Turquoise, et ainsi de suite.
   final Color accent;
+  final Color success;
+  final Color danger;
 
   static UngridBackground fromName(String? name) =>
       UngridBackground.values.firstWhere(
