@@ -29,6 +29,24 @@ class _UngridAppState extends State<UngridApp> {
   );
 
   late AppLanguage _language = widget.progress.language;
+  late UngridBackground _background = widget.progress.background;
+
+  @override
+  void initState() {
+    super.initState();
+    UngridColors.apply(_background);
+  }
+
+  /// Change le fond et reconstruit l'interface.
+  Future<void> _setBackground(UngridBackground choice) async {
+    if (choice == _background) return;
+    await widget.progress.setBackground(choice);
+    if (!mounted) return;
+    setState(() {
+      _background = choice;
+      UngridColors.apply(choice);
+    });
+  }
 
   /// Change la langue et reconstruit toute l'interface.
   Future<void> _setLanguage(AppLanguage language) async {
@@ -54,6 +72,7 @@ class _UngridAppState extends State<UngridApp> {
           progress: widget.progress,
           haptics: _haptics,
           onLanguageChanged: _setLanguage,
+          onBackgroundChanged: _setBackground,
         ),
       ),
     );

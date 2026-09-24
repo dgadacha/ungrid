@@ -21,6 +21,7 @@ class HomeScreen extends StatefulWidget {
     required this.progress,
     required this.haptics,
     this.onLanguageChanged,
+    this.onBackgroundChanged,
   });
 
   final LevelRepository repository;
@@ -29,6 +30,9 @@ class HomeScreen extends StatefulWidget {
 
   /// Change la langue de l'interface, transmis aux réglages.
   final ValueChanged<AppLanguage>? onLanguageChanged;
+
+  /// Change la couleur de fond, transmis aux réglages.
+  final ValueChanged<UngridBackground>? onBackgroundChanged;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -165,6 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () => _open(
                   SettingsScreen(
                     onLanguageChanged: widget.onLanguageChanged,
+                    onBackgroundChanged: widget.onBackgroundChanged,
                     progress: widget.progress,
                     haptics: widget.haptics,
                     repository: widget.repository,

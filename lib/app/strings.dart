@@ -203,13 +203,14 @@ class Strings {
   String get outOfMoves =>
       _pick('OUT OF MOVES', 'PLUS DE COUPS', 'SIN MOVIMIENTOS');
   String get retry => _pick('RETRY', 'RÉESSAYER', 'REINTENTAR');
-  String get undoMove => _pick('UNDO MOVE', 'ANNULER LE COUP', 'DESHACER');
   String extraMoves(int count) =>
       _pick('+$count MOVES', '+$count COUPS', '+$count MOVIMIENTOS');
 
   // ── Réglages ───────────────────────────────────────────────────────────
   String get settings => _pick('SETTINGS', 'RÉGLAGES', 'AJUSTES');
   String get haptics => _pick('HAPTICS', 'VIBRATIONS', 'VIBRACIÓN');
+  String get backgroundLabel =>
+      _pick('BACKGROUND', 'COULEUR DE FOND', 'COLOR DE FONDO');
   String get languageLabel => _pick('LANGUAGE', 'LANGUE', 'IDIOMA');
   String get resetProgress => _pick(
         'RESET PROGRESS',

@@ -5,6 +5,9 @@ enum RewardType {
 
   /// Trois coups de plus pour reprendre la partie perdue.
   extraMoves,
+
+  /// Une annulation de plus, une fois la gratuite dépensée.
+  undo,
 }
 
 /// Accès aux récompenses.

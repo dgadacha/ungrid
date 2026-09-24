@@ -261,12 +261,63 @@ class GameController extends ChangeNotifier {
   /// Seuls les coups qui ont modifié le plateau s'annulent : un refus n'a rien
   /// déplacé, et le rembourser reviendrait à autoriser le joueur à tout tester
   /// sans rien risquer.
+  /// Annulations offertes par partie.
+  ///
+  /// Une seule : revenir sur un coup doit rester un recours, pas une façon
+  /// de jouer. Au-delà, le joueur regarde une publicité — ou recommence, ce
+  /// qui ne coûte rien.
+  static const int freeUndos = 1;
+
+  int _undosUsed = 0;
+
+  /// Annulations déjà dépensées dans cette partie.
+  int get undosUsed => _undosUsed;
+
+  /// Reste-t-il l'annulation offerte ?
+  bool get hasFreeUndo => _undosUsed < freeUndos;
+
   bool get canUndo => !isCleared && engine.canUndo;
+
+  /// Une annulation est-elle possible, gratuite ou non ?
+  ///
+  /// Sans publicité disponible, la gratuite reste le seul recours : mieux
+  /// vaut un bouton éteint qu'un bouton qui ne mène nulle part.
+  bool get canRequestUndo =>
+      canUndo && (hasFreeUndo || rewards.isAvailable);
+
+  /// Annule, contre une publicité si la gratuite est déjà dépensée.
+  ///
+  /// Le chronomètre est suspendu le temps de la publicité : le temps passé
+  /// devant elle n'appartient pas à la partie.
+  Future<bool> requestUndo() async {
+    if (!canUndo) return false;
+    if (hasFreeUndo) {
+      _undosUsed++;
+      undo();
+      return true;
+    }
+    if (!rewards.isAvailable) return false;
+
+    final attempt = _attempt;
+    pauseTimer();
+    final granted = await rewards.requestReward(RewardType.undo);
+    if (attempt != _attempt || !canUndo) return false;
+    resumeTimer();
+    if (!granted) return false;
+
+    _undosUsed++;
+    undo();
+    return true;
+  }
 
   /// Reprend le dernier déplacement, en le rejouant à l'envers.
   ///
   /// Le coup est rendu au joueur ; le chronomètre, lui, continue de courir —
   /// le temps passé à revenir sur ses pas a bien été passé.
+  /// Reprend le dernier déplacement sans rien demander.
+  ///
+  /// Le quota n'est pas touché ici : c'est [requestUndo] qui le tient, et la
+  /// reprise après défaite ne doit rien coûter.
   void undo() {
     if (!canUndo) return;
 
@@ -299,21 +350,43 @@ class GameController extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Indices offerts par partie, comme pour l'annulation.
+  static const int freeHints = 1;
+
+  int _hintsUsed = 0;
+
+  /// Reste-t-il l'indice offert ?
+  bool get hasFreeHint => _hintsUsed < freeHints;
+
+  /// Un indice est-il possible, gratuit ou non ?
+  bool get canRequestHint =>
+      isPlaying && (hasFreeHint || rewards.isAvailable);
+
   /// Désigne un bloc jouable, sans le jouer : le joueur garde la main.
+  ///
+  /// Le premier est offert, les suivants passent par une publicité. Dans les
+  /// deux cas la partie est marquée comme assistée : un indice reste une
+  /// aide, qu'on l'ait payé ou non.
   ///
   /// Le chronomètre est suspendu le temps de la récompense.
   Future<bool> requestHint() async {
-    if (!isPlaying || !rewards.isAvailable) return false;
+    if (!isPlaying) return false;
 
-    final attempt = _attempt;
-    pauseTimer();
-    final granted = await rewards.requestReward(RewardType.hint);
-    if (attempt != _attempt || !isPlaying) return false;
-    resumeTimer();
-    if (!granted) return false;
+    if (!hasFreeHint) {
+      if (!rewards.isAvailable) return false;
+      final attempt = _attempt;
+      pauseTimer();
+      final granted = await rewards.requestReward(RewardType.hint);
+      if (attempt != _attempt || !isPlaying) return false;
+      resumeTimer();
+      if (!granted) return false;
+    }
 
     hintedBlockId = solver.nextBestMove(level, engine.history);
-    if (hintedBlockId != null) usedHint = true;
+    if (hintedBlockId != null) {
+      usedHint = true;
+      _hintsUsed++;
+    }
     notifyListeners();
     return hintedBlockId != null;
   }
@@ -348,6 +421,8 @@ class GameController extends ChangeNotifier {
   void restart() {
     _attempt++;
     usedHint = false;
+    _undosUsed = 0;
+    _hintsUsed = 0;
     engine.reset();
     motions.clear();
     _lastMotion = null;

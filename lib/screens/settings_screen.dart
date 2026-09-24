@@ -19,6 +19,7 @@ class SettingsScreen extends StatefulWidget {
     required this.haptics,
     required this.repository,
     this.onLanguageChanged,
+    this.onBackgroundChanged,
   });
 
   final ProgressService progress;
@@ -27,6 +28,9 @@ class SettingsScreen extends StatefulWidget {
 
   /// Appelé quand le joueur choisit une autre langue.
   final ValueChanged<AppLanguage>? onLanguageChanged;
+
+  /// Appelé quand le joueur choisit une autre couleur de fond.
+  final ValueChanged<UngridBackground>? onBackgroundChanged;
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -112,6 +116,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: Text(strings.haptics, style: textTheme.labelLarge),
             activeThumbColor: UngridColors.onBackground,
             activeTrackColor: UngridColors.success,
+          ),
+          const Divider(height: 34, indent: 28, endIndent: 28),
+
+          // Les fonds se choisissent à la couleur, pas au nom : une pastille
+          // dit immédiatement ce que le plateau deviendra.
+          Padding(
+            padding: const EdgeInsets.fromLTRB(28, 0, 28, 8),
+            child: Text(strings.backgroundLabel, style: textTheme.labelLarge),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(28, 0, 28, 6),
+            child: Wrap(
+              spacing: 10,
+              runSpacing: 10,
+              children: [
+                for (final choice in UngridBackground.values)
+                  _BackgroundChoice(
+                    choice: choice,
+                    selected: UngridColors.background == choice.background,
+                    onTap: () => widget.onBackgroundChanged?.call(choice),
+                  ),
+              ],
+            ),
           ),
           const Divider(height: 34, indent: 28, endIndent: 28),
 
@@ -240,6 +267,54 @@ class _LanguageChoice extends StatelessWidget {
             color: UngridColors.onBackground,
             fontSize: 13,
             fontWeight: selected ? FontWeight.w800 : FontWeight.w600,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Une pastille de fond : la teinte du plateau, et sa nuance de cases vides
+/// en son centre.
+///
+/// Montrer les deux couleurs d'un coup évite d'avoir à essayer pour voir :
+/// c'est exactement ce que la grille donnera.
+class _BackgroundChoice extends StatelessWidget {
+  const _BackgroundChoice({
+    required this.choice,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final UngridBackground choice;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 52,
+        height: 52,
+        decoration: BoxDecoration(
+          color: choice.background,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(
+            color: selected
+                ? UngridColors.onBackground
+                : UngridColors.onBackground.withValues(alpha: 0.18),
+            width: selected ? 3 : 1,
+          ),
+        ),
+        child: Center(
+          child: Container(
+            width: 20,
+            height: 20,
+            decoration: BoxDecoration(
+              color: choice.surface,
+              borderRadius: BorderRadius.circular(6),
+            ),
           ),
         ),
       ),

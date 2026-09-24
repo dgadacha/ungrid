@@ -11,14 +11,21 @@ class UngridColors {
   // Palette Flat UI v1. Les noms d'origine sont conservés en commentaire :
   // c'est la référence à rouvrir pour toute retouche.
 
-  static const Color background = Color(0xFF8E44AD); // Wisteria
+  /// Fond de l'application. Se change dans les réglages.
+  static Color background = UngridBackground.wisteria.background;
 
   /// Panneaux, cases vides, boutons secondaires.
   ///
-  /// Amethyst est à Wisteria ce que Wet Asphalt était à Midnight Blue : la
-  /// nuance juste au-dessus, assez proche pour ne pas découper la grille,
-  /// assez distincte pour qu'une case vide se lise comme un emplacement.
-  static const Color surface = Color(0xFF9B59B6); // Amethyst
+  /// Toujours la nuance juste au-dessus du fond, comme Amethyst l'est à
+  /// Wisteria : assez proche pour ne pas découper la grille, assez distincte
+  /// pour qu'une case vide se lise comme un emplacement.
+  static Color surface = UngridBackground.wisteria.surface;
+
+  /// Applique un fond et sa nuance de surface.
+  static void apply(UngridBackground choice) {
+    background = choice.background;
+    surface = choice.surface;
+  }
 
   static const Color onBackground = Color(0xFFECF0F1); // Clouds
   static const Color onBackgroundSoft = Color(0xFFBDC3C7); // Silver
@@ -36,8 +43,6 @@ class UngridColors {
   /// Aucune ne désigne une direction : la flèche s'en charge seule. La couleur
   /// n'a donc aucune fonction de jeu, elle casse la monotonie de la grille —
   /// et un joueur daltonien ne joue pas moins bien qu'un autre.
-  /// Amethyst n'en fait plus partie : il sert désormais aux cases vides, et un
-  /// bloc de la même teinte que le plateau se verrait mal.
   static const List<Color> blocks = [
     Color(0xFF1ABC9C), // Turquoise
     Color(0xFF2ECC71), // Emerald
@@ -47,6 +52,7 @@ class UngridColors {
     Color(0xFFE74C3C), // Alizarin
     Color(0xFF2980B9), // Belize Hole
     Color(0xFF16A085), // Green Sea
+    Color(0xFF9B59B6), // Amethyst
   ];
 
   /// Couleur d'un bloc, tirée de son identité et non de sa case.
@@ -59,7 +65,13 @@ class UngridColors {
       hash = (hash * 31 + unit) & 0x7FFFFFFF;
     }
     hash = (hash ^ (hash >> 13)) & 0x7FFFFFFF;
-    return blocks[hash % blocks.length];
+    // La teinte du plateau est retirée du tirage : un bloc de la couleur des
+    // cases vides disparaîtrait dedans.
+    final choices = [
+      for (final color in blocks)
+        if (color != surface) color,
+    ];
+    return choices[hash % choices.length];
   }
 
   /// Flèche : la couleur du fond, pas du noir pur. Elle creuse le bloc au lieu
@@ -71,7 +83,8 @@ class UngridTheme {
   const UngridTheme._();
 
   static ThemeData build() {
-    const base = ColorScheme.dark(
+    // Plus constant : la surface suit le fond choisi dans les réglages.
+    final base = ColorScheme.dark(
       primary: UngridColors.accent,
       secondary: UngridColors.accent,
       surface: UngridColors.surface,
@@ -126,4 +139,33 @@ class UngridTheme {
       ),
     );
   }
+}
+
+/// Les fonds proposés dans les réglages.
+///
+/// Chacun est une paire de la palette Flat UI : la teinte sombre pour le
+/// fond, sa voisine claire pour les cases vides. Ce sont les couples
+/// d'origine de la palette, pas des variantes calculées — c'est ce qui fait
+/// qu'un plateau reste lisible quelle que soit la couleur choisie.
+enum UngridBackground {
+  wisteria('Wisteria', Color(0xFF8E44AD), Color(0xFF9B59B6)),
+  midnight('Midnight', Color(0xFF2C3E50), Color(0xFF34495E)),
+  greenSea('Green Sea', Color(0xFF16A085), Color(0xFF1ABC9C)),
+  belizeHole('Belize', Color(0xFF2980B9), Color(0xFF3498DB)),
+  nephritis('Nephritis', Color(0xFF27AE60), Color(0xFF2ECC71)),
+  pomegranate('Pomegranate', Color(0xFFC0392B), Color(0xFFE74C3C)),
+  pumpkin('Pumpkin', Color(0xFFD35400), Color(0xFFE67E22)),
+  asbestos('Asbestos', Color(0xFF7F8C8D), Color(0xFF95A5A6));
+
+  const UngridBackground(this.label, this.background, this.surface);
+
+  final String label;
+  final Color background;
+  final Color surface;
+
+  static UngridBackground fromName(String? name) =>
+      UngridBackground.values.firstWhere(
+        (choice) => choice.name == name,
+        orElse: () => UngridBackground.wisteria,
+      );
 }

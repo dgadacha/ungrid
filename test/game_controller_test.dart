@@ -310,15 +310,90 @@ void main() {
       expect(controller.hintedBlockId, isNull);
     });
 
-    test('sans récompense disponible, pas d\'indice', () async {
+    test('le premier indice est offert, le suivant se paie', () async {
       final controller = controllerFor([
         '....',
         '>..^',
         '....',
         '....',
       ], rewards: const _NoRewards());
+
+      // Offert : il passe même sans publicité disponible.
+      expect(controller.hasFreeHint, isTrue);
+      expect(await controller.requestHint(), isTrue);
+      expect(controller.hintedBlockId, isNotNull);
+
+      // Dépensé : sans publicité, il n'y a plus rien à offrir.
+      expect(controller.hasFreeHint, isFalse);
+      expect(controller.canRequestHint, isFalse);
       expect(await controller.requestHint(), isFalse);
-      expect(controller.hintedBlockId, isNull);
+    });
+
+    test('le compte d\'indices repart à chaque partie', () async {
+      final controller = controllerFor([
+        '....',
+        '>..^',
+        '....',
+        '....',
+      ], rewards: const _NoRewards());
+      await controller.requestHint();
+      expect(controller.hasFreeHint, isFalse);
+      controller.restart();
+      expect(controller.hasFreeHint, isTrue);
+    });
+  });
+
+  group('annulation', () {
+    test('la première est offerte, la suivante se paie', () async {
+      final controller = controllerFor([
+        '....',
+        '>...',
+        '..^.',
+        '....',
+      ], moves: 4, rewards: const _NoRewards());
+
+      controller.tapCell(0, 1);
+      expect(controller.hasFreeUndo, isTrue);
+      expect(await controller.requestUndo(), isTrue);
+      expect(controller.movesUsed, 0);
+
+      // La gratuite est dépensée : sans publicité, le bouton s'éteint.
+      controller.tapCell(0, 1);
+      expect(controller.hasFreeUndo, isFalse);
+      expect(controller.canRequestUndo, isFalse);
+      expect(await controller.requestUndo(), isFalse);
+      expect(controller.movesUsed, 1, reason: 'le coup reste joué');
+    });
+
+    test('une publicité rend une annulation de plus', () async {
+      final controller = controllerFor([
+        '....',
+        '>...',
+        '..^.',
+        '....',
+      ], moves: 4);
+
+      controller.tapCell(0, 1);
+      await controller.requestUndo();
+      controller.tapCell(0, 1);
+      expect(controller.hasFreeUndo, isFalse);
+      expect(controller.canRequestUndo, isTrue, reason: 'la publicité existe');
+      expect(await controller.requestUndo(), isTrue);
+      expect(controller.movesUsed, 0);
+    });
+
+    test('le compte repart à chaque partie', () async {
+      final controller = controllerFor([
+        '....',
+        '>...',
+        '..^.',
+        '....',
+      ], moves: 4, rewards: const _NoRewards());
+      controller.tapCell(0, 1);
+      await controller.requestUndo();
+      expect(controller.hasFreeUndo, isFalse);
+      controller.restart();
+      expect(controller.hasFreeUndo, isTrue);
     });
   });
 

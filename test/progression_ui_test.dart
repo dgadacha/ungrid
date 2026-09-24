@@ -50,7 +50,9 @@ void main() {
       await tester.pump(const Duration(seconds: 1));
       await tester.pump(const Duration(seconds: 1));
       expect(find.text('OUT OF MOVES'), findsOneWidget);
-      await tester.tap(find.text('UNDO MOVE'));
+      // L'annulation a quitté l'écran de défaite : on reprend avec les coups
+      // supplémentaires, qui laissent la grille où elle en était.
+      await tester.tap(find.text('+3 MOVES'));
       await tester.pump();
       expect(c.isPlaying, isTrue);
       expect(find.text('OUT OF MOVES'), findsNothing);

@@ -163,13 +163,15 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
     _load(_levelId + 1);
   }
 
-  void _undo() {
-    if (!(_controller?.canUndo ?? false)) return;
+  /// Annulation demandée par le joueur : la première est offerte, les
+  /// suivantes passent par une publicité.
+  Future<void> _undo() async {
+    final controller = _controller;
+    if (controller == null || !controller.canRequestUndo) return;
     _outcomeTimer?.cancel();
-    setState(() {
-      _showOutcome = false;
-      _controller!.undo();
-    });
+    setState(() => _showOutcome = false);
+    await controller.requestUndo();
+    if (mounted) setState(() {});
   }
 
   void _restart() {
@@ -294,7 +296,6 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
               child: OutOfMovesOverlay(
                 remainingBlocks: controller.remainingBlocks,
                 onRetry: _restart,
-                onUndo: controller.canUndo ? _undo : null,
                 onExtraMoves: widget.rewards.isAvailable ? _extraMoves : null,
               ),
             ),
@@ -383,10 +384,15 @@ class _Controls extends StatelessWidget {
       builder: (context, _) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // Une fois l'annulation offerte dépensée, l'icône devient celle
+          // d'une vidéo : le joueur voit ce que le geste va lui coûter avant
+          // d'appuyer, pas après.
           RoundIconButton(
-            icon: PhosphorIconsBold.arrowCounterClockwise,
+            icon: controller.hasFreeUndo
+                ? PhosphorIconsBold.arrowCounterClockwise
+                : PhosphorIconsBold.playCircle,
             label: Strings.of(context).undo,
-            onPressed: controller.canUndo ? onUndo : null,
+            onPressed: controller.canRequestUndo ? onUndo : null,
           ),
           const SizedBox(width: 30),
           RoundIconButton(
@@ -396,11 +402,11 @@ class _Controls extends StatelessWidget {
           ),
           const SizedBox(width: 30),
           RoundIconButton(
-            icon: PhosphorIconsBold.lightbulb,
+            icon: controller.hasFreeHint
+                ? PhosphorIconsBold.lightbulb
+                : PhosphorIconsBold.playCircle,
             label: Strings.of(context).hint,
-            onPressed: controller.isPlaying && controller.rewards.isAvailable
-                ? onHint
-                : null,
+            onPressed: controller.canRequestHint ? onHint : null,
           ),
         ],
       ),
