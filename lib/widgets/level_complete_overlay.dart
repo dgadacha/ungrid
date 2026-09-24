@@ -205,7 +205,7 @@ class _Badge extends StatelessWidget {
       child: Text(
         label,
         style: const TextStyle(
-          color: UngridColors.arrow,
+          color: UngridColors.ink,
           fontSize: 12,
           fontWeight: FontWeight.w900,
           letterSpacing: 1.6,

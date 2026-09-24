@@ -75,7 +75,7 @@ class _ArrowLetterPainter extends CustomPainter {
     final shader = const LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-      colors: [UngridColors.accent, Color(0xFF2563EB)],
+      colors: [Color(0xFF3498DB), Color(0xFF2980B9)], // Peter River / Belize
     ).createShader(Offset.zero & size);
 
     _fill.shader = shader;

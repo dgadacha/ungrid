@@ -89,10 +89,15 @@ void main() {
       if (i == 1) painter.paintStopTile(canvas, rect);
       if (i == 2 || i == 3) painter.paintOccupiedStopTile(canvas, rect);
       if (i == 0 || i == 2) {
-        painter.paintBlock(canvas, rect, Direction.right, UngridColors.accent);
+        painter.paintBlock(
+          canvas,
+          rect,
+          Direction.right,
+          UngridColors.blocks[1],
+        );
       }
       if (i == 3) {
-        painter.paintBlock(canvas, rect, Direction.up, const Color(0xFF2ECC71));
+        painter.paintBlock(canvas, rect, Direction.up, UngridColors.blocks[0]);
       }
     }
     index++;

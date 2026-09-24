@@ -21,38 +21,43 @@ class UngridColors {
   /// pour qu'une case vide se lise comme un emplacement.
   static Color surface = UngridBackground.wisteria.surface;
 
-  /// Applique un fond et sa nuance de surface.
+  /// Applique un fond, sa nuance de surface et l'accent qui va avec.
   static void apply(UngridBackground choice) {
     background = choice.background;
     surface = choice.surface;
+    accent = choice.accent;
   }
 
   static const Color onBackground = Color(0xFFECF0F1); // Clouds
   static const Color onBackgroundSoft = Color(0xFFBDC3C7); // Silver
   static const Color onBackgroundFaint = Color(0xFF95A5A6); // Concrete
 
-  static const Color accent = Color(0xFF3498DB); // Peter River
+  /// Sélection, mise en avant, bordure du niveau courant.
+  ///
+  /// Il suit le fond choisi : un accent de la couleur des cases vides ne
+  /// désignerait plus rien, donc il s'écarte quand le plateau prend sa teinte.
+  static Color accent = UngridBackground.wisteria.accent;
   static const Color danger = Color(0xFFE74C3C); // Alizarin
   static const Color success = Color(0xFF2ECC71); // Emerald
 
   /// Texte posé sur une surface claire.
   static const Color ink = Color(0xFF2C3E50);
 
-  /// Les huit couleurs de blocs.
+  /// L'encre des flèches, la même sur tous les blocs.
   ///
-  /// Aucune ne désigne une direction : la flèche s'en charge seule. La couleur
-  /// n'a donc aucune fonction de jeu, elle casse la monotonie de la grille —
-  /// et un joueur daltonien ne joue pas moins bien qu'un autre.
+  /// Une seule teinte pour toutes les directions : aucune couleur ne désigne
+  /// un sens, c'est la forme qui le fait, et un joueur daltonien ne joue pas
+  /// moins bien qu'un autre.
+  static const Color arrow = Color(0xFF2C3E50); // Midnight Blue
+
+  /// Les six aplats de blocs.
   static const List<Color> blocks = [
-    Color(0xFF1ABC9C), // Turquoise
     Color(0xFF2ECC71), // Emerald
     Color(0xFF3498DB), // Peter River
+    Color(0xFF9B59B6), // Amethyst
     Color(0xFFF1C40F), // Sun Flower
     Color(0xFFE67E22), // Carrot
     Color(0xFFE74C3C), // Alizarin
-    Color(0xFF2980B9), // Belize Hole
-    Color(0xFF16A085), // Green Sea
-    Color(0xFF9B59B6), // Amethyst
   ];
 
   /// Couleur d'un bloc, tirée de son identité et non de sa case.
@@ -73,10 +78,6 @@ class UngridColors {
     ];
     return choices[hash % choices.length];
   }
-
-  /// Flèche : la couleur du fond, pas du noir pur. Elle creuse le bloc au lieu
-  /// de le trouer.
-  static const Color arrow = Color(0xFF2C3E50);
 }
 
 class UngridTheme {
@@ -148,20 +149,20 @@ class UngridTheme {
 /// d'origine de la palette, pas des variantes calculées — c'est ce qui fait
 /// qu'un plateau reste lisible quelle que soit la couleur choisie.
 enum UngridBackground {
-  wisteria('Wisteria', Color(0xFF8E44AD), Color(0xFF9B59B6)),
-  midnight('Midnight', Color(0xFF2C3E50), Color(0xFF34495E)),
-  greenSea('Green Sea', Color(0xFF16A085), Color(0xFF1ABC9C)),
-  belizeHole('Belize', Color(0xFF2980B9), Color(0xFF3498DB)),
-  nephritis('Nephritis', Color(0xFF27AE60), Color(0xFF2ECC71)),
-  pomegranate('Pomegranate', Color(0xFFC0392B), Color(0xFFE74C3C)),
-  pumpkin('Pumpkin', Color(0xFFD35400), Color(0xFFE67E22)),
-  asbestos('Asbestos', Color(0xFF7F8C8D), Color(0xFF95A5A6));
+  belizeHole(Color(0xFF2980B9), Color(0xFF3498DB), Color(0xFF9B59B6)),
+  wisteria(Color(0xFF8E44AD), Color(0xFF9B59B6), Color(0xFF3498DB)),
+  midnight(Color(0xFF2C3E50), Color(0xFF34495E), Color(0xFF3498DB));
 
-  const UngridBackground(this.label, this.background, this.surface);
+  const UngridBackground(this.background, this.surface, this.accent);
 
-  final String label;
+  /// La nuance du plateau est toujours la teinte juste au-dessus du fond :
+  /// une case vide se lit comme un emplacement, pas comme une découpe.
   final Color background;
   final Color surface;
+
+  /// L'accent ne reprend jamais la couleur des cases vides, sinon une
+  /// sélection deviendrait invisible sur ce fond.
+  final Color accent;
 
   static UngridBackground fromName(String? name) =>
       UngridBackground.values.firstWhere(
