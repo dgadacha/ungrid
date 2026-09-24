@@ -1,0 +1,8269 @@
+{
+  "catalogVersion": 5,
+  "generatorVersion": 5,
+  "levelCount": 100,
+  "mechanic": "rotation-tiered-v1",
+  "levels": [
+    {
+      "levelId": 1,
+      "seed": 59860,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 32.519299377344076,
+      "optimalMoves": 7,
+      "status": "active",
+      "fingerprint": "3eae78d64365022d",
+      "board": {
+        "id": 1,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "tutorial",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 17,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 2,
+      "seed": 41688,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 46.8046781634154,
+      "optimalMoves": 9,
+      "status": "active",
+      "fingerprint": "36ead10f5a020fc0",
+      "board": {
+        "id": 2,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "tutorial",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 6,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 3,
+      "seed": 47342,
+      "generatorVersion": 5,
+      "difficulty": "hard",
+      "difficultyScore": 57.91810779333611,
+      "optimalMoves": 7,
+      "status": "active",
+      "fingerprint": "c3adef85663c66d9",
+      "board": {
+        "id": 3,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "tutorial",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 1,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 4,
+      "seed": 51922,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 61.169427131993096,
+      "optimalMoves": 9,
+      "status": "active",
+      "fingerprint": "4b5fa60ddbf25522",
+      "board": {
+        "id": 4,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "tutorial",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 2,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 5,
+      "seed": 48115,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 62.636599338940385,
+      "optimalMoves": 9,
+      "status": "active",
+      "fingerprint": "9de57af556ec2fdc",
+      "board": {
+        "id": 5,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "tutorial",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 6,
+      "seed": 33966,
+      "generatorVersion": 5,
+      "difficulty": "hard",
+      "difficultyScore": 50.0054419982241,
+      "optimalMoves": 14,
+      "status": "active",
+      "fingerprint": "694e3705f3a58207",
+      "board": {
+        "id": 6,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 0,
+            "y": 3
+          },
+          {
+            "x": 1,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 2,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 7,
+      "seed": 24181,
+      "generatorVersion": 5,
+      "difficulty": "hard",
+      "difficultyScore": 50.869024282637774,
+      "optimalMoves": 14,
+      "status": "active",
+      "fingerprint": "feac81e06b4fc7b7",
+      "board": {
+        "id": 7,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 0
+          },
+          {
+            "x": 3,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 1,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 8,
+      "seed": 38971,
+      "generatorVersion": 5,
+      "difficulty": "hard",
+      "difficultyScore": 51.76515151478949,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "fecfa7a2ae4aa55f",
+      "board": {
+        "id": 8,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 3,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 2,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 9,
+      "seed": 10061,
+      "generatorVersion": 5,
+      "difficulty": "hard",
+      "difficultyScore": 52.768775285111175,
+      "optimalMoves": 15,
+      "status": "active",
+      "fingerprint": "74efb2990da02440",
+      "board": {
+        "id": 9,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 1
+          },
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 4,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 10,
+      "seed": 31731,
+      "generatorVersion": 5,
+      "difficulty": "expert",
+      "difficultyScore": 53.67510866533351,
+      "optimalMoves": 11,
+      "status": "active",
+      "fingerprint": "db1066f3fa12a6d1",
+      "board": {
+        "id": 10,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 3
+          },
+          {
+            "x": 4,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 11,
+      "seed": 722,
+      "generatorVersion": 5,
+      "difficulty": "hard",
+      "difficultyScore": 54.62787982829512,
+      "optimalMoves": 14,
+      "status": "active",
+      "fingerprint": "c21563037a85c91f",
+      "board": {
+        "id": 11,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 1
+          },
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 1,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 12,
+      "seed": 45924,
+      "generatorVersion": 5,
+      "difficulty": "expert",
+      "difficultyScore": 55.493537008507296,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "5e8e437905abb9cb",
+      "board": {
+        "id": 12,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 1,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 13,
+      "seed": 48532,
+      "generatorVersion": 5,
+      "difficulty": "medium",
+      "difficultyScore": 56.42890658654841,
+      "optimalMoves": 13,
+      "status": "active",
+      "fingerprint": "7587ceae4efa91db",
+      "board": {
+        "id": 13,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 4,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 14,
+      "seed": 46887,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 57.47825341980677,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "4460d48e0b93bf3c",
+      "board": {
+        "id": 14,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 2
+          },
+          {
+            "x": 1,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 15,
+      "seed": 59601,
+      "generatorVersion": 5,
+      "difficulty": "hard",
+      "difficultyScore": 58.25576720738642,
+      "optimalMoves": 13,
+      "status": "active",
+      "fingerprint": "ca2dd2e8a543d2ef",
+      "board": {
+        "id": 15,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 1
+          },
+          {
+            "x": 3,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 16,
+      "seed": 40136,
+      "generatorVersion": 5,
+      "difficulty": "expert",
+      "difficultyScore": 59.129760384782685,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "a33ca7b4ea76c213",
+      "board": {
+        "id": 16,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 17,
+      "seed": 48225,
+      "generatorVersion": 5,
+      "difficulty": "hard",
+      "difficultyScore": 60.0429053705442,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "3f77068d44e31adc",
+      "board": {
+        "id": 17,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 2,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 18,
+      "seed": 31092,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 61.03136993154856,
+      "optimalMoves": 10,
+      "status": "active",
+      "fingerprint": "c1e40d8d293dd5e6",
+      "board": {
+        "id": 18,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 0
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 2,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 19,
+      "seed": 58801,
+      "generatorVersion": 5,
+      "difficulty": "medium",
+      "difficultyScore": 62.01454990868601,
+      "optimalMoves": 13,
+      "status": "active",
+      "fingerprint": "80a8d43039579a9a",
+      "board": {
+        "id": 19,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 2
+          },
+          {
+            "x": 1,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 4,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 20,
+      "seed": 2875,
+      "generatorVersion": 5,
+      "difficulty": "expert",
+      "difficultyScore": 62.79478670793275,
+      "optimalMoves": 15,
+      "status": "active",
+      "fingerprint": "2de28623ec986c88",
+      "board": {
+        "id": 20,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 1
+          },
+          {
+            "x": 3,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 2,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 21,
+      "seed": 2770,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 64.01521266845681,
+      "optimalMoves": 12,
+      "status": "active",
+      "fingerprint": "251a93ad03cbeb8f",
+      "board": {
+        "id": 21,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 22,
+      "seed": 5290,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 65.36346301355353,
+      "optimalMoves": 11,
+      "status": "active",
+      "fingerprint": "598a5e81d3d1365b",
+      "board": {
+        "id": 22,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 5
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 1,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 23,
+      "seed": 51257,
+      "generatorVersion": 5,
+      "difficulty": "medium",
+      "difficultyScore": 67.18753003253649,
+      "optimalMoves": 11,
+      "status": "active",
+      "fingerprint": "b8dc0400e33b516b",
+      "board": {
+        "id": 23,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 0
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 4,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 24,
+      "seed": 34131,
+      "generatorVersion": 5,
+      "difficulty": "medium",
+      "difficultyScore": 69.31398638260954,
+      "optimalMoves": 15,
+      "status": "active",
+      "fingerprint": "f349b5b7c84b9965",
+      "board": {
+        "id": 24,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 1
+          },
+          {
+            "x": 3,
+            "y": 4
+          },
+          {
+            "x": 4,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 1,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 25,
+      "seed": 21681,
+      "generatorVersion": 5,
+      "difficulty": "medium",
+      "difficultyScore": 71.0559257415831,
+      "optimalMoves": 11,
+      "status": "active",
+      "fingerprint": "72cef5b93a0f094c",
+      "board": {
+        "id": 25,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 0
+          },
+          {
+            "x": 0,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "medium",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 1,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 26,
+      "seed": 38480,
+      "generatorVersion": 5,
+      "difficulty": "medium",
+      "difficultyScore": 60.10485952639638,
+      "optimalMoves": 19,
+      "status": "active",
+      "fingerprint": "335d8095cc6708c5",
+      "board": {
+        "id": 26,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 3
+          },
+          {
+            "x": 2,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 27,
+      "seed": 33461,
+      "generatorVersion": 5,
+      "difficulty": "medium",
+      "difficultyScore": 60.51602131089899,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "fa632ac9a275efdc",
+      "board": {
+        "id": 27,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 3
+          },
+          {
+            "x": 2,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 4,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 28,
+      "seed": 39359,
+      "generatorVersion": 5,
+      "difficulty": "expert",
+      "difficultyScore": 61.024801925020434,
+      "optimalMoves": 15,
+      "status": "active",
+      "fingerprint": "896e3275d066aacb",
+      "board": {
+        "id": 28,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 5,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 2,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 2,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 29,
+      "seed": 12733,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 61.6123568100025,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "2418c48d08fbd6d7",
+      "board": {
+        "id": 29,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 3
+          },
+          {
+            "x": 2,
+            "y": 5
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 30,
+      "seed": 59325,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 62.30680551886936,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "a7f2d4b02faafb33",
+      "board": {
+        "id": 30,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 3
+          },
+          {
+            "x": 3,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 1,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 31,
+      "seed": 13402,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 62.67965034981532,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "abd00739d5a718f5",
+      "board": {
+        "id": 31,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 1
+          },
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 1,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 1,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 32,
+      "seed": 50458,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 63.04246649913139,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "df09b52b9e6b6fa1",
+      "board": {
+        "id": 32,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 1,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 33,
+      "seed": 31650,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 63.41220127484793,
+      "optimalMoves": 15,
+      "status": "active",
+      "fingerprint": "85ec95dba9d87172",
+      "board": {
+        "id": 33,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 1
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 2,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 34,
+      "seed": 19985,
+      "generatorVersion": 5,
+      "difficulty": "expert",
+      "difficultyScore": 63.912395064257566,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "a1f918f8258ebc35",
+      "board": {
+        "id": 34,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 3,
+            "y": 5,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 5,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 4,
+            "y": 1
+          },
+          {
+            "x": 0,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 35,
+      "seed": 44810,
+      "generatorVersion": 5,
+      "difficulty": "expert",
+      "difficultyScore": 64.32203905059441,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "66e6998f1c6e4dcc",
+      "board": {
+        "id": 35,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 0
+          },
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 6,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 36,
+      "seed": 41471,
+      "generatorVersion": 5,
+      "difficulty": "medium",
+      "difficultyScore": 64.9016155107623,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "d13e6d4fd06d0623",
+      "board": {
+        "id": 36,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 1
+          },
+          {
+            "x": 0,
+            "y": 3
+          },
+          {
+            "x": 3,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 5,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 37,
+      "seed": 12568,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 65.16755635959427,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "bb16223c2a1c522f",
+      "board": {
+        "id": 37,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 1,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 38,
+      "seed": 15608,
+      "generatorVersion": 5,
+      "difficulty": "hard",
+      "difficultyScore": 65.74650671578482,
+      "optimalMoves": 19,
+      "status": "active",
+      "fingerprint": "9fd4a95aaa84121c",
+      "board": {
+        "id": 38,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 5,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 1
+          },
+          {
+            "x": 4,
+            "y": 1
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 39,
+      "seed": 22897,
+      "generatorVersion": 5,
+      "difficulty": "hard",
+      "difficultyScore": 66.30054130801993,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "92666e1679824231",
+      "board": {
+        "id": 39,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 4,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 40,
+      "seed": 42466,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 66.57496052181071,
+      "optimalMoves": 15,
+      "status": "active",
+      "fingerprint": "73c67e9e681ef4d2",
+      "board": {
+        "id": 40,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 1
+          },
+          {
+            "x": 2,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 41,
+      "seed": 12716,
+      "generatorVersion": 5,
+      "difficulty": "hard",
+      "difficultyScore": 66.95226551438653,
+      "optimalMoves": 18,
+      "status": "active",
+      "fingerprint": "4502e1200add3c97",
+      "board": {
+        "id": 41,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 1
+          },
+          {
+            "x": 2,
+            "y": 2
+          },
+          {
+            "x": 1,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 1,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 42,
+      "seed": 30748,
+      "generatorVersion": 5,
+      "difficulty": "medium",
+      "difficultyScore": 67.48203491511184,
+      "optimalMoves": 15,
+      "status": "active",
+      "fingerprint": "9329a2534fc3373a",
+      "board": {
+        "id": 42,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 2,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 43,
+      "seed": 52247,
+      "generatorVersion": 5,
+      "difficulty": "medium",
+      "difficultyScore": 68.04197790430764,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "bde61c10422ba783",
+      "board": {
+        "id": 43,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 0
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 44,
+      "seed": 54119,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 68.62119355366701,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "85b17e4cde9caadb",
+      "board": {
+        "id": 44,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 3
+          },
+          {
+            "x": 1,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 45,
+      "seed": 51935,
+      "generatorVersion": 5,
+      "difficulty": "expert",
+      "difficultyScore": 69.1861782546363,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "e01ac8e1b9cc2b80",
+      "board": {
+        "id": 45,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 46,
+      "seed": 5191,
+      "generatorVersion": 5,
+      "difficulty": "expert",
+      "difficultyScore": 69.54165850849061,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "8568d0fb08f72f11",
+      "board": {
+        "id": 46,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 1
+          },
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 47,
+      "seed": 58670,
+      "generatorVersion": 5,
+      "difficulty": "medium",
+      "difficultyScore": 70.27878462455958,
+      "optimalMoves": 15,
+      "status": "active",
+      "fingerprint": "e02048c0ceede21d",
+      "board": {
+        "id": 47,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 48,
+      "seed": 48269,
+      "generatorVersion": 5,
+      "difficulty": "expert",
+      "difficultyScore": 71.31721220117883,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "40918abbb4c072db",
+      "board": {
+        "id": 48,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 49,
+      "seed": 49044,
+      "generatorVersion": 5,
+      "difficulty": "expert",
+      "difficultyScore": 72.37352043557803,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "68748cb463440fc6",
+      "board": {
+        "id": 49,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 1
+          },
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 4,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 2,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 50,
+      "seed": 6562,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 74.05874531368416,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "35694de83f443c7f",
+      "board": {
+        "id": 50,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "hard",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 51,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 64.57978909382581,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "0ab146361e61ac81",
+      "board": {
+        "id": 51,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 1
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 1,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 52,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 67.38059639325442,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "f379448cb9fa845c",
+      "board": {
+        "id": 52,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 0
+          },
+          {
+            "x": 1,
+            "y": 5
+          },
+          {
+            "x": 0,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 1,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 53,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 68.25047675632119,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "be273d4e4a7ce135",
+      "board": {
+        "id": 53,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 2
+          },
+          {
+            "x": 4,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 54,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 69.34559003009514,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "0e9860459e26f7bf",
+      "board": {
+        "id": 54,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 2
+          },
+          {
+            "x": 1,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 55,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 69.58157417402802,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "2d8932d4069df122",
+      "board": {
+        "id": 55,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 0,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 56,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 69.74704684825457,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "91d9b26ac7c3bc9b",
+      "board": {
+        "id": 56,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 4
+          },
+          {
+            "x": 3,
+            "y": 0
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 57,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 70.86100611375359,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "ae1aa92c8da66611",
+      "board": {
+        "id": 57,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 3
+          },
+          {
+            "x": 4,
+            "y": 1
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 58,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 71.2480195518521,
+      "optimalMoves": 18,
+      "status": "active",
+      "fingerprint": "3eb09fd11d358a5a",
+      "board": {
+        "id": 58,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 1
+          },
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 0,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 59,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 71.31284400505456,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "eab5deb3b6323b78",
+      "board": {
+        "id": 59,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 60,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 71.77862886369759,
+      "optimalMoves": 18,
+      "status": "active",
+      "fingerprint": "21e03e821b7430e8",
+      "board": {
+        "id": 60,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 3
+          },
+          {
+            "x": 4,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 61,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 72.07922645965903,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "c651839830ac42bb",
+      "board": {
+        "id": 61,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 5,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 5
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 62,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 72.4913317137461,
+      "optimalMoves": 18,
+      "status": "active",
+      "fingerprint": "e17a127bad8c90ae",
+      "board": {
+        "id": 62,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 0,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 5,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 63,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 72.92484648121767,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "2b9759a3d568b3d9",
+      "board": {
+        "id": 63,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 2
+          },
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 4,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 64,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 73.15302423649185,
+      "optimalMoves": 18,
+      "status": "active",
+      "fingerprint": "91bb2a978edff302",
+      "board": {
+        "id": 64,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 1
+          },
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 0,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 65,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 73.49158943310869,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "f6714ea14f7d1707",
+      "board": {
+        "id": 65,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 5,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 66,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 73.5760802473336,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "0ec18dacce6c07e4",
+      "board": {
+        "id": 66,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 3
+          },
+          {
+            "x": 2,
+            "y": 0
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 67,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 73.58311365483472,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "b7bd77082c6ad13b",
+      "board": {
+        "id": 67,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 68,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 73.98502730883101,
+      "optimalMoves": 18,
+      "status": "active",
+      "fingerprint": "6a6aa194bea2f4eb",
+      "board": {
+        "id": 68,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 2
+          },
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 69,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 74.29090987680458,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "f6714ba14f7d11ee",
+      "board": {
+        "id": 69,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 5,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 70,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 74.3693046913729,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "61a254613e5916dd",
+      "board": {
+        "id": 70,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 4,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 71,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 74.84138814173897,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "c39aec1332bab112",
+      "board": {
+        "id": 71,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 2,
+            "y": 3
+          },
+          {
+            "x": 3,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 72,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 75.12219618649114,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "166abc24821694e8",
+      "board": {
+        "id": 72,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 4,
+            "y": 4
+          },
+          {
+            "x": 3,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 73,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 75.16916208956614,
+      "optimalMoves": 18,
+      "status": "active",
+      "fingerprint": "21e043821b743967",
+      "board": {
+        "id": 73,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 3
+          },
+          {
+            "x": 4,
+            "y": 1
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 74,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 75.24854146318985,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "627efab063532a8c",
+      "board": {
+        "id": 74,
+        "rows": 4,
+        "columns": 4,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 2,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 75,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 75.4954227064449,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "5fe6b8e616aee337",
+      "board": {
+        "id": 75,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 76,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 75.65150505487682,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "72ca83fd82e29b6e",
+      "board": {
+        "id": 76,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 77,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 75.99381445581021,
+      "optimalMoves": 19,
+      "status": "active",
+      "fingerprint": "4f4ae49445e9a34e",
+      "board": {
+        "id": 77,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 1,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 78,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 76.34999058127178,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "8d55682678769919",
+      "board": {
+        "id": 78,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 4,
+            "y": 2
+          },
+          {
+            "x": 0,
+            "y": 2
+          },
+          {
+            "x": 0,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 79,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 76.55542207079725,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "ac5b814c10517079",
+      "board": {
+        "id": 79,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 2,
+            "y": 3
+          },
+          {
+            "x": 3,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 80,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 76.75928543854248,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "882708cee5dcccd6",
+      "board": {
+        "id": 80,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 0,
+            "y": 3
+          },
+          {
+            "x": 2,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 81,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 76.97179080218633,
+      "optimalMoves": 20,
+      "status": "active",
+      "fingerprint": "d6b2a9962af8dcfc",
+      "board": {
+        "id": 81,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 5,
+            "y": 4,
+            "direction": "down"
+          },
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 4
+          },
+          {
+            "x": 3,
+            "y": 5
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 82,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 77.03231993168873,
+      "optimalMoves": 19,
+      "status": "active",
+      "fingerprint": "ae7ac0170517c82b",
+      "board": {
+        "id": 82,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 2,
+            "y": 3
+          },
+          {
+            "x": 3,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 83,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 77.51409029085305,
+      "optimalMoves": 25,
+      "status": "active",
+      "fingerprint": "77d25dc2f1996439",
+      "board": {
+        "id": 83,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 1
+          },
+          {
+            "x": 2,
+            "y": 1
+          },
+          {
+            "x": 0,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 9,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 84,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 77.78633051146143,
+      "optimalMoves": 19,
+      "status": "active",
+      "fingerprint": "4363aa98ab1ce4d2",
+      "board": {
+        "id": 84,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 3
+          },
+          {
+            "x": 0,
+            "y": 1
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 6,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 85,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 77.8086846357255,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "3151561070f46b47",
+      "board": {
+        "id": 85,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 3
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 86,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 77.86569800061456,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "538837ce828552eb",
+      "board": {
+        "id": 86,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 1
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 87,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 77.954818084671,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "f2beda7592c284a8",
+      "board": {
+        "id": 87,
+        "rows": 6,
+        "columns": 6,
+        "blocks": [
+          {
+            "x": 5,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 5,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 4
+          },
+          {
+            "x": 2,
+            "y": 5
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 88,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 78.22243473909691,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "84704812c6b80374",
+      "board": {
+        "id": 88,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 2
+          },
+          {
+            "x": 1,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 89,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 78.2392841211488,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "5eb8cc21029f6fe4",
+      "board": {
+        "id": 89,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 0,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 4
+          },
+          {
+            "x": 4,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 90,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 78.48783891897824,
+      "optimalMoves": 22,
+      "status": "active",
+      "fingerprint": "65d045446665d2aa",
+      "board": {
+        "id": 90,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 0,
+            "y": 3
+          },
+          {
+            "x": 0,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 91,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 78.6446131306468,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "ec745f24599374c1",
+      "board": {
+        "id": 91,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 0,
+            "y": 3
+          },
+          {
+            "x": 2,
+            "y": 4
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 92,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 78.89733697836877,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "7f8c048330010a04",
+      "board": {
+        "id": 92,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 93,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 79.32576866388604,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "b8d9fe3564cd9831",
+      "board": {
+        "id": 93,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 0,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 94,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 79.62931507350724,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "9132cb08cdf579ed",
+      "board": {
+        "id": 94,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 2
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 95,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 80.17980466211199,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "71c168e951236c94",
+      "board": {
+        "id": 95,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "right"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "up"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 0,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 96,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 80.57453403993205,
+      "optimalMoves": 16,
+      "status": "active",
+      "fingerprint": "591eba038220f79a",
+      "board": {
+        "id": 96,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "direction": "up"
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "direction": "right"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 1
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 97,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 81.46934839311278,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "dc79aebf00f26438",
+      "board": {
+        "id": 97,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "up"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 0,
+            "y": 3
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 98,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 82.75564707679106,
+      "optimalMoves": 18,
+      "status": "active",
+      "fingerprint": "8f866d801757d759",
+      "board": {
+        "id": 98,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "left"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 3
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 3,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 99,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 83.7347186249311,
+      "optimalMoves": 17,
+      "status": "active",
+      "fingerprint": "a668bf735644ed99",
+      "board": {
+        "id": 99,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 1,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "direction": "left"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 0,
+            "y": 3
+          },
+          {
+            "x": 3,
+            "y": 2
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    },
+    {
+      "levelId": 100,
+      "seed": 0,
+      "generatorVersion": 5,
+      "difficulty": "easy",
+      "difficultyScore": 85.645977405764,
+      "optimalMoves": 18,
+      "status": "active",
+      "fingerprint": "853a91aec7b3205b",
+      "board": {
+        "id": 100,
+        "rows": 5,
+        "columns": 5,
+        "blocks": [
+          {
+            "x": 2,
+            "y": 2,
+            "direction": "down"
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "direction": "left"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "direction": "down"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "direction": "up"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "direction": "right"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "direction": "down"
+          }
+        ],
+        "rotationTiles": [
+          {
+            "x": 2,
+            "y": 3
+          },
+          {
+            "x": 3,
+            "y": 3
+          },
+          {
+            "x": 3,
+            "y": 0
+          }
+        ]
+      },
+      "tier": "extreme",
+      "planning": {
+        "deferredReturns": 4,
+        "greedyWins": 0,
+        "greedyTrials": 24
+      }
+    }
+  ]
+}

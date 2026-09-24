@@ -69,6 +69,7 @@ flutter:
     - assets/levels/campaign_v2.json
     - assets/levels/campaign_v3.json
     - assets/levels/campaign_v4.json
+    - assets/levels/campaign_v5.json
 
   fonts:
     - family: NunitoSans

@@ -17,7 +17,7 @@ import 'campaign_level.dart';
 class CampaignCatalog {
   CampaignCatalog(this.campaign, {this.generator = const SlideGenerator()});
 
-  static const String assetPath = 'assets/levels/campaign_v4.json';
+  static const String assetPath = 'assets/levels/campaign_v5.json';
 
   final Campaign campaign;
   final PuzzleGenerator generator;

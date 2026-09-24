@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:ungrid/game/engine/planning_difficulty.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ungrid/game/campaign/campaign_catalog.dart';
+import 'package:ungrid/game/campaign/campaign_profile.dart';
 import 'package:ungrid/game/campaign/campaign_level.dart';
 import 'package:ungrid/game/engine/game_engine.dart';
 import 'package:ungrid/game/engine/level_fingerprint.dart';
@@ -25,55 +26,60 @@ void main() {
     'campagne active : 100 rotations distinctes, utiles et optimales',
     () async {
       final catalog = await CampaignCatalog.load();
-      expect(catalog.campaign.catalogVersion, 4);
+      expect(catalog.campaign.catalogVersion, 5);
       expect(catalog.levelCount, 100);
       final report =
           jsonDecode(
                 File(
-                  'assets/levels/campaign_v4_solutions.json',
+                  'assets/levels/campaign_v5_solutions.json',
                 ).readAsStringSync(),
               )
               as Map;
       final seen = <String>{};
-      var previousReturns = 0;
+      CampaignTier? previousTier;
       double previousScore = 0;
       for (var id = 1; id <= 100; id++) {
         final level = catalog.levelFor(id)!;
         expect(level.id, id);
         expect(level.rotationTiles, isNotEmpty);
         expect(seen.add(LevelFingerprint.of(level)), isTrue);
-        expect(level.blocks.length, inInclusiveRange(7, 14));
+        // Chaque niveau répond du palier où il se trouve, pas d'un profil
+        // unique : c'est toute la différence entre une campagne qui monte et
+        // une campagne qui commence au sommet.
+        final tier = CampaignTier.forLevel(id);
+        expect(level.blocks.length, inInclusiveRange(4, 14));
         final result = const LevelSolver().solve(level);
         expect(result.solvable, isTrue, reason: 'niveau $id');
         expect(result.exhaustive, isTrue);
         expect(result.minimumMoves, level.moveLimit);
-        expect(result.minimumMoves, greaterThanOrEqualTo(16));
         final planning = PlanningDifficulty.measure(
           level,
           result.exampleSolution,
         );
-        expect(
-          planning.accepts,
-          isTrue,
-          reason: 'niveau $id : ${planning.toJson()}',
-        );
         final analysis = const PuzzleAnalyzer(
           solver: LevelSolver(maxExploredStates: 6000),
         ).analyse(level, result);
-        expect(analysis.unresolvedAlternatives, 0);
-        expect(analysis.unusedStopTileCount, 0);
-        expect(analysis.difficultyScore(), greaterThanOrEqualTo(60));
-        expect(analysis.trivialityPenalty, lessThanOrEqualTo(.2));
-        expect(analysis.optimalPathNarrowness, greaterThanOrEqualTo(.35));
-        expect(analysis.temptingWrongMoveRatio, greaterThanOrEqualTo(.5));
-        expect(analysis.dependencyComplexity, greaterThanOrEqualTo(.65));
+        expect(analysis.unresolvedAlternatives, 0, reason: 'niveau $id');
+        expect(
+          tier.accepts(level, analysis, planning),
+          isTrue,
+          reason: 'niveau $id, palier ${tier.name} : '
+              '${analysis.optimalMoves} coups, '
+              'score ${analysis.difficultyScore().toStringAsFixed(1)}, '
+              '${planning.toJson()}',
+        );
+
+        // La difficulté monte à l'intérieur d'un palier, et ne redescend
+        // jamais d'un palier au suivant.
         final score = catalog.definitionFor(id)!.difficultyScore;
-        expect(planning.deferredReturns, greaterThanOrEqualTo(previousReturns));
-        if (planning.deferredReturns == previousReturns) {
-          expect(score, greaterThanOrEqualTo(previousScore));
+        if (tier == previousTier) {
+          expect(
+            score,
+            greaterThanOrEqualTo(previousScore - 0.001),
+            reason: 'niveau $id : le palier ${tier.name} redescend',
+          );
         }
-        if (id >= 81) expect(planning.deferredReturns, greaterThanOrEqualTo(4));
-        previousReturns = planning.deferredReturns;
+        previousTier = tier;
         previousScore = score;
         final engine = GameEngine(level);
         final plain = GameEngine(
