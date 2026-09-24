@@ -39,7 +39,8 @@ void main() {
       late final CampaignCatalog catalog;
       await tester.runAsync(() async {
         catalog = CampaignCatalog.parse(
-            await File(CampaignCatalog.assetPath).readAsString());
+          await File(CampaignCatalog.assetPath).readAsString(),
+        );
       });
       await tester.pumpWidget(
         MaterialApp(

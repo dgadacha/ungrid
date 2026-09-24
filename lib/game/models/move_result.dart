@@ -29,11 +29,11 @@ class MoveResult {
   });
 
   const MoveResult.ignored()
-      : outcome = MoveOutcome.ignored,
-        blockId = null,
-        from = null,
-        to = null,
-        remainingBlocks = 0;
+    : outcome = MoveOutcome.ignored,
+      blockId = null,
+      from = null,
+      to = null,
+      remainingBlocks = 0;
 
   final MoveOutcome outcome;
   final String? blockId;

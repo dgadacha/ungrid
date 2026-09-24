@@ -54,6 +54,7 @@ class _UngridAppState extends State<UngridApp> {
     await widget.progress.setLanguage(language);
     if (mounted) setState(() => _language = language);
   }
+
   late final LevelRepository _repository = LevelRepository(
     catalog: widget.catalog,
     lastLevel: widget.catalog?.levelCount,

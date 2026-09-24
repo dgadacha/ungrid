@@ -62,7 +62,6 @@ class DifficultyConfig {
   /// qui découple la longueur de la solution de la taille du board.
   final int stopTileBudget;
 
-
   Difficulty get tier => Difficulty.fromScalar(scalar);
 
   int get targetBlocks => (minBlocks + maxBlocks) ~/ 2;
@@ -113,7 +112,8 @@ class DifficultyConfig {
   static double _lerp(double a, double b, double t) => a + (b - a) * t;
 
   @override
-  String toString() => 'DifficultyConfig(${scalar.toStringAsFixed(2)} '
+  String toString() =>
+      'DifficultyConfig(${scalar.toStringAsFixed(2)} '
       '${gridSize}x$gridSize, $minBlocks-$maxBlocks blocs, '
       'repositionnement ${repositionRatio.toStringAsFixed(2)}, '
       'sorties immédiates <=${(maxExitableRatio * 100).round()}%, '
@@ -270,7 +270,6 @@ class DifficultyCurve {
     final wave = _wave[(levelId - 1) % _wave.length];
     return (base + wave).clamp(0.0, 1.0);
   }
-
 
   static DifficultyConfig configFor(int levelId) =>
       DifficultyConfig.fromScalar(scalarFor(levelId));

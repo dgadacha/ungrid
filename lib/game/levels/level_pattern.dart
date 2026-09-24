@@ -27,11 +27,11 @@ class LevelPattern {
   };
 
   static String symbolOf(Direction direction) => switch (direction) {
-        Direction.up => '^',
-        Direction.down => 'v',
-        Direction.left => '<',
-        Direction.right => '>',
-      };
+    Direction.up => '^',
+    Direction.down => 'v',
+    Direction.left => '<',
+    Direction.right => '>',
+  };
 
   static Level parse(
     List<String> rows, {
@@ -49,7 +49,8 @@ class LevelPattern {
       final row = rows[y];
       if (row.length != columns) {
         throw ArgumentError(
-            'Niveau $id : la ligne $y fait ${row.length} caractères au lieu de $columns');
+          'Niveau $id : la ligne $y fait ${row.length} caractères au lieu de $columns',
+        );
       }
       for (var x = 0; x < columns; x++) {
         final symbol = row[x];
@@ -60,13 +61,17 @@ class LevelPattern {
         }
         final direction = _symbols[symbol];
         if (direction == null) {
-          throw ArgumentError('Niveau $id : symbole inconnu "$symbol" en ($x,$y)');
+          throw ArgumentError(
+            'Niveau $id : symbole inconnu "$symbol" en ($x,$y)',
+          );
         }
-        blocks.add(Block(
-          id: 'b${blocks.length}',
-          position: GridPosition(x, y),
-          direction: direction,
-        ));
+        blocks.add(
+          Block(
+            id: 'b${blocks.length}',
+            position: GridPosition(x, y),
+            direction: direction,
+          ),
+        );
       }
     }
 

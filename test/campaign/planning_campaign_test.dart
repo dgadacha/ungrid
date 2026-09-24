@@ -63,7 +63,8 @@ void main() {
         expect(
           tier.accepts(level, analysis, planning),
           isTrue,
-          reason: 'niveau $id, palier ${tier.name} : '
+          reason:
+              'niveau $id, palier ${tier.name} : '
               '${analysis.optimalMoves} coups, '
               'score ${analysis.difficultyScore().toStringAsFixed(1)}, '
               '${planning.toJson()}',

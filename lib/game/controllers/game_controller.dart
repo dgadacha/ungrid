@@ -282,8 +282,7 @@ class GameController extends ChangeNotifier {
   ///
   /// Sans publicité disponible, la gratuite reste le seul recours : mieux
   /// vaut un bouton éteint qu'un bouton qui ne mène nulle part.
-  bool get canRequestUndo =>
-      canUndo && (hasFreeUndo || rewards.isAvailable);
+  bool get canRequestUndo => canUndo && (hasFreeUndo || rewards.isAvailable);
 
   /// Annule, contre une publicité si la gratuite est déjà dépensée.
   ///
@@ -359,8 +358,7 @@ class GameController extends ChangeNotifier {
   bool get hasFreeHint => _hintsUsed < freeHints;
 
   /// Un indice est-il possible, gratuit ou non ?
-  bool get canRequestHint =>
-      isPlaying && (hasFreeHint || rewards.isAvailable);
+  bool get canRequestHint => isPlaying && (hasFreeHint || rewards.isAvailable);
 
   /// Désigne un bloc jouable, sans le jouer : le joueur garde la main.
   ///

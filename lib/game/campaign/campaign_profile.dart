@@ -52,40 +52,44 @@ enum CampaignTier {
         // Rien sur le score : un premier niveau doit être lisible, pas noté.
         // Une seule rotation, sinon la règle s'apprend sur deux exemples à la
         // fois.
-        CampaignTier.tutorial => level.blocks.length >= 4 &&
-            level.blocks.length <= 7 &&
-            level.rotationTiles.length == 1 &&
-            a.optimalMoves >= 5 &&
-            a.optimalMoves <= 9 &&
-            a.unresolvedAlternatives == 0,
-        CampaignTier.medium => level.blocks.length >= 6 &&
-            level.blocks.length <= 10 &&
-            a.optimalMoves >= 10 &&
-            a.optimalMoves <= 15 &&
-            a.difficultyScore() >= 50 &&
-            p.deferredReturns >= 1 &&
-            a.unresolvedAlternatives == 0 &&
-            a.unusedStopTileCount == 0,
-        CampaignTier.hard => level.blocks.length >= 8 &&
-            a.optimalMoves >= 15 &&
-            a.optimalMoves <= 20 &&
-            a.difficultyScore() >= 60 &&
-            a.trivialityPenalty <= 0.25 &&
-            p.deferredReturns >= 2 &&
-            a.unresolvedAlternatives == 0 &&
-            a.unusedStopTileCount == 0,
+        CampaignTier.tutorial =>
+          level.blocks.length >= 4 &&
+              level.blocks.length <= 7 &&
+              level.rotationTiles.length == 1 &&
+              a.optimalMoves >= 5 &&
+              a.optimalMoves <= 9 &&
+              a.unresolvedAlternatives == 0,
+        CampaignTier.medium =>
+          level.blocks.length >= 6 &&
+              level.blocks.length <= 10 &&
+              a.optimalMoves >= 10 &&
+              a.optimalMoves <= 15 &&
+              a.difficultyScore() >= 50 &&
+              p.deferredReturns >= 1 &&
+              a.unresolvedAlternatives == 0 &&
+              a.unusedStopTileCount == 0,
+        CampaignTier.hard =>
+          level.blocks.length >= 8 &&
+              a.optimalMoves >= 15 &&
+              a.optimalMoves <= 20 &&
+              a.difficultyScore() >= 60 &&
+              a.trivialityPenalty <= 0.25 &&
+              p.deferredReturns >= 2 &&
+              a.unresolvedAlternatives == 0 &&
+              a.unusedStopTileCount == 0,
         // Le palier que la v4 remplissait déjà : c'est son profil, repris tel
         // quel pour que ses cent niveaux restent éligibles.
-        CampaignTier.extreme => level.blocks.length >= 7 &&
-            a.optimalMoves >= 16 &&
-            a.difficultyScore() >= 60 &&
-            a.trivialityPenalty <= 0.2 &&
-            a.optimalPathNarrowness >= 0.35 &&
-            a.temptingWrongMoveRatio >= 0.5 &&
-            a.dependencyComplexity >= 0.65 &&
-            p.accepts &&
-            a.unresolvedAlternatives == 0 &&
-            a.unusedStopTileCount == 0,
+        CampaignTier.extreme =>
+          level.blocks.length >= 7 &&
+              a.optimalMoves >= 16 &&
+              a.difficultyScore() >= 60 &&
+              a.trivialityPenalty <= 0.2 &&
+              a.optimalPathNarrowness >= 0.35 &&
+              a.temptingWrongMoveRatio >= 0.5 &&
+              a.dependencyComplexity >= 0.65 &&
+              p.accepts &&
+              a.unresolvedAlternatives == 0 &&
+              a.unusedStopTileCount == 0,
       };
 }
 

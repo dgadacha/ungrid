@@ -90,18 +90,22 @@ class DifficultyEvaluator {
 
     // Repositionnements : chaque bloc sort une fois, le reste est du travail
     // préparatoire.
-    final reposition =
-        blockCount == 0 ? 0.0 : (moves - blockCount) / blockCount;
-    final repositionTerm =
-        (reposition / _repositionTarget).clamp(0.0, 1.0).toDouble();
+    final reposition = blockCount == 0
+        ? 0.0
+        : (moves - blockCount) / blockCount;
+    final repositionTerm = (reposition / _repositionTarget)
+        .clamp(0.0, 1.0)
+        .toDouble();
 
     final exitableRatio = blockCount == 0 ? 0.0 : exitableCount / blockCount;
     final searchTerm = (1 - exitableRatio).clamp(0.0, 1.0).toDouble();
 
-    final trapTerm =
-        (solveResult.deadEndCount / _deadEndTarget).clamp(0.0, 1.0).toDouble();
+    final trapTerm = (solveResult.deadEndCount / _deadEndTarget)
+        .clamp(0.0, 1.0)
+        .toDouble();
 
-    final structureFactor = _baseFactor +
+    final structureFactor =
+        _baseFactor +
         repositionTerm * _repositionWeight +
         searchTerm * _searchWeight +
         trapTerm * _trapWeight;
@@ -163,8 +167,9 @@ class DifficultyEvaluator {
           final index = horizontal
               ? grid[a * level.columns + b]
               : grid[b * level.columns + a];
-          final direction =
-              index >= 0 ? level.blocks[index].direction.index : null;
+          final direction = index >= 0
+              ? level.blocks[index].direction.index
+              : null;
           if (direction != null && direction == current) {
             streak++;
             if (streak == 3) runs++;
@@ -211,15 +216,14 @@ class DifficultyEvaluator {
   List<String> unmetCriteria(
     DifficultyConfig config,
     DifficultyEvaluation evaluation,
-  ) =>
-      [
-        if (evaluation.score < config.minScore) 'score bas',
-        if (evaluation.score > config.maxScore) 'score haut',
-        if (evaluation.exitableRatio > config.maxExitableRatio)
-          'trop de sorties immédiates',
-        if (evaluation.repositionRatio <= 0) 'aucun repositionnement',
-        if (evaluation.exitableRatio > 0) 'sorties offertes',
-        if (evaluation.trivialPenalty > 0) 'trivial',
-        if (evaluation.repetitivePenalty > 4) 'répétitif',
-      ];
+  ) => [
+    if (evaluation.score < config.minScore) 'score bas',
+    if (evaluation.score > config.maxScore) 'score haut',
+    if (evaluation.exitableRatio > config.maxExitableRatio)
+      'trop de sorties immédiates',
+    if (evaluation.repositionRatio <= 0) 'aucun repositionnement',
+    if (evaluation.exitableRatio > 0) 'sorties offertes',
+    if (evaluation.trivialPenalty > 0) 'trivial',
+    if (evaluation.repetitivePenalty > 4) 'répétitif',
+  ];
 }

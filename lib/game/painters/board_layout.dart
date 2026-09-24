@@ -24,10 +24,8 @@ class BoardLayout {
   final int rows;
 
   factory BoardLayout.fit(Size available, int columns, int rows) {
-    final side = math.min(
-          available.width,
-          available.height,
-        ) -
+    final side =
+        math.min(available.width, available.height) -
         GameMetrics.boardPadding * 2;
     final board = math.max(side, 0.0);
     final cell = board / math.max(columns, rows);
@@ -44,11 +42,11 @@ class BoardLayout {
   }
 
   Rect cellRect(int x, int y) => Rect.fromLTWH(
-        rect.left + x * cellSize,
-        rect.top + y * cellSize,
-        cellSize,
-        cellSize,
-      );
+    rect.left + x * cellSize,
+    rect.top + y * cellSize,
+    cellSize,
+    cellSize,
+  );
 
   /// Case visée par un toucher, `null` en dehors de la grille.
   GridPosition? cellAt(Offset position) {

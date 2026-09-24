@@ -30,15 +30,17 @@ void main() {
       {
         final generated = generator.generate(levelId: id);
         watch.stop();
-        samples.add(_Sample(
-          id: id,
-          level: generated.level,
-          micros: watch.elapsedMicroseconds,
-          solvable: generated.solveResult.solvable,
-          moves: generated.solveResult.minimumMoves,
-          score: generated.difficulty.score,
-          exitableRatio: generated.difficulty.exitableRatio,
-        ));
+        samples.add(
+          _Sample(
+            id: id,
+            level: generated.level,
+            micros: watch.elapsedMicroseconds,
+            solvable: generated.solveResult.solvable,
+            moves: generated.solveResult.minimumMoves,
+            score: generated.difficulty.score,
+            exitableRatio: generated.difficulty.exitableRatio,
+          ),
+        );
       }
     }
   });
@@ -46,12 +48,21 @@ void main() {
   test('toute la campagne est structurellement valide', () {
     for (final sample in samples) {
       final trace = LevelPattern.render(sample.level).join('\n');
-      expect(sample.level.blocks, isNotEmpty,
-          reason: 'niveau ${sample.id} vide');
-      expect(sample.level.isStructurallyValid, isTrue,
-          reason: 'niveau ${sample.id} : coordonnées ou doublons\n$trace');
-      expect(sample.level.occupancy, lessThan(0.75),
-          reason: 'niveau ${sample.id} : plus rien ne peut glisser\n$trace');
+      expect(
+        sample.level.blocks,
+        isNotEmpty,
+        reason: 'niveau ${sample.id} vide',
+      );
+      expect(
+        sample.level.isStructurallyValid,
+        isTrue,
+        reason: 'niveau ${sample.id} : coordonnées ou doublons\n$trace',
+      );
+      expect(
+        sample.level.occupancy,
+        lessThan(0.75),
+        reason: 'niveau ${sample.id} : plus rien ne peut glisser\n$trace',
+      );
     }
   });
 
@@ -62,8 +73,11 @@ void main() {
 
   test('la limite de coups est la solution optimale', () {
     for (final sample in samples) {
-      expect(sample.level.moveLimit, sample.moves,
-          reason: 'niveau ${sample.id} : la limite doit valoir l\'optimal');
+      expect(
+        sample.level.moveLimit,
+        sample.moves,
+        reason: 'niveau ${sample.id} : la limite doit valoir l\'optimal',
+      );
     }
   });
 
@@ -71,8 +85,11 @@ void main() {
     for (final id in [7, 21, 48, 63, 77, 92, 100]) {
       final a = generator.generate(levelId: id).level;
       final b = generator.generate(levelId: id).level;
-      expect(LevelPattern.render(a), LevelPattern.render(b),
-          reason: 'niveau $id non reproductible');
+      expect(
+        LevelPattern.render(a),
+        LevelPattern.render(b),
+        reason: 'niveau $id non reproductible',
+      );
     }
   });
 
@@ -86,10 +103,16 @@ void main() {
       return values.reduce((a, b) => a + b) / values.length;
     }
 
-    final blocksEarly =
-        average(11, 40, (s) => s.level.blocks.length.toDouble());
-    final blocksLate =
-        average(71, 100, (s) => s.level.blocks.length.toDouble());
+    final blocksEarly = average(
+      11,
+      40,
+      (s) => s.level.blocks.length.toDouble(),
+    );
+    final blocksLate = average(
+      71,
+      100,
+      (s) => s.level.blocks.length.toDouble(),
+    );
     final scoreEarly = average(11, 40, (s) => s.score);
     final scoreLate = average(71, 100, (s) => s.score);
 
@@ -118,10 +141,16 @@ void main() {
       }
     }
 
-    expect(nearDuplicates, isEmpty,
-        reason: 'boards identiques à portée de mémoire : $nearDuplicates');
-    expect(duplicates.length / samples.length, lessThan(0.01),
-        reason: 'trop de boards identiques : ${duplicates.length}');
+    expect(
+      nearDuplicates,
+      isEmpty,
+      reason: 'boards identiques à portée de mémoire : $nearDuplicates',
+    );
+    expect(
+      duplicates.length / samples.length,
+      lessThan(0.01),
+      reason: 'trop de boards identiques : ${duplicates.length}',
+    );
 
     final counts = <String, int>{};
     for (final sample in samples) {
@@ -131,8 +160,11 @@ void main() {
     }
     final totalBlocks = counts.values.reduce((a, b) => a + b);
     for (final entry in counts.entries) {
-      expect(entry.value / totalBlocks, lessThan(0.35),
-          reason: 'direction ${entry.key} sur-représentée');
+      expect(
+        entry.value / totalBlocks,
+        lessThan(0.35),
+        reason: 'direction ${entry.key} sur-représentée',
+      );
     }
   });
 

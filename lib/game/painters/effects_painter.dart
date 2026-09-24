@@ -50,13 +50,16 @@ class ClearEffect {
     final radius = board.width / 2;
 
     for (final particle in particles) {
-      final local = ((progress - particle.delay) / (1 - particle.delay))
-          .clamp(0.0, 1.0);
+      final local = ((progress - particle.delay) / (1 - particle.delay)).clamp(
+        0.0,
+        1.0,
+      );
       if (local <= 0) continue;
 
       final eased = 1 - math.pow(1 - local, 3).toDouble();
       final distance = radius * particle.distance * eased;
-      final position = center +
+      final position =
+          center +
           Offset(math.cos(particle.angle), math.sin(particle.angle)) * distance;
 
       _paint.color = UngridColors.ink.withValues(alpha: (1 - local) * 0.55);

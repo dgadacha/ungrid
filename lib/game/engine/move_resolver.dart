@@ -84,11 +84,7 @@ class MoveResolver {
       distance++;
 
       if (cells[target] & cellStopTile != 0) {
-        return (
-          outcome: MoveOutcome.stopped,
-          distance: distance,
-          cell: target,
-        );
+        return (outcome: MoveOutcome.stopped, distance: distance, cell: target);
       }
     }
   }

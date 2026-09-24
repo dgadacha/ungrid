@@ -10,64 +10,56 @@ import 'package:ungrid/services/progress_service.dart';
 import 'package:ungrid/widgets/game_board.dart';
 
 void main() {
-  testWidgets(
-    'reprendre une défaite et maîtriser un niveau',
-    (tester) async {
-      tester.view.physicalSize = const Size(320, 568);
-      tester.view.devicePixelRatio = 1;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
-      SharedPreferences.setMockInitialValues({});
-      final p = await ProgressService.load();
-      for (var id = 1; id <= 9; id++) {
-        await p.recordCompletion(
-          levelId: id,
-          movesUsed: 2,
-          time: const Duration(seconds: 30),
-        );
-      }
-      final level = LevelPattern.parse([
-        '>^..',
-        '....',
-        '....',
-        '....',
-      ], id: 10);
-      await tester.pumpWidget(
-        MaterialApp(
-          theme: UngridTheme.build(),
-          home: GameScreen(
-            levelId: 10,
-            repository: LevelRepository(fixedLevels: [level], lastLevel: 10),
-            progress: p,
-            haptics: HapticService(enabled: false),
-          ),
-        ),
+  testWidgets('reprendre une défaite et maîtriser un niveau', (tester) async {
+    tester.view.physicalSize = const Size(320, 568);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    SharedPreferences.setMockInitialValues({});
+    final p = await ProgressService.load();
+    for (var id = 1; id <= 9; id++) {
+      await p.recordCompletion(
+        levelId: id,
+        movesUsed: 2,
+        time: const Duration(seconds: 30),
       );
-      await tester.pumpAndSettle();
-      final c = tester.widget<GameBoard>(find.byType(GameBoard)).controller;
-      c.tapCell(0, 0);
-      c.tapCell(1, 0);
-      await tester.pump(const Duration(seconds: 1));
-      await tester.pump(const Duration(seconds: 1));
-      expect(find.text('OUT OF MOVES'), findsOneWidget);
-      // L'annulation a quitté l'écran de défaite : on reprend avec les coups
-      // supplémentaires, qui laissent la grille où elle en était.
-      await tester.tap(find.text('+3 MOVES'));
-      await tester.pump();
-      expect(c.isPlaying, isTrue);
-      expect(find.text('OUT OF MOVES'), findsNothing);
-      c.restart();
-      c.lockInput(Duration.zero);
-      c.tapCell(1, 0);
-      c.tapCell(0, 0);
-      await tester.pump(const Duration(seconds: 1));
-      await tester.pump(const Duration(seconds: 1));
-      expect(find.text('MASTERED'), findsOneWidget);
-      // Plus de palettes : ni écran, ni déblocage, ni annonce.
-      expect(find.textContaining('UNLOCKED'), findsNothing);
-      expect(p.chapterCleared(1), 10);
-      expect(p.isMastered(10), isTrue);
-      expect(tester.takeException(), isNull);
-    },
-  );
+    }
+    final level = LevelPattern.parse(['>^..', '....', '....', '....'], id: 10);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: UngridTheme.build(),
+        home: GameScreen(
+          levelId: 10,
+          repository: LevelRepository(fixedLevels: [level], lastLevel: 10),
+          progress: p,
+          haptics: HapticService(enabled: false),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    final c = tester.widget<GameBoard>(find.byType(GameBoard)).controller;
+    c.tapCell(0, 0);
+    c.tapCell(1, 0);
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.text('OUT OF MOVES'), findsOneWidget);
+    // L'annulation a quitté l'écran de défaite : on reprend avec les coups
+    // supplémentaires, qui laissent la grille où elle en était.
+    await tester.tap(find.text('+3 MOVES'));
+    await tester.pump();
+    expect(c.isPlaying, isTrue);
+    expect(find.text('OUT OF MOVES'), findsNothing);
+    c.restart();
+    c.lockInput(Duration.zero);
+    c.tapCell(1, 0);
+    c.tapCell(0, 0);
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.text('MASTERED'), findsOneWidget);
+    // Plus de palettes : ni écran, ni déblocage, ni annonce.
+    expect(find.textContaining('UNLOCKED'), findsNothing);
+    expect(p.chapterCleared(1), 10);
+    expect(p.isMastered(10), isTrue);
+    expect(tester.takeException(), isNull);
+  });
 }

@@ -180,10 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const SizedBox(height: 18),
           if (completed > 0)
-            Text(
-              strings.levelsCleared(completed),
-              style: textTheme.labelLarge,
-            ),
+            Text(strings.levelsCleared(completed), style: textTheme.labelLarge),
           const SizedBox(height: 26),
         ],
       ),

@@ -24,13 +24,12 @@ GameController controllerFor(
   Difficulty difficulty = Difficulty.easy,
   int? moves,
   RewardService rewards = const LocalRewardService(),
-}) =>
-    GameController(
-      level: parse(rows, difficulty: difficulty, moves: moves),
-      // Les vibrations passeraient par le canal de la plateforme, absent ici.
-      haptics: HapticService(enabled: false),
-      rewards: rewards,
-    );
+}) => GameController(
+  level: parse(rows, difficulty: difficulty, moves: moves),
+  // Les vibrations passeraient par le canal de la plateforme, absent ici.
+  haptics: HapticService(enabled: false),
+  rewards: rewards,
+);
 
 /// Récompense toujours refusée, comme lorsqu'aucune publicité n'est prête.
 class _NoRewards implements RewardService {
@@ -48,34 +47,19 @@ void main() {
     test('la limite est exactement la solution optimale', () {
       // Le but n'est pas de vider la grille, c'est de trouver la bonne
       // séquence : aucune marge n'est accordée.
-      final level = parse([
-        '....',
-        '>..^',
-        '....',
-        '....',
-      ]);
+      final level = parse(['....', '>..^', '....', '....']);
       expect(level.moveLimit, level.optimalMoves);
     });
 
     test('une sortie consomme un coup', () {
-      final controller = controllerFor([
-        '....',
-        '.>..',
-        '..^.',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '.>..', '..^.', '....']);
       final before = controller.movesLeft;
       expect(controller.tapCell(2, 2).exited, isTrue);
       expect(controller.movesLeft, before - 1);
     });
 
     test('un glissement consomme un coup', () {
-      final controller = controllerFor([
-        '....',
-        '>..<',
-        '....',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '>..<', '....', '....']);
       final before = controller.movesLeft;
       expect(controller.tapCell(0, 1).slid, isTrue);
       expect(controller.movesLeft, before - 1);
@@ -83,26 +67,19 @@ void main() {
     });
 
     test('un coup refusé consomme un coup lui aussi', () {
-      final controller = controllerFor([
-        '....',
-        '><..',
-        '....',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '><..', '....', '....']);
       final before = controller.movesLeft;
       expect(controller.tapCell(0, 1).blocked, isTrue);
       expect(controller.movesUsed, 1);
-      expect(controller.movesLeft, before - 1,
-          reason: 'sans cela, le joueur pourrait tout essayer sans réfléchir');
+      expect(
+        controller.movesLeft,
+        before - 1,
+        reason: 'sans cela, le joueur pourrait tout essayer sans réfléchir',
+      );
     });
 
     test('toucher une case vide ne coûte rien', () {
-      final controller = controllerFor([
-        '....',
-        '.>..',
-        '....',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '.>..', '....', '....']);
       expect(controller.tapCell(0, 0).outcome, MoveOutcome.ignored);
       expect(controller.movesUsed, 0);
       expect(controller.movesLeft, controller.moveLimit);
@@ -111,40 +88,28 @@ void main() {
 
   group('victoire et défaite', () {
     test('vider la grille gagne la partie', () {
-      final controller = controllerFor([
-        '....',
-        '.>..',
-        '....',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '.>..', '....', '....']);
       controller.tapCell(1, 1);
       expect(controller.isCleared, isTrue);
       expect(controller.remainingBlocks, 0);
     });
 
     test('la séquence juste vide la grille au dernier coup', () {
-      final controller = controllerFor([
-        '....',
-        '.>..',
-        '..^.',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '.>..', '..^.', '....']);
       controller.tapCell(2, 2);
       controller.tapCell(1, 1);
       expect(controller.isCleared, isTrue);
-      expect(controller.movesLeft, 0,
-          reason: 'la réserve vaut exactement la solution optimale');
+      expect(
+        controller.movesLeft,
+        0,
+        reason: 'la réserve vaut exactement la solution optimale',
+      );
     });
 
     test('un coup de trop fait perdre la partie', () {
       // Deux coups suffisaient ; en pousser un d'abord en coûte trois, et la
       // réserve n'en contient que deux.
-      final controller = controllerFor([
-        '....',
-        '>..^',
-        '....',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '>..^', '....', '....']);
       expect(controller.moveLimit, 2);
 
       controller.tapCell(0, 1); // glisse en (2,1) : coup gâché
@@ -155,12 +120,7 @@ void main() {
     });
 
     test('la bonne séquence passe tout juste', () {
-      final controller = controllerFor([
-        '....',
-        '>..^',
-        '....',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '>..^', '....', '....']);
       controller.tapCell(3, 1); // le '^' sort
       controller.tapCell(0, 1); // le '>' file droit dehors
       expect(controller.isCleared, isTrue);
@@ -168,12 +128,7 @@ void main() {
     });
 
     test('épuiser ses coups perd la partie', () {
-      final controller = controllerFor([
-        '....',
-        '><..',
-        '....',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '><..', '....', '....']);
       // Deux blocs collés : le tap est refusé à chaque fois, et coûte quand
       // même un coup.
       while (controller.movesLeft > 0 && controller.isPlaying) {
@@ -184,12 +139,7 @@ void main() {
     });
 
     test('vider la grille avec le dernier coup est une victoire', () {
-      final controller = controllerFor([
-        '....',
-        '.>..',
-        '..^.',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '.>..', '..^.', '....']);
       // On gaspille des coups sur une case vide ? Non : sur le bloc du haut,
       // qui sortira de toute façon. On vise ici le cas limite où le dernier
       // coup disponible vide la grille.
@@ -203,12 +153,7 @@ void main() {
     });
 
     test('la partie terminée n\'accepte plus rien', () {
-      final controller = controllerFor([
-        '....',
-        '.>..',
-        '..^.',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '.>..', '..^.', '....']);
       controller.tapCell(2, 2);
       controller.tapCell(1, 1);
       final moves = controller.movesUsed;
@@ -227,8 +172,11 @@ void main() {
         '.....',
       ]);
       await Future<void>.delayed(const Duration(milliseconds: 30));
-      expect(controller.elapsed, Duration.zero,
-          reason: 'le joueur doit pouvoir observer la grille sans être pressé');
+      expect(
+        controller.elapsed,
+        Duration.zero,
+        reason: 'le joueur doit pouvoir observer la grille sans être pressé',
+      );
 
       controller.tapCell(2, 3);
       expect(controller.timerStarted, isTrue);
@@ -248,8 +196,11 @@ void main() {
       controller.pauseTimer();
       final paused = controller.elapsed;
       await Future<void>.delayed(const Duration(milliseconds: 30));
-      expect(controller.elapsed, paused,
-          reason: 'le temps passé hors du jeu ne compte pas');
+      expect(
+        controller.elapsed,
+        paused,
+        reason: 'le temps passé hors du jeu ne compte pas',
+      );
 
       controller.resumeTimer();
       await Future<void>.delayed(const Duration(milliseconds: 20));
@@ -257,12 +208,7 @@ void main() {
     });
 
     test('il s\'arrête à la victoire', () async {
-      final controller = controllerFor([
-        '....',
-        '.>..',
-        '....',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '.>..', '....', '....']);
       controller.tapCell(1, 1);
       final atWin = controller.elapsed;
       await Future<void>.delayed(const Duration(milliseconds: 25));
@@ -270,12 +216,7 @@ void main() {
     });
 
     test('il ne repart pas tout seul après la victoire', () async {
-      final controller = controllerFor([
-        '....',
-        '.>..',
-        '....',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '.>..', '....', '....']);
       controller.tapCell(1, 1);
       controller.resumeTimer();
       final atWin = controller.elapsed;
@@ -286,12 +227,7 @@ void main() {
 
   group('indice', () {
     test('il désigne un bloc jouable sans le jouer', () async {
-      final controller = controllerFor([
-        '....',
-        '>..^',
-        '....',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '>..^', '....', '....']);
       expect(await controller.requestHint(), isTrue);
       expect(controller.hintedBlockId, isNotNull);
       expect(controller.engine.canExit(controller.hintedBlockId!), isTrue);
@@ -299,12 +235,7 @@ void main() {
     });
 
     test('il s\'efface une fois le bloc joué', () async {
-      final controller = controllerFor([
-        '....',
-        '>..^',
-        '....',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '>..^', '....', '....']);
       await controller.requestHint();
       controller.tapCell(3, 1);
       expect(controller.hintedBlockId, isNull);
@@ -345,12 +276,11 @@ void main() {
 
   group('annulation', () {
     test('la première est offerte, la suivante se paie', () async {
-      final controller = controllerFor([
-        '....',
-        '>...',
-        '..^.',
-        '....',
-      ], moves: 4, rewards: const _NoRewards());
+      final controller = controllerFor(
+        ['....', '>...', '..^.', '....'],
+        moves: 4,
+        rewards: const _NoRewards(),
+      );
 
       controller.tapCell(0, 1);
       expect(controller.hasFreeUndo, isTrue);
@@ -383,12 +313,11 @@ void main() {
     });
 
     test('le compte repart à chaque partie', () async {
-      final controller = controllerFor([
-        '....',
-        '>...',
-        '..^.',
-        '....',
-      ], moves: 4, rewards: const _NoRewards());
+      final controller = controllerFor(
+        ['....', '>...', '..^.', '....'],
+        moves: 4,
+        rewards: const _NoRewards(),
+      );
       controller.tapCell(0, 1);
       await controller.requestUndo();
       expect(controller.hasFreeUndo, isFalse);
@@ -401,12 +330,7 @@ void main() {
     test('ils reprennent la partie sans toucher à la grille', () async {
       // Deux blocs collés : le tap est refusé à chaque fois et ne déplace
       // rien, ce qui permet de vider le compteur sans changer le plateau.
-      final controller = controllerFor([
-        '....',
-        '><..',
-        '....',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '><..', '....', '....']);
       while (controller.isPlaying) {
         controller.tapCell(0, 1);
       }
@@ -416,17 +340,15 @@ void main() {
       expect(await controller.requestExtraMoves(), isTrue);
       expect(controller.isPlaying, isTrue);
       expect(controller.movesLeft, 3);
-      expect(controller.remainingBlocks, remaining,
-          reason: 'la partie reprend où elle s\'était arrêtée');
+      expect(
+        controller.remainingBlocks,
+        remaining,
+        reason: 'la partie reprend où elle s\'était arrêtée',
+      );
     });
 
     test('ils ne sont offerts qu\'en fin de coups', () async {
-      final controller = controllerFor([
-        '....',
-        '>..^',
-        '....',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '>..^', '....', '....']);
       expect(await controller.requestExtraMoves(), isFalse);
     });
   });
@@ -446,25 +368,18 @@ void main() {
     });
 
     test('toucher une tuile vide ne fait rien du tout', () {
-      final controller = controllerFor([
-        '....',
-        '.o..',
-        '..>.',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '.o..', '..>.', '....']);
       expect(controller.tapCell(1, 1).outcome, MoveOutcome.ignored);
       expect(controller.movesUsed, 0);
-      expect(controller.timerStarted, isFalse,
-          reason: 'une tuile ne se joue pas');
+      expect(
+        controller.timerStarted,
+        isFalse,
+        reason: 'une tuile ne se joue pas',
+      );
     });
 
     test('les tuiles ne comptent pas dans la victoire', () {
-      final controller = controllerFor([
-        '.o..',
-        '.>..',
-        '..o.',
-        '....',
-      ]);
+      final controller = controllerFor(['.o..', '.>..', '..o.', '....']);
       controller.tapCell(1, 1);
       expect(controller.isCleared, isTrue);
     });
@@ -486,12 +401,7 @@ void main() {
 
   group('annulation', () {
     test('elle rend le coup et remet le bloc en place', () {
-      final controller = controllerFor([
-        '....',
-        '>..<',
-        '....',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '>..<', '....', '....']);
       final before = controller.movesLeft;
       controller.tapCell(0, 1);
       expect(controller.movesLeft, before - 1);
@@ -504,12 +414,7 @@ void main() {
     });
 
     test('elle fait revenir un bloc sorti', () {
-      final controller = controllerFor([
-        '....',
-        '.>..',
-        '..^.',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '.>..', '..^.', '....']);
       controller.tapCell(2, 2);
       expect(controller.remainingBlocks, 1);
 
@@ -519,25 +424,18 @@ void main() {
     });
 
     test('un refus ne s\'annule pas', () {
-      final controller = controllerFor([
-        '....',
-        '><..',
-        '....',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '><..', '....', '....']);
       controller.tapCell(0, 1);
       expect(controller.movesUsed, 1);
-      expect(controller.canUndo, isFalse,
-          reason: 'rien n\'a bougé, il n\'y a rien à reprendre');
+      expect(
+        controller.canUndo,
+        isFalse,
+        reason: 'rien n\'a bougé, il n\'y a rien à reprendre',
+      );
     });
 
     test('le chronomètre n\'est pas rembobiné', () async {
-      final controller = controllerFor([
-        '....',
-        '>..<',
-        '....',
-        '....',
-      ]);
+      final controller = controllerFor(['....', '>..<', '....', '....']);
       controller.tapCell(0, 1);
       await Future<void>.delayed(const Duration(milliseconds: 25));
       final elapsed = controller.elapsed;
@@ -547,12 +445,7 @@ void main() {
   });
 
   test('recommencer remet tout à zéro', () {
-    final controller = controllerFor([
-      '....',
-      '>..<',
-      '....',
-      '....',
-    ]);
+    final controller = controllerFor(['....', '>..<', '....', '....']);
     controller.tapCell(0, 1);
     controller.tapCell(3, 1);
     controller.restart();
@@ -566,20 +459,9 @@ void main() {
   });
 
   test('changer de niveau réinitialise la partie', () {
-    final controller = controllerFor([
-      '....',
-      '.>..',
-      '....',
-      '....',
-    ]);
+    final controller = controllerFor(['....', '.>..', '....', '....']);
     controller.tapCell(1, 1);
-    controller.loadLevel(parse([
-      '.....',
-      '..>..',
-      '.....',
-      '..^..',
-      '.....',
-    ]));
+    controller.loadLevel(parse(['.....', '..>..', '.....', '..^..', '.....']));
 
     expect(controller.isPlaying, isTrue);
     expect(controller.remainingBlocks, 2);

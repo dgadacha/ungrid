@@ -232,8 +232,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
               Flexible(
                 flex: 5,
                 child: AspectRatio(
-                  aspectRatio:
-                      controller.level.columns / controller.level.rows,
+                  aspectRatio: controller.level.columns / controller.level.rows,
                   child: GameBoard(controller: controller),
                 ),
               ),

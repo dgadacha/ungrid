@@ -48,7 +48,8 @@ void main(List<String> args) {
 
       if (analysis.decisionScore > bestScore) {
         bestScore = analysis.decisionScore;
-        best = '$id/$attempt : ${level.blocks.length} blocs, '
+        best =
+            '$id/$attempt : ${level.blocks.length} blocs, '
             '${result.minimumMoves} coups, $analysis';
       }
     }
@@ -62,8 +63,10 @@ void main(List<String> args) {
   void line(String label, double value, [int digits = 2]) =>
       print('  ${label.padRight(28)} ${value.toStringAsFixed(digits)}');
 
-  print('$count candidats analysés en ${watch.elapsedMilliseconds} ms '
-      '(${(watch.elapsedMilliseconds / count).toStringAsFixed(1)} ms pièce)\n');
+  print(
+    '$count candidats analysés en ${watch.elapsedMilliseconds} ms '
+    '(${(watch.elapsedMilliseconds / count).toStringAsFixed(1)} ms pièce)\n',
+  );
   line('coups / blocs', complexity / count);
   line('blocs rejoués (part)', multi / count);
   line('choix moyens par étape', choices / count);

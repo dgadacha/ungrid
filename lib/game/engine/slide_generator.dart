@@ -118,7 +118,8 @@ class SlideGenerator implements PuzzleGenerator {
     required DifficultyConfig config,
   }) {
     final size = config.gridSize;
-    final targetBlocks = config.minBlocks +
+    final targetBlocks =
+        config.minBlocks +
         SeededRandom(seed).nextInt(config.maxBlocks - config.minBlocks + 1);
 
     // Coups de repositionnement en plus des entrées : c'est ce qui transforme
@@ -188,17 +189,26 @@ class SlideGenerator implements PuzzleGenerator {
     var guard = targetMoves * 6;
     while (board.moveCount < targetMoves && guard-- > 0) {
       final needsBlock = board.blockCount < targetBlocks;
-      final wantsEntry = needsBlock &&
+      final wantsEntry =
+          needsBlock &&
           (board.blockCount == 0 ||
               board.moveCount == 0 ||
               random.nextDouble() < _entryChance(board, targetBlocks));
 
       final played = wantsEntry
           ? board.rewindEntry(random, _shortlistSize, _weights, strict: strict)
-          : board.rewindPullBack(random, _shortlistSize, _weights,
-                  strict: strict) ||
-              board.rewindEntry(random, _shortlistSize, _weights,
-                  strict: strict);
+          : board.rewindPullBack(
+                  random,
+                  _shortlistSize,
+                  _weights,
+                  strict: strict,
+                ) ||
+                board.rewindEntry(
+                  random,
+                  _shortlistSize,
+                  _weights,
+                  strict: strict,
+                );
 
       if (!played) break;
     }
@@ -242,9 +252,8 @@ class _Rewind {
     this.rows, {
     this.stopBudget = 0,
     this.stopThreshold = 0,
-  })
-      : _cells = List<int>.filled(columns * rows, -1),
-        _stops = List<bool>.filled(columns * rows, false);
+  }) : _cells = List<int>.filled(columns * rows, -1),
+       _stops = List<bool>.filled(columns * rows, false);
 
   final int columns;
   final int rows;
@@ -288,7 +297,6 @@ class _Rewind {
   bool _isFree(int x, int y) => _cells[y * columns + x] < 0;
 
   bool _hasStop(int x, int y) => _stops[y * columns + x];
-
 
   /// Une tuile peut-elle retenir un bloc sur cette case ?
   /// Une tuile peut-elle retenir un bloc sur cette case ?
@@ -467,19 +475,19 @@ class _Rewind {
       // chuter l'étroitesse du chemin optimal de 84 % et le score de
       // difficulté de 22 %. On regarde donc ce que la case retient avant de la
       // choisir, et un arrêt qui n'engage personne passe en dernier.
-      final tileBonus = stopper == _Stopper.newStopTile
-          ? _stopValue(i)
-          : 0.0;
+      final tileBonus = stopper == _Stopper.newStopTile ? _stopValue(i) : 0.0;
 
       for (final (x, y, distance) in _pullBackRoom(i)) {
-        candidates.add(_Candidate(
-          x: x,
-          y: y,
-          direction: _directions[i],
-          stopper: stopper,
-          block: i,
-          score: _pullBackScore(i, x, y, distance) + tileBonus,
-        ));
+        candidates.add(
+          _Candidate(
+            x: x,
+            y: y,
+            direction: _directions[i],
+            stopper: stopper,
+            block: i,
+            score: _pullBackScore(i, x, y, distance) + tileBonus,
+          ),
+        );
       }
     }
     if (candidates.isEmpty) return false;
@@ -634,7 +642,6 @@ class _Rewind {
 
       // Au-delà du voisin, la route vers le bord doit rester praticable ;
       // un bloc partagé par une autre ronde y est admis, il partira avant.
-      
 
       cx = nextX + direction.dx;
       cy = nextY + direction.dy;
@@ -647,8 +654,7 @@ class _Rewind {
     return true;
   }
 
-  bool _inside(int x, int y) =>
-      x >= 0 && y >= 0 && x < columns && y < rows;
+  bool _inside(int x, int y) => x >= 0 && y >= 0 && x < columns && y < rows;
 
   void _place(int x, int y, Direction direction) {
     _cells[y * columns + x] = blockCount;
@@ -656,9 +662,6 @@ class _Rewind {
     _y.add(y);
     _directions.add(direction);
   }
-
-
-
 
   /// Blocs qui quitteraient la grille dès le premier coup.
   int exitableCount() {
@@ -769,12 +772,7 @@ class _Rewind {
           final score = _entryScore(x, y, direction);
           if (score > bestScore) {
             bestScore = score;
-            best = _Candidate(
-              x: x,
-              y: y,
-              direction: direction,
-              score: score,
-            );
+            best = _Candidate(x: x, y: y, direction: direction, score: score);
           }
         }
       }
@@ -801,8 +799,11 @@ class _Rewind {
         // celle du bloc qu'elle retient. Sans ce cas, le geste qui donne
         // toute sa valeur à la mécanique était systématiquement écarté.
         if (candidate.stopper == _Stopper.newStopTile ||
-            _exitableInterrupted(candidate.x, candidate.y,
-                    ignore: candidate.block) >
+            _exitableInterrupted(
+                  candidate.x,
+                  candidate.y,
+                  ignore: candidate.block,
+                ) >
                 0)
           candidate,
     ];
@@ -1024,18 +1025,18 @@ class _Rewind {
 
   /// Les tuiles posées, dans l'ordre des cases.
   List<GridPosition> toStopTiles() => [
-        for (var cell = 0; cell < _stops.length; cell++)
-          if (_stops[cell]) GridPosition(cell % columns, cell ~/ columns),
-      ];
+    for (var cell = 0; cell < _stops.length; cell++)
+      if (_stops[cell]) GridPosition(cell % columns, cell ~/ columns),
+  ];
 
   List<Block> toBlocks() => [
-        for (var i = 0; i < blockCount; i++)
-          Block(
-            id: 'b$i',
-            position: GridPosition(_x[i], _y[i]),
-            direction: _directions[i],
-          ),
-      ];
+    for (var i = 0; i < blockCount; i++)
+      Block(
+        id: 'b$i',
+        position: GridPosition(_x[i], _y[i]),
+        direction: _directions[i],
+      ),
+  ];
 }
 
 /// Ce qui retient un bloc là où il est, et ce que le recul coûtera.

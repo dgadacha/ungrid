@@ -34,11 +34,13 @@ void main(List<String> args) {
     for (var i = 0; i < blockCount; i++) {
       final cell = random.nextInt(size * size);
       if (!taken.add(cell)) continue;
-      blocks.add(Block(
-        id: 'b${blocks.length}',
-        position: GridPosition(cell % size, cell ~/ size),
-        direction: Direction.values[random.nextInt(4)],
-      ));
+      blocks.add(
+        Block(
+          id: 'b${blocks.length}',
+          position: GridPosition(cell % size, cell ~/ size),
+          direction: Direction.values[random.nextInt(4)],
+        ),
+      );
     }
     if (blocks.length < 3) continue;
 
@@ -73,11 +75,20 @@ void main(List<String> args) {
   }
 
   print('$solvable boards solvables sur $draws tirages\n');
-  for (final key in ['1.00', '1.01-1.14', '1.15-1.25', '1.26-1.39', '1.40-1.59', '1.60+']) {
+  for (final key in [
+    '1.00',
+    '1.01-1.14',
+    '1.15-1.25',
+    '1.26-1.39',
+    '1.40-1.59',
+    '1.60+',
+  ]) {
     final count = buckets[key] ?? 0;
     final share = solvable == 0 ? 0 : count * 100 / solvable;
-    print('  ${key.padRight(10)} ${count.toString().padLeft(6)}  '
-        '${share.toStringAsFixed(2)} %');
+    print(
+      '  ${key.padRight(10)} ${count.toString().padLeft(6)}  '
+      '${share.toStringAsFixed(2)} %',
+    );
   }
 
   print('\nplafond atteint : ${best.toStringAsFixed(2)}');

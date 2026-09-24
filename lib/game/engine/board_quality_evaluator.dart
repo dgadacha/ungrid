@@ -31,7 +31,8 @@ class BoardQuality {
   final bool perfectlySymmetric;
 
   @override
-  String toString() => 'BoardQuality(${score.round()}/100, '
+  String toString() =>
+      'BoardQuality(${score.round()}/100, '
       'densité ${(density * 100).round()}%, '
       'directions ${(directionBalance * 100).round()}%)';
 }
@@ -55,7 +56,7 @@ class BoardQualityEvaluator {
     final usedDirections = counts.values.where((c) => c > 0).length;
     final directionBalance =
         (1 - (dominantRatio - 0.25) / 0.75).clamp(0.0, 1.0) *
-            (usedDirections / 4);
+        (usedDirections / 4);
 
     // Répartition spatiale par quadrant.
     final quadrants = List<int>.filled(4, 0);
@@ -67,10 +68,8 @@ class BoardQualityEvaluator {
     final ideal = blocks.length / 4;
     final deviation = ideal == 0
         ? 0.0
-        : quadrants
-                .map((c) => (c - ideal).abs())
-                .reduce((a, b) => a + b) /
-            (2 * blocks.length);
+        : quadrants.map((c) => (c - ideal).abs()).reduce((a, b) => a + b) /
+              (2 * blocks.length);
     final spatialBalance = (1 - deviation).clamp(0.0, 1.0);
 
     // Lignes et colonnes entièrement vides : le board paraît coupé en deux.
@@ -80,7 +79,8 @@ class BoardQualityEvaluator {
       rowsUsed[block.y] = true;
       columnsUsed[block.x] = true;
     }
-    final emptyLines = rowsUsed.where((used) => !used).length +
+    final emptyLines =
+        rowsUsed.where((used) => !used).length +
         columnsUsed.where((used) => !used).length;
 
     final symmetric = _isPerfectlySymmetric(level);

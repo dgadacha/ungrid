@@ -30,19 +30,18 @@ class Block {
     GridPosition? position,
     Direction? direction,
     BlockType? type,
-  }) =>
-      Block(
-        id: id ?? this.id,
-        position: position ?? this.position,
-        direction: direction ?? this.direction,
-        type: type ?? this.type,
-      );
+  }) => Block(
+    id: id ?? this.id,
+    position: position ?? this.position,
+    direction: direction ?? this.direction,
+    type: type ?? this.type,
+  );
 
   Map<String, dynamic> toJson() => {
-        'x': position.x,
-        'y': position.y,
-        'direction': direction.toJson(),
-      };
+    'x': position.x,
+    'y': position.y,
+    'direction': direction.toJson(),
+  };
 
   static Block fromJson(Map<String, dynamic> json, {required String id}) =>
       Block(
@@ -64,5 +63,6 @@ class Block {
   int get hashCode => Object.hash(id, position, direction, type);
 
   @override
-  String toString() => 'Block($id ${position.x},${position.y} ${direction.code})';
+  String toString() =>
+      'Block($id ${position.x},${position.y} ${direction.code})';
 }

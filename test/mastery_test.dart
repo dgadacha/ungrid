@@ -56,32 +56,29 @@ void main() {
       extra.dispose();
     },
   );
-  test(
-    'maîtrise persistante et récompenses non cumulables',
-    () async {
-      SharedPreferences.setMockInitialValues({});
-      var p = await ProgressService.load(campaignId: 'test');
-      for (var id = 1; id <= 10; id++) {
-        await p.recordCompletion(
-          levelId: id,
-          movesUsed: 10,
-          time: const Duration(seconds: 30),
-          mastered: true,
-        );
-      }
+  test('maîtrise persistante et récompenses non cumulables', () async {
+    SharedPreferences.setMockInitialValues({});
+    var p = await ProgressService.load(campaignId: 'test');
+    for (var id = 1; id <= 10; id++) {
       await p.recordCompletion(
-        levelId: 1,
-        movesUsed: 15,
-        time: const Duration(seconds: 20),
+        levelId: id,
+        movesUsed: 10,
+        time: const Duration(seconds: 30),
+        mastered: true,
       );
-      p = await ProgressService.load(campaignId: 'test');
-      expect(p.chapterCleared(1), 10);
-      expect(p.chapterMastered(1), 10);
-      expect(p.completedChapters, 1);
-      expect(p.isMastered(1), isTrue);
-      await p.resetProgress();
-      expect(p.chapterMastered(1), 0);
-      expect(p.completedChapters, 0);
-    },
-  );
+    }
+    await p.recordCompletion(
+      levelId: 1,
+      movesUsed: 15,
+      time: const Duration(seconds: 20),
+    );
+    p = await ProgressService.load(campaignId: 'test');
+    expect(p.chapterCleared(1), 10);
+    expect(p.chapterMastered(1), 10);
+    expect(p.completedChapters, 1);
+    expect(p.isMastered(1), isTrue);
+    await p.resetProgress();
+    expect(p.chapterMastered(1), 0);
+    expect(p.completedChapters, 0);
+  });
 }

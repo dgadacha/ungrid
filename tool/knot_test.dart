@@ -17,9 +17,11 @@ void main() {
     final r = solver.solve(level);
     final complexity = r.solvable ? r.minimumMoves / level.blocks.length : 0;
     if (r.solvable && r.minimumMoves > level.blocks.length) ok++;
-    print('seed $seed : ${level.blocks.length} blocs, '
-        '${r.solvable ? "${r.minimumMoves} coups" : "INSOLUBLE"}, '
-        'complexité ${complexity.toStringAsFixed(2)}');
+    print(
+      'seed $seed : ${level.blocks.length} blocs, '
+      '${r.solvable ? "${r.minimumMoves} coups" : "INSOLUBLE"}, '
+      'complexité ${complexity.toStringAsFixed(2)}',
+    );
     for (final row in LevelPattern.render(level)) {
       print('    $row');
     }

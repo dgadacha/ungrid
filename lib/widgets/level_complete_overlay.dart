@@ -96,9 +96,7 @@ class _LevelCompleteOverlayState extends State<LevelCompleteOverlay>
             ),
             const SizedBox(height: 10),
             Text(
-              widget.mastered
-                  ? strings.masteryRule
-                  : strings.clearedWithHelp,
+              widget.mastered ? strings.masteryRule : strings.clearedWithHelp,
               style: textTheme.bodyMedium,
             ),
             if (record != null) ...[
@@ -139,7 +137,10 @@ class _LevelCompleteOverlayState extends State<LevelCompleteOverlay>
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _Stat(label: strings.time, value: formatPlayTime(widget.elapsed)),
+                _Stat(
+                  label: strings.time,
+                  value: formatPlayTime(widget.elapsed),
+                ),
                 const SizedBox(width: 44),
                 _Stat(label: strings.moves, value: '${widget.movesUsed}'),
               ],

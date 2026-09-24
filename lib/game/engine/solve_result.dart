@@ -17,13 +17,13 @@ class SolveResult {
     required this.exploredStates,
     required this.exhaustive,
     required this.deadEndCount,
-  })  : solvable = false,
-        minimumMoves = 0,
-        maxBranchingFactor = 0,
-        averageBranchingFactor = 0,
-        forcedMoveCount = 0,
-        decisionPointCount = 0,
-        exampleSolution = const [];
+  }) : solvable = false,
+       minimumMoves = 0,
+       maxBranchingFactor = 0,
+       averageBranchingFactor = 0,
+       forcedMoveCount = 0,
+       decisionPointCount = 0,
+       exampleSolution = const [];
 
   final bool solvable;
 
@@ -59,6 +59,6 @@ class SolveResult {
   @override
   String toString() => solvable
       ? 'SolveResult(ok, $minimumMoves coups, $exploredStates états, '
-          '$deadEndCount impasses)'
+            '$deadEndCount impasses)'
       : 'SolveResult(insoluble, $exploredStates états explorés)';
 }

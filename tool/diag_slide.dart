@@ -8,9 +8,7 @@ import 'package:ungrid/game/levels/level_pattern.dart';
 import 'package:ungrid/game/models/level.dart';
 
 int exitable(Level level) {
-  final busy = <int>{
-    for (final b in level.blocks) b.y * level.columns + b.x,
-  };
+  final busy = <int>{for (final b in level.blocks) b.y * level.columns + b.x};
   var count = 0;
   for (final block in level.blocks) {
     var x = block.x + block.direction.dx;
@@ -47,12 +45,14 @@ void main() {
         continue;
       }
       final result = solver.solve(level);
-      print('  essai $attempt : ${level.blocks.length} blocs, '
-          'construction ${level.optimalMoves} coups, '
-          'solveur ${result.minimumMoves} coups, '
-          'sorties immédiates ${exitable(level)}, '
-          'impasses ${result.deadEndCount}, '
-          'états ${result.exploredStates}');
+      print(
+        '  essai $attempt : ${level.blocks.length} blocs, '
+        'construction ${level.optimalMoves} coups, '
+        'solveur ${result.minimumMoves} coups, '
+        'sorties immédiates ${exitable(level)}, '
+        'impasses ${result.deadEndCount}, '
+        'états ${result.exploredStates}',
+      );
       if (attempt == 0) {
         for (final row in LevelPattern.render(level)) {
           print('      $row');

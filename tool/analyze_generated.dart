@@ -51,8 +51,10 @@ void main(List<String> args) {
   }
   watch.stop();
 
-  print('\ntranche                blocs  coups/bloc  rejoués  choix  erreurs'
-      '  pièges  décision  sorties  essais');
+  print(
+    '\ntranche                blocs  coups/bloc  rejoués  choix  erreurs'
+    '  pièges  décision  sorties  essais',
+  );
   for (final entry in bands.entries) {
     final values = entry.value;
     final rows = values.length ~/ fields;
@@ -64,24 +66,30 @@ void main(List<String> args) {
       return sum / rows;
     }
 
-    print('${entry.key.padRight(21)}'
-        '  ${avg(0).toStringAsFixed(1).padLeft(5)}'
-        '  ${avg(1).toStringAsFixed(2).padLeft(10)}'
-        '  ${'${(avg(2) * 100).round()} %'.padLeft(7)}'
-        '  ${avg(3).toStringAsFixed(1).padLeft(5)}'
-        '  ${avg(4).toStringAsFixed(1).padLeft(7)}'
-        '  ${avg(5).toStringAsFixed(1).padLeft(6)}'
-        '  ${avg(6).toStringAsFixed(0).padLeft(8)}'
-        '  ${'${(avg(7) * 100).round()} %'.padLeft(7)}'
-        '  ${avg(8).toStringAsFixed(1).padLeft(6)}');
+    print(
+      '${entry.key.padRight(21)}'
+      '  ${avg(0).toStringAsFixed(1).padLeft(5)}'
+      '  ${avg(1).toStringAsFixed(2).padLeft(10)}'
+      '  ${'${(avg(2) * 100).round()} %'.padLeft(7)}'
+      '  ${avg(3).toStringAsFixed(1).padLeft(5)}'
+      '  ${avg(4).toStringAsFixed(1).padLeft(7)}'
+      '  ${avg(5).toStringAsFixed(1).padLeft(6)}'
+      '  ${avg(6).toStringAsFixed(0).padLeft(8)}'
+      '  ${'${(avg(7) * 100).round()} %'.padLeft(7)}'
+      '  ${avg(8).toStringAsFixed(1).padLeft(6)}',
+    );
   }
 
   durations.sort();
-  print('\nrepositionnement exigé : $withReposition/$total'
-      '   aucune sortie offerte : $sealed/$total');
+  print(
+    '\nrepositionnement exigé : $withReposition/$total'
+    '   aucune sortie offerte : $sealed/$total',
+  );
   print('replis : $replies/$total   insolubles : $unsolvable');
-  print('génération : moyenne ${(watch.elapsedMilliseconds / total).toStringAsFixed(1)} ms, '
-      'médiane ${(durations[durations.length ~/ 2] / 1000).toStringAsFixed(1)} ms, '
-      'p95 ${(durations[(durations.length * 0.95).floor()] / 1000).toStringAsFixed(1)} ms, '
-      'max ${(durations.last / 1000).toStringAsFixed(1)} ms');
+  print(
+    'génération : moyenne ${(watch.elapsedMilliseconds / total).toStringAsFixed(1)} ms, '
+    'médiane ${(durations[durations.length ~/ 2] / 1000).toStringAsFixed(1)} ms, '
+    'p95 ${(durations[(durations.length * 0.95).floor()] / 1000).toStringAsFixed(1)} ms, '
+    'max ${(durations.last / 1000).toStringAsFixed(1)} ms',
+  );
 }

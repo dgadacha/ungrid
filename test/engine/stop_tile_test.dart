@@ -29,9 +29,12 @@ void main() {
     test('ne retient pas celui qui en part', () {
       // Le bloc démarre sur la tuile : elle ne doit pas le figer, sans quoi
       // la case deviendrait un piège dont rien ne ressort.
-      final engine = GameEngine(LevelPattern.parse(['.>..'], id: 0).copyWith(
-        stopTiles: LevelPattern.parse(['.o..'], id: 0).stopTiles,
-      ));
+      final engine = GameEngine(
+        LevelPattern.parse(
+          ['.>..'],
+          id: 0,
+        ).copyWith(stopTiles: LevelPattern.parse(['.o..'], id: 0).stopTiles),
+      );
       expect(engine.tap('b0').outcome, MoveOutcome.exited);
       expect(engine.isCompleted, isTrue);
     });
@@ -112,12 +115,19 @@ void main() {
         final engine = GameEngine(level);
         for (final id in result.exampleSolution) {
           final move = engine.tap(id);
-          expect(move.outcome, isNot(MoveOutcome.ignored),
-              reason: 'seed $seed : le solveur joue un bloc absent');
+          expect(
+            move.outcome,
+            isNot(MoveOutcome.ignored),
+            reason: 'seed $seed : le solveur joue un bloc absent',
+          );
         }
-        expect(engine.isCompleted, isTrue,
-            reason: 'seed $seed : la solution ne vide pas la grille\n'
-                '${LevelPattern.render(level).join('\n')}');
+        expect(
+          engine.isCompleted,
+          isTrue,
+          reason:
+              'seed $seed : la solution ne vide pas la grille\n'
+              '${LevelPattern.render(level).join('\n')}',
+        );
       }
     });
   });
@@ -129,8 +139,11 @@ void main() {
       final same = LevelPattern.parse(['>.o.'], id: 7);
 
       expect(LevelFingerprint.of(a), isNot(LevelFingerprint.of(b)));
-      expect(LevelFingerprint.of(a), LevelFingerprint.of(same),
-          reason: 'le numéro du niveau n\'entre pas dans l\'empreinte');
+      expect(
+        LevelFingerprint.of(a),
+        LevelFingerprint.of(same),
+        reason: 'le numéro du niveau n\'entre pas dans l\'empreinte',
+      );
     });
 
     test('une même seed rend toujours le même niveau', () {
@@ -138,11 +151,17 @@ void main() {
         final a = generator.fromSeed(seed, levelId: seed);
         final b = generator.fromSeed(seed, levelId: seed);
         expect(a, isNotNull);
-        expect(LevelFingerprint.of(a!), LevelFingerprint.of(b!),
-            reason: 'seed $seed non déterministe');
+        expect(
+          LevelFingerprint.of(a!),
+          LevelFingerprint.of(b!),
+          reason: 'seed $seed non déterministe',
+        );
       }
-      expect(currentGeneratorVersion, 2,
-          reason: 'les règles ont changé : la version aussi');
+      expect(
+        currentGeneratorVersion,
+        2,
+        reason: 'les règles ont changé : la version aussi',
+      );
     });
   });
 
@@ -161,10 +180,16 @@ void main() {
 
         final cells = <int>{};
         for (final tile in level.stopTiles) {
-          expect(tile.isInside(level.columns, level.rows), isTrue,
-              reason: 'seed $seed : tuile hors grille');
-          expect(cells.add(tile.y * level.columns + tile.x), isTrue,
-              reason: 'seed $seed : deux tuiles sur la même case');
+          expect(
+            tile.isInside(level.columns, level.rows),
+            isTrue,
+            reason: 'seed $seed : tuile hors grille',
+          );
+          expect(
+            cells.add(tile.y * level.columns + tile.x),
+            isTrue,
+            reason: 'seed $seed : deux tuiles sur la même case',
+          );
         }
         if (level.stopTiles.isNotEmpty) withTiles++;
 
@@ -184,22 +209,31 @@ void main() {
           engine.tap(id);
           final block = engine.blockById(id);
           if (block != null) {
-            expect(block.direction, directions[id],
-                reason: 'seed $seed : un bloc a changé de direction');
+            expect(
+              block.direction,
+              directions[id],
+              reason: 'seed $seed : un bloc a changé de direction',
+            );
           }
         }
         expect(engine.isCompleted, isTrue, reason: 'seed $seed\n$trace');
         expect(level.optimalMoves, greaterThanOrEqualTo(level.blocks.length));
 
         for (final tile in level.stopTiles) {
-          expect(engine.hasStopTileAt(tile.x, tile.y), isTrue,
-              reason: 'seed $seed : une tuile a disparu en cours de partie');
+          expect(
+            engine.hasStopTileAt(tile.x, tile.y),
+            isTrue,
+            reason: 'seed $seed : une tuile a disparu en cours de partie',
+          );
         }
       }
 
       expect(checked, greaterThan(800));
-      expect(withTiles, greaterThan(checked ~/ 4),
-          reason: 'la mécanique doit servir sur une part notable des boards');
+      expect(
+        withTiles,
+        greaterThan(checked ~/ 4),
+        reason: 'la mécanique doit servir sur une part notable des boards',
+      );
     });
   });
 }

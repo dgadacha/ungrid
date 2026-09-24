@@ -40,8 +40,10 @@ void main(List<String> args) {
   stdout.writeln('Recherche sur $seeds seeds...');
   for (var seed = 1; seed <= seeds; seed++) {
     if (seed % 10000 == 0) {
-      stdout.writeln('  seed $seed : '
-          '${pools.entries.map((e) => '${e.key.name} ${e.value.length}').join(', ')}');
+      stdout.writeln(
+        '  seed $seed : '
+        '${pools.entries.map((e) => '${e.key.name} ${e.value.length}').join(', ')}',
+      );
     }
     final level = generator.fromSeed(seed, levelId: seed);
     if (level == null) continue;
@@ -52,8 +54,7 @@ void main(List<String> args) {
     if (!seen.add(LevelFingerprint.of(ready))) continue;
 
     final analysis = analyzer.analyse(ready, solved);
-    final planning =
-        PlanningDifficulty.measure(ready, solved.exampleSolution);
+    final planning = PlanningDifficulty.measure(ready, solved.exampleSolution);
 
     for (final tier in CampaignTier.values) {
       // Le dernier palier vient de la v4 : inutile d'en chercher ici.
@@ -68,12 +69,14 @@ void main(List<String> args) {
   }
 
   // Le palier final reprend la v4, déjà validée, du plus doux au plus dur.
-  final v4 = jsonDecode(
-    File('assets/levels/campaign_v4.json').readAsStringSync(),
-  ) as Map<String, dynamic>;
-  final v4Solutions = jsonDecode(
-    File('assets/levels/campaign_v4_solutions.json').readAsStringSync(),
-  ) as Map<String, dynamic>;
+  final v4 =
+      jsonDecode(File('assets/levels/campaign_v4.json').readAsStringSync())
+          as Map<String, dynamic>;
+  final v4Solutions =
+      jsonDecode(
+            File('assets/levels/campaign_v4_solutions.json').readAsStringSync(),
+          )
+          as Map<String, dynamic>;
   // Les solutions v4 sont rangées par identifiant de niveau, sous la clé
   // « id » — le fichier porte le board complet, pas seulement la suite de
   // coups.
@@ -84,32 +87,39 @@ void main(List<String> args) {
   final extreme = <_Candidate>[];
   for (final raw in v4['levels'] as List) {
     final definition = raw as Map<String, dynamic>;
-    final level = Level.fromJson(definition['board'] as Map<String, dynamic>)
-        .copyWith(optimalMoves: definition['optimalMoves'] as int);
+    final level = Level.fromJson(
+      definition['board'] as Map<String, dynamic>,
+    ).copyWith(optimalMoves: definition['optimalMoves'] as int);
     final solved = solver.solve(level);
     if (!solved.solvable) continue;
-    extreme.add(_Candidate(
-      level,
-      analyzer.analyse(level, solved),
-      PlanningDifficulty.measure(level, solved.exampleSolution),
-      solutionsById[definition['levelId'] as int] ?? solved.exampleSolution,
-    ));
+    extreme.add(
+      _Candidate(
+        level,
+        analyzer.analyse(level, solved),
+        PlanningDifficulty.measure(level, solved.exampleSolution),
+        solutionsById[definition['levelId'] as int] ?? solved.exampleSolution,
+      ),
+    );
   }
   extreme.sort((a, b) => a.score.compareTo(b.score));
   pools[CampaignTier.extreme] = extreme;
 
   stdout.writeln('\nRéservoir :');
   for (final tier in CampaignTier.values) {
-    stdout.writeln('  ${tier.name.padRight(10)} ${pools[tier]!.length} '
-        '(${tier.levelCount} requis)');
+    stdout.writeln(
+      '  ${tier.name.padRight(10)} ${pools[tier]!.length} '
+      '(${tier.levelCount} requis)',
+    );
   }
 
   final selection = <_Candidate>[];
   for (final tier in CampaignTier.values) {
     final pool = pools[tier]!..sort((a, b) => a.score.compareTo(b.score));
     if (pool.length < tier.levelCount) {
-      stderr.writeln('Palier ${tier.name} : '
-          '${pool.length} candidats pour ${tier.levelCount} niveaux.');
+      stderr.writeln(
+        'Palier ${tier.name} : '
+        '${pool.length} candidats pour ${tier.levelCount} niveaux.',
+      );
       exit(1);
     }
     // Un échantillon régulier du réservoir trié : la difficulté monte à
@@ -148,17 +158,11 @@ void main(List<String> args) {
 
   const encoder = JsonEncoder.withIndent('  ');
   File('assets/levels/campaign_v5.json').writeAsStringSync(
-    '${encoder.convert({
-      'catalogVersion': 5,
-      'generatorVersion': 5,
-      'levelCount': levels.length,
-      'mechanic': 'rotation-tiered-v1',
-      'levels': levels,
-    })}\n',
+    '${encoder.convert({'catalogVersion': 5, 'generatorVersion': 5, 'levelCount': levels.length, 'mechanic': 'rotation-tiered-v1', 'levels': levels})}\n',
   );
-  File('assets/levels/campaign_v5_solutions.json').writeAsStringSync(
-    '${encoder.convert({'levels': solutions})}\n',
-  );
+  File(
+    'assets/levels/campaign_v5_solutions.json',
+  ).writeAsStringSync('${encoder.convert({'levels': solutions})}\n');
 
   stdout.writeln('\nCampagne écrite : ${levels.length} niveaux');
   for (final tier in CampaignTier.values) {
@@ -168,9 +172,11 @@ void main(List<String> args) {
     ];
     final first = levels[ids.first - 1];
     final last = levels[ids.last - 1];
-    stdout.writeln('  ${tier.name.padRight(10)} niveaux ${ids.first}-${ids.last} : '
-        '${first['optimalMoves']} à ${last['optimalMoves']} coups, '
-        'score ${(first['difficultyScore'] as double).toStringAsFixed(0)}'
-        ' à ${(last['difficultyScore'] as double).toStringAsFixed(0)}');
+    stdout.writeln(
+      '  ${tier.name.padRight(10)} niveaux ${ids.first}-${ids.last} : '
+      '${first['optimalMoves']} à ${last['optimalMoves']} coups, '
+      'score ${(first['difficultyScore'] as double).toStringAsFixed(0)}'
+      ' à ${(last['difficultyScore'] as double).toStringAsFixed(0)}',
+    );
   }
 }

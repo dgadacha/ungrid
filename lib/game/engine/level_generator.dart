@@ -43,7 +43,8 @@ class GeneratedLevel {
   final double distance;
 
   @override
-  String toString() => 'GeneratedLevel(${level.id}, '
+  String toString() =>
+      'GeneratedLevel(${level.id}, '
       '${level.blocks.length} blocs, ${solveResult.minimumMoves} coups, '
       '${analysis.moveComplexity.toStringAsFixed(2)} coups/bloc, '
       'décision ${analysis.decisionScore.round()}, '
@@ -102,7 +103,8 @@ class LevelGenerator {
       final exitable = exitableCount(candidate);
       final exitableRatio = exitable / candidate.blocks.length;
       final quality = qualityEvaluator.evaluate(candidate);
-      final cheapDistance = (exitableRatio > band.maxExitRatio
+      final cheapDistance =
+          (exitableRatio > band.maxExitRatio
               ? (exitableRatio - band.maxExitRatio) * 12
               : 0.0) +
           _qualityDistance(quality);
@@ -120,15 +122,18 @@ class LevelGenerator {
       final complexityGap = complexity < band.minComplexity
           ? (band.minComplexity - complexity) * 8
           : (complexity > band.maxComplexity
-              ? (complexity - band.maxComplexity) * 4
-              : 0.0);
+                ? (complexity - band.maxComplexity) * 4
+                : 0.0);
       if (best != null && cheapDistance + complexityGap >= best.distance) {
         continue;
       }
 
       final analysis = analyzer.analyse(candidate, solveResult);
-      final difficulty =
-          difficultyEvaluator.evaluate(candidate, solveResult, exitable);
+      final difficulty = difficultyEvaluator.evaluate(
+        candidate,
+        solveResult,
+        exitable,
+      );
 
       final distance = cheapDistance + _bandDistance(band, analysis);
       final accepted = distance == 0;
@@ -214,6 +219,6 @@ class LevelGenerator {
 
   double _qualityDistance(BoardQuality quality) =>
       quality.score >= minimumQuality
-          ? 0
-          : (minimumQuality - quality.score) / 10;
+      ? 0
+      : (minimumQuality - quality.score) / 10;
 }

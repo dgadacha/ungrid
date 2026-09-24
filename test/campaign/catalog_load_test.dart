@@ -11,34 +11,39 @@ import 'package:ungrid/game/levels/level_repository.dart';
 /// mesure le dira avant le joueur — une résolution coûte des dizaines de
 /// millisecondes par niveau, et se voit à l'ouverture.
 void main() {
-  test('les cent niveaux se chargent sans repasser par le solveur', () async {
-    final catalog = CampaignCatalog.parse(
-      await File(CampaignCatalog.assetPath).readAsString(),
-    );
-    final repository = LevelRepository(
-      catalog: catalog,
-      lastLevel: CampaignCatalog.assetPath.isEmpty ? null : 100,
-      useIsolate: false,
-    );
-
-    final watch = Stopwatch()..start();
-    for (var id = 1; id <= catalog.levelCount; id++) {
-      final level = repository.levelForSync(id);
-      expect(level.id, id);
-      expect(level.isStructurallyValid, isTrue);
-      expect(
-        repository.moveLimitFor(id, level),
-        level.optimalMoves,
-        reason: 'niveau $id : la réserve vaut l\'optimal',
+  test(
+    'les cent niveaux se chargent sans repasser par le solveur',
+    () async {
+      final catalog = CampaignCatalog.parse(
+        await File(CampaignCatalog.assetPath).readAsString(),
       );
-    }
-    watch.stop();
+      final repository = LevelRepository(
+        catalog: catalog,
+        lastLevel: CampaignCatalog.assetPath.isEmpty ? null : 100,
+        useIsolate: false,
+      );
 
-    expect(
-      watch.elapsedMilliseconds,
-      lessThan(500),
-      reason: 'chargés en ${watch.elapsedMilliseconds} ms : le solveur est '
-          'probablement revenu dans le chemin d\'ouverture',
-    );
-  }, timeout: const Timeout(Duration(seconds: 60)));
+      final watch = Stopwatch()..start();
+      for (var id = 1; id <= catalog.levelCount; id++) {
+        final level = repository.levelForSync(id);
+        expect(level.id, id);
+        expect(level.isStructurallyValid, isTrue);
+        expect(
+          repository.moveLimitFor(id, level),
+          level.optimalMoves,
+          reason: 'niveau $id : la réserve vaut l\'optimal',
+        );
+      }
+      watch.stop();
+
+      expect(
+        watch.elapsedMilliseconds,
+        lessThan(500),
+        reason:
+            'chargés en ${watch.elapsedMilliseconds} ms : le solveur est '
+            'probablement revenu dans le chemin d\'ouverture',
+      );
+    },
+    timeout: const Timeout(Duration(seconds: 60)),
+  );
 }

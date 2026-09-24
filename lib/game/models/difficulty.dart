@@ -8,11 +8,11 @@ enum Difficulty {
   expert;
 
   String get label => switch (this) {
-        Difficulty.easy => 'EASY',
-        Difficulty.medium => 'MEDIUM',
-        Difficulty.hard => 'HARD',
-        Difficulty.expert => 'EXPERT',
-      };
+    Difficulty.easy => 'EASY',
+    Difficulty.medium => 'MEDIUM',
+    Difficulty.hard => 'HARD',
+    Difficulty.expert => 'EXPERT',
+  };
 
   static Difficulty fromScalar(double t) {
     if (t < 0.30) return Difficulty.easy;

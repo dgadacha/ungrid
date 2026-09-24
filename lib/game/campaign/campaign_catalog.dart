@@ -32,8 +32,9 @@ class CampaignCatalog {
   /// Les tests de widget passent par là : leur horloge est simulée, si bien
   /// qu'une lecture de fichier attendue directement ne se termine jamais. Ils
   /// lisent donc le catalogue eux-mêmes, sous `runAsync`, et le donnent ici.
-  static CampaignCatalog parse(String raw) =>
-      CampaignCatalog(Campaign.fromJson(jsonDecode(raw) as Map<String, dynamic>));
+  static CampaignCatalog parse(String raw) => CampaignCatalog(
+    Campaign.fromJson(jsonDecode(raw) as Map<String, dynamic>),
+  );
 
   int get levelCount => campaign.levelCount;
 

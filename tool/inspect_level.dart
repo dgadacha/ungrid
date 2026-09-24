@@ -23,12 +23,16 @@ void main(List<String> args) {
       generated.level.moveLimit,
       generated.analysis,
     );
-    print('  attendu             coups/bloc ${band.minComplexity}'
-        '-${band.maxComplexity}, rejoués >= ${(band.minMultiMoveRatio * 100).round()} %'
-        ', décision >= ${band.minDecisionScore.round()}');
-    print('  essais              ${generated.attempts}'
-        '${generated.accepted ? " (accepté)" : " (meilleur trouvé)"}'
-        ' en ${watch.elapsedMilliseconds} ms');
+    print(
+      '  attendu             coups/bloc ${band.minComplexity}'
+      '-${band.maxComplexity}, rejoués >= ${(band.minMultiMoveRatio * 100).round()} %'
+      ', décision >= ${band.minDecisionScore.round()}',
+    );
+    print(
+      '  essais              ${generated.attempts}'
+      '${generated.accepted ? " (accepté)" : " (meilleur trouvé)"}'
+      ' en ${watch.elapsedMilliseconds} ms',
+    );
     for (final row in LevelPattern.render(generated.level)) {
       print('    $row');
     }
@@ -39,8 +43,10 @@ void _show(int blocks, int moves, int limit, PuzzleAnalysis analysis) {
   print('  blocs               $blocks');
   print('  coups optimaux      $moves  (limite $limit)');
   print('  coups / bloc        ${analysis.moveComplexity.toStringAsFixed(2)}');
-  print('  blocs rejoués       ${analysis.multiMoveBlocks}'
-      ' (${(analysis.multiMoveRatio * 100).round()} %)');
+  print(
+    '  blocs rejoués       ${analysis.multiMoveBlocks}'
+    ' (${(analysis.multiMoveRatio * 100).round()} %)',
+  );
   print('  choix par étape     ${analysis.averageChoices.toStringAsFixed(1)}');
   print('  étapes avec choix   ${(analysis.decisionRatio * 100).round()} %');
   print('  coups qui rallongent ${analysis.wrongMoveOpportunities}');

@@ -59,18 +59,18 @@ void main() {
       DebugBoardPainter(
         level: level,
         blocks: painter,
-        positions: [
-          for (final b in level.blocks) b.y * level.columns + b.x,
-        ],
+        positions: [for (final b in level.blocks) b.y * level.columns + b.x],
         removed: const {},
         usedStopTiles: used,
       ).paint(canvas, size);
       canvas.restore();
       index++;
 
-      stdout.writeln('${entry.key}: ${level.columns}x${level.rows}, '
-          '${level.blocks.length} blocs, ${level.stopTiles.length} tuiles, '
-          '${solution.minimumMoves} coups');
+      stdout.writeln(
+        '${entry.key}: ${level.columns}x${level.rows}, '
+        '${level.blocks.length} blocs, ${level.stopTiles.length} tuiles, '
+        '${solution.minimumMoves} coups',
+      );
     }
 
     // L'état « bloc posé sur une tuile » doit rester lisible : le bloc couvre
@@ -79,8 +79,12 @@ void main() {
     canvas.translate(size.width * index, 0);
     const layoutCell = 68.0;
     for (var i = 0; i < 4; i++) {
-      final rect = Rect.fromLTWH(30 + i * (layoutCell + 10), 120, layoutCell,
-          layoutCell);
+      final rect = Rect.fromLTWH(
+        30 + i * (layoutCell + 10),
+        120,
+        layoutCell,
+        layoutCell,
+      );
       painter.paintEmptyCell(canvas, rect);
       if (i == 1) painter.paintStopTile(canvas, rect);
       if (i == 2 || i == 3) painter.paintOccupiedStopTile(canvas, rect);
@@ -95,13 +99,14 @@ void main() {
 
     canvas.restore();
 
-    final image = await recorder
-        .endRecording()
-        .toImage((size.width * columns).round(), size.height.round());
-    final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
-    await File('/tmp/ungrid_preview.png').writeAsBytes(
-      bytes!.buffer.asUint8List(),
+    final image = await recorder.endRecording().toImage(
+      (size.width * columns).round(),
+      size.height.round(),
     );
+    final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
+    await File(
+      '/tmp/ungrid_preview.png',
+    ).writeAsBytes(bytes!.buffer.asUint8List());
     stdout.writeln('→ /tmp/ungrid_preview.png');
   });
 }

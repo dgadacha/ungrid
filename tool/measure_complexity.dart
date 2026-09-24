@@ -63,7 +63,8 @@ void main(List<String> args) {
 
       if (complexity > best) {
         best = complexity;
-        bestBoard = '$id/$attempt : ${level.blocks.length} blocs, '
+        bestBoard =
+            '$id/$attempt : ${level.blocks.length} blocs, '
             '${result.minimumMoves} coups';
       }
     }
@@ -71,17 +72,28 @@ void main(List<String> args) {
 
   print('candidats : $total, solvables : $solvable\n');
   print('complexité (coups / blocs)');
-  for (final key in ['1.00', '1.01-1.09', '1.10-1.19', '1.20-1.29', '1.30-1.49', '1.50+']) {
+  for (final key in [
+    '1.00',
+    '1.01-1.09',
+    '1.10-1.19',
+    '1.20-1.29',
+    '1.30-1.49',
+    '1.50+',
+  ]) {
     final count = buckets[key] ?? 0;
     final share = solvable == 0 ? 0 : (count * 100 / solvable).round();
-    print('  ${key.padRight(10)} ${count.toString().padLeft(5)}  ${'#' * (share ~/ 2)} $share %');
+    print(
+      '  ${key.padRight(10)} ${count.toString().padLeft(5)}  ${'#' * (share ~/ 2)} $share %',
+    );
   }
 
   print('\nsorties immédiates');
   for (final key in ['0 %', '1-10 %', '11-20 %', '21-30 %', '31 %+']) {
     final count = exitBuckets[key] ?? 0;
     final share = solvable == 0 ? 0 : (count * 100 / solvable).round();
-    print('  ${key.padRight(10)} ${count.toString().padLeft(5)}  ${'#' * (share ~/ 2)} $share %');
+    print(
+      '  ${key.padRight(10)} ${count.toString().padLeft(5)}  ${'#' * (share ~/ 2)} $share %',
+    );
   }
 
   print('\nmeilleur : ${best.toStringAsFixed(2)}  ($bestBoard)');

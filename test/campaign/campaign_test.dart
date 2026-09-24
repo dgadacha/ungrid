@@ -76,81 +76,115 @@ void main() {
 
   group('catalogue', () {
     test('le fichier existe', () {
-      expect(exists, isTrue,
-          reason: 'lancer dart run tool/build_campaign.dart');
+      expect(
+        exists,
+        isTrue,
+        reason: 'lancer dart run tool/build_campaign.dart',
+      );
     }, skip: exists ? false : 'campagne non construite');
 
-    test('il annonce la version du générateur qui l\'a produit', () {
-      expect(campaign.generatorVersion, currentGeneratorVersion);
-    }, skip: exists ? false : 'campagne non construite');
+    test(
+      'il annonce la version du générateur qui l\'a produit',
+      () {
+        expect(campaign.generatorVersion, currentGeneratorVersion);
+      },
+      skip: exists ? false : 'campagne non construite',
+    );
 
-    test('les niveaux se suivent sans trou ni doublon', () {
-      for (var i = 0; i < campaign.levels.length; i++) {
-        expect(campaign.levels[i].levelId, i + 1);
-      }
-    }, skip: exists ? false : 'campagne non construite');
-
-    test('chaque niveau se reconstruit tel qu\'il a été publié', () {
-      // C'est le garde-fou : si le générateur change, les empreintes ne
-      // correspondent plus et les solutions déjà partagées deviennent fausses.
-      final broken = <int>[];
-      for (final definition in campaign.levels) {
-        final level = catalog.levelFor(definition.levelId);
-        if (level == null ||
-            LevelFingerprint.of(level) != definition.fingerprint) {
-          broken.add(definition.levelId);
+    test(
+      'les niveaux se suivent sans trou ni doublon',
+      () {
+        for (var i = 0; i < campaign.levels.length; i++) {
+          expect(campaign.levels[i].levelId, i + 1);
         }
-      }
-      expect(broken, isEmpty, reason: 'niveaux altérés : $broken');
-    }, skip: exists ? false : 'campagne non construite');
+      },
+      skip: exists ? false : 'campagne non construite',
+    );
 
-    test('tous les niveaux se terminent, dans le compte annoncé', () {
-      final broken = <int>[];
-      for (final definition in campaign.levels) {
-        final level = catalog.levelFor(definition.levelId)!;
-        final result = solver.solve(level);
-        if (!result.solvable ||
-            result.minimumMoves != definition.optimalMoves) {
-          broken.add(definition.levelId);
+    test(
+      'chaque niveau se reconstruit tel qu\'il a été publié',
+      () {
+        // C'est le garde-fou : si le générateur change, les empreintes ne
+        // correspondent plus et les solutions déjà partagées deviennent fausses.
+        final broken = <int>[];
+        for (final definition in campaign.levels) {
+          final level = catalog.levelFor(definition.levelId);
+          if (level == null ||
+              LevelFingerprint.of(level) != definition.fingerprint) {
+            broken.add(definition.levelId);
+          }
         }
-      }
-      expect(broken, isEmpty, reason: 'niveaux incohérents : $broken');
-    }, skip: exists ? false : 'campagne non construite');
+        expect(broken, isEmpty, reason: 'niveaux altérés : $broken');
+      },
+      skip: exists ? false : 'campagne non construite',
+    );
 
-    test('la réserve vaut l\'optimal, à tous les niveaux', () {
-      for (final definition in campaign.levels) {
-        final level = catalog.levelFor(definition.levelId)!;
-        expect(level.moveLimit, definition.optimalMoves,
-            reason: 'niveau ${definition.levelId} : aucune marge nulle part');
-      }
-    }, skip: exists ? false : 'campagne non construite');
-
-    test('aucun board ne revient à portée de mémoire', () {
-      final seenAt = <String, int>{};
-      final close = <String>[];
-      for (final definition in campaign.levels) {
-        final previous = seenAt[definition.fingerprint];
-        if (previous != null && definition.levelId - previous < 50) {
-          close.add('$previous et ${definition.levelId}');
+    test(
+      'tous les niveaux se terminent, dans le compte annoncé',
+      () {
+        final broken = <int>[];
+        for (final definition in campaign.levels) {
+          final level = catalog.levelFor(definition.levelId)!;
+          final result = solver.solve(level);
+          if (!result.solvable ||
+              result.minimumMoves != definition.optimalMoves) {
+            broken.add(definition.levelId);
+          }
         }
-        seenAt[definition.fingerprint] = definition.levelId;
-      }
-      expect(close, isEmpty, reason: 'boards répétés : $close');
-    }, skip: exists ? false : 'campagne non construite');
+        expect(broken, isEmpty, reason: 'niveaux incohérents : $broken');
+      },
+      skip: exists ? false : 'campagne non construite',
+    );
 
-    test('la campagne durcit du début à la fin', () {
-      double average(int from, int to) {
-        final slice = campaign.levels
-            .where((l) => l.levelId >= from && l.levelId <= to)
-            .map((l) => l.optimalMoves)
-            .toList();
-        return slice.reduce((a, b) => a + b) / slice.length;
-      }
+    test(
+      'la réserve vaut l\'optimal, à tous les niveaux',
+      () {
+        for (final definition in campaign.levels) {
+          final level = catalog.levelFor(definition.levelId)!;
+          expect(
+            level.moveLimit,
+            definition.optimalMoves,
+            reason: 'niveau ${definition.levelId} : aucune marge nulle part',
+          );
+        }
+      },
+      skip: exists ? false : 'campagne non construite',
+    );
 
-      if (campaign.levels.length < 200) return;
-      final last = campaign.levels.last.levelId;
-      expect(average(last - 99, last), greaterThan(average(30, 129)));
-    }, skip: exists ? false : 'campagne non construite');
+    test(
+      'aucun board ne revient à portée de mémoire',
+      () {
+        final seenAt = <String, int>{};
+        final close = <String>[];
+        for (final definition in campaign.levels) {
+          final previous = seenAt[definition.fingerprint];
+          if (previous != null && definition.levelId - previous < 50) {
+            close.add('$previous et ${definition.levelId}');
+          }
+          seenAt[definition.fingerprint] = definition.levelId;
+        }
+        expect(close, isEmpty, reason: 'boards répétés : $close');
+      },
+      skip: exists ? false : 'campagne non construite',
+    );
+
+    test(
+      'la campagne durcit du début à la fin',
+      () {
+        double average(int from, int to) {
+          final slice = campaign.levels
+              .where((l) => l.levelId >= from && l.levelId <= to)
+              .map((l) => l.optimalMoves)
+              .toList();
+          return slice.reduce((a, b) => a + b) / slice.length;
+        }
+
+        if (campaign.levels.length < 200) return;
+        final last = campaign.levels.last.levelId;
+        expect(average(last - 99, last), greaterThan(average(30, 129)));
+      },
+      skip: exists ? false : 'campagne non construite',
+    );
 
     test(
       'tous les niveaux respectent le profil validé et leur solution se joue',
@@ -200,8 +234,10 @@ void main() {
 
         // Dans la campagne, chaque niveau vient du catalogue publié.
         for (final definition in campaign.levels) {
-          expect(repository.levelForSync(definition.levelId).id,
-              definition.levelId);
+          expect(
+            repository.levelForSync(definition.levelId).id,
+            definition.levelId,
+          );
         }
 
         // Au-delà, le dépôt refuse. Fabriquer un board à la volée serait pire
