@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import '../app/strings.dart';
 import '../game/controllers/game_controller.dart';
 import '../game/painters/block_painter.dart';
 import '../game/painters/board_layout.dart';
@@ -95,6 +96,7 @@ class _GameBoardState extends State<GameBoard>
                   nowMs: nowMs,
                   blocks: _blockPainter,
                   effect: _clearEffect,
+                  bonkLabel: Strings.of(context).bonk,
                 ),
               ),
             ),

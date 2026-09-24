@@ -20,25 +20,27 @@ class GamePainter extends CustomPainter {
     required this.nowMs,
     required this.blocks,
     required this.effect,
-  }) : super(repaint: controller);
+    required String bonkLabel,
+  })  : _bonk = TextPainter(
+          text: TextSpan(
+            text: bonkLabel,
+            style: const TextStyle(
+              fontFamily: 'NunitoSans',
+              fontSize: 20,
+              fontWeight: FontWeight.w900,
+              letterSpacing: 1.5,
+              color: UngridColors.onBackground,
+            ),
+          ),
+          textDirection: TextDirection.ltr,
+        )..layout(),
+        super(repaint: controller);
 
   final Paint _hintPaint = Paint()
     ..isAntiAlias = true
     ..style = PaintingStyle.stroke;
 
-  final TextPainter _bonk = TextPainter(
-    text: const TextSpan(
-      text: 'BONK !',
-      style: TextStyle(
-        fontFamily: 'NunitoSans',
-        fontSize: 20,
-        fontWeight: FontWeight.w900,
-        letterSpacing: 1.5,
-        color: UngridColors.onBackground,
-      ),
-    ),
-    textDirection: TextDirection.ltr,
-  )..layout();
+  final TextPainter _bonk;
 
   final GameController controller;
 

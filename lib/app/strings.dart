@@ -91,6 +91,8 @@ class Strings {
   String get undo => _pick('UNDO', 'ANNULER', 'DESHACER');
   String get restart => _pick('RESTART', 'RECOMMENCER', 'REINICIAR');
   String get hint => _pick('HINT', 'INDICE', 'PISTA');
+  /// Le cri du refus, lâché au-dessus d'un bloc qui n'a pas bougé.
+  String get bonk => _pick('BONK !', 'BLOQUÉ !', '¡BLOQUEADO!');
   String get noHint => _pick(
         'No hint available right now.',
         'Aucun indice pour le moment.',
