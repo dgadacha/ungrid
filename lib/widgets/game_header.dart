@@ -4,6 +4,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
+import '../app/strings.dart';
 import '../app/theme.dart';
 import '../game/controllers/game_controller.dart';
 
@@ -78,7 +79,7 @@ class _GameHeaderState extends State<GameHeader> {
               ),
               Expanded(
                 child: Text(
-                  'LEVEL ${widget.levelId}',
+                  Strings.of(context).level(widget.levelId),
                   textAlign: TextAlign.center,
                   style: textTheme.titleMedium,
                 ),
@@ -147,10 +148,11 @@ class _MovesLeft extends StatelessWidget {
         : math.sin(controller.nowMs / 380) * 0.035 * pressure;
     final scale = 1 + controller.movesPulse * 0.22 + beat;
 
+    final strings = Strings.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('MOVES LEFT', style: Theme.of(context).textTheme.labelLarge),
+        Text(strings.movesLeft, style: Theme.of(context).textTheme.labelLarge),
         const SizedBox(height: 2),
         Transform.scale(
           alignment: Alignment.centerLeft,
@@ -180,10 +182,11 @@ class _TimePanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final strings = Strings.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text('TIME', style: textTheme.labelLarge),
+        Text(strings.time, style: textTheme.labelLarge),
         const SizedBox(height: 2),
         Text(
           formatPlayTime(elapsed),
@@ -197,7 +200,7 @@ class _TimePanel extends StatelessWidget {
         ),
         if (best != null)
           Text(
-            'BEST ${formatPlayTime(best!)}',
+            strings.best(formatPlayTime(best!)),
             style: textTheme.labelLarge?.copyWith(fontSize: 10),
           ),
       ],

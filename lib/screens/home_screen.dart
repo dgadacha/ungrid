@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../app/constants.dart';
+import '../app/strings.dart';
 import '../app/theme.dart';
 import '../widgets/ungrid_button.dart';
 import '../widgets/ungrid_scaffold.dart';
@@ -20,11 +21,15 @@ class HomeScreen extends StatefulWidget {
     required this.repository,
     required this.progress,
     required this.haptics,
+    this.onLanguageChanged,
   });
 
   final LevelRepository repository;
   final ProgressService progress;
   final HapticService haptics;
+
+  /// Change la langue de l'interface, transmis aux réglages.
+  final ValueChanged<AppLanguage>? onLanguageChanged;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -63,8 +68,8 @@ class _HomeScreenState extends State<HomeScreen> {
           duration: const Duration(seconds: 6),
           content: Text(
             newCampaign
-                ? 'New challenge campaign. Your previous save has been kept separately.'
-                : 'New levels: the puzzles changed, so progress and records were reset.',
+                ? Strings.of(context).campaignChanged
+                : Strings.of(context).progressReset,
           ),
         ),
       );
@@ -98,6 +103,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final level = _currentLevel;
     final completed = widget.progress.completedCount();
 
+    final strings = Strings.of(context);
+
     return UngridScaffold(
       child: Column(
         children: [
@@ -111,12 +118,15 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const SizedBox(height: 16),
           Text(
-            _campaignComplete ? 'CAMPAIGN COMPLETE' : 'LEVEL $level',
+            _campaignComplete ? strings.campaignComplete : strings.level(level),
             style: textTheme.labelLarge,
           ),
           const SizedBox(height: 14),
           Text(
-            'CHAPTER ${(level - 1) ~/ 10 + 1} · ${widget.progress.chapterCleared((level - 1) ~/ 10 + 1)}/10 SOLVED',
+            strings.chapterProgress(
+              (level - 1) ~/ 10 + 1,
+              widget.progress.chapterCleared((level - 1) ~/ 10 + 1),
+            ),
             style: textTheme.labelLarge,
           ),
           const SizedBox(height: 10),
@@ -132,21 +142,21 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const Spacer(flex: 2),
           UngridButton(
-            label: _campaignComplete ? 'REPLAY' : 'PLAY',
+            label: _campaignComplete ? strings.replay : strings.play,
             onPressed: _play,
             horizontalPadding: 64,
           ),
           const SizedBox(height: 8),
           TextButton(
             onPressed: () => _open(RewardsScreen(progress: widget.progress)),
-            child: const Text('REWARDS'),
+            child: Text(strings.rewards),
           ),
           const Spacer(flex: 4),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _FooterAction(
-                label: 'LEVELS',
+                label: strings.levels,
                 onPressed: () => _open(
                   LevelSelectScreen(
                     repository: widget.repository,
@@ -160,6 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 icon: PhosphorIconsBold.gearSix,
                 onPressed: () => _open(
                   SettingsScreen(
+                    onLanguageChanged: widget.onLanguageChanged,
                     progress: widget.progress,
                     haptics: widget.haptics,
                     repository: widget.repository,

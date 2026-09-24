@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
+import '../app/strings.dart';
 import '../app/theme.dart';
 import 'ungrid_button.dart';
 
@@ -47,6 +48,7 @@ class _OutOfMovesOverlayState extends State<OutOfMovesOverlay>
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final strings = Strings.of(context);
 
     return AnimatedBuilder(
       animation: _animation,
@@ -70,7 +72,7 @@ class _OutOfMovesOverlayState extends State<OutOfMovesOverlay>
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('OUT OF MOVES', style: textTheme.displayMedium),
+          Text(strings.outOfMoves, style: textTheme.displayMedium),
           const SizedBox(height: 12),
           Text(
             widget.remainingBlocks > 1
@@ -81,21 +83,21 @@ class _OutOfMovesOverlayState extends State<OutOfMovesOverlay>
           const SizedBox(height: 28),
           if (widget.onUndo != null) ...[
             UngridButton(
-              label: 'UNDO MOVE',
+              label: strings.undoMove,
               icon: PhosphorIconsBold.arrowCounterClockwise,
               onPressed: widget.onUndo!,
             ),
             const SizedBox(height: 14),
           ],
           UngridButton(
-            label: 'RETRY',
+            label: strings.retry,
             icon: PhosphorIconsBold.arrowClockwise,
             onPressed: widget.onRetry,
           ),
           if (widget.onExtraMoves != null) ...[
             const SizedBox(height: 14),
             UngridButton(
-              label: '+${widget.extraMovesAmount} MOVES',
+              label: strings.extraMoves(widget.extraMovesAmount),
               icon: PhosphorIconsBold.playCircle,
               filled: false,
               onPressed: widget.onExtraMoves!,

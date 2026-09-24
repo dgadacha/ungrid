@@ -11,10 +11,14 @@ class UngridColors {
   // Palette Flat UI v1. Les noms d'origine sont conservés en commentaire :
   // c'est la référence à rouvrir pour toute retouche.
 
-  static const Color background = Color(0xFF2C3E50); // Midnight Blue
+  static const Color background = Color(0xFF8E44AD); // Wisteria
 
   /// Panneaux, cases vides, boutons secondaires.
-  static const Color surface = Color(0xFF34495E); // Wet Asphalt
+  ///
+  /// Amethyst est à Wisteria ce que Wet Asphalt était à Midnight Blue : la
+  /// nuance juste au-dessus, assez proche pour ne pas découper la grille,
+  /// assez distincte pour qu'une case vide se lise comme un emplacement.
+  static const Color surface = Color(0xFF9B59B6); // Amethyst
 
   static const Color onBackground = Color(0xFFECF0F1); // Clouds
   static const Color onBackgroundSoft = Color(0xFFBDC3C7); // Silver
@@ -32,15 +36,17 @@ class UngridColors {
   /// Aucune ne désigne une direction : la flèche s'en charge seule. La couleur
   /// n'a donc aucune fonction de jeu, elle casse la monotonie de la grille —
   /// et un joueur daltonien ne joue pas moins bien qu'un autre.
+  /// Amethyst n'en fait plus partie : il sert désormais aux cases vides, et un
+  /// bloc de la même teinte que le plateau se verrait mal.
   static const List<Color> blocks = [
     Color(0xFF1ABC9C), // Turquoise
     Color(0xFF2ECC71), // Emerald
     Color(0xFF3498DB), // Peter River
-    Color(0xFF9B59B6), // Amethyst
     Color(0xFFF1C40F), // Sun Flower
     Color(0xFFE67E22), // Carrot
     Color(0xFFE74C3C), // Alizarin
     Color(0xFF2980B9), // Belize Hole
+    Color(0xFF16A085), // Green Sea
   ];
 
   /// Couleur d'un bloc, tirée de son identité et non de sa case.

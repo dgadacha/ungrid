@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../app/constants.dart';
+import '../app/strings.dart';
 import '../app/theme.dart';
 import '../game/levels/level_repository.dart';
 import '../services/haptic_service.dart';
@@ -54,6 +55,7 @@ class _LevelSelectScreenState extends State<LevelSelectScreen> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final strings = Strings.of(context);
     final unlocked = widget.progress.highestUnlockedLevel;
     final total = widget.repository.lastLevel ?? unlocked + _lockedPreview;
 
@@ -74,7 +76,7 @@ class _LevelSelectScreenState extends State<LevelSelectScreen> {
                 ),
                 Expanded(
                   child: Text(
-                    'LEVELS',
+                    strings.levels,
                     textAlign: TextAlign.center,
                     style: textTheme.titleMedium,
                   ),
@@ -110,7 +112,7 @@ class _LevelSelectScreenState extends State<LevelSelectScreen> {
                           const SizedBox(width: 10),
                           Expanded(
                             child: Text(
-                              'CHAPTER $chapter',
+                              strings.chapter(chapter),
                               style: textTheme.titleMedium,
                             ),
                           ),
@@ -126,7 +128,7 @@ class _LevelSelectScreenState extends State<LevelSelectScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        '$mastered mastered · ${cleared == 10 ? 'Medal collected' : '${10 - cleared} to chapter medal'}',
+                        '$mastered mastered · ${cleared == 10 ? Strings.of(context).medalCollectedShort : '${10 - cleared} to chapter medal'}',
                         style: textTheme.bodyMedium,
                       ),
                       const SizedBox(height: 12),

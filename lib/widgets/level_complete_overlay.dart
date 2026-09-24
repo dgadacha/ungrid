@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../app/strings.dart';
 import '../app/theme.dart';
 import '../services/progress_service.dart';
 import 'game_header.dart';
@@ -18,7 +19,7 @@ class LevelCompleteOverlay extends StatefulWidget {
     required this.onNext,
     required this.onReplay,
     required this.allowTapAnywhere,
-    this.nextLabel = 'NEXT',
+    this.nextLabel,
     this.mastered = false,
     this.rewardLabel,
     this.chapter,
@@ -32,7 +33,7 @@ class LevelCompleteOverlay extends StatefulWidget {
   final VoidCallback onNext;
   final VoidCallback onReplay;
   final bool allowTapAnywhere;
-  final String nextLabel;
+  final String? nextLabel;
   final bool mastered;
   final String? rewardLabel;
   final int? chapter;
@@ -55,17 +56,18 @@ class _LevelCompleteOverlayState extends State<LevelCompleteOverlay>
     super.dispose();
   }
 
-  String? get _recordLabel {
-    if (widget.records.both) return 'DOUBLE RECORD';
-    if (widget.records.time) return 'NEW BEST TIME';
-    if (widget.records.moves) return 'NEW BEST MOVES';
+  String? _recordLabel(Strings strings) {
+    if (widget.records.both) return strings.doubleRecord;
+    if (widget.records.time) return strings.newBestTime;
+    if (widget.records.moves) return strings.newBestMoves;
     return null;
   }
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final record = _recordLabel;
+    final strings = Strings.of(context);
+    final record = _recordLabel(strings);
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -91,14 +93,14 @@ class _LevelCompleteOverlayState extends State<LevelCompleteOverlay>
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              widget.mastered ? 'MASTERED' : 'SOLVED',
+              widget.mastered ? strings.mastered : strings.solved,
               style: textTheme.displayLarge,
             ),
             const SizedBox(height: 10),
             Text(
               widget.mastered
-                  ? 'No hints. Original move budget.'
-                  : 'Cleared with assistance',
+                  ? strings.masteryRule
+                  : strings.clearedWithHelp,
               style: textTheme.bodyMedium,
             ),
             if (record != null) ...[
@@ -108,7 +110,8 @@ class _LevelCompleteOverlayState extends State<LevelCompleteOverlay>
             if (widget.chapter != null) ...[
               const SizedBox(height: 24),
               Text(
-                'CHAPTER ${widget.chapter} · ${widget.chapterCleared}/10',
+                '${strings.chapter(widget.chapter!)} '
+                '· ${widget.chapterCleared}/10',
                 style: textTheme.labelLarge,
               ),
               const SizedBox(height: 10),
@@ -129,7 +132,7 @@ class _LevelCompleteOverlayState extends State<LevelCompleteOverlay>
               const SizedBox(height: 10),
               Text(
                 widget.chapterCleared == 10
-                    ? 'CHAPTER MEDAL COLLECTED'
+                    ? strings.medalCollected
                     : '${10 - widget.chapterCleared} levels to your chapter medal',
                 style: textTheme.bodyMedium,
               ),
@@ -148,17 +151,20 @@ class _LevelCompleteOverlayState extends State<LevelCompleteOverlay>
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _Stat(label: 'TIME', value: formatPlayTime(widget.elapsed)),
+                _Stat(label: strings.time, value: formatPlayTime(widget.elapsed)),
                 const SizedBox(width: 44),
-                _Stat(label: 'MOVES', value: '${widget.movesUsed}'),
+                _Stat(label: strings.moves, value: '${widget.movesUsed}'),
               ],
             ),
             const SizedBox(height: 46),
-            UngridButton(label: widget.nextLabel, onPressed: widget.onNext),
+            UngridButton(
+              label: widget.nextLabel ?? strings.next,
+              onPressed: widget.onNext,
+            ),
             const SizedBox(height: 12),
             TextButton(
               onPressed: widget.onReplay,
-              child: Text('REPLAY', style: textTheme.labelLarge),
+              child: Text(strings.replay, style: textTheme.labelLarge),
             ),
           ],
         ),

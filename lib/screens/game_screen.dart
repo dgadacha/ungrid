@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../app/constants.dart';
+import '../app/strings.dart';
 import '../app/theme.dart';
 import '../game/controllers/game_controller.dart';
 import '../game/levels/level_repository.dart';
-import '../game/levels/tutorial_hints.dart';
 import '../services/haptic_service.dart';
 import '../services/progress_service.dart';
 import '../services/reward_service.dart';
@@ -193,9 +193,9 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
     final granted = await _controller?.requestHint() ?? false;
     if (!granted && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('No hint available right now.'),
-          duration: Duration(seconds: 2),
+        SnackBar(
+          content: Text(Strings.of(context).noHint),
+          duration: const Duration(seconds: 2),
         ),
       );
     }
@@ -232,27 +232,44 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
                 bestTime: _best?.bestTime,
                 onBack: () => Navigator.of(context).maybePop(),
               ),
-              Expanded(child: GameBoard(controller: controller)),
-              if (controller.level.rotationTiles.isNotEmpty)
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                  child: Text(
-                    'Circular tiles stop the block and turn its arrow 90° clockwise.',
-                    textAlign: TextAlign.center,
+              // La grille est servie à son format exact plutôt qu'étirée sur
+              // tout l'espace : sans cela elle se centre dans une zone plus
+              // haute qu'elle, et la phrase en dessous se retrouve collée aux
+              // boutons au lieu de respirer entre les deux.
+              Flexible(
+                flex: 5,
+                child: AspectRatio(
+                  aspectRatio:
+                      controller.level.columns / controller.level.rows,
+                  child: GameBoard(controller: controller),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Builder(
+                      builder: (context) {
+                        if (controller.level.rotationTiles.isNotEmpty) {
+                          return Text(
+                            Strings.of(context).rotationRule,
+                            textAlign: TextAlign.center,
+                          );
+                        }
+                        if (controller.level.fragileStopTiles.isNotEmpty) {
+                          return Text(
+                            Strings.of(context).fragileRule,
+                            textAlign: TextAlign.center,
+                          );
+                        }
+                        if (widget.playtest) return const _PlaytestBanner();
+                        return _TutorialHint(levelId: _levelId);
+                      },
+                    ),
                   ),
-                )
-              else if (controller.level.fragileStopTiles.isNotEmpty)
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                  child: Text(
-                    'A cracked stop holds once, then breaks when the block leaves. Undo restores it.',
-                    textAlign: TextAlign.center,
-                  ),
-                )
-              else if (widget.playtest)
-                const _PlaytestBanner()
-              else
-                _TutorialHint(levelId: _levelId),
+                ),
+              ),
               _Controls(
                 controller: controller,
                 onUndo: _undo,
@@ -315,7 +332,7 @@ class _PlaytestBanner extends StatelessWidget {
       height: 54,
       child: Center(
         child: Text(
-          'PLAYTEST · NOTHING IS SAVED',
+          Strings.of(context).playtestBanner,
           style: Theme.of(context).textTheme.labelLarge?.copyWith(
             color: UngridColors.onBackgroundFaint,
           ),
@@ -332,7 +349,7 @@ class _TutorialHint extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hint = TutorialHints.forLevel(levelId);
+    final hint = Strings.of(context).tutorial(levelId);
     return SizedBox(
       height: 54,
       child: hint == null
@@ -378,19 +395,19 @@ class _Controls extends StatelessWidget {
         children: [
           RoundIconButton(
             icon: PhosphorIconsBold.arrowCounterClockwise,
-            label: 'UNDO',
+            label: Strings.of(context).undo,
             onPressed: controller.canUndo ? onUndo : null,
           ),
           const SizedBox(width: 30),
           RoundIconButton(
             icon: PhosphorIconsBold.arrowClockwise,
-            label: 'RESTART',
+            label: Strings.of(context).restart,
             onPressed: controller.movesUsed > 0 ? onRestart : null,
           ),
           const SizedBox(width: 30),
           RoundIconButton(
             icon: PhosphorIconsBold.lightbulb,
-            label: 'HINT',
+            label: Strings.of(context).hint,
             onPressed: controller.isPlaying && controller.rewards.isAvailable
                 ? onHint
                 : null,

@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../app/strings.dart';
 import '../game/engine/generator_version.dart';
 
 /// Ce qu'on retient d'un niveau terminé.
@@ -36,6 +37,7 @@ class ProgressService {
 
   String get _kHighestUnlocked => '${_prefix}highest_unlocked_level';
   static const String _kHaptics = 'haptics_enabled';
+  static const String _kLanguage = 'language';
   String get _kGeneratorVersion => '${_prefix}progress_generator_version';
   String _kCompleted(int id) => '${_prefix}level_${id}_completed';
   String _kMoves(int id) => '${_prefix}level_${id}_best_moves';
@@ -109,6 +111,13 @@ class ProgressService {
 
   Future<void> setHapticsEnabled(bool value) =>
       _prefs.setBool(_kHaptics, value);
+
+  /// Langue de l'interface. Anglais tant que rien n'a été choisi.
+  AppLanguage get language =>
+      AppLanguage.fromCode(_prefs.getString(_kLanguage));
+
+  Future<void> setLanguage(AppLanguage value) =>
+      _prefs.setString(_kLanguage, value.code);
 
   bool isUnlocked(int levelId) => levelId <= highestUnlockedLevel;
 

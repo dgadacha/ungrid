@@ -1,3 +1,15 @@
+/// Outils de développement : l'écran d'essai et celui d'analyse de la
+/// génération.
+///
+/// Masqués dans l'application livrée. Ils ne servent qu'à régler le jeu, et
+/// un joueur qui tombe dessus peut sauter la campagne ou se retrouver devant
+/// des chiffres qui ne lui disent rien. On les rallume au besoin :
+///
+/// ```
+/// flutter run --dart-define=ungrid.devtools=true
+/// ```
+const bool showDeveloperTools = bool.fromEnvironment('ungrid.devtools');
+
 /// Réglages de temps et de forme, rassemblés pour être ajustés d'un seul
 /// endroit. Le jeu se joue à la seconde : ces valeurs décident de sa nervosité.
 class GameTiming {
