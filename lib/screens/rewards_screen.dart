@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import '../app/strings.dart';
 import '../app/theme.dart';
 import '../services/progress_service.dart';
 import '../widgets/ungrid_scaffold.dart';
@@ -26,8 +27,11 @@ class _RewardsScreenState extends State<RewardsScreen> {
                 onPressed: () => Navigator.of(context).pop(),
                 icon: const Icon(PhosphorIconsBold.arrowLeft),
               ),
-              const Expanded(
-                child: Text('YOUR COLLECTION', textAlign: TextAlign.center),
+              Expanded(
+                child: Text(
+                  Strings.of(context).collection,
+                  textAlign: TextAlign.center,
+                ),
               ),
               const SizedBox(width: 48),
             ],
@@ -48,7 +52,7 @@ class _RewardsScreenState extends State<RewardsScreen> {
                     for (var chapter = 1; chapter <= 10; chapter++)
                       Tooltip(
                         message:
-                            'Chapter $chapter · ${p.chapterCleared(chapter)}/10 solved · ${p.chapterMastered(chapter)}/10 mastered',
+                            Strings.of(context).chapterMastery(chapter, p.chapterCleared(chapter), p.chapterMastered(chapter)),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -68,9 +72,7 @@ class _RewardsScreenState extends State<RewardsScreen> {
                   ],
                 ),
                 const SizedBox(height: 24),
-                const Text(
-                  'Solve a chapter to earn its medal. Master every level to turn it gold. Undo is always allowed.',
-                ),
+                Text(Strings.of(context).rewardsRule),
                 const SizedBox(height: 24),
                 for (
                   var palette = 0;
@@ -107,7 +109,7 @@ class _RewardsScreenState extends State<RewardsScreen> {
                           const SizedBox(height: 8),
                           Text(
                             palette == 0
-                                ? 'Always available'
+                                ? Strings.of(context).alwaysAvailable
                                 : '${thresholds[palette]} chapter medal${thresholds[palette] > 1 ? 's' : ''}',
                           ),
                           TextButton(
@@ -119,10 +121,10 @@ class _RewardsScreenState extends State<RewardsScreen> {
                                 : null,
                             child: Text(
                               p.paletteIndex == palette
-                                  ? 'EQUIPPED'
+                                  ? Strings.of(context).equipped
                                   : p.unlockedPalettes.contains(palette)
-                                  ? 'EQUIP'
-                                  : 'LOCKED',
+                                  ? Strings.of(context).equip
+                                  : Strings.of(context).locked,
                             ),
                           ),
                         ],

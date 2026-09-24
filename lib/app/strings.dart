@@ -139,6 +139,12 @@ class Strings {
   String get solved => _pick('SOLVED', 'RÉSOLU', 'RESUELTO');
   String get moves => _pick('MOVES', 'COUPS', 'MOVIMIENTOS');
   String get next => _pick('NEXT', 'SUIVANT', 'SIGUIENTE');
+  String get finish => _pick('FINISH', 'TERMINER', 'TERMINAR');
+  String paletteUnlocked(String palette) => _pick(
+        '$palette UNLOCKED · See Rewards',
+        '$palette DÉBLOQUÉE · Voir les récompenses',
+        '$palette DESBLOQUEADA · Ver recompensas',
+      );
   String best(String value) =>
       _pick('BEST $value', 'RECORD $value', 'RÉCORD $value');
   String get newBestTime =>
@@ -162,6 +168,11 @@ class Strings {
         'CHAPTER MEDAL COLLECTED',
         'MÉDAILLE DU CHAPITRE',
         'MEDALLA DEL CAPÍTULO',
+      );
+  String levelsToMedal(int count) => _pick(
+        '$count levels to your chapter medal',
+        '$count niveaux avant la médaille du chapitre',
+        '$count niveles para la medalla del capítulo',
       );
   String get medalCollectedShort =>
       _pick('Medal collected', 'Médaille obtenue', 'Medalla obtenida');

@@ -133,7 +133,7 @@ class _LevelCompleteOverlayState extends State<LevelCompleteOverlay>
               Text(
                 widget.chapterCleared == 10
                     ? strings.medalCollected
-                    : '${10 - widget.chapterCleared} levels to your chapter medal',
+                    : strings.levelsToMedal(10 - widget.chapterCleared),
                 style: textTheme.bodyMedium,
               ),
             ],

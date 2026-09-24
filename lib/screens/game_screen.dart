@@ -151,7 +151,8 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
       setState(() {
         final palettes = widget.progress.unlockedPalettes;
         _rewardLabel = !widget.playtest && palettes.length > palettesBefore
-            ? '${UngridColors.paletteNames[palettes.last]} UNLOCKED · See Rewards'
+            ? Strings.of(context)
+                .paletteUnlocked(UngridColors.paletteNames[palettes.last])
             : null;
         _records = records;
         _showOutcome = true;
@@ -295,8 +296,8 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
                 onNext: _next,
                 onReplay: _restart,
                 nextLabel: _levelId == widget.repository.lastLevel
-                    ? 'FINISH'
-                    : 'NEXT',
+                    ? Strings.of(context).finish
+                    : Strings.of(context).next,
               ),
             ),
           if (_showOutcome && controller.isOutOfMoves)
