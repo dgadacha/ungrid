@@ -12,7 +12,6 @@ import '../services/progress_service.dart';
 import 'game_screen.dart';
 import 'level_select_screen.dart';
 import 'settings_screen.dart';
-import 'rewards_screen.dart';
 
 /// L'accueil. Trois informations, une action : on joue en un geste.
 class HomeScreen extends StatefulWidget {
@@ -146,11 +145,6 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: _play,
             horizontalPadding: 64,
           ),
-          const SizedBox(height: 8),
-          TextButton(
-            onPressed: () => _open(RewardsScreen(progress: widget.progress)),
-            child: Text(strings.rewards),
-          ),
           const Spacer(flex: 4),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -182,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(height: 18),
           if (completed > 0)
             Text(
-              '$completed LEVEL${completed > 1 ? 'S' : ''} CLEARED',
+              strings.levelsCleared(completed),
               style: textTheme.labelLarge,
             ),
           const SizedBox(height: 26),

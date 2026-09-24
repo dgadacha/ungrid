@@ -17,7 +17,6 @@ import 'package:ungrid/game/models/grid_position.dart';
 import 'package:ungrid/screens/home_screen.dart';
 import 'package:ungrid/screens/game_screen.dart';
 import 'package:ungrid/screens/level_select_screen.dart';
-import 'package:ungrid/screens/rewards_screen.dart';
 import 'package:ungrid/services/haptic_service.dart';
 import 'package:ungrid/services/progress_service.dart';
 import 'package:ungrid/widgets/level_complete_overlay.dart';
@@ -86,7 +85,6 @@ void main() {
         progress: p,
         haptics: HapticService(enabled: false),
       ),
-      'rewards': RewardsScreen(progress: p),
       'victory': Scaffold(
         backgroundColor: UngridColors.background,
         body: LevelCompleteOverlay(

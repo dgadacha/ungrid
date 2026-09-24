@@ -56,7 +56,6 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
   RecordsBeaten _records = const RecordsBeaten.none();
   LevelProgress? _best;
   Timer? _outcomeTimer;
-  String? _rewardLabel;
 
   @override
   void initState() {
@@ -95,7 +94,6 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
       _levelId = levelId;
       _showOutcome = false;
       _records = const RecordsBeaten.none();
-      _rewardLabel = null;
       // En essai, aucun record à battre : la partie ne compte pas.
       _best = widget.playtest ? null : widget.progress.progressFor(levelId);
       if (_controller == null) {
@@ -138,7 +136,6 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
 
     if (controller.isCleared) {
       final completedId = _levelId;
-      final palettesBefore = widget.progress.unlockedPalettes.length;
       final records = widget.playtest
           ? const RecordsBeaten.none()
           : await widget.progress.recordCompletion(
@@ -149,11 +146,6 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
             );
       if (!mounted || _levelId != completedId || !controller.isCleared) return;
       setState(() {
-        final palettes = widget.progress.unlockedPalettes;
-        _rewardLabel = !widget.playtest && palettes.length > palettesBefore
-            ? Strings.of(context)
-                .paletteUnlocked(UngridColors.paletteNames[palettes.last])
-            : null;
         _records = records;
         _showOutcome = true;
       });
@@ -185,7 +177,6 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
     _outcomeTimer?.cancel();
     setState(() {
       _showOutcome = false;
-      _rewardLabel = null;
       _controller?.restart();
     });
   }
@@ -287,7 +278,6 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
                 elapsed: controller.elapsed,
                 records: _records,
                 mastered: controller.mastered,
-                rewardLabel: _rewardLabel,
                 chapter: widget.playtest ? null : (_levelId - 1) ~/ 10 + 1,
                 chapterCleared: widget.playtest
                     ? 0

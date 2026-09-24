@@ -21,7 +21,6 @@ class LevelCompleteOverlay extends StatefulWidget {
     required this.allowTapAnywhere,
     this.nextLabel,
     this.mastered = false,
-    this.rewardLabel,
     this.chapter,
     this.chapterCleared = 0,
   });
@@ -35,7 +34,6 @@ class LevelCompleteOverlay extends StatefulWidget {
   final bool allowTapAnywhere;
   final String? nextLabel;
   final bool mastered;
-  final String? rewardLabel;
   final int? chapter;
   final int chapterCleared;
 
@@ -135,16 +133,6 @@ class _LevelCompleteOverlayState extends State<LevelCompleteOverlay>
                     ? strings.medalCollected
                     : strings.levelsToMedal(10 - widget.chapterCleared),
                 style: textTheme.bodyMedium,
-              ),
-            ],
-            if (widget.rewardLabel != null) ...[
-              const SizedBox(height: 12),
-              Text(
-                widget.rewardLabel!,
-                textAlign: TextAlign.center,
-                style: textTheme.bodyMedium?.copyWith(
-                  color: const Color(0xFFF8C471),
-                ),
               ),
             ],
             const SizedBox(height: 28),

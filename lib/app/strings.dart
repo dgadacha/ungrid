@@ -49,8 +49,17 @@ class Strings {
   // ── Accueil ────────────────────────────────────────────────────────────
   String get play => _pick('PLAY', 'JOUER', 'JUGAR');
   String get replay => _pick('REPLAY', 'REJOUER', 'REPETIR');
-  String get rewards => _pick('REWARDS', 'RÉCOMPENSES', 'RECOMPENSAS');
   String get levels => _pick('LEVELS', 'NIVEAUX', 'NIVELES');
+  /// Le compteur du bas de l'accueil.
+  ///
+  /// L'accord se fait dans chaque langue plutôt qu'en collant un « s » : le
+  /// pluriel espagnol ne s'écrit pas comme l'anglais, et le français accorde
+  /// aussi le participe.
+  String levelsCleared(int count) => _pick(
+        '$count LEVEL${count > 1 ? 'S' : ''} CLEARED',
+        '$count NIVEAU${count > 1 ? 'X' : ''} RÉUSSI${count > 1 ? 'S' : ''}',
+        '$count NIVEL${count > 1 ? 'ES' : ''} SUPERADO${count > 1 ? 'S' : ''}',
+      );
   String get campaignComplete =>
       _pick('CAMPAIGN COMPLETE', 'CAMPAGNE TERMINÉE', 'CAMPAÑA COMPLETA');
 
@@ -140,11 +149,6 @@ class Strings {
   String get moves => _pick('MOVES', 'COUPS', 'MOVIMIENTOS');
   String get next => _pick('NEXT', 'SUIVANT', 'SIGUIENTE');
   String get finish => _pick('FINISH', 'TERMINER', 'TERMINAR');
-  String paletteUnlocked(String palette) => _pick(
-        '$palette UNLOCKED · See Rewards',
-        '$palette DÉBLOQUÉE · Voir les récompenses',
-        '$palette DESBLOQUEADA · Ver recompensas',
-      );
   String best(String value) =>
       _pick('BEST $value', 'RECORD $value', 'RÉCORD $value');
   String get newBestTime =>
@@ -208,27 +212,6 @@ class Strings {
   String get cancel => _pick('Cancel', 'Annuler', 'Cancelar');
   String get reset => _pick('Reset', 'Effacer', 'Borrar');
 
-  // ── Récompenses ────────────────────────────────────────────────────────
-  String get collection =>
-      _pick('YOUR COLLECTION', 'VOTRE COLLECTION', 'TU COLECCIÓN');
-  String get equip => _pick('EQUIP', 'CHOISIR', 'ELEGIR');
-  String get equipped => _pick('EQUIPPED', 'EN COURS', 'EN USO');
-  String get locked => _pick('LOCKED', 'À DÉBLOQUER', 'BLOQUEADO');
-  String get alwaysAvailable =>
-      _pick('Always available', 'Toujours disponible', 'Siempre disponible');
-  String get rewardsRule => _pick(
-        'Solve a chapter to earn its medal. Master every level to turn it '
-            'gold. Undo is always allowed.',
-        'Terminez un chapitre pour gagner sa médaille. Maîtrisez tous ses '
-            'niveaux pour la passer en or. L\'annulation reste permise.',
-        'Completa un capítulo para ganar su medalla. Domina todos sus niveles '
-            'para volverla dorada. Deshacer siempre está permitido.',
-      );
-  String chapterMastery(int id, int cleared, int mastered) => _pick(
-        'Chapter $id · $cleared/10 solved · $mastered/10 mastered',
-        'Chapitre $id · $cleared/10 réussis · $mastered/10 maîtrisés',
-        'Capítulo $id · $cleared/10 superados · $mastered/10 dominados',
-      );
 }
 
 /// Porte la langue choisie jusqu'aux écrans.
