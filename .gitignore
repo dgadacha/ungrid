@@ -31,6 +31,10 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+# Le dossier de build est parfois un lien vers un répertoire hors iCloud :
+# synchronisé, il reçoit des attributs File Provider que codesign refuse, et
+# la signature du framework Flutter échoue.
+/build
 /coverage/
 
 # Symbolication related
