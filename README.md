@@ -49,4 +49,6 @@ Le détail des règles et de l'architecture est dans [CLAUDE.md](CLAUDE.md).
 
 Tuiles de rotation : Settings → Playtest → **ROTATION · 10**. Le générateur dédié vérifie leur usage et le budget optimal ; voir [les règles et la génération](docs/rotation.md).
 
-La campagne active v3 embarque ses grilles vérifiées et se génère avec `tool/build_rotation_campaign.dart`. PLAY lance directement les 100 niveaux ; le lot Playtest de 10 reste disponible.
+La campagne active v4 embarque ses grilles vérifiées et se génère avec `tool/build_planning_campaign.dart`. Elle exige au moins trois retours différés dans sa solution optimale de référence, quatre pour les niveaux 81–100, et au moins 16 coups. PLAY lance directement les 100 niveaux ; le lot Playtest de 10 reste disponible.
+
+Le retour sur le niveau 81 a conduit à revoir la sélection : voir [les critères de planification](docs/planning-difficulty.md).

@@ -141,6 +141,13 @@ class GamePainter extends CustomPainter {
       _paintMotion(canvas, layout, motion);
     }
 
+    for (final tile in level.rotationTiles) {
+      final occupant = controller.engine.blockAt(tile.x, tile.y);
+      if (occupant != null && !animated.contains(occupant.id)) {
+        blocks.paintRotationBadge(canvas, layout.cellRect(tile.x, tile.y));
+      }
+    }
+
     if (blocked != null) _paintBonk(canvas, layout, blocked);
 
     if (pulse > 0) {

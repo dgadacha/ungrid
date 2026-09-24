@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:flutter/services.dart';
 
 import '../app/theme.dart';
@@ -79,8 +80,11 @@ class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
     final seed = _seed;
     // Par seed, on regarde ce que le générateur sait faire ; par numéro, ce
     // que la campagne servirait vraiment.
-    final generated = seed == null ? _generator.generate(levelId: levelId) : null;
-    final level = generated?.level ??
+    final generated = seed == null
+        ? _generator.generate(levelId: levelId)
+        : null;
+    final level =
+        generated?.level ??
         const SlideGenerator().fromSeed(seed!, levelId: levelId) ??
         _generator.generate(levelId: levelId).level;
     watch.stop();
@@ -111,15 +115,15 @@ class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
       level: level,
       solveResult: solveResult,
       difficulty: difficulty,
-      puzzle: generated?.analysis ??
+      puzzle:
+          generated?.analysis ??
           const PuzzleAnalyzer().analyse(level, solveResult),
       band: bandFor(levelId),
       generated: generated,
       config: DifficultyCurve.configFor(levelId),
       usedStopTiles: used,
       taps: taps,
-      seed: seed ??
-          seedForLevel(levelId, (generated?.attempts ?? 1) - 1),
+      seed: seed ?? seedForLevel(levelId, (generated?.attempts ?? 1) - 1),
     );
   }
 
@@ -165,9 +169,9 @@ class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
   Future<void> _copyReport() async {
     await Clipboard.setData(ClipboardData(text: _report()));
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Report copied')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Report copied')));
   }
 
   String _report() {
@@ -213,14 +217,16 @@ class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
   }
 
   void _play() {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (_) => GameScreen(
-        levelId: _levelId,
-        repository: widget.repository,
-        progress: widget.progress!,
-        haptics: widget.haptics!,
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => GameScreen(
+          levelId: _levelId,
+          repository: widget.repository,
+          progress: widget.progress!,
+          haptics: widget.haptics!,
+        ),
       ),
-    ));
+    );
   }
 
   @override
@@ -234,7 +240,7 @@ class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
         _playback.blockById(block.id) == null
             ? -1
             : _playback.blockById(block.id)!.y * analysis.level.columns +
-                _playback.blockById(block.id)!.x,
+                  _playback.blockById(block.id)!.x,
     ];
     final removed = <int>{
       for (var i = 0; i < blocks.length; i++)
@@ -253,8 +259,10 @@ class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
               children: [
                 IconButton(
                   onPressed: () => Navigator.of(context).maybePop(),
-                  icon: const Icon(Icons.arrow_back_rounded,
-                      color: UngridColors.onBackground),
+                  icon: const Icon(
+                    PhosphorIconsBold.arrowLeft,
+                    color: UngridColors.onBackground,
+                  ),
                   splashRadius: 24,
                 ),
                 Expanded(
@@ -267,8 +275,10 @@ class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
                 ),
                 IconButton(
                   onPressed: () => _load(_levelId),
-                  icon: const Icon(Icons.refresh_rounded,
-                      color: UngridColors.onBackground),
+                  icon: const Icon(
+                    PhosphorIconsBold.arrowClockwise,
+                    color: UngridColors.onBackground,
+                  ),
                   splashRadius: 24,
                 ),
               ],
@@ -313,10 +323,12 @@ class _DebugGenerationScreenState extends State<DebugGenerationScreen> {
                 ),
                 _Chip(label: 'REGENERATE', onTap: () => _load(_levelId)),
                 _Chip(label: 'SEED +1', onTap: _nextSeed),
-                _Chip(label: 'SOLVE', onTap: () => _load(_levelId, keepSeed: true)),
+                _Chip(
+                  label: 'SOLVE',
+                  onTap: () => _load(_levelId, keepSeed: true),
+                ),
                 _Chip(label: 'COPY REPORT', onTap: _copyReport),
-                if (widget.progress != null)
-                  _Chip(label: 'PLAY', onTap: _play),
+                if (widget.progress != null) _Chip(label: 'PLAY', onTap: _play),
               ],
             ),
           ),
@@ -365,11 +377,7 @@ class _Analysis {
 }
 
 class _Chip extends StatelessWidget {
-  const _Chip({
-    required this.label,
-    required this.onTap,
-    this.accent = false,
-  });
+  const _Chip({required this.label, required this.onTap, this.accent = false});
 
   final String label;
   final VoidCallback onTap;
@@ -417,8 +425,7 @@ class _Stats extends StatelessWidget {
     final difficulty = analysis.difficulty;
     final puzzle = analysis.puzzle;
     final config = analysis.config;
-    final unmet =
-        const DifficultyEvaluator().unmetCriteria(config, difficulty);
+    final unmet = const DifficultyEvaluator().unmetCriteria(config, difficulty);
 
     return ListView(
       padding: const EdgeInsets.fromLTRB(22, 16, 22, 24),
@@ -428,64 +435,92 @@ class _Stats extends StatelessWidget {
         _row('Seed', '${analysis.seed}'),
         _row('Grid', '${level.columns} x ${level.rows}'),
         _row('Blocks', '${level.blocks.length}'),
-        _row('Stop tiles',
-            '${puzzle.stopTileCount}'
-            '${puzzle.unusedStopTileCount > 0 ? "  (${puzzle.unusedStopTileCount} unused)" : ""}'),
+        _row(
+          'Stop tiles',
+          '${puzzle.stopTileCount}'
+              '${puzzle.unusedStopTileCount > 0 ? "  (${puzzle.unusedStopTileCount} unused)" : ""}',
+        ),
         _row('Density', '${(level.occupancy * 100).round()} %'),
         const Divider(height: 26),
 
         // Ce que le niveau demande vraiment : le nombre de coups seul ne dit
         // rien, deux niveaux de même longueur peuvent n'avoir rien à voir.
         _row('Optimal moves', '${solve.minimumMoves}'),
-        _row('Moves / block',
-            '${puzzle.moveComplexity.toStringAsFixed(2)}'
-            '   target ${analysis.band.minComplexity.toStringAsFixed(2)}'
-            '-${analysis.band.maxComplexity.toStringAsFixed(2)}'),
-        _row('Replayed blocks',
-            '${puzzle.multiMoveBlocks} (${(puzzle.multiMoveRatio * 100).round()} %)'
-            '   target ${(analysis.band.minMultiMoveRatio * 100).round()} %'),
+        _row(
+          'Moves / block',
+          '${puzzle.moveComplexity.toStringAsFixed(2)}'
+              '   target ${analysis.band.minComplexity.toStringAsFixed(2)}'
+              '-${analysis.band.maxComplexity.toStringAsFixed(2)}',
+        ),
+        _row(
+          'Replayed blocks',
+          '${puzzle.multiMoveBlocks} (${(puzzle.multiMoveRatio * 100).round()} %)'
+              '   target ${(analysis.band.minMultiMoveRatio * 100).round()} %',
+        ),
         _row('Max moves / block', '${puzzle.maxMovesForSingleBlock}'),
         _row('Choices per step', puzzle.averageChoices.toStringAsFixed(1)),
         _row('Meaningful choices', '${puzzle.meaningfulAlternativeCount}'),
-        _row('Steps with a choice',
-            '${(puzzle.decisionRatio * 100).round()} %'),
+        _row(
+          'Steps with a choice',
+          '${(puzzle.decisionRatio * 100).round()} %',
+        ),
         _row('Moves that cost', '${puzzle.wrongMoveOpportunities}'),
         _row('Moves that lose', '${puzzle.deadEndOpportunities}'),
-        _row('Tempting wrong moves',
-            '${puzzle.temptingWrongMoves}'
-            '  (${puzzle.temptingWrongMoveRatio.toStringAsFixed(2)})'),
-        _row('Path narrowness',
-            puzzle.optimalPathNarrowness.toStringAsFixed(2)),
-        _row('Dependency complexity',
-            puzzle.dependencyComplexity.toStringAsFixed(2)),
-        _row('Decision score',
-            '${puzzle.decisionScore.round()}'
-            '   target ${analysis.band.minDecisionScore.round()}'),
+        _row(
+          'Tempting wrong moves',
+          '${puzzle.temptingWrongMoves}'
+              '  (${puzzle.temptingWrongMoveRatio.toStringAsFixed(2)})',
+        ),
+        _row(
+          'Path narrowness',
+          puzzle.optimalPathNarrowness.toStringAsFixed(2),
+        ),
+        _row(
+          'Dependency complexity',
+          puzzle.dependencyComplexity.toStringAsFixed(2),
+        ),
+        _row(
+          'Decision score',
+          '${puzzle.decisionScore.round()}'
+              '   target ${analysis.band.minDecisionScore.round()}',
+        ),
         const Divider(height: 26),
 
         // Ce que les tuiles apportent, et ce qu'elles ne font qu'allonger.
         _row('Stop interactions', '${puzzle.stopTileInteractions}'),
-        _row('Meaningful stops',
-            '${puzzle.meaningfulStopInteractions}'
-            '  (${(puzzle.stopDependencyScore * 100).round()} %)'),
-        _row('Triviality penalty',
-            puzzle.trivialityPenalty.toStringAsFixed(2)),
+        _row(
+          'Meaningful stops',
+          '${puzzle.meaningfulStopInteractions}'
+              '  (${(puzzle.stopDependencyScore * 100).round()} %)',
+        ),
+        _row('Triviality penalty', puzzle.trivialityPenalty.toStringAsFixed(2)),
         const Divider(height: 26),
 
         _row('Move limit', '${level.moveLimit}'),
-        _row('Instant exits',
-            '${LevelGenerator.exitableCount(level)}'
-            ' (${(difficulty.exitableRatio * 100).round()} %)'
-            '   max ${(analysis.band.maxExitRatio * 100).round()} %'),
-        _row('States explored',
-            '${solve.exploredStates}${solve.exhaustive ? "" : "+"}'),
+        _row(
+          'Instant exits',
+          '${LevelGenerator.exitableCount(level)}'
+              ' (${(difficulty.exitableRatio * 100).round()} %)'
+              '   max ${(analysis.band.maxExitRatio * 100).round()} %',
+        ),
+        _row(
+          'States explored',
+          '${solve.exploredStates}${solve.exhaustive ? "" : "+"}',
+        ),
         _row('Difficulty score', '${puzzle.difficultyScore().round()}'),
-        _row('Tier score',
-            '${difficulty.score.round()} · ${difficulty.tier.label}'),
-        _row('Visual score',
-            '${analysis.generated?.quality.score.round() ?? "-"}'),
+        _row(
+          'Tier score',
+          '${difficulty.score.round()} · ${difficulty.tier.label}',
+        ),
+        _row(
+          'Visual score',
+          '${analysis.generated?.quality.score.round() ?? "-"}',
+        ),
         _row('Attempts', '${analysis.generated?.attempts ?? "-"}'),
-        _row('Generation', '${(generationMicros / 1000).toStringAsFixed(1)} ms'),
+        _row(
+          'Generation',
+          '${(generationMicros / 1000).toStringAsFixed(1)} ms',
+        ),
         const Divider(height: 26),
 
         // Les taps par bloc : c'est là qu'un rapport coups / blocs élevé
@@ -542,22 +577,26 @@ class _Stats extends StatelessWidget {
   }
 
   Widget _row(String label, String value) => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(label,
-                style: const TextStyle(
-                  color: UngridColors.onBackgroundSoft,
-                  fontSize: 13,
-                )),
-            Text(value,
-                style: const TextStyle(
-                  color: UngridColors.onBackground,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w800,
-                )),
-          ],
+    padding: const EdgeInsets.symmetric(vertical: 4),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            color: UngridColors.onBackgroundSoft,
+            fontSize: 13,
+          ),
         ),
-      );
+        Text(
+          value,
+          style: const TextStyle(
+            color: UngridColors.onBackground,
+            fontSize: 13,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+      ],
+    ),
+  );
 }

@@ -8,7 +8,13 @@ import 'slide_generator.dart';
 /// Un candidat n'est livré que si sa solution optimale utilise chaque rotation
 /// et cesse de fonctionner lorsqu'on remplace les rotations par des arrêts.
 class RotationGenerator {
-  const RotationGenerator({this.solver = const LevelSolver()});
+  const RotationGenerator({
+    this.solver = const LevelSolver(),
+    this.maxBlocks = 12,
+    this.maxRotationTiles = 2,
+  });
+  final int maxBlocks;
+  final int maxRotationTiles;
   final LevelSolver solver;
   static const rulesVersion = 1;
 
@@ -16,9 +22,9 @@ class RotationGenerator {
     final base = const SlideGenerator().fromSeed(seed);
     if (base == null ||
         base.columns > 6 ||
-        base.blocks.length > 12 ||
+        base.blocks.length > maxBlocks ||
         base.stopTiles.isEmpty ||
-        base.stopTiles.length > 2) {
+        base.stopTiles.length > maxRotationTiles) {
       return null;
     }
     final candidate = base.copyWith(

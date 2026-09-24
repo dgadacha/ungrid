@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../app/theme.dart';
 import '../game/controllers/game_controller.dart';
@@ -70,7 +71,7 @@ class _GameHeaderState extends State<GameHeader> {
               IconButton(
                 onPressed: widget.onBack,
                 icon: const Icon(
-                  Icons.arrow_back_rounded,
+                  PhosphorIconsBold.arrowLeft,
                   color: UngridColors.onBackground,
                 ),
                 splashRadius: 24,

@@ -2,7 +2,7 @@
 
 Une tuile circulaire arrête le bloc et tourne sa flèche de 90° dans le sens horaire. Elle agit à chaque arrivée, jamais au départ ni sur un coup bloqué. Un bloc initialement dessus conserve sa direction initiale. Les rotations peuvent former des boucles ; undo restaure position et orientation, et les indices résolvent l'état courant.
 
-La campagne principale v3 propose 100 niveaux avec rotations via PLAY. Le lot initial de 10 reste accessible dans Settings → Playtest → ROTATION · 10. Voir [la campagne](campaign-100.md).
+La campagne principale v4 propose 100 niveaux avec rotations via PLAY. Le lot initial de 10 reste accessible dans Settings → Playtest → ROTATION · 10. Voir [la campagne](campaign-100.md).
 
 ## Génération
 

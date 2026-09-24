@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../app/theme.dart';
 import '../game/levels/level_repository.dart';
@@ -39,8 +40,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: UngridColors.surface,
-        title: const Text('Reset progress?',
-            style: TextStyle(color: UngridColors.onBackground)),
+        title: const Text(
+          'Reset progress?',
+          style: TextStyle(color: UngridColors.onBackground),
+        ),
         content: const Text(
           'Cleared levels and best times will be lost.',
           style: TextStyle(color: UngridColors.onBackgroundSoft),
@@ -70,88 +73,98 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     return UngridScaffold(
       child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 4, 56, 4),
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () => Navigator.of(context).maybePop(),
-                    icon: const Icon(Icons.arrow_back_rounded,
-                        color: UngridColors.onBackground),
-                    splashRadius: 24,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 4, 56, 4),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () => Navigator.of(context).maybePop(),
+                  icon: const Icon(
+                    PhosphorIconsBold.arrowLeft,
+                    color: UngridColors.onBackground,
                   ),
-                  Expanded(
-                    child: Text(
-                      'SETTINGS',
-                      textAlign: TextAlign.center,
-                      style: textTheme.titleMedium,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 18),
-            SwitchListTile.adaptive(
-              value: _haptics,
-              onChanged: _toggleHaptics,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 28),
-              title: Text('HAPTICS', style: textTheme.labelLarge),
-              activeThumbColor: UngridColors.onBackground,
-              activeTrackColor: UngridColors.success,
-            ),
-            const Divider(height: 34, indent: 28, endIndent: 28),
-            ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 28),
-              onTap: _confirmReset,
-              title: Text('RESET PROGRESS',
-                  style: textTheme.labelLarge?.copyWith(
-                    color: UngridColors.danger,
-                  )),
-              subtitle: Text(
-                'Level ${widget.progress.highestUnlockedLevel}'
-                ' · ${widget.progress.completedCount()} cleared',
-                style: textTheme.bodyMedium,
-              ),
-            ),
-            const Spacer(),
-            ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 28),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => PlaytestScreen(
-                    repository: widget.repository,
-                    progress: widget.progress,
-                    haptics: widget.haptics,
+                  splashRadius: 24,
+                ),
+                Expanded(
+                  child: Text(
+                    'SETTINGS',
+                    textAlign: TextAlign.center,
+                    style: textTheme.titleMedium,
                   ),
                 ),
-              ),
-              title: Text('PLAYTEST', style: textTheme.labelLarge),
-              subtitle: Text('Jump to any level, nothing is saved',
-                  style: textTheme.bodyMedium),
-              trailing: const Icon(Icons.chevron_right_rounded,
-                  color: UngridColors.onBackgroundFaint),
+              ],
             ),
-            ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 28),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => DebugGenerationScreen(
-                    repository: widget.repository,
-                    progress: widget.progress,
-                    haptics: widget.haptics,
-                  ),
+          ),
+          const SizedBox(height: 18),
+          SwitchListTile.adaptive(
+            value: _haptics,
+            onChanged: _toggleHaptics,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 28),
+            title: Text('HAPTICS', style: textTheme.labelLarge),
+            activeThumbColor: UngridColors.onBackground,
+            activeTrackColor: UngridColors.success,
+          ),
+          const Divider(height: 34, indent: 28, endIndent: 28),
+          ListTile(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 28),
+            onTap: _confirmReset,
+            title: Text(
+              'RESET PROGRESS',
+              style: textTheme.labelLarge?.copyWith(color: UngridColors.danger),
+            ),
+            subtitle: Text(
+              'Level ${widget.progress.highestUnlockedLevel}'
+              ' · ${widget.progress.completedCount()} cleared',
+              style: textTheme.bodyMedium,
+            ),
+          ),
+          const Spacer(),
+          ListTile(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 28),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => PlaytestScreen(
+                  repository: widget.repository,
+                  progress: widget.progress,
+                  haptics: widget.haptics,
                 ),
               ),
-              title: Text('GENERATION', style: textTheme.labelLarge),
-              subtitle: Text('Level analysis and tuning',
-                  style: textTheme.bodyMedium),
-              trailing: const Icon(Icons.chevron_right_rounded,
-                  color: UngridColors.onBackgroundFaint),
             ),
-            const SizedBox(height: 18),
-          ],
+            title: Text('PLAYTEST', style: textTheme.labelLarge),
+            subtitle: Text(
+              'Jump to any level, nothing is saved',
+              style: textTheme.bodyMedium,
+            ),
+            trailing: const Icon(
+              PhosphorIconsBold.caretRight,
+              color: UngridColors.onBackgroundFaint,
+            ),
+          ),
+          ListTile(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 28),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => DebugGenerationScreen(
+                  repository: widget.repository,
+                  progress: widget.progress,
+                  haptics: widget.haptics,
+                ),
+              ),
+            ),
+            title: Text('GENERATION', style: textTheme.labelLarge),
+            subtitle: Text(
+              'Level analysis and tuning',
+              style: textTheme.bodyMedium,
+            ),
+            trailing: const Icon(
+              PhosphorIconsBold.caretRight,
+              color: UngridColors.onBackgroundFaint,
+            ),
+          ),
+          const SizedBox(height: 18),
+        ],
       ),
     );
   }

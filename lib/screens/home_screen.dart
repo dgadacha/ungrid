@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../app/constants.dart';
 import '../app/theme.dart';
@@ -156,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(width: 28),
               _FooterAction(
-                icon: Icons.settings_rounded,
+                icon: PhosphorIconsBold.gearSix,
                 onPressed: () => _open(
                   SettingsScreen(
                     progress: widget.progress,
@@ -196,7 +197,7 @@ class _FooterAction extends StatelessWidget {
       ),
       child: label != null
           ? Text(label!, style: Theme.of(context).textTheme.labelLarge)
-          : Icon(icon, color: UngridColors.onBackgroundFaint, size: 22),
+          : Icon(icon!, color: UngridColors.onBackgroundFaint, size: 22),
     );
   }
 }

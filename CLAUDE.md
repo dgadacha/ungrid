@@ -337,3 +337,7 @@ Police Nunito Sans, portrait uniquement.
 ### Campagne active v3 — rotations
 
 La campagne active est désormais `assets/levels/campaign_v3.json` : cent grilles générées avec `RotationGenerator` et validées hors ligne par `tool/build_rotation_campaign.dart`. Les définitions contiennent le board et son empreinte ; le chargement ne relance pas le solveur. `CampaignCatalog` continue de charger les anciens catalogues à seeds v2. Le générateur historique reste v2 ; le catalogue et les définitions de la nouvelle campagne portent la version 3. La sauvegarde est `campaign_3_generator_3`. La v2 et ses tests restent des références historiques. Voir `docs/campaign-100.md` pour les critères actuels.
+
+### Campagne active v4 — planification
+
+Après le retour humain (niveau 81 v3 résolu en 14 secondes), la campagne active devient `assets/levels/campaign_v4.json`. `tool/build_planning_campaign.dart` produit des variantes des grilles v2/v3, résout leur budget à nouveau et applique `PlanningDifficulty` en complément du score existant. Au moins 16 coups et trois retours différés dans la solution optimale retenue ; quatre pour les niveaux 81–100. Classement par retours différés puis score, pas par seul score. Les métriques ne prouvent pas une durée humaine ni l'absence d'une autre solution plus simple. Les snapshots v2/v3 et leurs sauvegardes sont conservés ; la v4 utilise `campaign_4_generator_4`. Voir `docs/planning-difficulty.md`.

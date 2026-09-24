@@ -54,7 +54,7 @@ class UngridButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (icon != null) ...[
-              Icon(icon, size: 19, color: foreground),
+              Icon(icon!, size: 19, color: foreground),
               const SizedBox(width: 10),
             ],
             Text(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../app/constants.dart';
 import '../app/theme.dart';
@@ -66,7 +67,7 @@ class _LevelSelectScreenState extends State<LevelSelectScreen> {
                 IconButton(
                   onPressed: () => Navigator.of(context).maybePop(),
                   icon: const Icon(
-                    Icons.arrow_back_rounded,
+                    PhosphorIconsBold.arrowLeft,
                     color: UngridColors.onBackground,
                   ),
                   splashRadius: 24,
@@ -100,8 +101,8 @@ class _LevelSelectScreenState extends State<LevelSelectScreen> {
                         children: [
                           Icon(
                             cleared == 10
-                                ? Icons.workspace_premium_rounded
-                                : Icons.radio_button_unchecked,
+                                ? PhosphorIconsBold.medal
+                                : PhosphorIconsBold.circle,
                             color: cleared == 10
                                 ? UngridColors.success
                                 : UngridColors.onBackgroundFaint,
@@ -207,7 +208,7 @@ class _LevelTile extends StatelessWidget {
           children: [
             if (locked)
               const Icon(
-                Icons.lock_rounded,
+                PhosphorIconsBold.lockKey,
                 size: 20,
                 color: UngridColors.onBackgroundFaint,
               )
@@ -215,8 +216,8 @@ class _LevelTile extends StatelessWidget {
               if (done)
                 Icon(
                   best?.mastered == true
-                      ? Icons.workspace_premium_rounded
-                      : Icons.check_rounded,
+                      ? PhosphorIconsBold.medal
+                      : PhosphorIconsBold.check,
                   size: 16,
                   color: best?.mastered == true
                       ? const Color(0xFFF8C471)

@@ -46,17 +46,21 @@ class RoundIconButton extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Icon(icon, size: size * 0.44,
-                  color: UngridColors.onBackground),
+              child: Center(
+                child: Icon(
+                  icon,
+                  size: size * 0.44,
+                  color: UngridColors.onBackground,
+                ),
+              ),
             ),
             if (label != null) ...[
               const SizedBox(height: 7),
               Text(
                 label!,
-                style: Theme.of(context)
-                    .textTheme
-                    .labelLarge
-                    ?.copyWith(fontSize: 10),
+                style: Theme.of(
+                  context,
+                ).textTheme.labelLarge?.copyWith(fontSize: 10),
               ),
             ],
           ],

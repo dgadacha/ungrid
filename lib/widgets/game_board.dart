@@ -65,6 +65,7 @@ class _GameBoardState extends State<GameBoard>
     widget.controller.removeListener(_ensureTicking);
     _ticker.dispose();
     _frame.dispose();
+    _blockPainter.dispose();
     super.dispose();
   }
 

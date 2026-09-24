@@ -12,6 +12,8 @@ import 'package:ungrid/app/theme.dart';
 import 'package:ungrid/game/campaign/campaign_catalog.dart';
 import 'package:ungrid/game/levels/level_repository.dart';
 import 'package:ungrid/game/models/level.dart';
+import 'package:ungrid/game/levels/level_pattern.dart';
+import 'package:ungrid/game/models/grid_position.dart';
 import 'package:ungrid/screens/home_screen.dart';
 import 'package:ungrid/screens/game_screen.dart';
 import 'package:ungrid/screens/level_select_screen.dart';
@@ -28,6 +30,14 @@ void main() {
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
+    for (final style in ['Bold', 'Fill']) {
+      await (FontLoader('packages/phosphor_flutter/Phosphor$style')..addFont(
+            rootBundle.load(
+              'packages/phosphor_flutter/lib/fonts/Phosphor-$style.ttf',
+            ),
+          ))
+          .load();
+    }
     final font = FontLoader('NunitoSans')
       ..addFont(rootBundle.load('assets/fonts/NunitoSans-Regular.ttf'))
       ..addFont(rootBundle.load('assets/fonts/NunitoSans-ExtraBold.ttf'));
@@ -45,7 +55,9 @@ void main() {
         mastered: id <= 10 || id.isEven,
       );
     }
-    final catalog = await CampaignCatalog.load();
+    final catalog = CampaignCatalog.parse(
+      File(CampaignCatalog.assetPath).readAsStringSync(),
+    );
     final repository = LevelRepository(catalog: catalog, lastLevel: 100);
     final raw =
         jsonDecode(await rootBundle.loadString('assets/levels/fragile_v1.json'))
@@ -88,6 +100,26 @@ void main() {
           chapter: 2,
           chapterCleared: 7,
         ),
+      ),
+      'rotation-occupied': GameScreen(
+        levelId: 1,
+        repository: LevelRepository(
+          fixedLevels: [
+            LevelPattern.parse([
+              '.....',
+              '.>.<.',
+              '.....',
+              '.^...',
+              '.....',
+            ], id: 1).copyWith(
+              rotationTiles: const [GridPosition(1, 1), GridPosition(3, 3)],
+            ),
+          ],
+          lastLevel: 1,
+        ),
+        progress: p,
+        haptics: HapticService(enabled: false),
+        playtest: true,
       ),
       'rotation': GameScreen(
         levelId: 1,

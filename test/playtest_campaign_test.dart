@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ungrid/app/theme.dart';
@@ -198,7 +199,11 @@ void main() {
       rotation.level.moveLimit,
       const LevelSolver().solve(rotation.level).minimumMoves,
     );
-    await tester.tap(find.byIcon(Icons.arrow_back_rounded));
+    await tester.tap(
+      find.byWidgetPredicate(
+        (w) => w is Icon && w.icon == PhosphorIconsBold.arrowLeft,
+      ),
+    );
     await tester.pumpAndSettle();
     await tester.tap(find.text('FRAGILE · 10'));
     await tester.pumpAndSettle();

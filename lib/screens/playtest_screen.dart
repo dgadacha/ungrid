@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../app/theme.dart';
 import '../game/campaign/campaign_catalog.dart';
@@ -205,7 +206,7 @@ class _PlaytestScreenState extends State<PlaytestScreen> {
                 IconButton(
                   onPressed: () => Navigator.of(context).maybePop(),
                   icon: const Icon(
-                    Icons.arrow_back_rounded,
+                    PhosphorIconsBold.arrowLeft,
                     color: UngridColors.onBackground,
                   ),
                   splashRadius: 24,

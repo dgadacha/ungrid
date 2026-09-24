@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../app/theme.dart';
 import '../services/progress_service.dart';
 import '../widgets/ungrid_scaffold.dart';
@@ -23,7 +24,7 @@ class _RewardsScreenState extends State<RewardsScreen> {
             children: [
               IconButton(
                 onPressed: () => Navigator.of(context).pop(),
-                icon: const Icon(Icons.arrow_back_rounded),
+                icon: const Icon(PhosphorIconsBold.arrowLeft),
               ),
               const Expanded(
                 child: Text('YOUR COLLECTION', textAlign: TextAlign.center),
@@ -52,7 +53,7 @@ class _RewardsScreenState extends State<RewardsScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(
-                              Icons.workspace_premium_rounded,
+                              PhosphorIconsBold.medal,
                               size: 36,
                               color: p.chapterMastered(chapter) == 10
                                   ? const Color(0xFFF8C471)

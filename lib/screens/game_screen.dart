@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../app/constants.dart';
 import '../app/theme.dart';
@@ -376,19 +377,19 @@ class _Controls extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           RoundIconButton(
-            icon: Icons.undo_rounded,
+            icon: PhosphorIconsBold.arrowCounterClockwise,
             label: 'UNDO',
             onPressed: controller.canUndo ? onUndo : null,
           ),
           const SizedBox(width: 30),
           RoundIconButton(
-            icon: Icons.refresh_rounded,
+            icon: PhosphorIconsBold.arrowClockwise,
             label: 'RESTART',
             onPressed: controller.movesUsed > 0 ? onRestart : null,
           ),
           const SizedBox(width: 30),
           RoundIconButton(
-            icon: Icons.lightbulb_outline_rounded,
+            icon: PhosphorIconsBold.lightbulb,
             label: 'HINT',
             onPressed: controller.isPlaying && controller.rewards.isAvailable
                 ? onHint

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../app/theme.dart';
 import 'ungrid_button.dart';
@@ -81,21 +82,21 @@ class _OutOfMovesOverlayState extends State<OutOfMovesOverlay>
           if (widget.onUndo != null) ...[
             UngridButton(
               label: 'UNDO MOVE',
-              icon: Icons.undo_rounded,
+              icon: PhosphorIconsBold.arrowCounterClockwise,
               onPressed: widget.onUndo!,
             ),
             const SizedBox(height: 14),
           ],
           UngridButton(
             label: 'RETRY',
-            icon: Icons.refresh_rounded,
+            icon: PhosphorIconsBold.arrowClockwise,
             onPressed: widget.onRetry,
           ),
           if (widget.onExtraMoves != null) ...[
             const SizedBox(height: 14),
             UngridButton(
               label: '+${widget.extraMovesAmount} MOVES',
-              icon: Icons.play_circle_outline_rounded,
+              icon: PhosphorIconsBold.playCircle,
               filled: false,
               onPressed: widget.onExtraMoves!,
             ),

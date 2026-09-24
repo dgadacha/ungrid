@@ -11,13 +11,13 @@ import 'campaign_level.dart';
 
 /// La campagne officielle, telle que tous les joueurs la reçoivent.
 ///
-/// La v3 embarque les grilles validées hors ligne pour charger sans solveur.
+/// Les campagnes récentes embarquent les grilles validées hors ligne pour charger sans solveur.
 /// Les anciens catalogues restent reconstruits depuis leurs seeds v2.
 /// L'empreinte est vérifiée dans toutes les configurations de compilation.
 class CampaignCatalog {
   CampaignCatalog(this.campaign, {this.generator = const SlideGenerator()});
 
-  static const String assetPath = 'assets/levels/campaign_v3.json';
+  static const String assetPath = 'assets/levels/campaign_v4.json';
 
   final Campaign campaign;
   final PuzzleGenerator generator;

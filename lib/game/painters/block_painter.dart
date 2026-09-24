@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../app/constants.dart';
 import '../../app/theme.dart';
@@ -9,7 +10,7 @@ import '../models/direction.dart';
 /// Dessin d'un bloc : la brique visuelle du jeu.
 ///
 /// Tout est tracé, rien n'est importé. Un aplat de couleur, un arrondi, une
-/// flèche épaisse — ni dégradé, ni reflet, ni relief. Le rendu reste net à
+/// flèche épaisse et un relief discret, sans dégradé. Le rendu reste net à
 /// n'importe quelle taille de grille et pivote sans qu'un éclairage vienne
 /// trahir la rotation.
 ///
@@ -19,16 +20,45 @@ import '../models/direction.dart';
 class BlockPainter {
   BlockPainter();
 
+  final TextPainter _iconPainter = TextPainter(
+    textDirection: TextDirection.ltr,
+  );
+
+  void _paintIcon(
+    Canvas canvas,
+    IconData icon,
+    Offset center,
+    double size,
+    Color color,
+  ) {
+    _iconPainter.text = TextSpan(
+      text: String.fromCharCode(icon.codePoint),
+      style: TextStyle(
+        fontFamily: icon.fontFamily,
+        package: icon.fontPackage,
+        fontSize: size,
+        height: 1,
+        color: color,
+      ),
+    );
+    _iconPainter.layout();
+    _iconPainter.paint(
+      canvas,
+      center - Offset(_iconPainter.width / 2, _iconPainter.height / 2),
+    );
+  }
+
+  void dispose() => _iconPainter.dispose();
+
   final Paint _fill = Paint()..isAntiAlias = true;
+  final Paint _rim = Paint()
+    ..isAntiAlias = true
+    ..style = PaintingStyle.stroke
+    ..strokeWidth = 1;
   final Paint _shadow = Paint()
     ..isAntiAlias = true
     ..maskFilter = const ui.MaskFilter.blur(BlurStyle.normal, 2);
-  final Paint _arrowFill = Paint()..isAntiAlias = true;
-  final Paint _arrowStroke = Paint()
-    ..isAntiAlias = true
-    ..style = PaintingStyle.stroke
-    ..strokeJoin = StrokeJoin.round
-    ..strokeCap = StrokeCap.round;
+
   final Paint _cellFill = Paint()
     ..isAntiAlias = true
     ..color = UngridColors.surface;
@@ -39,19 +69,6 @@ class BlockPainter {
   final Paint _stopDot = Paint()
     ..isAntiAlias = true
     ..color = UngridColors.onBackgroundFaint;
-
-  /// Contour de la flèche, en coordonnées normalisées autour de son centre,
-  /// pointant vers la droite. Les quatre directions ne sont que des rotations
-  /// de cette même forme.
-  static final Path _arrowPath = Path()
-    ..moveTo(-0.46, -0.13)
-    ..lineTo(0.02, -0.13)
-    ..lineTo(0.02, -0.33)
-    ..lineTo(0.47, 0)
-    ..lineTo(0.02, 0.33)
-    ..lineTo(0.02, 0.13)
-    ..lineTo(-0.46, 0.13)
-    ..close();
 
   /// Case vide : un ton au-dessus du fond, et rien de plus. Elle situe la
   /// grille sans jamais concurrencer les blocs.
@@ -103,22 +120,42 @@ class BlockPainter {
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
       ..strokeWidth = 2;
-    final r = cell.width * (occupied ? .46 : .21);
-    final c = cell.center;
-    canvas.drawArc(
-      Rect.fromCircle(center: c, radius: r),
-      -1.5707963267948966,
-      4.71238898038469,
-      false,
-      paint,
+    if (occupied) {
+      final rect = cell.deflate(cell.width * GameMetrics.blockInsetRatio * .35);
+      paint.strokeWidth = (cell.width * .022).clamp(1.0, 1.6);
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(
+          rect,
+          Radius.circular(rect.width * GameMetrics.blockRadiusRatio),
+        ),
+        paint,
+      );
+      return;
+    }
+    _paintIcon(
+      canvas,
+      PhosphorIconsBold.arrowClockwise,
+      cell.center,
+      cell.width * .48,
+      const Color(0xFF9CE7EE),
     );
-    final tip = Offset(c.dx - r, c.dy);
-    canvas.drawPath(
-      Path()
-        ..moveTo(tip.dx - r * .30, tip.dy + r * .35)
-        ..lineTo(tip.dx, tip.dy)
-        ..lineTo(tip.dx + r * .30, tip.dy + r * .35),
-      paint,
+  }
+
+  /// Petit repère de tuile, séparé de la flèche de déplacement.
+  void paintRotationBadge(Canvas canvas, Rect cell) {
+    final size = cell.width * .28;
+    final center = Offset(
+      cell.right - cell.width * .13,
+      cell.top + cell.width * .13,
+    );
+    canvas.drawCircle(
+      center,
+      size * .5,
+      Paint()..color = const Color(0xFF2C3E50),
+    );
+    paintRotationTile(
+      canvas,
+      Rect.fromCenter(center: center, width: size * 1.35, height: size * 1.35),
     );
   }
 
@@ -181,8 +218,31 @@ class BlockPainter {
     _shadow.color = const Color(0xFF000000).withValues(alpha: 0.12 * opacity);
     canvas.drawRRect(rrect.shift(const Offset(0, 2)), _shadow);
 
-    _fill.color = opacity >= 1 ? color : color.withValues(alpha: opacity);
+    // Une tranche de deux pixels, contenue dans le bloc : la face reste unie.
+    final depth = (rect.width * .035).clamp(1.2, 2.5) * scale;
+    final baseColor = Color.lerp(color, const Color(0xFF172B3A), .20)!;
+    _fill.color = baseColor.withValues(alpha: opacity);
     canvas.drawRRect(rrect, _fill);
+
+    final face = RRect.fromRectAndRadius(
+      Rect.fromLTRB(rect.left, rect.top, rect.right, rect.bottom - depth),
+      Radius.circular(rect.width * GameMetrics.blockRadiusRatio),
+    );
+    _fill.color = color.withValues(alpha: opacity);
+    canvas.drawRRect(face, _fill);
+
+    // Fin liseré supérieur ; aucun reflet sur le centre ni sur la flèche.
+    canvas.save();
+    canvas.clipRect(
+      Rect.fromLTWH(rect.left, rect.top, rect.width, rect.height * .22),
+    );
+    _rim.color = Color.lerp(
+      color,
+      Colors.white,
+      .18,
+    )!.withValues(alpha: opacity);
+    canvas.drawRRect(face.deflate(.5), _rim);
+    canvas.restore();
 
     _paintArrow(canvas, rect, direction, opacity);
   }
@@ -202,17 +262,13 @@ class BlockPainter {
     canvas.save();
     canvas.translate(center.dx, center.dy);
     canvas.rotate(direction.angle);
-    canvas.scale(size);
-
-    _arrowFill.color = color;
-    // Le même contour en trait arrondi adoucit les angles : une flèche à
-    // pointes vives paraît agressive à cette taille.
-    _arrowStroke
-      ..color = color
-      ..strokeWidth = 0.14;
-
-    canvas.drawPath(_arrowPath, _arrowStroke);
-    canvas.drawPath(_arrowPath, _arrowFill);
+    _paintIcon(
+      canvas,
+      PhosphorIconsFill.arrowFatRight,
+      Offset.zero,
+      size,
+      color,
+    );
     canvas.restore();
   }
 }

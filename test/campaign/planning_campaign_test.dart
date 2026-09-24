@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:ungrid/game/engine/planning_difficulty.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ungrid/game/campaign/campaign_catalog.dart';
 import 'package:ungrid/game/campaign/campaign_level.dart';
@@ -13,9 +14,7 @@ import 'package:ungrid/game/models/grid_position.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   test('une grille publiée altérée est rejetée au chargement', () async {
-    final catalog = await CampaignCatalog.load(
-      path: 'assets/levels/campaign_v3.json',
-    );
+    final catalog = await CampaignCatalog.load();
     final raw = catalog.campaign.toJson();
     final first = (raw['levels'] as List).first as Map<String, dynamic>;
     first['fingerprint'] = 'invalid';
@@ -23,32 +22,41 @@ void main() {
     expect(() => corrupt.levelFor(1), throwsStateError);
   });
   test(
-    'campagne v3 historique : 100 rotations distinctes, utiles et optimales',
+    'campagne active : 100 rotations distinctes, utiles et optimales',
     () async {
-      final catalog = await CampaignCatalog.load(
-        path: 'assets/levels/campaign_v3.json',
-      );
-      expect(catalog.campaign.catalogVersion, 3);
+      final catalog = await CampaignCatalog.load();
+      expect(catalog.campaign.catalogVersion, 4);
       expect(catalog.levelCount, 100);
       final report =
           jsonDecode(
                 File(
-                  'assets/levels/campaign_v3_solutions.json',
+                  'assets/levels/campaign_v4_solutions.json',
                 ).readAsStringSync(),
               )
               as Map;
       final seen = <String>{};
-      double previous = 0;
+      var previousReturns = 0;
+      double previousScore = 0;
       for (var id = 1; id <= 100; id++) {
         final level = catalog.levelFor(id)!;
         expect(level.id, id);
         expect(level.rotationTiles, isNotEmpty);
         expect(seen.add(LevelFingerprint.of(level)), isTrue);
-        expect(level.blocks.length, inInclusiveRange(7, 12));
+        expect(level.blocks.length, inInclusiveRange(7, 14));
         final result = const LevelSolver().solve(level);
         expect(result.solvable, isTrue, reason: 'niveau $id');
         expect(result.exhaustive, isTrue);
         expect(result.minimumMoves, level.moveLimit);
+        expect(result.minimumMoves, greaterThanOrEqualTo(16));
+        final planning = PlanningDifficulty.measure(
+          level,
+          result.exampleSolution,
+        );
+        expect(
+          planning.accepts,
+          isTrue,
+          reason: 'niveau $id : ${planning.toJson()}',
+        );
         final analysis = const PuzzleAnalyzer(
           solver: LevelSolver(maxExploredStates: 6000),
         ).analyse(level, result);
@@ -60,8 +68,13 @@ void main() {
         expect(analysis.temptingWrongMoveRatio, greaterThanOrEqualTo(.5));
         expect(analysis.dependencyComplexity, greaterThanOrEqualTo(.65));
         final score = catalog.definitionFor(id)!.difficultyScore;
-        expect(score, greaterThanOrEqualTo(previous));
-        previous = score;
+        expect(planning.deferredReturns, greaterThanOrEqualTo(previousReturns));
+        if (planning.deferredReturns == previousReturns) {
+          expect(score, greaterThanOrEqualTo(previousScore));
+        }
+        if (id >= 81) expect(planning.deferredReturns, greaterThanOrEqualTo(4));
+        previousReturns = planning.deferredReturns;
+        previousScore = score;
         final engine = GameEngine(level);
         final plain = GameEngine(
           level.copyWith(rotationTiles: [], stopTiles: level.rotationTiles),
@@ -80,10 +93,6 @@ void main() {
         expect(plain.isCompleted, isFalse);
         expect(visited.length, level.rotationTiles.length);
       }
-      expect(
-        catalog.definitionFor(100)!.difficultyScore,
-        greaterThan(catalog.definitionFor(1)!.difficultyScore),
-      );
       final repository = LevelRepository(catalog: catalog, lastLevel: 100);
       expect(repository.levelForSync(100).rotationTiles, isNotEmpty);
       expect(() => repository.levelForSync(101), throwsRangeError);

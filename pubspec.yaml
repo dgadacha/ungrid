@@ -35,6 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.5.5
+  phosphor_flutter: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +68,7 @@ flutter:
     - assets/levels/rotation_v1.json
     - assets/levels/campaign_v2.json
     - assets/levels/campaign_v3.json
+    - assets/levels/campaign_v4.json
 
   fonts:
     - family: NunitoSans
