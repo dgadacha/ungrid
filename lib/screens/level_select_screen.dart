@@ -128,7 +128,7 @@ class _LevelSelectScreenState extends State<LevelSelectScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        '$mastered mastered · ${cleared == 10 ? Strings.of(context).medalCollectedShort : '${10 - cleared} to chapter medal'}',
+                        Strings.of(context).chapterSummary(mastered, cleared),
                         style: textTheme.bodyMedium,
                       ),
                       const SizedBox(height: 12),

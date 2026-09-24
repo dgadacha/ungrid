@@ -75,9 +75,7 @@ class _OutOfMovesOverlayState extends State<OutOfMovesOverlay>
           Text(strings.outOfMoves, style: textTheme.displayMedium),
           const SizedBox(height: 12),
           Text(
-            widget.remainingBlocks > 1
-                ? '${widget.remainingBlocks} blocks left'
-                : 'one block left',
+            strings.blocksLeft(widget.remainingBlocks),
             style: textTheme.bodyMedium,
           ),
           const SizedBox(height: 28),

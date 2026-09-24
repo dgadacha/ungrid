@@ -178,6 +178,23 @@ class Strings {
         '$count niveaux avant la médaille du chapitre',
         '$count niveles para la medalla del capítulo',
       );
+  /// Le résumé d'un chapitre dans la liste des niveaux.
+  String chapterSummary(int mastered, int cleared) => _pick(
+        '$mastered mastered · '
+            '${cleared == 10 ? 'medal collected' : '${10 - cleared} to chapter medal'}',
+        '$mastered maîtrisé${mastered > 1 ? 's' : ''} · '
+            '${cleared == 10 ? 'médaille obtenue' : '${10 - cleared} avant la médaille'}',
+        '$mastered dominado${mastered > 1 ? 's' : ''} · '
+            '${cleared == 10 ? 'medalla obtenida' : '${10 - cleared} para la medalla'}',
+      );
+
+  /// Ce qu'il reste sur la grille quand les coups sont épuisés.
+  String blocksLeft(int count) => _pick(
+        count > 1 ? '$count blocks left' : 'one block left',
+        count > 1 ? '$count blocs restants' : 'un bloc restant',
+        count > 1 ? 'quedan $count bloques' : 'queda un bloque',
+      );
+
   String get medalCollectedShort =>
       _pick('Medal collected', 'Médaille obtenue', 'Medalla obtenida');
 
